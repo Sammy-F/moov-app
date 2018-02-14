@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "75014780858",
+    "firebase_url": "https://moov-app.firebaseio.com",
+    "project_id": "moov-app",
+    "storage_bucket": "moov-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75014780858:android:fd2afd698b6d55f6",
+        "android_client_info": {
+          "package_name": "app.moov.moov"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75014780858-5q521di6kihu7ngvdcbrm4lgd81g636u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHf23US4fRDGQIke10lbktOFPdyNmUuHw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
