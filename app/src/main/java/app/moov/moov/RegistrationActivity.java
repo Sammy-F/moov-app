@@ -87,7 +87,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private void setUIViews(){
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnAlready = (Button) findViewById(R.id.btnAlready);
-        etUsername = (EditText) findViewById(R.id.etEmail);
+        etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etPassword2 = (EditText) findViewById(R.id.etPassword2);
         etEmail = (EditText) findViewById(R.id.etEmail);
