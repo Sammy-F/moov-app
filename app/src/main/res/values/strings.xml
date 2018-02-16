@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Moov</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">SIGN IN</string>
+    <string name="register">Register</string>
+
+    <string name="placeholder">Just some sad placeholder text. Sorry!</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -17,8 +20,15 @@
 
     <string name="hint_username">Username</string>
     <string name="hint_pass">Password</string>
+    <string name="hint_pass2">Repeat Password</string>
     <string name="hint_email">Email</string>
     <string name="hint_name">Fullname</string>
+
+    <string name="numAttempts"> attempts remaining</string>
+
+    <string name="btn_link_to_register">Not a member? Register to Moov now!</string>
+    <string name="btn_register">SIGN UP</string>
+    <string name="btn_already_registered">Already registered? Log in now!</string>
 
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
@@ -30,7 +40,6 @@
     <string name="new_pass">New Password</string>
     <string name="title_activity_profile">Firebase</string>
     <string name="btn_login">LOGIN</string>
-    <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
     <string name="btn_link_to_login">Already registered. Login Me!</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
     <string name="btn_forgot_password">Forgot your password?</string>
