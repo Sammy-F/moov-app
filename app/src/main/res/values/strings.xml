@@ -15,6 +15,11 @@
         completions."
     </string>
 
+    <string name="hint_username">Username</string>
+    <string name="hint_pass">Password</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_name">Fullname</string>
+
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
@@ -24,9 +29,6 @@
     <string name="remove_user">Remove user</string>
     <string name="new_pass">New Password</string>
     <string name="title_activity_profile">Firebase</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_name">Fullname</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
     <string name="btn_link_to_login">Already registered. Login Me!</string>
