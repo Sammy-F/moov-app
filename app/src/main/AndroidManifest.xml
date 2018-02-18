@@ -26,6 +26,11 @@
         </activity>
         <activity android:name=".Feed" />
         <activity android:name=".RegistrationActivity" />
+        <activity
+            android:name=".FeedPage"
+            android:label="@string/title_activity_feed_page"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".PostActivity"></activity>
     </application>
 
 </manifest>

@@ -55,4 +55,10 @@
 
     <string name="mLogo">Moov Logo</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_feed_page">FeedPage</string>
+    <string name ="new_post">Create New Post</string>
+    <string name ="movie">Movie Title</string>
+    <string name ="rating">Rating out of Ten</string>
+    <string name ="posttext">Write your thoughts!</string>
+
 </resources>
