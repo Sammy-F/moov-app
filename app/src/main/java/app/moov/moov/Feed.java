@@ -53,7 +53,7 @@ public class Feed extends AppCompatActivity {
         testStrings.add("placeholder");
 
         btnLogout = (Button) findViewById(R.id.btnLogout);
-        rvFeed = (RecyclerView) findViewById(R.id.rvFeed);
+        //rvFeed = (RecyclerView) findViewById(R.id.rvFeed);
 
         //improve performance if all posts have fixed size
         rvFeed.hasFixedSize();

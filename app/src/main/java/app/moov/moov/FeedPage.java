@@ -10,12 +10,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class FeedPage extends AppCompatActivity {
+
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_page);
+        firebaseAuth = FirebaseAuth.getInstance();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,6 +40,12 @@ public class FeedPage extends AppCompatActivity {
         if (id==R.id.addIcon) {
             Intent intent = new Intent(FeedPage.this,PostActivity.class);
             startActivity(intent);
+        }
+
+        if (id==R.id.logoutIcon) {
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(FeedPage.this, MainActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

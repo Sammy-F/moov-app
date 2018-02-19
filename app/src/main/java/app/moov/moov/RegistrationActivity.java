@@ -71,7 +71,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
                                 ref.child("Username").setValue(userName);
 
-                                startActivity(new Intent(RegistrationActivity.this, Feed.class));
+                                startActivity(new Intent(RegistrationActivity.this, FeedPage.class));
                             } else{
                                 regProgress.setVisibility(View.INVISIBLE);
                                 Toast.makeText(RegistrationActivity.this, "Registration failed, please try again.", Toast.LENGTH_LONG).show();
