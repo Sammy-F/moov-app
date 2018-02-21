@@ -60,5 +60,7 @@
     <string name ="movie">Movie Title</string>
     <string name ="rating">Rating out of Ten</string>
     <string name ="posttext">Write your thoughts!</string>
+    <string name ="share">Share</string>
+
 
 </resources>

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "75014780858-tch17jbp8dj3lmglrcuf1mmemnf76h1h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.moov.moov",
+            "certificate_hash": "144aae23a5026e591b3a823e59514833d1906ac4"
+          }
+        },
+        {
           "client_id": "75014780858-5q521di6kihu7ngvdcbrm4lgd81g636u.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75014780858-5q521di6kihu7ngvdcbrm4lgd81g636u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
