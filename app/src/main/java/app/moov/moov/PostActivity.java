@@ -30,8 +30,6 @@ public class PostActivity extends AppCompatActivity {
         editTextMovieTitle = (EditText) findViewById(R.id.editTextMovieTitle);
         editTextRating = (EditText) findViewById(R.id.editTextRating);
         editTextWriteReview = (EditText) findViewById(R.id.editTextWriteReview);
-
-        //I am a comment
     }
 
     public void shareButtonClicked(View view) {
@@ -47,15 +45,6 @@ public class PostActivity extends AppCompatActivity {
                     Toast.makeText(PostActivity.this,"Upload Complete", Toast.LENGTH_LONG).show();
                 }
             });
-
-            //
-
-
-
-
-
         }
-
-
     }
 }
