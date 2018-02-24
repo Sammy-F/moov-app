@@ -32,19 +32,19 @@ public class PostActivity extends AppCompatActivity {
         editTextWriteReview = (EditText) findViewById(R.id.editTextWriteReview);
     }
 
-    public void shareButtonClicked(View view) {
-        String movieTitle = editTextMovieTitle.getText().toString().trim();
-        String rating = editTextRating.getText().toString().trim();
-        String review = editTextWriteReview.getText().toString().trim();
-        if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(rating) && !TextUtils.isEmpty(review)) {
-            StorageReference filePath = storageReference.child("Post_Review").child(uri.getLastPathSegment());
-            filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadurl = taskSnapshot.getDownloadUrl();
-                    Toast.makeText(PostActivity.this,"Upload Complete", Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-    }
+//    public void shareButtonClicked(View view) {
+//        String movieTitle = editTextMovieTitle.getText().toString().trim();
+//        String rating = editTextRating.getText().toString().trim();
+//        String review = editTextWriteReview.getText().toString().trim();
+//        if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(rating) && !TextUtils.isEmpty(review)) {
+//            StorageReference filePath = storageReference.child("Post_Review").child(uri.getLastPathSegment());
+//            filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    Uri downloadurl = taskSnapshot.getDownloadUrl();
+//                    Toast.makeText(PostActivity.this,"Upload Complete", Toast.LENGTH_LONG).show();
+//                }
+//            });
+//        }
+//    }
 }
