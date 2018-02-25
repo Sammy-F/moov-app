@@ -48,6 +48,11 @@ public class FeedPage extends AppCompatActivity {
             startActivity(new Intent(FeedPage.this, MainActivity.class));
         }
 
+        if (id==R.id.profileIcon) {
+            Intent intent = new Intent(FeedPage.this, UserProfileActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

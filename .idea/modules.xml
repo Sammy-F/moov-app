@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Moov.iml" filepath="$PROJECT_DIR$/Moov.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\Moov\moov-app.iml" filepath="D:\Moov\moov-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moov-app.iml" filepath="$PROJECT_DIR$/moov-app.iml" />
     </modules>
   </component>
 </project>
