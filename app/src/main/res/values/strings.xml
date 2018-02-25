@@ -24,6 +24,8 @@
     <string name="hint_email">Email</string>
     <string name="hint_name">Fullname</string>
 
+    <string name="follow_btn">Follow</string>
+
     <string name="numAttempts"> attempts remaining</string>
 
     <string name="btn_link_to_register">Not a member? Register to Moov now!</string>
@@ -56,11 +58,12 @@
     <string name="mLogo">Moov Logo</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_feed_page">FeedPage</string>
-    <string name ="new_post">Create New Post</string>
-    <string name ="movie">Movie Title</string>
-    <string name ="rating">Rating out of Ten</string>
-    <string name ="posttext">Write your thoughts!</string>
-    <string name ="share">Share</string>
+    <string name="new_post">Create New Post</string>
+    <string name="movie">Movie Title</string>
+    <string name="rating">Rating out of Ten</string>
+    <string name="posttext">Write your thoughts!</string>
+    <string name="share">Share</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
 
 
 </resources>

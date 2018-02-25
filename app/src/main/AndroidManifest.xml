@@ -30,7 +30,11 @@
             android:name=".FeedPage"
             android:label="@string/title_activity_feed_page"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PostActivity"></activity>
+        <activity android:name=".PostActivity" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
