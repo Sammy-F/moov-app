@@ -5,17 +5,22 @@ package app.moov.moov;
  */
 
 public class Post {
-    private String movieTitle, movieRating, movieReview;
+    private String uid, movieTitle, movieRating, movieReview;
 
     public Post() {
 
     }
 
-    public Post(String title, String rating, String review) {
+    public Post(String uid, String title, String rating, String review) {
+        this.uid = uid;
         this.movieTitle = title;
         this.movieRating = rating;
         this.movieReview = review;
     }
+
+    public String getUID() { return uid; };
+
+    public void setUID(String uid) {this.uid = uid;}
 
     public String getMovieTitle() {
         return movieTitle;

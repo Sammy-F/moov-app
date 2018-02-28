@@ -36,7 +36,7 @@ public class UserProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Username");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("User").child("Username");
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
        // String uid = user.getUid(); //gets the current user

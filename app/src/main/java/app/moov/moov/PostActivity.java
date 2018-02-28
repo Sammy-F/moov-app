@@ -1,5 +1,6 @@
 package app.moov.moov;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +12,14 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -26,11 +32,24 @@ public class PostActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private DatabaseReference currentUserDB;
 
+    private FirebaseDatabase thisDatabase;
+    private DatabaseReference baseRef;
+    private DatabaseReference usersRef;
+    private DatabaseReference postsRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        storageReference = FirebaseStorage.getInstance().getReference();
         setContentView(R.layout.activity_post);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        thisDatabase = FirebaseDatabase.getInstance();
+        baseRef = thisDatabase.getReference();
+        usersRef = baseRef.child("Users");
+        postsRef = baseRef.child("Posts");
+
+        storageReference = FirebaseStorage.getInstance().getReference();
         editTextMovieTitle = (EditText) findViewById(R.id.editTextMovieTitle);
         editTextRating = (EditText) findViewById(R.id.editTextRating);
         editTextWriteReview = (EditText) findViewById(R.id.editTextWriteReview);
@@ -55,13 +74,29 @@ public class PostActivity extends AppCompatActivity {
         final String movieTitle = editTextMovieTitle.getText().toString().trim();
         final String rating = editTextRating.getText().toString().trim();
         final String review = editTextWriteReview.getText().toString().trim();
+        final String timePosted = Calendar.getInstance().getTime().toString();
 
             if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(rating) && !TextUtils.isEmpty(review)) {
                     String user = mAuth.getCurrentUser().getUid();
-                     currentUserDB = mDatabase.child(user);
-                     currentUserDB.child("Posts").child("Title").setValue(movieTitle);
-                    currentUserDB.child("Posts").child(movieTitle).child("Rating").setValue(rating);
-                    currentUserDB.child("Posts").child(movieTitle).child("Review").setValue(review);
+//                     currentUserDB = mDatabase.child(user);
+//                     Map<String, String> newPost = new HashMap<>();
+//                     newPost.put("Title", movieTitle);
+//                     newPost.put("Rating", rating);
+//                     newPost.put("Review", review);
+//                     usersRef.child(user).child("Posts").setValue(new HashMap<String, String>());
+//                    currentUserDB.child("Posts").child(movieTitle).child("Rating").setValue(rating);
+//                    currentUserDB.child("Posts").child(movieTitle).child("Review").setValue(review);
+
+                Post newPost = new Post(user, movieTitle, rating, review);
+
+                DatabaseReference newPostRef = postsRef.push();
+                newPostRef.setValue(newPost);
+//                postsRef.push().setValue(new HashMap<String, String>().put("Title", movieTitle)); //ignore me
+
+                usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
+                startActivity(new Intent(PostActivity.this, FeedPage.class));
+
+
 
         }
     }
