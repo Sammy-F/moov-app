@@ -36,6 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
+    //Create recycler view, the id is recyclerView
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="368dp"

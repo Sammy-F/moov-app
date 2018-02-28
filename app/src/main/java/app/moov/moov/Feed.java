@@ -22,7 +22,9 @@ public class Feed extends AppCompatActivity {
 
     private Button btnLogout;
     private FirebaseAuth firebaseAuth;
+    //Reference to the recycler view
     private RecyclerView rvFeed;
+
     private RecyclerView.Adapter feedAdapter;
     private RecyclerView.LayoutManager feedManager;
     private DatabaseReference mDatabase;
@@ -34,6 +36,8 @@ public class Feed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         firebaseAuth = FirebaseAuth.getInstance();
+
+//        mDatabase = FirebaseDatabase.getInstance().getReference().child("Post"); //added this - Lisa
         setUIViews();
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +46,7 @@ public class Feed extends AppCompatActivity {
             }
         });
 
+        //Assigning it to the ID on XML
         rvFeed = (RecyclerView) findViewById(R.id.recyclerView);
         rvFeed.setHasFixedSize(true);
         rvFeed.setLayoutManager(new LinearLayoutManager(this));
@@ -54,9 +59,9 @@ public class Feed extends AppCompatActivity {
         FirebaseRecyclerAdapter<Post, PostViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
 
                 Post.class,
-                R.layout.rv_row,
+                R.layout.rv_row, //specifying the design of the cardview, which is the re_row.xml
                 PostViewHolder.class,
-                mDatabase = FirebaseDatabase.getInstance().getReference().child("Post")
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts")
 
         ) {
             @Override
@@ -64,7 +69,6 @@ public class Feed extends AppCompatActivity {
                 viewHolder.setMovieTitle(model.getMovieTitle());
                 viewHolder.setMovieRating(model.getMovieRating());
                 viewHolder.setMovieReview(model.getMovieReview());
-
             }
         };
         rvFeed.setAdapter(FBRA);
