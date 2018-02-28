@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -21,6 +22,9 @@ public class PostActivity extends AppCompatActivity {
     private EditText editTextRating;
     private EditText editTextWriteReview;
     private StorageReference storageReference;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private DatabaseReference currentUserDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,4 +51,20 @@ public class PostActivity extends AppCompatActivity {
 //            });
 //        }
 //    }
+    public void shareButtonClicked(View view){
+        final String movieTitle = editTextMovieTitle.getText().toString().trim();
+        final String rating = editTextRating.getText().toString().trim();
+        final String review = editTextWriteReview.getText().toString().trim();
+
+            if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(rating) && !TextUtils.isEmpty(review)) {
+                    String user = mAuth.getCurrentUser().getUid();
+                     currentUserDB = mDatabase.child(user);
+                     currentUserDB.child("Posts").child("Title").setValue(movieTitle);
+                    currentUserDB.child("Posts").child(movieTitle).child("Rating").setValue(rating);
+                    currentUserDB.child("Posts").child(movieTitle).child("Review").setValue(review);
+
+        }
+    }
+
+
 }
