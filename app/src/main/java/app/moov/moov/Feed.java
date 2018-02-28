@@ -7,8 +7,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -16,10 +22,10 @@ public class Feed extends AppCompatActivity {
 
     private Button btnLogout;
     private FirebaseAuth firebaseAuth;
-
     private RecyclerView rvFeed;
     private RecyclerView.Adapter feedAdapter;
     private RecyclerView.LayoutManager feedManager;
+    private DatabaseReference mDatabase;
 
     private ArrayList<String> testStrings;
 
@@ -27,10 +33,8 @@ public class Feed extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-
         firebaseAuth = FirebaseAuth.getInstance();
         setUIViews();
-
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,6 +42,51 @@ public class Feed extends AppCompatActivity {
             }
         });
 
+        rvFeed = (RecyclerView) findViewById(R.id.recyclerView);
+        rvFeed.setHasFixedSize(true);
+        rvFeed.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseRecyclerAdapter<Post, PostViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
+
+                Post.class,
+                R.layout.rv_row,
+                PostViewHolder.class,
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("Post")
+
+        ) {
+            @Override
+            protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
+                viewHolder.setMovieTitle(model.getMovieTitle());
+                viewHolder.setMovieRating(model.getMovieRating());
+                viewHolder.setMovieReview(model.getMovieReview());
+
+            }
+        };
+        rvFeed.setAdapter(FBRA);
+    }
+
+    public static class PostViewHolder extends RecyclerView.ViewHolder {
+        public PostViewHolder(View itemView) {
+            super(itemView);
+            View mView = itemView;
+        }
+        public void setMovieTitle(String movieTitle) {
+            TextView movie_title = (TextView) itemView.findViewById(R.id.MovieTitle);
+            movie_title.setText(movieTitle);
+        }
+        public void setMovieRating(String movieRating) {
+            TextView movie_rating = (TextView) itemView.findViewById(R.id.MovieRating);
+            movie_rating.setText(movieRating);
+        }
+        public void setMovieReview (String movieReview) {
+            TextView movie_review = (TextView) itemView.findViewById(R.id.MovieReview);
+            movie_review.setText(movieReview);
+        }
     }
 
     private void logout() {

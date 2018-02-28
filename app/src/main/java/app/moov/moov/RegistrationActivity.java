@@ -27,8 +27,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText etPassword2;
     private EditText etEmail;
     private ProgressBar regProgress;
-
-     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +36,18 @@ public class RegistrationActivity extends AppCompatActivity {
         setUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
-
         btnAlready.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goLogin();
             }
         });
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (validate()) {
                     //Database time, bitches
-
                     regProgress.setVisibility(View.VISIBLE);
 
                     final String userName = etUsername.getText().toString().trim();
@@ -72,13 +69,13 @@ public class RegistrationActivity extends AppCompatActivity {
                                 ref.child("Username").setValue(userName);
 
                                 startActivity(new Intent(RegistrationActivity.this, FeedPage.class));
-                            } else{
+                            } else {
+
                                 regProgress.setVisibility(View.INVISIBLE);
                                 Toast.makeText(RegistrationActivity.this, "Registration failed, please try again.", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-
                 }
             }
         });
