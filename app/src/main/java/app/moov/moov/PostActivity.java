@@ -74,7 +74,7 @@ public class PostActivity extends AppCompatActivity {
         final String movieTitle = editTextMovieTitle.getText().toString().trim();
         final String rating = editTextRating.getText().toString().trim();
         final String review = editTextWriteReview.getText().toString().trim();
-        final String timePosted = Calendar.getInstance().getTime().toString();
+        final long timePosted = Calendar.getInstance().getTimeInMillis();
 
             if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(rating) && !TextUtils.isEmpty(review)) {
                     String user = mAuth.getCurrentUser().getUid();
@@ -87,7 +87,7 @@ public class PostActivity extends AppCompatActivity {
 //                    currentUserDB.child("Posts").child(movieTitle).child("Rating").setValue(rating);
 //                    currentUserDB.child("Posts").child(movieTitle).child("Review").setValue(review);
 
-                Post newPost = new Post(user, movieTitle, rating, review);
+                Post newPost = new Post(user, movieTitle, rating, review, timePosted);
 
                 DatabaseReference newPostRef = postsRef.push();
                 newPostRef.setValue(newPost);
