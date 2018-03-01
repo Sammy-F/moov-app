@@ -7,19 +7,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -94,7 +89,7 @@ public class PostActivity extends AppCompatActivity {
 //                postsRef.push().setValue(new HashMap<String, String>().put("Title", movieTitle)); //ignore me
 
                 usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
-                startActivity(new Intent(PostActivity.this, FeedPage.class));
+                startActivity(new Intent(PostActivity.this, MessyFeedPage.class));
 
 
 

@@ -68,7 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
                                 ref.child("Username").setValue(userName);
 
-                                startActivity(new Intent(RegistrationActivity.this, FeedPage.class));
+                                startActivity(new Intent(RegistrationActivity.this, MessyFeedPage.class));
                             } else {
 
                                 regProgress.setVisibility(View.INVISIBLE);

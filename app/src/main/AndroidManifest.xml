@@ -27,7 +27,7 @@
         <activity android:name=".Feed" />
         <activity android:name=".RegistrationActivity" />
         <activity
-            android:name=".FeedPage"
+            android:name=".MessyFeedPage"
             android:label="@string/title_activity_feed_page"
             android:theme="@style/AppTheme" />
         <activity android:name=".PostActivity" />
