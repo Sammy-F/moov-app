@@ -37,7 +37,7 @@ public class Feed extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
         firebaseAuth = FirebaseAuth.getInstance();
 
-//        mDatabase = FirebaseDatabase.getInstance().getReference().child("Post"); //added this - Lisa
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Post"); //added this - Lisa
         setUIViews();
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,8 @@ public class Feed extends AppCompatActivity {
                 Post.class,
                 R.layout.rv_row, //specifying the design of the cardview, which is the re_row.xml
                 PostViewHolder.class,
-                mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts")
+                mDatabase
+//                mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts")
 
         ) {
             @Override
@@ -114,9 +115,6 @@ public class Feed extends AppCompatActivity {
         //set recycler view manager
         feedManager = new LinearLayoutManager(this);
         rvFeed.setLayoutManager(feedManager);
-
-        //specify adapter
-        feedAdapter = new FeedAdapter(testStrings);
 
     }
 }
