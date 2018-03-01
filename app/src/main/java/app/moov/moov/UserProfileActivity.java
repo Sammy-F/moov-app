@@ -49,6 +49,9 @@ public class UserProfileActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference().child("Users").child(uid).child("Username");
 
+        /**
+         * Inside gets current user's username
+         */
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -64,7 +67,6 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-        //Toast.makeText(UserProfileActivity.this,"Username is " + username, Toast.LENGTH_SHORT).show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,6 +87,16 @@ public class UserProfileActivity extends AppCompatActivity {
             firebaseAuth.signOut();
             finish();
             startActivity(new Intent(UserProfileActivity.this, MainActivity.class));
+        }
+
+        if (id==R.id.addIcon) {
+            Intent intent = new Intent(UserProfileActivity.this,FindUserActivity.class);
+            startActivity(intent);
+        }
+
+        if (id==R.id.profileIcon) {
+            Intent intent = new Intent(UserProfileActivity.this,UserProfileActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -10,10 +10,10 @@
         />
 
     <item
-        android:id="@+id/logoutIcon"
+        android:id="@+id/searchIcon"
         app:showAsAction="always"
-        android:icon="@drawable/goodbyeicon"
-        android:title="logoutIcon"
+        android:icon="@drawable/movieicon"
+        android:title="searchIcon"
         />
 
     <item
@@ -22,5 +22,13 @@
         android:icon="@drawable/personicon"
         android:title="profileIcon"
         />
+
+    <item
+        android:id="@+id/logoutIcon"
+        app:showAsAction="always"
+        android:icon="@drawable/goodbyeicon"
+        android:title="logoutIcon"
+        />
+
 
 </menu>

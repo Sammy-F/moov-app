@@ -9,6 +9,8 @@ import android.view.View;
 
 public class OtherUserProfile extends AppCompatActivity {
 
+    private String thisUserID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +18,10 @@ public class OtherUserProfile extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        thisUserID = getIntent().getStringExtra("thisUserID");
+
+
     }
+
 
 }

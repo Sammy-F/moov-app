@@ -38,6 +38,10 @@
         <activity
             android:name=".OtherUserProfile"
             android:label="@string/title_activity_other_user_profile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FindUserActivity"
+            android:label="@string/title_activity_find_user"
             android:theme="@style/AppTheme"></activity>
     </application>
 

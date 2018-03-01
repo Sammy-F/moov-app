@@ -15,8 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -28,6 +31,11 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText etEmail;
     private ProgressBar regProgress;
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase database;
+
+    private String userName;
+    private String userEmail;
+    private String userPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
         btnAlready.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,34 +55,80 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                userName = etUsername.getText().toString().trim();
+                userEmail = etEmail.getText().toString().trim();
+                userPassword = etPassword.getText().toString().trim();
+
                 if (validate()) {
                     //Database time, bitches
                     regProgress.setVisibility(View.VISIBLE);
 
-                    final String userName = etUsername.getText().toString().trim();
-                    String userEmail = etEmail.getText().toString().trim();
-                    String userPassword = etPassword.getText().toString().trim();
+                    //Original Signup
 
-                    Toast.makeText(RegistrationActivity.this, "Attempting registration. This may take a while!", Toast.LENGTH_LONG).show();
+//                    firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                            //what do we do once the user is registered?
+//
+//                            if (task.isSuccessful()) {
+//                                Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
+//
+//                                FirebaseUser currentPerson=FirebaseAuth.getInstance().getCurrentUser();
+//                                DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
+//                                ref.child("Username").setValue(userName);
+//
+//                                database.getReference().child("Usernames").child(userName).setValue(firebaseAuth.getCurrentUser().getUid());
+//
+//                                startActivity(new Intent(RegistrationActivity.this, MessyFeedPage.class));
+//                            } else {
+//
+//                                regProgress.setVisibility(View.INVISIBLE);
+//                                Toast.makeText(RegistrationActivity.this, "Registration failed, please try again.", Toast.LENGTH_LONG).show();
+//                            }
+//                        }
+//                    });
 
-                    firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    database.getReference().child("Usernames").child(userName).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            //what do we do once the user is registered?
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            if (task.isSuccessful()) {
-                                Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
+                            if (!dataSnapshot.exists()) {
+                                Toast.makeText(RegistrationActivity.this, "Attempting registration. This may take a while!", Toast.LENGTH_LONG).show();
 
-                                FirebaseUser currentPerson=FirebaseAuth.getInstance().getCurrentUser();
-                                DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
-                                ref.child("Username").setValue(userName);
+                                firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        //what do we do once the user is registered?
 
-                                startActivity(new Intent(RegistrationActivity.this, MessyFeedPage.class));
-                            } else {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
 
-                                regProgress.setVisibility(View.INVISIBLE);
-                                Toast.makeText(RegistrationActivity.this, "Registration failed, please try again.", Toast.LENGTH_LONG).show();
+                                            FirebaseUser currentPerson=FirebaseAuth.getInstance().getCurrentUser();
+                                            DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
+                                            ref.child("Username").setValue(userName);
+
+                                            database.getReference().child("Usernames").child(userName).setValue(firebaseAuth.getCurrentUser().getUid());
+
+                                            startActivity(new Intent(RegistrationActivity.this, MessyFeedPage.class));
+                                        } else {
+
+                                            regProgress.setVisibility(View.INVISIBLE);
+                                            Toast.makeText(RegistrationActivity.this, "Registration failed, please try again.", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+
                             }
+                            else {
+                                Toast.makeText(RegistrationActivity.this, "Username is taken.", Toast.LENGTH_LONG).show();
+                                regProgress.setVisibility(View.INVISIBLE);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
                         }
                     });
                 }

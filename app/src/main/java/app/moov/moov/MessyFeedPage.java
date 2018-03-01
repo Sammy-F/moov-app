@@ -72,6 +72,11 @@ public class MessyFeedPage extends AppCompatActivity {
             startActivity(intent);
         }
 
+        if (id==R.id.searchIcon) {
+            Intent intent = new Intent(MessyFeedPage.this,FindUserActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

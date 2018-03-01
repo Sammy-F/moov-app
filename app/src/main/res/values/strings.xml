@@ -18,6 +18,8 @@
         completions."
     </string>
 
+    <string name="input_uid">Input your friend\'s unique ID</string>
+
     <string name="hint_username">Username</string>
     <string name="hint_pass">Password</string>
     <string name="hint_pass2">Repeat Password</string>
@@ -31,6 +33,7 @@
     <string name="btn_link_to_register">Not a member? Register to Moov now!</string>
     <string name="btn_register">SIGN UP</string>
     <string name="btn_already_registered">Already registered? Log in now!</string>
+    <string name="btn_go">Let\'s Go!</string>
 
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
@@ -65,6 +68,7 @@
     <string name="share">Share</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_other_user_profile">OtherUserProfile</string>
+    <string name="title_activity_find_user">FindUserActivity</string>
 
 
 </resources>
