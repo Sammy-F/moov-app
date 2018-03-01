@@ -52,8 +52,9 @@ public class UserProfileActivity extends AppCompatActivity {
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Toast.makeText(UserProfileActivity.this,"Got username.", Toast.LENGTH_SHORT).show();
                 username = dataSnapshot.getValue(String.class);
+
+                tvUsername.setText(username);
             }
 
             @Override
@@ -63,9 +64,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(UserProfileActivity.this,"Username is " + username, Toast.LENGTH_SHORT).show();
-
-        tvUsername.setText(username);
+        //Toast.makeText(UserProfileActivity.this,"Username is " + username, Toast.LENGTH_SHORT).show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

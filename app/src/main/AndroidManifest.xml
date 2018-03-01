@@ -34,6 +34,10 @@
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".OtherUserProfile"
+            android:label="@string/title_activity_other_user_profile"
             android:theme="@style/AppTheme"></activity>
     </application>
 
