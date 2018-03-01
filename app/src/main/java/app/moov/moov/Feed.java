@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -36,8 +37,9 @@ public class Feed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         firebaseAuth = FirebaseAuth.getInstance();
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Post"); //added this - Lisa
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        final String uid = user.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Posts"); //added this - Lisa
         setUIViews();
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
