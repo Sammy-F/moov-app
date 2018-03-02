@@ -18,7 +18,7 @@
         completions."
     </string>
 
-    <string name="input_uid">Input your friend\'s unique ID</string>
+    <string name="input_friend_username">Input your friend\'s username</string>
 
     <string name="hint_username">Username</string>
     <string name="hint_pass">Password</string>

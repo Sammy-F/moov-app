@@ -2,8 +2,6 @@ package app.moov.moov;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -21,14 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 public class FindUserActivity extends AppCompatActivity {
 
     private TextView tvPromptUID;
-    private EditText etUID;
+    private EditText etUsername;
     private Button btnFindUser;
 
     private FirebaseDatabase database;
-    private DatabaseReference usersRef;
+    private DatabaseReference usernamesRef;
     private DatabaseReference checkUserRef;
 
-    private Boolean userExists;
+    private String checkUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +38,30 @@ public class FindUserActivity extends AppCompatActivity {
         setUIViews(); // Initialize layout object variables
 
         database = FirebaseDatabase.getInstance();
-        usersRef = database.getReference().child("Users");
+        usernamesRef = database.getReference().child("Usernames");
 
         btnFindUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (userExists()) {
-                    goToUserProfile();
-                }
-                else {
-                    Toast.makeText(FindUserActivity.this, "User not found.", Toast.LENGTH_SHORT).show();
-                }
+                checkUsername = etUsername.getText().toString().trim();
+                usernamesRef.child(checkUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            goToUserProfile();
+                        }
+
+                        else {
+                            Toast.makeText(FindUserActivity.this,"User not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
 
             }
         });
@@ -62,44 +73,30 @@ public class FindUserActivity extends AppCompatActivity {
     private void setUIViews() {
 
         tvPromptUID = (TextView) findViewById(R.id.tvPrompUID);
-        etUID = (EditText) findViewById(R.id.etUID);
+        etUsername = (EditText) findViewById(R.id.etUsername);
         btnFindUser = (Button) findViewById(R.id.btnFindUser);
 
     }
 
+    /**
+     * If search for user exists, go to their profile and store the user's
+     * UID as an extra of the Intent.
+     */
     private void goToUserProfile() {
 
-        Intent intent = new Intent(FindUserActivity.this,OtherUserProfile.class);
-        intent.putExtra("thisUserID", etUID.getText().toString());
-
-        startActivity(intent);
-
-    }
-
-    /**
-     * Confirm that a user exists before attempting to go to their profile.
-     */
-    private Boolean userExists() {
-        String checkID = etUID.getText().toString();
-        usersRef.child(checkID).addListenerForSingleValueEvent(new ValueEventListener() {
+        usernamesRef.child(checkUsername).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    userExists = true;
-                }
-                else {
-                    userExists = false;
-                }
+                Intent intent = new Intent(FindUserActivity.this,OtherUserProfile.class);
+                intent.putExtra("thisUserID", dataSnapshot.getValue().toString());
+                startActivity(intent);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(FindUserActivity.this,"An error occurred when trying to get the UID.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        return userExists;
-
     }
-
 }

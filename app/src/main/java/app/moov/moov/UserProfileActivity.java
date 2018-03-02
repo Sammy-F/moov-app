@@ -89,7 +89,7 @@ public class UserProfileActivity extends AppCompatActivity {
             startActivity(new Intent(UserProfileActivity.this, MainActivity.class));
         }
 
-        if (id==R.id.addIcon) {
+        if (id==R.id.searchIcon) {
             Intent intent = new Intent(UserProfileActivity.this,FindUserActivity.class);
             startActivity(intent);
         }
