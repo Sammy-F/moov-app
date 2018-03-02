@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.56"
+        app:layout_constraintVertical_bias="0.375"
         app:srcCompat="@drawable/logo" />
 
     <EditText
@@ -33,13 +33,13 @@
         android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="@string/hint_email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.376" />
+        app:layout_constraintVertical_bias="0.391" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -57,7 +57,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.047" />
 
     <Button
         android:id="@+id/btnLogin"
