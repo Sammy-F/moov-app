@@ -9,8 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -31,6 +34,11 @@ public class PostActivity extends AppCompatActivity {
     private DatabaseReference baseRef;
     private DatabaseReference usersRef;
     private DatabaseReference postsRef;
+
+    private Post newPost;
+    private DatabaseReference newPostRef;
+
+    DatabaseReference followerRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +90,34 @@ public class PostActivity extends AppCompatActivity {
 //                    currentUserDB.child("Posts").child(movieTitle).child("Rating").setValue(rating);
 //                    currentUserDB.child("Posts").child(movieTitle).child("Review").setValue(review);
 
-                Post newPost = new Post(user, movieTitle, rating, review, timePosted);
+                newPost = new Post(user, movieTitle, rating, review, timePosted);
 
-                DatabaseReference newPostRef = postsRef.push();
+                newPostRef = postsRef.push();
                 newPostRef.setValue(newPost);
 //                postsRef.push().setValue(new HashMap<String, String>().put("Title", movieTitle)); //ignore me
 
                 usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
+
+                /**
+                 * Store the new post in all user's feeds.
+                 */
+                usersRef.child(user).child("Followers").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                            String UID = postSnapshot.getKey();
+                            usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPost);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
                 startActivity(new Intent(PostActivity.this, MessyFeedPage.class));
 
 
