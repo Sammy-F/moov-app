@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,34 +22,35 @@ import java.util.ArrayList;
 
 public class Feed extends AppCompatActivity {
 
-    private Button btnLogout;
-    private FirebaseAuth firebaseAuth;
-    //Reference to the recycler view
     private RecyclerView rvFeed;
 
-    private RecyclerView.Adapter feedAdapter;
-    private RecyclerView.LayoutManager feedManager;
+//    private Button btnLogout;
+    private FirebaseAuth firebaseAuth;
+//    private RecyclerView.Adapter feedAdapter;
+//    private RecyclerView.LayoutManager feedManager;
     private DatabaseReference mDatabase;
 
-    private ArrayList<String> testStrings;
+//    private ArrayList<String> testStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        final String uid = user.getUid();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Posts"); //added this - Lisa
-        setUIViews();
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logout();
-            }
-        });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        //Assigning it to the ID on XML
+//        FirebaseUser user = firebaseAuth.getCurrentUser();
+//        final String uid = user.getUid();
+//        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Posts"); //added this - Lisa
+//        btnLogout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                logout();
+//            }
+//        });
+//
+//        //Assigning it to the ID on XML
         rvFeed = (RecyclerView) findViewById(R.id.recyclerView);
         rvFeed.setHasFixedSize(true);
         rvFeed.setLayoutManager(new LinearLayoutManager(this));
@@ -59,12 +61,10 @@ public class Feed extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseRecyclerAdapter<Post, PostViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
-
                 Post.class,
                 R.layout.rv_row, //specifying the design of the cardview, which is the re_row.xml
                 PostViewHolder.class,
-                mDatabase
-//                mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts")
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts")
 
         ) {
             @Override
@@ -96,27 +96,9 @@ public class Feed extends AppCompatActivity {
         }
     }
 
-    private void logout() {
-        firebaseAuth.signOut();
-        finish();
-        startActivity(new Intent(Feed.this, MainActivity.class));
-    }
-
-    private void setUIViews(){
-
-        testStrings.add("lorem");
-        testStrings.add("ipsum");
-        testStrings.add("placeholder");
-
-        btnLogout = (Button) findViewById(R.id.btnLogout);
-        //rvFeed = (RecyclerView) findViewById(R.id.rvFeed);
-
-        //improve performance if all posts have fixed size
-        rvFeed.hasFixedSize();
-
-        //set recycler view manager
-        feedManager = new LinearLayoutManager(this);
-        rvFeed.setLayoutManager(feedManager);
-
-    }
+//    private void logout() {
+//        firebaseAuth.signOut();
+//        finish();
+//        startActivity(new Intent(Feed.this, MainActivity.class));
+//    }
 }

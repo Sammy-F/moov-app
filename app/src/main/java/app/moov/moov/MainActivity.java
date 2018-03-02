@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView numAttempts;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (user != null) {
             finish();
-            startActivity(new Intent(MainActivity.this,MessyFeedPage.class));
+            startActivity(new Intent(MainActivity.this,Feed.class));
         }
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, MessyFeedPage.class));
+                    startActivity(new Intent(MainActivity.this, Feed.class));
                 } else{
                     Toast.makeText(MainActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                     counter--;
