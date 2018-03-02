@@ -97,6 +97,7 @@ public class PostActivity extends AppCompatActivity {
 //                postsRef.push().setValue(new HashMap<String, String>().put("Title", movieTitle)); //ignore me
 
                 usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
+                usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);
 
                 /**
                  * Store the new post in all user's feeds.
