@@ -22,11 +22,15 @@ import com.google.firebase.database.ValueEventListener;
 public class OtherUserProfile extends AppCompatActivity {
 
     private String thisUserID;
+    private String currentUID;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private DatabaseReference ref;
     private DatabaseReference usersRef;
+
+    private DatabaseReference currentUserRef;
+    private DatabaseReference thisUserRef;
 
     TextView tvUsername;
     Button btnFollow;
@@ -43,7 +47,12 @@ public class OtherUserProfile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
-        usersRef = ref.child("Users").child(thisUserID);
+        usersRef = ref.child("Users");
+
+        currentUID = firebaseAuth.getCurrentUser().getUid();
+
+        currentUserRef = usersRef.child(currentUID);
+        thisUserRef = usersRef.child(thisUserID);
 
         setUIViews();
     }
@@ -57,7 +66,7 @@ public class OtherUserProfile extends AppCompatActivity {
          * Inside gets current user's username and sets the
          * TextView to display it
          */
-        usersRef.child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
+        thisUserRef.child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String username = dataSnapshot.getValue(String.class);
@@ -69,6 +78,30 @@ public class OtherUserProfile extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(OtherUserProfile.this,"Getting username failed.", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (!dataSnapshot.exists()) {
+                            thisUserRef.child("Followers").child(currentUID).setValue(true);
+                            currentUserRef.child("Following").child(thisUserID).setValue(true);
+                        }
+                        else {
+                            Toast.makeText(OtherUserProfile.this,"You already follow them.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
