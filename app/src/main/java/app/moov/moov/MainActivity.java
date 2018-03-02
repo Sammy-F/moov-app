@@ -69,11 +69,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Go to the registration page.
+     */
     private void register() {
         Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Validate that the input values for the user's registration
+     * are valid inputs.
+     * @param userName
+     * @param userPassword
+     */
     private void validate(String userName, String userPassword) {
 
         progressDialog.setMessage("Just wait a bit!");
