@@ -21,7 +21,7 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintVertical_bias="0.048" />
 
     <EditText
         android:id="@+id/editTextMovieTitle"
@@ -35,10 +35,9 @@
         android:inputType="textAutoComplete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCreateNewPost"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.041" />
 
     <EditText
         android:id="@+id/editTextRating"
@@ -66,14 +65,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:gravity="top"
         android:hint="@string/posttext"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextRating"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.108" />
 
     <Button
         android:id="@+id/buttonShare"

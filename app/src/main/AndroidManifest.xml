@@ -42,6 +42,10 @@
         <activity
             android:name=".FindUserActivity"
             android:label="@string/title_activity_find_user"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FeedActivity"
+            android:label="@string/title_activity_feed"
             android:theme="@style/AppTheme"></activity>
     </application>
 

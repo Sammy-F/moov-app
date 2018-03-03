@@ -69,6 +69,7 @@
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_other_user_profile">OtherUserProfile</string>
     <string name="title_activity_find_user">FindUserActivity</string>
+    <string name="title_activity_feed">FeedActivity</string>
 
 
 </resources>
