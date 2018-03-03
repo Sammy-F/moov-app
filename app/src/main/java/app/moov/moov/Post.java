@@ -9,6 +9,9 @@ public class Post {
 
     private long time;
 
+    public Post() {
+
+    }
 
     public Post(String uid, String title, String rating, String review, long time) {
         this.uid = uid;
