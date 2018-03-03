@@ -1,6 +1,7 @@
 package app.moov.moov;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,6 +36,7 @@ public class OtherUserProfile extends AppCompatActivity {
     TextView tvUsername;
     Button btnFollow;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +57,32 @@ public class OtherUserProfile extends AppCompatActivity {
         thisUserRef = usersRef.child(thisUserID);
 
         setUIViews();
+
     }
 
     private void setUIViews() {
 
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         btnFollow = (Button) findViewById(R.id.btnFollow);
+
+        thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    btnFollow.setText("Follow");
+                }
+                else {
+                    btnFollow.setText("Unfollow");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         /**
          * Inside gets current user's username and sets the
@@ -91,9 +113,13 @@ public class OtherUserProfile extends AppCompatActivity {
                         if (!dataSnapshot.exists()) {
                             thisUserRef.child("Followers").child(currentUID).setValue(true);
                             currentUserRef.child("Following").child(thisUserID).setValue(true);
+                            btnFollow.setText("Unfollow");
                         }
                         else {
-                            Toast.makeText(OtherUserProfile.this,"You already follow them.", Toast.LENGTH_SHORT).show();
+                            thisUserRef.child("Followers").child(currentUID).removeValue();
+                            currentUserRef.child("Following").child(thisUserID).removeValue();
+                            btnFollow.setText("Follow");
+//                            Toast.makeText(OtherUserProfile.this,"You already follow them.", Toast.LENGTH_SHORT).show();
                         }
                     }
 

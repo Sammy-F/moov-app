@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -77,6 +79,12 @@ public class Feed extends AppCompatActivity {
         rvFeed.setAdapter(FBRA);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_feed_page, menu);
+        return true;
+    }
+
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         public PostViewHolder(View itemView) {
             super(itemView);
@@ -95,6 +103,35 @@ public class Feed extends AppCompatActivity {
             movie_review.setText(movieReview);
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id==R.id.addIcon) {
+            Intent intent = new Intent(Feed.this,PostActivity.class);
+            startActivity(intent);
+        }
+
+        if (id==R.id.logoutIcon) {
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(Feed.this, MainActivity.class));
+        }
+
+        if (id==R.id.profileIcon) {
+            Intent intent = new Intent(Feed.this, UserProfileActivity.class);
+            startActivity(intent);
+        }
+
+        if (id==R.id.searchIcon) {
+            Intent intent = new Intent(Feed.this,FindUserActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 //    private void logout() {
 //        firebaseAuth.signOut();
