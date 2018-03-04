@@ -109,7 +109,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                                             database.getReference().child("Usernames").child(userName).setValue(firebaseAuth.getCurrentUser().getUid());
 
-                                            startActivity(new Intent(RegistrationActivity.this, MessyFeedPage.class));
+                                            startActivity(new Intent(RegistrationActivity.this, FeedActivity.class));
                                         } else {
 
                                             regProgress.setVisibility(View.INVISIBLE);

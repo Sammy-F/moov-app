@@ -24,12 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Feed" />
         <activity android:name=".RegistrationActivity" />
-        <activity
-            android:name=".MessyFeedPage"
-            android:label="@string/title_activity_feed_page"
-            android:theme="@style/AppTheme" />
         <activity android:name=".PostActivity" />
         <activity
             android:name=".UserProfileActivity"

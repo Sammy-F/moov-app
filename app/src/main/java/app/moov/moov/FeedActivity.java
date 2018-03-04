@@ -15,8 +15,11 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FeedActivity extends AppCompatActivity {
 
@@ -58,15 +61,19 @@ public class FeedActivity extends AppCompatActivity {
                 Post.class,
                 R.layout.rv_row,
                 FeedViewHolder.class,
-                postsRef
+                postsRef.orderByChild("time")
 
         ) {
             @Override
             protected void populateViewHolder(FeedViewHolder viewHolder, Post model, int position) {
 
+                final FeedViewHolder viewHolder1 = viewHolder;
+
                 viewHolder.setTitle(model.getMovieTitle());
                 viewHolder.setRating(model.getMovieRating());
                 viewHolder.setReview(model.getMovieReview());
+                viewHolder.setUsername(model.getUsername());
+
 
             }
         };
@@ -93,6 +100,11 @@ public class FeedActivity extends AppCompatActivity {
         public void setReview(String review) {
             TextView movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
             movieReview.setText(review);
+        }
+
+        public void setUsername(String username) {
+            TextView userName = (TextView) itemView.findViewById(R.id.Username);
+            userName.setText(username);
         }
 
     }

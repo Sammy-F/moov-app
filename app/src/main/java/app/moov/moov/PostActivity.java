@@ -80,7 +80,7 @@ public class PostActivity extends AppCompatActivity {
         final long timePosted = Calendar.getInstance().getTimeInMillis();
 
             if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(rating) && !TextUtils.isEmpty(review)) {
-                    String user = mAuth.getCurrentUser().getUid();
+                String user = mAuth.getCurrentUser().getUid();
 //                     currentUserDB = mDatabase.child(user);
 //                     Map<String, String> newPost = new HashMap<>();
 //                     newPost.put("Title", movieTitle);
@@ -90,27 +90,44 @@ public class PostActivity extends AppCompatActivity {
 //                    currentUserDB.child("Posts").child(movieTitle).child("Rating").setValue(rating);
 //                    currentUserDB.child("Posts").child(movieTitle).child("Review").setValue(review);
 
-                newPost = new Post(user, movieTitle, rating, review, timePosted);
-
-                newPostRef = postsRef.push();
-                newPostRef.setValue(newPost);
-//                postsRef.push().setValue(new HashMap<String, String>().put("Title", movieTitle)); //ignore me
-
-                usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
-                usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);
-
-                /**
-                 * Store the new post in all user's feeds.
-                 */
-                usersRef.child(user).child("Followers").addValueEventListener(new ValueEventListener() {
+                usersRef.child(user).child("Username").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-                            String UID = postSnapshot.getKey();
-                            usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPost);
+                        String user = mAuth.getCurrentUser().getUid();
+                        String username = dataSnapshot.getValue(String.class);
 
-                        }
+                        newPost = new Post(username, user, movieTitle, rating, review, timePosted);
+
+                        newPostRef = postsRef.push();
+                        newPostRef.setValue(newPost);
+//                postsRef.push().setValue(new HashMap<String, String>().put("Title", movieTitle)); //ignore me
+
+                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
+                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);
+
+                        /**
+                         * Store the new post in all user's feeds.
+                         */
+                        usersRef.child(user).child("Followers").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                                    String UID = postSnapshot.getKey();
+                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPost);
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
                     }
 
                     @Override
@@ -119,7 +136,7 @@ public class PostActivity extends AppCompatActivity {
                     }
                 });
 
-                startActivity(new Intent(PostActivity.this, MessyFeedPage.class));
+                startActivity(new Intent(PostActivity.this, FeedActivity.class));
 
 
 
