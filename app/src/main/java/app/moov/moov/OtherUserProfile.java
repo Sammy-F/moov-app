@@ -33,6 +33,8 @@ public class OtherUserProfile extends AppCompatActivity {
     private DatabaseReference currentUserRef;
     private DatabaseReference thisUserRef;
 
+    TextView tvNumFollowers;
+    TextView tvNumFollowing;
     TextView tvUsername;
     Button btnFollow;
 
@@ -45,19 +47,15 @@ public class OtherUserProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         thisUserID = getIntent().getStringExtra("thisUserID");
-
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
         usersRef = ref.child("Users");
-
         currentUID = firebaseAuth.getCurrentUser().getUid();
-
         currentUserRef = usersRef.child(currentUID);
         thisUserRef = usersRef.child(thisUserID);
 
         setUIViews();
-
     }
 
     private void setUIViews() {
@@ -74,6 +72,31 @@ public class OtherUserProfile extends AppCompatActivity {
                 else {
                     btnFollow.setText("Unfollow");
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        thisUserRef.child("Followers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvNumFollowers.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        thisUserRef.child("Following").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvNumFollowing.setText(String.valueOf(dataSnapshot.getChildrenCount()));
             }
 
             @Override
