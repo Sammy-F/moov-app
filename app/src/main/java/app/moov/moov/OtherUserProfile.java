@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 public class OtherUserProfile extends AppCompatActivity {
 
     private String thisUserID;
@@ -62,6 +64,9 @@ public class OtherUserProfile extends AppCompatActivity {
 
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         btnFollow = (Button) findViewById(R.id.btnFollow);
+
+        tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
+        tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
 
         thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
