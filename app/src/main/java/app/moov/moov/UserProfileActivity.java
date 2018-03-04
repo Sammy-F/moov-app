@@ -25,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 public class UserProfileActivity extends AppCompatActivity {
 
     private TextView tvUsername;
-    private Button btnFollow;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
@@ -38,7 +37,6 @@ public class UserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         tvUsername = (TextView) findViewById(R.id.tvUsername);
-        btnFollow = (Button) findViewById(R.id.btnFollow);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
