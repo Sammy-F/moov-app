@@ -236,7 +236,6 @@ public class OtherUserProfile extends AppCompatActivity {
 
     }
 
-
     public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
 
         public ProfileFeedHolder(View itemView) {

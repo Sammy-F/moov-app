@@ -39,6 +39,9 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private LinearLayoutManager orderedManager;
 
+    private TextView tvNumFollowing;
+    private TextView tvNumFollowers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,9 @@ public class UserProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+
+        tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
+        tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
 
         profileFeedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
         profileFeedRecycler.setHasFixedSize(true);
@@ -62,13 +68,38 @@ public class UserProfileActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         final String uid = user.getUid();
         database = FirebaseDatabase.getInstance();
-        userRef = database.getReference().child("Users").child(uid).child("Username");
+        userRef = database.getReference().child("Users").child(uid);
         userPostsRef = database.getReference().child("Users").child(uid).child("Posts");
+
+        userRef.child("Followers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvNumFollowers.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        userRef.child("Following").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvNumFollowing.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         /**
          * Inside gets current user's username
          */
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        userRef.child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 username = dataSnapshot.getValue(String.class);

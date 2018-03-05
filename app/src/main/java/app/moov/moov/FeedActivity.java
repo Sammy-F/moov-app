@@ -1,5 +1,12 @@
 package app.moov.moov;
 
+/**
+ * Created by Sammy on 3/3/18.
+ * Loads and displays the feed
+ * and manages user interactions
+ * with the toolbar.
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -47,6 +54,9 @@ public class FeedActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Initialized layout objects
+     */
     private void setUIViews() {
 
         feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
