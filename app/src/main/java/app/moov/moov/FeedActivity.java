@@ -38,6 +38,10 @@ public class FeedActivity extends AppCompatActivity {
 
     private LinearLayoutManager orderedManager;
 
+    private String uid;
+
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +52,11 @@ public class FeedActivity extends AppCompatActivity {
         setUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        uid = firebaseAuth.getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
         baseRef = database.getReference();
-        postsRef = baseRef.child("Posts");
+//        postsRef = baseRef.child("Posts");
+        postsRef = baseRef.child("Users").child(uid).child("Feed");
 
     }
 
@@ -58,6 +64,16 @@ public class FeedActivity extends AppCompatActivity {
      * Initialized layout objects
      */
     private void setUIViews() {
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FeedActivity.this, FeedActivity.class);
+                startActivity(intent);
+            }
+        });
 
         feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
         feedRecycler.setHasFixedSize(true);
