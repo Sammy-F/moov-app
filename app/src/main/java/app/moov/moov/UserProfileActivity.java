@@ -37,6 +37,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private RecyclerView profileFeedRecycler;
 
+    private LinearLayoutManager orderedManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,12 @@ public class UserProfileActivity extends AppCompatActivity {
 
         profileFeedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
         profileFeedRecycler.setHasFixedSize(true);
-        profileFeedRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+        orderedManager = new LinearLayoutManager(this);
+        orderedManager.setReverseLayout(true);
+        orderedManager.setStackFromEnd(true);
+
+        profileFeedRecycler.setLayoutManager(orderedManager);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();

@@ -29,6 +29,8 @@ public class FeedActivity extends AppCompatActivity {
     private DatabaseReference postsRef;
     private FirebaseAuth firebaseAuth;
 
+    private LinearLayoutManager orderedManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,12 @@ public class FeedActivity extends AppCompatActivity {
 
         feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
         feedRecycler.setHasFixedSize(true);
-        feedRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+        orderedManager = new LinearLayoutManager(this);
+        orderedManager.setReverseLayout(true);
+        orderedManager.setStackFromEnd(true);
+
+        feedRecycler.setLayoutManager(orderedManager);
 
     }
 

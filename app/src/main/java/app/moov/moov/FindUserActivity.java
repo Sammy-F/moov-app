@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +27,10 @@ public class FindUserActivity extends AppCompatActivity {
     private DatabaseReference usernamesRef;
     private DatabaseReference checkUserRef;
 
+    private FirebaseAuth firebaseAuth;
+
     private String checkUsername;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class FindUserActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         usernamesRef = database.getReference().child("Usernames");
+        firebaseAuth = FirebaseAuth.getInstance();
+        userID = firebaseAuth.getCurrentUser().getUid();
 
         btnFindUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,9 +93,15 @@ public class FindUserActivity extends AppCompatActivity {
         usernamesRef.child(checkUsername).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Intent intent = new Intent(FindUserActivity.this,OtherUserProfile.class);
-                intent.putExtra("thisUserID", dataSnapshot.getValue().toString());
-                startActivity(intent);
+                if (dataSnapshot.getValue(String.class).equals(userID)) {
+                    Intent intent = new Intent(FindUserActivity.this, UserProfileActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(FindUserActivity.this,OtherUserProfile.class);
+                    intent.putExtra("thisUserID", dataSnapshot.getValue().toString());
+                    startActivity(intent);
+                }
             }
 
             @Override

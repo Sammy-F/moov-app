@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,11 +38,13 @@ public class OtherUserProfile extends AppCompatActivity {
     private DatabaseReference currentUserRef;
     private DatabaseReference thisUserRef;
 
-    TextView tvNumFollowers;
-    TextView tvNumFollowing;
-    TextView tvUsername;
-    Button btnFollow;
+    private TextView tvNumFollowers;
+    private TextView tvNumFollowing;
+    private TextView tvUsername;
+    private Button btnFollow;
 
+    private RecyclerView userRecycler;
+    private LinearLayoutManager orderedManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,15 @@ public class OtherUserProfile extends AppCompatActivity {
 
         tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
         tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
+
+        userRecycler = (RecyclerView) findViewById(R.id.userRecycler);
+        userRecycler.setHasFixedSize(true);
+
+        orderedManager = new LinearLayoutManager(this);
+        orderedManager.setReverseLayout(true);
+        orderedManager.setStackFromEnd(true);
+
+        userRecycler.setLayoutManager(orderedManager);
 
         thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -110,6 +124,9 @@ public class OtherUserProfile extends AppCompatActivity {
             }
         });
 
+        /**
+         * Inside method gets user's posts and displays them
+         */
 
 
         /**
@@ -187,6 +204,66 @@ public class OtherUserProfile extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+
+        FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder>(
+
+                Post.class,
+                R.layout.rv_row,
+                FeedActivity.FeedViewHolder.class,
+                thisUserRef.child("Posts").orderByChild("time")
+
+        ) {
+            @Override
+            protected void populateViewHolder(FeedActivity.FeedViewHolder viewHolder, Post model, int position) {
+
+                final FeedActivity.FeedViewHolder viewHolder1 = viewHolder;
+
+                viewHolder.setTitle(model.getMovieTitle());
+                viewHolder.setRating(model.getMovieRating());
+                viewHolder.setReview(model.getMovieReview());
+                viewHolder.setUsername(model.getUsername());
+
+
+            }
+        };
+        userRecycler.setAdapter(FBRA);
+
+    }
+
+
+    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
+
+        public ProfileFeedHolder(View itemView) {
+            super(itemView);
+            View mView = itemView;
+        }
+
+        public void setTitle(String title) {
+            TextView movieTitle = (TextView) itemView.findViewById(R.id.MovieTitle);
+            movieTitle.setText(title);
+        }
+
+        public void setRating(String rating) {
+            TextView movieRating = (TextView) itemView.findViewById(R.id.MovieRating);
+            movieRating.setText(rating);
+        }
+
+        public void setReview(String review) {
+            TextView movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
+            movieReview.setText(review);
+        }
+
+        public void setUsername(String username) {
+            TextView userName = (TextView) itemView.findViewById(R.id.Username);
+            userName.setText(username);
+        }
+
     }
 
 
