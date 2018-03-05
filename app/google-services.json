@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "75014780858-tsrjv4kjq6lqpl3pcg1kpg9mapslc2r8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.moov.moov",
+            "certificate_hash": "278f4248f3132fd9a2d6cc7be244428390d16aa4"
+          }
+        },
+        {
           "client_id": "75014780858-tch17jbp8dj3lmglrcuf1mmemnf76h1h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
