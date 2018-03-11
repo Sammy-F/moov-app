@@ -1,17 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/bg_main</item>
         <item name="colorPrimaryDark">@color/toolbar_color</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/bg_main</item>
+        <item name="android:statusBarColor">@color/toolbar_color</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 </resources>

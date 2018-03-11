@@ -214,7 +214,7 @@ public class OtherUserProfile extends AppCompatActivity {
         FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder>(
 
                 Post.class,
-                R.layout.rv_row,
+                R.layout.cv_layout,
                 FeedActivity.FeedViewHolder.class,
                 thisUserRef.child("Posts").orderByChild("time")
 

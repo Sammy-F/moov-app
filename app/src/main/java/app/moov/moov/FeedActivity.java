@@ -92,7 +92,7 @@ public class FeedActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter <Post, FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedViewHolder>(
 
                 Post.class,
-                R.layout.rv_row,
+                R.layout.cv_layout,
                 FeedViewHolder.class,
                 postsRef.orderByChild("time")
 
