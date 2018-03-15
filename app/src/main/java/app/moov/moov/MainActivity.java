@@ -1,5 +1,13 @@
 package app.moov.moov;
 
+/**
+ * MainActivity initializes the objects
+ * in the login pages and handles any
+ * listeners.
+ *
+ * Modified 3/14 by Sammy Fritsche
+ */
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -29,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView numAttempts;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +73,13 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validate(etEmail.getText().toString(), etPassword.getText().toString());
+
+                if (!isEmpty(etEmail) && !isEmpty(etPassword)) {
+                    validate(etEmail.getText().toString().trim(), etPassword.getText().toString().trim());
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Please input username and password.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -77,6 +90,18 @@ public class MainActivity extends AppCompatActivity {
     private void register() {
         Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Check if the editText is empty
+     */
+    private boolean isEmpty(EditText eText) {
+        if (eText.getText().toString().trim().length() == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
