@@ -97,11 +97,11 @@ public class PostActivity extends AppCompatActivity {
                         String user = mAuth.getCurrentUser().getUid();
                         String username = dataSnapshot.getValue(String.class);
 
-                        newPost = new Post(username, user, movieTitle, rating, review, timePosted);
-
                         newPostRef = postsRef.push();
+
+                        final Post newPost = new Post(username, user, movieTitle, rating, review, timePosted, newPostRef.getKey());
+
                         newPostRef.setValue(newPost);
-//                postsRef.push().setValue(new HashMap<String, String>().put("Title", movieTitle)); //ignore me
 
                         usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
                         usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);

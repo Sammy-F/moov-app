@@ -30,9 +30,10 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView tvUsername;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private DatabaseReference ref;
     private DatabaseReference userRef;
     private DatabaseReference userPostsRef;
+    private DatabaseReference allUsers;
     private String username;
 
     private RecyclerView profileFeedRecycler;
@@ -68,8 +69,10 @@ public class UserProfileActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         final String uid = user.getUid();
         database = FirebaseDatabase.getInstance();
+        ref = database.getReference();
         userRef = database.getReference().child("Users").child(uid);
         userPostsRef = database.getReference().child("Users").child(uid).child("Posts");
+        allUsers = ref.child("Users");
 
         userRef.child("Followers").addValueEventListener(new ValueEventListener() {
             @Override
@@ -121,27 +124,68 @@ public class UserProfileActivity extends AppCompatActivity {
 
         super.onStart();
 
-        FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder>(
+        FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder>(
 
                 Post.class,
-                R.layout.cv_layout,
-                FeedActivity.FeedViewHolder.class,
+                R.layout.self_cv_layout,
+                UserProfileActivity.ProfileFeedHolder.class,
                 userPostsRef.orderByChild("time")
 
         ) {
             @Override
-            protected void populateViewHolder(FeedActivity.FeedViewHolder viewHolder, Post model, int position) {
-
-                final FeedActivity.FeedViewHolder viewHolder1 = viewHolder;
+            protected void populateViewHolder(UserProfileActivity.ProfileFeedHolder viewHolder, Post model, int position) {
+                final Post model1 = model;
 
                 viewHolder.setTitle(model.getMovieTitle());
                 viewHolder.setRating(model.getMovieRating());
                 viewHolder.setReview(model.getMovieReview());
                 viewHolder.setUsername(model.getUsername());
 
+                viewHolder.getDelButton().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final String pid = model1.getPID();
+                        userRef.child("Feed").child(pid).removeValue();
+                        userRef.child("Posts").child(pid).removeValue();
+                        ref.child("Posts").child(pid).removeValue();
 
+                        // Remove post from follower feeds
+                        userRef.child("Followers").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot follower : dataSnapshot.getChildren()) {
+                                    String UID = follower.getKey();
+
+                                    allUsers.child(UID).child("Feed").child(pid).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.exists()) {
+                                                dataSnapshot.getRef().removeValue();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
+                    }
+                });
             }
         };
+
         profileFeedRecycler.setAdapter(FBRA);
 
     }
@@ -182,9 +226,12 @@ public class UserProfileActivity extends AppCompatActivity {
 
     public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
 
+        Button deleteBtn;
+
         public ProfileFeedHolder(View itemView) {
             super(itemView);
             View mView = itemView;
+            this.deleteBtn = (Button) mView.findViewById(R.id.delBtn);
         }
 
         public void setTitle(String title) {
@@ -206,6 +253,8 @@ public class UserProfileActivity extends AppCompatActivity {
             TextView userName = (TextView) itemView.findViewById(R.id.Username);
             userName.setText(username);
         }
+
+        public Button getDelButton() { return deleteBtn; }
 
     }
 }

@@ -6,7 +6,7 @@ package app.moov.moov;
  */
 
 public class Post {
-    private String uid, movieTitle, movieRating, movieReview, username;
+    private String uid, movieTitle, movieRating, movieReview, username, pid;
 
     private long time;
 
@@ -14,13 +14,14 @@ public class Post {
 
     }
 
-    public Post(String username, String uid, String title, String rating, String review, long time) {
+    public Post(String username, String uid, String title, String rating, String review, long time, String pid) {
         this.uid = uid;
         this.movieTitle = title;
         this.movieRating = rating;
         this.movieReview = review;
         this.time = time;
         this.username = username;
+        this.pid = pid;
     }
 
     public String getUsername() { return username; }
@@ -58,4 +59,8 @@ public class Post {
     public void setMovieReview(String movieReview) {
         this.movieReview = movieReview;
     }
+
+    public String getPID() { return pid; }
+
+    public void setPID(String pid) { this.pid = pid; }
 }

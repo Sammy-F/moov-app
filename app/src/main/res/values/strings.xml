@@ -18,6 +18,8 @@
         completions."
     </string>
 
+    <string name="delete_post">Delete post</string>
+
     <string name="review">Review</string>
 
     <string name="input_friend_username">Input your friend\'s username</string>
