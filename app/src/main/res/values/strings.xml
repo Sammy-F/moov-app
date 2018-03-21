@@ -75,5 +75,7 @@
     <string name="title_activity_find_user">FindUserActivity</string>
     <string name="title_activity_feed">FeedActivity</string>
 
+    <string name="search">Search</string>
+
 
 </resources>
