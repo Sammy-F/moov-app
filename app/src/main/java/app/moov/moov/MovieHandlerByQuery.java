@@ -7,8 +7,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.TmdbSearch;
+import info.movito.themoviedbapi.model.MovieDb;
+import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 /**
  * Created by Sammy on 3/19/2018.
@@ -18,55 +22,30 @@ import info.movito.themoviedbapi.TmdbApi;
 
 public class MovieHandlerByQuery implements MovieHandler {
     private String searchQuery;
-    URL searchURL;
+    private TmdbSearch movieSearch;
+    private MovieResultsPage results;
+    private List<MovieDb> listResults;
 
-    //Instantiate a handler based on a search query
+    private int searchYear;
+    private boolean includeAdult;
+
+    private int page;
+
+    //Instantiate a handler based on search query only, not including 18+
     public MovieHandlerByQuery(String searchQuery) {
+
         this.searchQuery = searchQuery;
+        movieSearch = new TmdbSearch(API_ACCESS);
 
-        try {
-            searchURL = new URL("http://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&query=" + searchQuery);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        searchYear = 0;
+        includeAdult = false;
+        page = 0;
+
+        results = movieSearch.searchMovie(searchQuery, searchYear, "en", false, 0);
+
+        listResults = results.getResults();
+
     }
 
-    public String[] getPathsFromSearchQuery() {
-        String[] array = new String[15];
 
-        boolean running = true;
-
-        while(running) {
-            try {
-                HttpURLConnection urlConnection = (HttpURLConnection) searchURL.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.connect();
-
-                // Read the input steam into a String
-                InputStream inputStream = urlConnection.getInputStream();
-                StringBuffer buffer = new StringBuffer();
-
-                if (inputStream == null) {
-                    return null;
-                }
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
-                }
-
-                if (buffer.length() == 0) {
-                    return null;
-                }
-
-                String JSONResult = buffer.toString();
-            } catch (IOException e) {
-
-            }
-        }
-
-        return array;
-    }
 }
