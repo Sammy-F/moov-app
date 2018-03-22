@@ -99,7 +99,7 @@ public class PostActivity extends AppCompatActivity {
 
                         newPostRef = postsRef.push();
 
-                        final Post newPost = new Post(username, user, movieTitle, rating, review, timePosted, newPostRef.getKey());
+                        final Post newPost = new Post(username, user, movieTitle, rating, review, timePosted, newPostRef.getKey(), 0); //TODO: Update w/ actual movie ID
 
                         newPostRef.setValue(newPost);
 

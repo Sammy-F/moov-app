@@ -39,7 +39,10 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_search_results);
+
         firebaseAuth = FirebaseAuth.getInstance();
+        searchQuery = getIntent().getStringExtra("searchQuery");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,11 +50,21 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
     }
 
     private void setUIViews() {
-        searchQuery = getIntent().getStringExtra("searchQuery");
         searchHandler = new MovieHandlerByQuery(searchQuery);
         searchResults = searchHandler.getResults();
 
         if (searchResults.size() > 0) {
+            searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
+            searchRecycler.setHasFixedSize(true);
+
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+            searchRecycler.setLayoutManager(mLayoutManager);
+
+            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(searchResults);
+            searchRecycler.setAdapter(searchAdapter);
+        }
+        else if (searchResults.size() > 20) { // Cap the result size to 20
+            searchResults = searchResults.subList(0, 19);
             searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
             searchRecycler.setHasFixedSize(true);
 
