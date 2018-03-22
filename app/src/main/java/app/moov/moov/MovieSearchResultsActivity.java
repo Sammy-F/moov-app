@@ -34,7 +34,6 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
 
     private RecyclerView searchRecycler;
     private String searchQuery;
-    private MovieHandlerByQuery searchHandler;
 
     private List<MovieDb> searchResults;
 
@@ -54,15 +53,14 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
         setUIViews();
     }
 
+    /**
+     * Initialize and prepare UI Views for display
+     * Called in onCreate
+     */
     private void setUIViews() {
-//        searchHandler = new MovieHandlerByQuery(searchQuery);
-//        searchResults = searchHandler.getResults();
 
         APISearchHandler myHandler = new APISearchHandler(searchQuery);
         myHandler.execute();
-
-//        while(myHandler.getStatus() == AsyncTask.Status.RUNNING) {
-//        }
 
         try {
             searchResults = myHandler.get();
@@ -72,7 +70,9 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
             searchResults = null;
         }
 
-        if (searchResults.size() > 0 && searchResults.size() <= 20) {
+        if (searchResults == null) {
+            Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
+        } else if (searchResults.size() > 0 && searchResults.size() <= 20) {
             searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
             searchRecycler.setHasFixedSize(true);
 
@@ -112,6 +112,11 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
             this.searchQuery = searchQuery;
         }
 
+        /**
+         * Processes run when execute() is called
+         * @param searchQueries
+         * @return
+         */
         protected List<MovieDb> doInBackground(String[] searchQueries) {
             try {
                 TmdbSearch movieSearch = new TmdbSearch(new TmdbApi("3744632a440f06514578b01d1b6e9d27"));
@@ -123,15 +128,6 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
                 return null;
             }
         }
-
-        @Override
-        protected void onPostExecute(List<MovieDb> output) {
-            setResults(resultList);
-        }
-    }
-
-    private void setResults(List<MovieDb> output) {
-        searchResults = output;
     }
 
     @Override
