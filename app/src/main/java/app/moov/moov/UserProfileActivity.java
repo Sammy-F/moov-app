@@ -25,45 +25,38 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * UserProfileActivity displays the user's profile
+ * and handles certain interactions with items within
+ * the profile.
+ *
+ * Modified by Sammy 3/22/18
+ */
+
 public class UserProfileActivity extends AppCompatActivity {
 
     private TextView tvUsername;
+    private TextView tvNumFollowing;
+    private TextView tvNumFollowers;
+
+    private String username;
+
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private DatabaseReference ref;
     private DatabaseReference userRef;
     private DatabaseReference userPostsRef;
     private DatabaseReference allUsers;
-    private String username;
 
     private RecyclerView profileFeedRecycler;
-
     private LinearLayoutManager orderedManager;
-
-    private TextView tvNumFollowing;
-    private TextView tvNumFollowers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        tvUsername = (TextView) findViewById(R.id.tvUsername);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
-        tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
-        tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
-
-        profileFeedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
-        profileFeedRecycler.setHasFixedSize(true);
-
-        orderedManager = new LinearLayoutManager(this);
-        orderedManager.setReverseLayout(true);
-        orderedManager.setStackFromEnd(true);
-
-        profileFeedRecycler.setLayoutManager(orderedManager);
+        setUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -74,6 +67,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userPostsRef = database.getReference().child("Users").child(uid).child("Posts");
         allUsers = ref.child("Users");
 
+        // Set text for number of Followers user has
         userRef.child("Followers").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -86,6 +80,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
+        // Set next for number of users the user Follows
         userRef.child("Following").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -124,6 +119,10 @@ public class UserProfileActivity extends AppCompatActivity {
 
         super.onStart();
 
+        /**
+         * Create custom adapter using ProfileFeedHolder,
+         * populate using data pulled from Firebase.
+         */
         FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder>(
 
                 Post.class,
@@ -141,6 +140,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 viewHolder.setReview(model.getMovieReview());
                 viewHolder.setUsername(model.getUsername());
 
+                // Handles deletion when Delete Post button is clicked
                 viewHolder.getDelButton().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -190,6 +190,68 @@ public class UserProfileActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Internal ViewHolder class used with
+     * the custom Adapter for our profile
+     * RecyclerView
+     */
+    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
+
+        Button deleteBtn;
+
+        public ProfileFeedHolder(View itemView) {
+            super(itemView);
+            View mView = itemView;
+            this.deleteBtn = (Button) mView.findViewById(R.id.delBtn);
+        }
+
+        public void setTitle(String title) {
+            TextView movieTitle = (TextView) itemView.findViewById(R.id.MovieTitle);
+            movieTitle.setText(title);
+        }
+
+        public void setRating(String rating) {
+            TextView movieRating = (TextView) itemView.findViewById(R.id.MovieRating);
+            movieRating.setText(rating);
+        }
+
+        public void setReview(String review) {
+            TextView movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
+            movieReview.setText(review);
+        }
+
+        public void setUsername(String username) {
+            TextView userName = (TextView) itemView.findViewById(R.id.Username);
+            userName.setText(username);
+        }
+
+        public Button getDelButton() { return deleteBtn; }
+
+    }
+
+    /**
+     * Initialize layout variables
+     * Called in onStart
+     */
+    private void setUIViews() {
+        tvUsername = (TextView) findViewById(R.id.tvUsername);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
+        tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
+
+        profileFeedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
+        profileFeedRecycler.setHasFixedSize(true);
+
+        orderedManager = new LinearLayoutManager(this);
+        orderedManager.setReverseLayout(true);
+        orderedManager.setStackFromEnd(true);
+
+        profileFeedRecycler.setLayoutManager(orderedManager);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_feed_page, menu);
@@ -224,37 +286,4 @@ public class UserProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
-
-        Button deleteBtn;
-
-        public ProfileFeedHolder(View itemView) {
-            super(itemView);
-            View mView = itemView;
-            this.deleteBtn = (Button) mView.findViewById(R.id.delBtn);
-        }
-
-        public void setTitle(String title) {
-            TextView movieTitle = (TextView) itemView.findViewById(R.id.MovieTitle);
-            movieTitle.setText(title);
-        }
-
-        public void setRating(String rating) {
-            TextView movieRating = (TextView) itemView.findViewById(R.id.MovieRating);
-            movieRating.setText(rating);
-        }
-
-        public void setReview(String review) {
-            TextView movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
-            movieReview.setText(review);
-        }
-
-        public void setUsername(String username) {
-            TextView userName = (TextView) itemView.findViewById(R.id.Username);
-            userName.setText(username);
-        }
-
-        public Button getDelButton() { return deleteBtn; }
-
-    }
 }

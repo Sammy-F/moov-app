@@ -82,6 +82,7 @@ public class OtherUserProfile extends AppCompatActivity {
 
         userRecycler.setLayoutManager(orderedManager);
 
+        // Set the text for the follow/unfollow button
         thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,6 +101,7 @@ public class OtherUserProfile extends AppCompatActivity {
         });
 
 
+        // Display number of user's followers
         thisUserRef.child("Followers").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -112,6 +114,7 @@ public class OtherUserProfile extends AppCompatActivity {
             }
         });
 
+        // Display how many people the user is following
         thisUserRef.child("Following").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -148,6 +151,7 @@ public class OtherUserProfile extends AppCompatActivity {
             }
         });
 
+        // Handle following/unfollowing when button is clicked
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,31 +215,33 @@ public class OtherUserProfile extends AppCompatActivity {
 
         super.onStart();
 
-        FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder>(
-
+        /**
+         * Internal Adapter for use with the RecyclerView
+         */
+        FirebaseRecyclerAdapter<Post, OtherUserProfile.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, OtherUserProfile.ProfileFeedHolder>(
                 Post.class,
                 R.layout.cv_layout,
-                FeedActivity.FeedViewHolder.class,
+                ProfileFeedHolder.class,
                 thisUserRef.child("Posts").orderByChild("time")
-
         ) {
             @Override
-            protected void populateViewHolder(FeedActivity.FeedViewHolder viewHolder, Post model, int position) {
+            protected void populateViewHolder(OtherUserProfile.ProfileFeedHolder viewHolder, Post model, int position) {
 
-                final FeedActivity.FeedViewHolder viewHolder1 = viewHolder;
+                final OtherUserProfile.ProfileFeedHolder viewHolder1 = viewHolder;
 
                 viewHolder.setTitle(model.getMovieTitle());
                 viewHolder.setRating(model.getMovieRating());
                 viewHolder.setReview(model.getMovieReview());
                 viewHolder.setUsername(model.getUsername());
 
-
             }
         };
         userRecycler.setAdapter(FBRA);
-
     }
 
+    /**
+     * ViewHolder class for use on the profile
+     */
     public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
 
         public ProfileFeedHolder(View itemView) {
