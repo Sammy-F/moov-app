@@ -177,7 +177,7 @@ public class FeedActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id==R.id.addIcon) {
-            Intent intent = new Intent(FeedActivity.this,PostActivity.class);
+            Intent intent = new Intent(FeedActivity.this,ChooseMovieActivity.class);
             startActivity(intent);
         }
 
@@ -194,11 +194,6 @@ public class FeedActivity extends AppCompatActivity {
 
         if (id==R.id.searchIcon) {
             Intent intent = new Intent(FeedActivity.this,FindUserActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.movieSearchIcon) {
-            Intent intent = new Intent(FeedActivity.this, ChooseMovieActivity.class);
             startActivity(intent);
         }
 

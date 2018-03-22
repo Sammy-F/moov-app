@@ -263,7 +263,7 @@ public class UserProfileActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id==R.id.addIcon) {
-            Intent intent = new Intent(UserProfileActivity.this,PostActivity.class);
+            Intent intent = new Intent(UserProfileActivity.this,ChooseMovieActivity.class);
             startActivity(intent);
         }
 

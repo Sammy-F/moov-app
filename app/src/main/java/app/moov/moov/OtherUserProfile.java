@@ -187,7 +187,7 @@ public class OtherUserProfile extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id==R.id.addIcon) {
-            Intent intent = new Intent(OtherUserProfile.this,PostActivity.class);
+            Intent intent = new Intent(OtherUserProfile.this,ChooseMovieActivity.class);
             startActivity(intent);
         }
 

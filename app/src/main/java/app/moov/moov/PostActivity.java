@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +23,8 @@ import java.util.Calendar;
 public class PostActivity extends AppCompatActivity {
 
     private Uri uri = null;
-    private EditText editTextMovieTitle;
+//    private EditText editTextMovieTitle;
+    private TextView tvMovieTitle;
     private EditText editTextRating;
     private EditText editTextWriteReview;
     private StorageReference storageReference;
@@ -40,10 +42,16 @@ public class PostActivity extends AppCompatActivity {
 
     DatabaseReference followerRef;
 
+    private int movieID;
+    private String movieTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        movieID = getIntent().getIntExtra("movieID", 0); //defaults movieID to 0 if not set
+        movieTitle = getIntent().getStringExtra("movieTitle").trim(); //get standardized title from search
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -53,7 +61,9 @@ public class PostActivity extends AppCompatActivity {
         postsRef = baseRef.child("Posts");
 
         storageReference = FirebaseStorage.getInstance().getReference();
-        editTextMovieTitle = (EditText) findViewById(R.id.editTextMovieTitle);
+//        editTextMovieTitle = (EditText) findViewById(R.id.editTextMovieTitle);
+        tvMovieTitle = (TextView) findViewById(R.id.tvMovieTitle);
+        tvMovieTitle.setText(movieTitle);
         editTextRating = (EditText) findViewById(R.id.editTextRating);
         editTextWriteReview = (EditText) findViewById(R.id.editTextWriteReview);
     }
@@ -74,7 +84,7 @@ public class PostActivity extends AppCompatActivity {
 //        }
 //    }
     public void shareButtonClicked(View view){
-        final String movieTitle = editTextMovieTitle.getText().toString().trim();
+//        final String movieTitle = editTextMovieTitle.getText().toString().trim();
         final String rating = editTextRating.getText().toString().trim();
         final String review = editTextWriteReview.getText().toString().trim();
         final long timePosted = Calendar.getInstance().getTimeInMillis();
@@ -99,7 +109,7 @@ public class PostActivity extends AppCompatActivity {
 
                         newPostRef = postsRef.push();
 
-                        final Post newPost = new Post(username, user, movieTitle, rating, review, timePosted, newPostRef.getKey(), 0); //TODO: Update w/ actual movie ID
+                        final Post newPost = new Post(username, user, movieTitle, rating, review, timePosted, newPostRef.getKey(), movieID); //TODO: Update w/ actual movie ID
 
                         newPostRef.setValue(newPost);
 

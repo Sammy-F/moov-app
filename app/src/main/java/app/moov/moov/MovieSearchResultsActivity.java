@@ -79,7 +79,7 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
             searchRecycler.setLayoutManager(mLayoutManager);
 
-            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(searchResults);
+            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(this, searchResults);
             searchRecycler.setAdapter(searchAdapter);
         }
         else if (searchResults.size() > 20) { // Cap the result size to 20
@@ -90,7 +90,7 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
             searchRecycler.setLayoutManager(mLayoutManager);
 
-            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(searchResults);
+            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(this, searchResults);
             searchRecycler.setAdapter(searchAdapter);
         }
         else {
