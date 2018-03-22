@@ -79,6 +79,10 @@
     <string name="title_activity_find_user">FindUserActivity</string>
     <string name="title_activity_feed">FeedActivity</string>
 
+    <string name="title_movie_profile">MovieProfile</string>
+    <string name="movie_rating">MovieAPIRating</string>
+    <string name="movie_follower_rating">FollowerRating</string>
+
     <string name="search">Search</string>
     <string name="title_activity_movie_search_results">MovieSearchResultsActivity</string>
     <string name="title_activity_choose_movie">ChooseMovieActivity</string>

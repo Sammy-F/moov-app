@@ -21,6 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_other_user_profile" />
+    <include layout="@layout/content_movie_profile" />
 
 </android.support.design.widget.CoordinatorLayout>
