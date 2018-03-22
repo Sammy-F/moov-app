@@ -186,6 +186,11 @@ public class FeedActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        if (id==R.id.movieSearchIcon) {
+            Intent intent = new Intent(FeedActivity.this, ChooseMovieActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

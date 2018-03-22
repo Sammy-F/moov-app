@@ -30,5 +30,12 @@
         android:title="logoutIcon"
         />
 
+    <item
+        android:id="@+id/movieSearchIcon"
+        app:showAsAction="always"
+        android:icon="@drawable/movieicon"
+        android:title="movieSearchIcon"
+        />
+
 
 </menu>

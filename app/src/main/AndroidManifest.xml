@@ -45,6 +45,10 @@
         <activity
             android:name=".MovieSearchResultsActivity"
             android:label="@string/title_activity_movie_search_results"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseMovieActivity"
+            android:label="@string/title_activity_choose_movie"
             android:theme="@style/AppTheme"></activity>
     </application>
 

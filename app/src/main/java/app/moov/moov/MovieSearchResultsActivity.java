@@ -1,6 +1,7 @@
 package app.moov.moov;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,8 +23,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.TmdbSearch;
 import info.movito.themoviedbapi.model.MovieDb;
+import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 public class MovieSearchResultsActivity extends AppCompatActivity {
 
@@ -50,10 +55,24 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
     }
 
     private void setUIViews() {
-        searchHandler = new MovieHandlerByQuery(searchQuery);
-        searchResults = searchHandler.getResults();
+//        searchHandler = new MovieHandlerByQuery(searchQuery);
+//        searchResults = searchHandler.getResults();
 
-        if (searchResults.size() > 0) {
+        APISearchHandler myHandler = new APISearchHandler(searchQuery);
+        myHandler.execute();
+
+//        while(myHandler.getStatus() == AsyncTask.Status.RUNNING) {
+//        }
+
+        try {
+            searchResults = myHandler.get();
+        } catch (InterruptedException e) {
+            searchResults = null;
+        } catch (ExecutionException f) {
+            searchResults = null;
+        }
+
+        if (searchResults.size() > 0 && searchResults.size() <= 20) {
             searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
             searchRecycler.setHasFixedSize(true);
 
@@ -78,6 +97,41 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
             Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    /**
+     * Internal class handles searches in separate thread.
+     */
+    private class APISearchHandler extends AsyncTask<String, Void, List<MovieDb>> {
+        private List<MovieDb> resultList;
+        private String searchQuery;
+        Exception exception;
+
+        public APISearchHandler(String searchQuery) {
+            super();
+            this.searchQuery = searchQuery;
+        }
+
+        protected List<MovieDb> doInBackground(String[] searchQueries) {
+            try {
+                TmdbSearch movieSearch = new TmdbSearch(new TmdbApi("3744632a440f06514578b01d1b6e9d27"));
+                MovieResultsPage results = movieSearch.searchMovie(searchQuery, null, "en", false, 0);
+                resultList = results.getResults();
+                return resultList;
+            } catch (Exception e) {
+                this.exception = e;
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<MovieDb> output) {
+            setResults(resultList);
+        }
+    }
+
+    private void setResults(List<MovieDb> output) {
+        searchResults = output;
     }
 
     @Override

@@ -18,7 +18,7 @@
         completions."
     </string>
 
-    <string name="choose_moovie">Choose Movie</string>
+    <string name="choose_movie">Choose Movie</string>
 
     <string name="delete_post">Delete post</string>
 
@@ -40,6 +40,8 @@
     <string name="btn_register">SIGN UP</string>
     <string name="btn_already_registered">Already registered? Log in now!</string>
     <string name="btn_go">Let\'s Go!</string>
+
+    <string name="search_for_movie">Search for a movie</string>
 
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
@@ -79,6 +81,7 @@
 
     <string name="search">Search</string>
     <string name="title_activity_movie_search_results">MovieSearchResultsActivity</string>
+    <string name="title_activity_choose_movie">ChooseMovieActivity</string>
 
 
 </resources>
