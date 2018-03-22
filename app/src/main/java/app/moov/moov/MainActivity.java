@@ -43,26 +43,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
-        numAttempts = (TextView) findViewById(R.id.numAttempts);
-
-
-
-        numAttempts.setText("Number of attempts remaining: 5");
+        setUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        // If user is already signed in, bring them to the Feed
         if (user != null) {
             finish();
             startActivity(new Intent(MainActivity.this,FeedActivity.class));
         }
 
+        // Call register() when register button is clicked
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Check if login details are valid and do so
+        // if they are by calling validate()
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,5 +130,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    /**
+     * Initialize layout items
+     * Called in onCreate()
+     */
+    private void setUIViews() {
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        numAttempts = (TextView) findViewById(R.id.numAttempts);
+        numAttempts.setText("Number of attempts remaining: 5");
     }
 }

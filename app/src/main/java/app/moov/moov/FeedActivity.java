@@ -61,12 +61,11 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     /**
-     * Initialized layout objects
+     * Initialize layout objects, called in onCreate
      */
     private void setUIViews() {
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +88,9 @@ public class FeedActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        // Creates new Adapter to user with the RecyclerView using
+        // our internal FeedViewHolder.
         FirebaseRecyclerAdapter <Post, FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedViewHolder>(
 
                 Post.class,
@@ -113,6 +115,10 @@ public class FeedActivity extends AppCompatActivity {
         feedRecycler.setAdapter(FBRA);
     }
 
+    /**
+     * Internal ViewHolder class used
+     * for the Feed's RecyclerView
+     */
     public static class FeedViewHolder extends RecyclerView.ViewHolder{
 
         public FeedViewHolder(View itemView) {
@@ -142,23 +148,28 @@ public class FeedActivity extends AppCompatActivity {
 
     }
 
+
+//    /**
+//     * Internal ViewHolder class used
+//     * for the Feed's RecyclerView
+//     */
+//    public class rvHolder extends RecyclerView.ViewHolder {
+//
+//        public rvHolder(View itemView) {
+//            super(itemView);
+//            View mView = itemView;
+//        }
+//
+//        public void setTitle(String movieTitle) {
+//            TextView thisMovie = (TextView) itemView.findViewById(R.id.MovieTitle);
+//        }
+//
+//    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_feed_page, menu);
         return true;
-    }
-
-    public class rvHolder extends RecyclerView.ViewHolder {
-
-        public rvHolder(View itemView) {
-            super(itemView);
-            View mView = itemView;
-        }
-
-        public void setTitle(String movieTitle) {
-            TextView thisMovie = (TextView) itemView.findViewById(R.id.MovieTitle);
-        }
-
     }
 
     @Override

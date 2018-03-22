@@ -119,7 +119,7 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
          */
         protected List<MovieDb> doInBackground(String[] searchQueries) {
             try {
-                TmdbSearch movieSearch = new TmdbSearch(new TmdbApi("3744632a440f06514578b01d1b6e9d27"));
+                TmdbSearch movieSearch = new TmdbSearch(new TmdbApi("3744632a440f06514578b01d1b6e9d27")); //TODO: Save API Key elsewhere
                 MovieResultsPage results = movieSearch.searchMovie(searchQuery, null, "en", false, 0);
                 resultList = results.getResults();
                 return resultList;

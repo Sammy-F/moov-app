@@ -17,10 +17,21 @@ import info.movito.themoviedbapi.model.MovieDb;
 public class MovieResultsAdapter extends RecyclerView.Adapter<MovieResultsAdapter.ResultsViewHolder> {
     private List<MovieDb> movieResults;
 
+    /**
+     * Construct the Adapter using a list of MovieDb objects
+     * @param movieResults
+     */
     public MovieResultsAdapter(List<MovieDb> movieResults) {
         this.movieResults = movieResults;
     }
 
+    /**
+     * Declare card variables by inflating a new
+     * ResultsViewHOlder
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public MovieResultsAdapter.ResultsViewHolder onCreateViewHolder(ViewGroup parent,
                                                                     int viewType) {
@@ -31,6 +42,12 @@ public class MovieResultsAdapter extends RecyclerView.Adapter<MovieResultsAdapte
 
     }
 
+    /**
+     * Initialize the layout variables using information pulled
+     * from the objects in movieResults
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(MovieResultsAdapter.ResultsViewHolder holder, int position) {
         holder.setTitle(movieResults.get(position).getTitle());
@@ -38,6 +55,10 @@ public class MovieResultsAdapter extends RecyclerView.Adapter<MovieResultsAdapte
         holder.setID(movieResults.get(position).getId());
     }
 
+    /**
+     * Get int size of List
+     * @return
+     */
     @Override
     public int getItemCount() {
         return movieResults.size();
