@@ -36,4 +36,17 @@ public class MovieHandlerByID implements MovieHandler {
 //        }
     }
 
+    /**
+     * Returns the movie at the associated ID.
+     * Otherwise, returns null.
+     */
+    private MovieDb getMovie() {
+        if (movie == null) {
+            return null;
+        }
+        else {
+            return movie;
+        }
+    }
+
 }

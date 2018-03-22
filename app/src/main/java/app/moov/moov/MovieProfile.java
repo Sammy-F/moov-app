@@ -61,6 +61,7 @@ public class MovieProfile extends AppCompatActivity {
 
     private DatabaseReference movieRef;
     private DatabaseReference thisUserRef;
+    private DatabaseReference currentUserRef;
 
     private TextView tvNumFollowers;
     private TextView tvNumFollowing;

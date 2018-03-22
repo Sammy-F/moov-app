@@ -16,8 +16,6 @@ import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 /**
  * Created by Sammy on 3/19/2018.
- * Credit to Paymon Wang-Lotfi for
- * his tutorial and code snippets.
  */
 
 public class MovieHandlerByQuery implements MovieHandler {
@@ -44,7 +42,20 @@ public class MovieHandlerByQuery implements MovieHandler {
         results = movieSearch.searchMovie(searchQuery, searchYear, "en", false, 0);
 
         listResults = results.getResults();
+    }
 
+    /**
+     * Returns a List of MovieDB objects
+     * returned from the API based on the search
+     * query. If no movies exist, returns null.
+     */
+    private List<MovieDb> getResults() {
+        if (listResults.size() == 0) {
+            return null;
+        }
+        else {
+            return listResults;
+        }
     }
 
 

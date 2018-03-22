@@ -10,11 +10,13 @@ public class Post {
 
     private long time;
 
+    private int movieID;
+
     public Post() {
 
     }
 
-    public Post(String username, String uid, String title, String rating, String review, long time, String pid) {
+    public Post(String username, String uid, String title, String rating, String review, long time, String pid, int movieID) {
         this.uid = uid;
         this.movieTitle = title;
         this.movieRating = rating;
@@ -22,6 +24,7 @@ public class Post {
         this.time = time;
         this.username = username;
         this.pid = pid;
+        this.movieID = movieID;
     }
 
     public String getUsername() { return username; }
@@ -63,4 +66,8 @@ public class Post {
     public String getPID() { return pid; }
 
     public void setPID(String pid) { this.pid = pid; }
+
+    public int getMovieID() { return movieID; }
+
+    public void setMovieID(int movieID) { this.movieID = movieID; }
 }
