@@ -39,8 +39,9 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:0.4.4'
     compile 'com.google.android.gms:play-services-auth:11.8.0'
 
-    compile group: 'info.movito', name: 'themoviedbapi', version:'1.7'
+    compile group: 'info.movito', name: 'themoviedbapi', version: '1.7'
 }
+
 
 
 

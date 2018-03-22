@@ -18,6 +18,8 @@
         completions."
     </string>
 
+    <string name="choose_moovie">Choose Movie</string>
+
     <string name="delete_post">Delete post</string>
 
     <string name="review">Review</string>
@@ -76,6 +78,7 @@
     <string name="title_activity_feed">FeedActivity</string>
 
     <string name="search">Search</string>
+    <string name="title_activity_movie_search_results">MovieSearchResultsActivity</string>
 
 
 </resources>

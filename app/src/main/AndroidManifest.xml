@@ -41,6 +41,10 @@
         <activity
             android:name=".FeedActivity"
             android:label="@string/title_activity_feed"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MovieSearchResultsActivity"
+            android:label="@string/title_activity_movie_search_results"
             android:theme="@style/AppTheme"></activity>
     </application>
 

@@ -49,7 +49,7 @@ public class MovieHandlerByQuery implements MovieHandler {
      * returned from the API based on the search
      * query. If no movies exist, returns null.
      */
-    private List<MovieDb> getResults() {
+    public List<MovieDb> getResults() {
         if (listResults.size() == 0) {
             return null;
         }
