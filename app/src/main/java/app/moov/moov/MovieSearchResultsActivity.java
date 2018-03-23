@@ -70,6 +70,8 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
             searchResults = null;
         }
 
+        myHandler.cancel(true);
+
         if (searchResults == null) {
             Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
         } else if (searchResults.size() > 0 && searchResults.size() <= 20) {

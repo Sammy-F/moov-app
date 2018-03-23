@@ -38,12 +38,14 @@ public class MovieGetterByID {
         } catch (ExecutionException f) {
             thisMovie = null;
         }
+
+        movieGetter.cancel(true);
     }
 
     /**
      * Internal class handles getting movie in separate thread.
      */
-    private class APIMovieGetter extends AsyncTask<Integer, Void, MovieDb> {
+    static class APIMovieGetter extends AsyncTask<Integer, Void, MovieDb> {
         private MovieDb movie;
         private int ID;
         Exception exception;
