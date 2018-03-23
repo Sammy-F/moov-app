@@ -102,7 +102,7 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
     /**
      * Internal class handles searches in separate thread.
      */
-    private class APISearchHandler extends AsyncTask<String, Void, List<MovieDb>> {
+    static class APISearchHandler extends AsyncTask<String, Void, List<MovieDb>> {
         private List<MovieDb> resultList;
         private String searchQuery;
         Exception exception;
