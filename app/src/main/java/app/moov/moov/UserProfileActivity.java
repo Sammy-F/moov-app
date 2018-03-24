@@ -1,5 +1,6 @@
 package app.moov.moov;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import info.movito.themoviedbapi.model.MovieDb;
 
 /**
  * UserProfileActivity displays the user's profile
@@ -51,10 +54,14 @@ public class UserProfileActivity extends AppCompatActivity {
     private RecyclerView profileFeedRecycler;
     private LinearLayoutManager orderedManager;
 
+    private Context thisContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        thisContext = this;
 
         setUIViews();
 
@@ -140,6 +147,21 @@ public class UserProfileActivity extends AppCompatActivity {
                 viewHolder.setReview(model.getMovieReview());
                 viewHolder.setUsername(model.getUsername());
 
+                // Handles going to MoviePage when title is clicked
+
+                viewHolder.getMovieBtn().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final int movieID = model1.getMovieID();
+
+                        // Temporary actions until movie page is finished.
+                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
+                        MovieDb thisMovie = movieGetter.getMovie();
+                        String movieTitle = thisMovie.getTitle();
+                        Toast.makeText(UserProfileActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 // Handles deletion when Delete Post button is clicked
                 viewHolder.getDelButton().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -178,9 +200,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
                             }
                         });
-
-
-
                     }
                 });
             }
@@ -198,16 +217,17 @@ public class UserProfileActivity extends AppCompatActivity {
     public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
 
         Button deleteBtn;
+        Button movieBtn;
 
         public ProfileFeedHolder(View itemView) {
             super(itemView);
             View mView = itemView;
             this.deleteBtn = (Button) mView.findViewById(R.id.delBtn);
+            this.movieBtn = (Button) mView.findViewById(R.id.MovieTitle);
         }
 
         public void setTitle(String title) {
-            TextView movieTitle = (TextView) itemView.findViewById(R.id.MovieTitle);
-            movieTitle.setText(title);
+            movieBtn.setText(title);
         }
 
         public void setRating(String rating) {
@@ -226,6 +246,8 @@ public class UserProfileActivity extends AppCompatActivity {
         }
 
         public Button getDelButton() { return deleteBtn; }
+
+        public Button getMovieBtn() { return movieBtn; }
 
     }
 
@@ -279,8 +301,9 @@ public class UserProfileActivity extends AppCompatActivity {
         }
 
         if (id==R.id.profileIcon) {
-            Intent intent = new Intent(UserProfileActivity.this,UserProfileActivity.class);
-            startActivity(intent);
+            //donothing
+//            Intent intent = new Intent(UserProfileActivity.this,UserProfileActivity.class);
+//            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

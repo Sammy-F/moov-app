@@ -47,12 +47,12 @@ public class MovieGetterByID {
      */
     static class APIMovieGetter extends AsyncTask<Integer, Void, MovieDb> {
         private MovieDb movie;
-        private int ID;
+        private int movieID;
         Exception exception;
 
         public APIMovieGetter(int ID) {
             super();
-            this.ID = ID;
+            this.movieID = ID;
         }
 
         /**
@@ -63,7 +63,7 @@ public class MovieGetterByID {
         protected MovieDb doInBackground(Integer[] ID) {
             try {
                 TmdbMovies movies = new TmdbApi("3744632a440f06514578b01d1b6e9d27").getMovies();
-                return movies.getMovie(ID[0], "en");
+                return movies.getMovie(movieID, "en");
             } catch (Exception e) {
                 this.exception = e;
                 return null;
@@ -71,5 +71,5 @@ public class MovieGetterByID {
         }
     }
 
-    private MovieDb getMovie() { return thisMovie; }
+    public MovieDb getMovie() { return thisMovie; }
 }

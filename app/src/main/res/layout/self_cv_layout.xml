@@ -20,7 +20,6 @@
             android:layout_marginBottom="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="4dp"
             android:text="@string/review"
             android:textColor="@color/card_movietitle"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,13 +55,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <Button
             android:id="@+id/MovieTitle"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="24dp"
+            android:background="@color/cardview_light_background"
+            android:paddingBottom="0dp"
+            android:paddingTop="0dp"
             android:text="@string/movie"
             android:textColor="@color/card_movietitle"
             app:layout_constraintBottom_toTopOf="@id/MovieReview"
