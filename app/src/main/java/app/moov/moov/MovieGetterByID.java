@@ -21,7 +21,7 @@ import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 public class MovieGetterByID {
 
-    Context activityContext;
+    Context activityContext; //the context in which the MovieGetter is called
     int ID;
     private MovieDb thisMovie;
 
@@ -29,17 +29,17 @@ public class MovieGetterByID {
         this.activityContext = activityContext;
         this.ID = ID;
 
-        APIMovieGetter movieGetter = new APIMovieGetter(ID);
-        movieGetter.execute();
+        APIMovieGetter movieGetter = new APIMovieGetter(ID); //initialize a new APIMovieGetter (internal class)
+        movieGetter.execute(); //run doInBackground
         try {
-            thisMovie = movieGetter.get();
+            thisMovie = movieGetter.get(); //get the output from doInBackground
         } catch (InterruptedException e) {
             thisMovie = null;
         } catch (ExecutionException f) {
             thisMovie = null;
         }
 
-        movieGetter.cancel(true);
+        movieGetter.cancel(true); //terminate the thread
     }
 
     /**

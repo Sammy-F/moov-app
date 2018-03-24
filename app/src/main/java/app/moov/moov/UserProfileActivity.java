@@ -301,7 +301,7 @@ public class UserProfileActivity extends AppCompatActivity {
         }
 
         if (id==R.id.profileIcon) {
-            //donothing
+            //save time by not creating a new intent just to return to the same page
 //            Intent intent = new Intent(UserProfileActivity.this,UserProfileActivity.class);
 //            startActivity(intent);
         }
