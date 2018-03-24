@@ -1,5 +1,6 @@
 package app.moov.moov;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import info.movito.themoviedbapi.model.MovieDb;
+
 public class OtherUserProfile extends AppCompatActivity {
 
     private String thisUserID;
@@ -46,12 +49,16 @@ public class OtherUserProfile extends AppCompatActivity {
     private RecyclerView userRecycler;
     private LinearLayoutManager orderedManager;
 
+    private Context thisContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        thisContext = this;
 
         thisUserID = getIntent().getStringExtra("thisUserID");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -228,11 +235,22 @@ public class OtherUserProfile extends AppCompatActivity {
             protected void populateViewHolder(OtherUserProfile.ProfileFeedHolder viewHolder, Post model, int position) {
 
                 final OtherUserProfile.ProfileFeedHolder viewHolder1 = viewHolder;
+                final int movieID = model.getMovieID();
 
                 viewHolder.setTitle(model.getMovieTitle());
                 viewHolder.setRating(model.getMovieRating());
                 viewHolder.setReview(model.getMovieReview());
                 viewHolder.setUsername(model.getUsername());
+
+                viewHolder.getBtnMovieTitle().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
+                        MovieDb thisMovie = movieGetter.getMovie();
+                        String movieTitle = thisMovie.getTitle();
+                        Toast.makeText(OtherUserProfile.this,movieTitle, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         };
@@ -244,14 +262,16 @@ public class OtherUserProfile extends AppCompatActivity {
      */
     public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
 
+        private Button btnMovieTitle;
+
         public ProfileFeedHolder(View itemView) {
             super(itemView);
             View mView = itemView;
+            btnMovieTitle = (Button) itemView.findViewById(R.id.MovieTitle);
         }
 
         public void setTitle(String title) {
-            TextView movieTitle = (TextView) itemView.findViewById(R.id.MovieTitle);
-            movieTitle.setText(title);
+            btnMovieTitle.setText(title);
         }
 
         public void setRating(String rating) {
@@ -268,6 +288,8 @@ public class OtherUserProfile extends AppCompatActivity {
             TextView userName = (TextView) itemView.findViewById(R.id.Username);
             userName.setText(username);
         }
+
+        public Button getBtnMovieTitle() { return btnMovieTitle; }
 
     }
 

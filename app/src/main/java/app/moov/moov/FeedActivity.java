@@ -7,6 +7,7 @@ package app.moov.moov;
  * with the toolbar.
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,7 +19,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +30,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import info.movito.themoviedbapi.model.MovieDb;
 
 public class FeedActivity extends AppCompatActivity {
 
@@ -42,12 +47,16 @@ public class FeedActivity extends AppCompatActivity {
 
     private FloatingActionButton fab;
 
+    private Context thisContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        thisContext = this;
 
         setUIViews();
 
@@ -109,6 +118,18 @@ public class FeedActivity extends AppCompatActivity {
                 viewHolder.setReview(model.getMovieReview());
                 viewHolder.setUsername(model.getUsername());
 
+                final int movieID = model.getMovieID();
+
+                viewHolder.getBtnMovieTitle().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) { //temporary button response
+                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
+                        MovieDb thisMovie = movieGetter.getMovie();
+                        String movieTitle = thisMovie.getTitle();
+                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
             }
         };
@@ -121,14 +142,16 @@ public class FeedActivity extends AppCompatActivity {
      */
     public static class FeedViewHolder extends RecyclerView.ViewHolder{
 
+        private Button btnMovieTitle;
+
         public FeedViewHolder(View itemView) {
             super(itemView);
             View mView = itemView;
+            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
         }
 
         public void setTitle(String title) {
-            TextView movieTitle = (TextView) itemView.findViewById(R.id.MovieTitle);
-            movieTitle.setText(title);
+            btnMovieTitle.setText(title);
         }
 
         public void setRating(String rating) {
@@ -145,6 +168,8 @@ public class FeedActivity extends AppCompatActivity {
             TextView userName = (TextView) itemView.findViewById(R.id.Username);
             userName.setText(username);
         }
+
+        public Button getBtnMovieTitle() { return btnMovieTitle; }
 
     }
 
