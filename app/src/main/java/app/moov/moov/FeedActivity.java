@@ -45,8 +45,6 @@ public class FeedActivity extends AppCompatActivity {
 
     private String uid;
 
-    private FloatingActionButton fab;
-
     private Context thisContext;
 
     @Override
@@ -73,16 +71,6 @@ public class FeedActivity extends AppCompatActivity {
      * Initialize layout objects, called in onCreate
      */
     private void setUIViews() {
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FeedActivity.this, FeedActivity.class);
-                startActivity(intent);
-            }
-        });
-
         feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
         feedRecycler.setHasFixedSize(true);
 
