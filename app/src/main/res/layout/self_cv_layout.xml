@@ -66,6 +66,7 @@
             android:paddingBottom="0dp"
             android:paddingTop="0dp"
             android:text="@string/movie"
+            android:textSize="12sp"
             android:textColor="@color/card_movietitle"
             app:layout_constraintBottom_toTopOf="@id/MovieReview"
             app:layout_constraintEnd_toStartOf="@id/MovieRating"
@@ -87,6 +88,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.965"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/editBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:text="Edit Post"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/delBtn"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />

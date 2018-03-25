@@ -147,6 +147,20 @@ public class UserProfileActivity extends AppCompatActivity {
                 viewHolder.setReview(model.getMovieReview());
                 viewHolder.setUsername(model.getUsername());
 
+                // Handles going to EditPostActivity when Edit Button is clicked
+
+                viewHolder.getEditBtn().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(UserProfileActivity.this, EditPostActivity.class);
+                        intent.putExtra("rating", model1.getMovieRating());
+                        intent.putExtra("review", model1.getMovieReview());
+                        intent.putExtra("movieTitle", model1.getMovieTitle());
+                        intent.putExtra("postID", model1.getPID());
+                        startActivity(intent);
+                    }
+                });
+
                 // Handles going to MoviePage when title is clicked
 
                 viewHolder.getMovieBtn().setOnClickListener(new View.OnClickListener() {
@@ -218,12 +232,14 @@ public class UserProfileActivity extends AppCompatActivity {
 
         Button deleteBtn;
         Button movieBtn;
+        Button editBtn;
 
         public ProfileFeedHolder(View itemView) {
             super(itemView);
             View mView = itemView;
             this.deleteBtn = (Button) mView.findViewById(R.id.delBtn);
             this.movieBtn = (Button) mView.findViewById(R.id.MovieTitle);
+            this.editBtn = (Button) mView.findViewById(R.id.editBtn);
         }
 
         public void setTitle(String title) {
@@ -248,6 +264,8 @@ public class UserProfileActivity extends AppCompatActivity {
         public Button getDelButton() { return deleteBtn; }
 
         public Button getMovieBtn() { return movieBtn; }
+
+        public Button getEditBtn() { return editBtn; }
 
     }
 

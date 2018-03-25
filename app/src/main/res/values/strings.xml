@@ -86,6 +86,7 @@
     <string name="search">Search</string>
     <string name="title_activity_movie_search_results">MovieSearchResultsActivity</string>
     <string name="title_activity_choose_movie">ChooseMovieActivity</string>
+    <string name="title_activity_edit_post">EditPostActivity</string>
 
 
 </resources>

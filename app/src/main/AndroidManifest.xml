@@ -49,12 +49,16 @@
         <activity
             android:name=".ChooseMovieActivity"
             android:label="@string/title_activity_choose_movie"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SearchUserActivity"
             android:label="SearchUserActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".EditPostActivity"
+            android:label="@string/title_activity_edit_post"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
