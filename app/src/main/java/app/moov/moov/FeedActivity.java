@@ -206,7 +206,7 @@ public class FeedActivity extends AppCompatActivity {
         }
 
         if (id==R.id.searchIcon) {
-            Intent intent = new Intent(FeedActivity.this,FindUserActivity.class);
+            Intent intent = new Intent(FeedActivity.this,SearchUserActivity.class);
             startActivity(intent);
         }
 
