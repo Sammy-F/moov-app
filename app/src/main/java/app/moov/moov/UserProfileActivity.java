@@ -33,7 +33,7 @@ import info.movito.themoviedbapi.model.MovieDb;
  * and handles certain interactions with items within
  * the profile.
  *
- * Modified by Sammy 3/22/18
+ * Modified by Sammy 3/25/18
  */
 
 public class UserProfileActivity extends AppCompatActivity {

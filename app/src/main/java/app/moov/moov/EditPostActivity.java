@@ -19,6 +19,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Handles post editing by taking the existing
+ * review and rating in a post from the intent and
+ * then updates database info to reflect the changes.
+ *
+ * Created by Sammy 3/25/18
+ */
+
 public class EditPostActivity extends AppCompatActivity {
 
     private EditText etRating;
