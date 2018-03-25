@@ -37,7 +37,7 @@ public class SearchUserActivity extends AppCompatActivity{
         setUIViews(); // Initialize layout object variables
 
         database = FirebaseDatabase.getInstance();
-        usernamesRef = database.getReference().child("Usernames");
+        usernamesRef = database.getReference("Usernames");
         firebaseAuth = FirebaseAuth.getInstance();
 
         btnSearchUser.setOnClickListener(new View.OnClickListener() {
