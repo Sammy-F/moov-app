@@ -5,15 +5,19 @@ package app.moov.moov;
  */
 
 public class User {
-    public String username;
+    private String Username;
     public User() {
     }
 
-    public String getUsername() {
-        return username;
+    public User(String Username) {
+        this.Username = Username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String Username) {
+        this.Username = Username;
     }
 }

@@ -50,6 +50,10 @@
             android:name=".ChooseMovieActivity"
             android:label="@string/title_activity_choose_movie"
             android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".SearchUserActivity"
+            android:label="SearchUserActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
