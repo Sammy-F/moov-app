@@ -60,7 +60,6 @@
         android:id="@+id/rvSearchResult"
         android:layout_width="384dp"
         android:layout_height="325dp"
-        android:layout_marginBottom="24dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
