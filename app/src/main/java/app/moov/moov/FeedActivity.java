@@ -111,10 +111,13 @@ public class FeedActivity extends AppCompatActivity {
                 viewHolder.getBtnMovieTitle().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response
-                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
-                        MovieDb thisMovie = movieGetter.getMovie();
-                        String movieTitle = thisMovie.getTitle();
-                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(FeedActivity.this, MovieProfile.class);
+                        intent.putExtra("movieID", movieID);
+                        startActivity(intent); //go to movie's profile
+//                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
+//                        MovieDb thisMovie = movieGetter.getMovie();
+//                        String movieTitle = thisMovie.getTitle();
+//                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
                     }
                 });
 

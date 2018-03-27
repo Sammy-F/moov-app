@@ -58,7 +58,11 @@
         <activity
             android:name=".EditPostActivity"
             android:label="@string/title_activity_edit_post"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MovieProfile"
+            android:label="MovieProfile"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

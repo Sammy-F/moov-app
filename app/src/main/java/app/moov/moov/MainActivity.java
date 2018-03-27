@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     if (counter == 0) {
                         btnLogin.setEnabled(false);
                     }
+                    progressDialog.dismiss();
                 }
             }
         });
