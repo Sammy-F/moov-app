@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +26,8 @@ public class PostActivity extends AppCompatActivity {
     private Uri uri = null;
 //    private EditText editTextMovieTitle;
     private TextView tvMovieTitle;
-    private EditText editTextRating;
+//    private EditText editTextRating;
+    private RatingBar ratingBar;
     private EditText editTextWriteReview;
     private StorageReference storageReference;
     private FirebaseAuth mAuth;
@@ -36,6 +38,7 @@ public class PostActivity extends AppCompatActivity {
     private DatabaseReference baseRef;
     private DatabaseReference usersRef;
     private DatabaseReference postsRef;
+    private DatabaseReference moviePostsRef;
 
     private Post newPost;
     private DatabaseReference newPostRef;
@@ -59,12 +62,14 @@ public class PostActivity extends AppCompatActivity {
         baseRef = thisDatabase.getReference();
         usersRef = baseRef.child("Users");
         postsRef = baseRef.child("Posts");
+        moviePostsRef = baseRef.child("PostsByMovie").child(Integer.toString(movieID));
 
         storageReference = FirebaseStorage.getInstance().getReference();
 //        editTextMovieTitle = (EditText) findViewById(R.id.editTextMovieTitle);
         tvMovieTitle = (TextView) findViewById(R.id.tvMovieTitle);
         tvMovieTitle.setText(movieTitle);
-        editTextRating = (EditText) findViewById(R.id.editTextRating);
+//        editTextRating = (EditText) findViewById(R.id.editTextRating);
+        ratingBar = (RatingBar) findViewById(R.id.editTextRating);
         editTextWriteReview = (EditText) findViewById(R.id.editTextWriteReview);
     }
 
@@ -85,11 +90,13 @@ public class PostActivity extends AppCompatActivity {
 //    }
     public void shareButtonClicked(View view){
 //        final String movieTitle = editTextMovieTitle.getText().toString().trim();
-        final String rating = editTextRating.getText().toString().trim();
+//        final String rating = editTextRating.getText().toString().trim();
+        final int rating = ratingBar.getNumStars();
         final String review = editTextWriteReview.getText().toString().trim();
         final long timePosted = Calendar.getInstance().getTimeInMillis();
+        final String stringRating = Integer.toString(rating);
 
-            if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(rating) && !TextUtils.isEmpty(review)) {
+            if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(review)) {
                 String user = mAuth.getCurrentUser().getUid();
 //                     currentUserDB = mDatabase.child(user);
 //                     Map<String, String> newPost = new HashMap<>();
@@ -109,12 +116,14 @@ public class PostActivity extends AppCompatActivity {
 
                         newPostRef = postsRef.push();
 
-                        final Post newPost = new Post(username, user, movieTitle, rating, review, timePosted, newPostRef.getKey(), movieID); //TODO: Update w/ actual movie ID
+                        final Post newPost = new Post(username, user, movieTitle, stringRating, review, timePosted, newPostRef.getKey(), movieID); //TODO: Update w/ actual movie ID
 
                         newPostRef.setValue(newPost);
 
                         usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
                         usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);
+
+                        moviePostsRef.child(newPostRef.getKey()).setValue(newPost);
 
                         /**
                          * Store the new post in all user's feeds.
