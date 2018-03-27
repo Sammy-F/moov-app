@@ -73,6 +73,7 @@ public class MovieProfile extends AppCompatActivity {
     private DatabaseReference movieRef;
     private DatabaseReference thisUserRef;
     private DatabaseReference currentUserRef;
+    private DatabaseReference thisMoviePostsRef;
 
     private TextView tvNumFollowers;
     private TextView tvNumFollowing;
@@ -98,6 +99,7 @@ public class MovieProfile extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
         postsRef = ref.child("Posts");
+        thisMoviePostsRef = ref.child("PostsByMovie").child(Integer.toString(movieID));
 //        movieRef = postsRef.child("movieTitle");
 
         setUIViews();
@@ -117,14 +119,14 @@ public class MovieProfile extends AppCompatActivity {
 //        tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
 //        tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
 
-//        userRecycler = (RecyclerView) findViewById(R.id.userRecycler);
-//        userRecycler.setHasFixedSize(true);
+        userRecycler = (RecyclerView) findViewById(R.id.userRecycler);
+        userRecycler.setHasFixedSize(true);
 
-//        orderedManager = new LinearLayoutManager(this);
-//        orderedManager.setReverseLayout(true);
-//        orderedManager.setStackFromEnd(true);
+        orderedManager = new LinearLayoutManager(this);
+        orderedManager.setReverseLayout(true);
+        orderedManager.setStackFromEnd(true);
 
-//        userRecycler.setLayoutManager(orderedManager);
+        userRecycler.setLayoutManager(orderedManager);
 
 //        thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
@@ -256,34 +258,34 @@ public class MovieProfile extends AppCompatActivity {
 
         super.onStart();
 
-//        FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedActivity.FeedViewHolder>(
-//
-//                Post.class,
-//                R.layout.cv_layout,
-//                FeedActivity.FeedViewHolder.class,
-//                movieRef.orderByChild("time")
-//
-//        ) {
-//            @Override
-//            protected void populateViewHolder(FeedActivity.FeedViewHolder viewHolder, Post model, int position) {
-//
-//                final FeedActivity.FeedViewHolder viewHolder1 = viewHolder;
-//
-//                viewHolder.setTitle(model.getMovieTitle());
-//                viewHolder.setRating(model.getMovieRating());
-//                viewHolder.setReview(model.getMovieReview());
-//                viewHolder.setUsername(model.getUsername());
-//
-//
-//            }
-//        };
-//        userRecycler.setAdapter(FBRA);
+        FirebaseRecyclerAdapter<Post, MovieProfile.MovieProfileHolder> FBRA = new FirebaseRecyclerAdapter<Post, MovieProfile.MovieProfileHolder>(
+
+                Post.class,
+                R.layout.cv_layout,
+                MovieProfile.MovieProfileHolder.class,
+                thisMoviePostsRef.orderByChild("time")
+
+        ) {
+            @Override
+            protected void populateViewHolder(MovieProfile.MovieProfileHolder viewHolder, Post model, int position) {
+
+                final MovieProfile.MovieProfileHolder viewHolder1 = viewHolder;
+
+                viewHolder.setTitle(model.getMovieTitle());
+                viewHolder.setRating(model.getMovieRating());
+                viewHolder.setReview(model.getMovieReview());
+                viewHolder.setUsername(model.getUsername());
+
+
+            }
+        };
+        userRecycler.setAdapter(FBRA);
 
     }
 
-    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
+    public static class MovieProfileHolder extends RecyclerView.ViewHolder {
 
-        public ProfileFeedHolder(View itemView) {
+        public MovieProfileHolder(View itemView) {
             super(itemView);
             View mView = itemView;
         }
