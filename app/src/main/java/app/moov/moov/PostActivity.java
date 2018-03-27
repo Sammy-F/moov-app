@@ -156,6 +156,7 @@ public class PostActivity extends AppCompatActivity {
                 });
 
                 startActivity(new Intent(PostActivity.this, FeedActivity.class));
+                finish();
 
 
 
