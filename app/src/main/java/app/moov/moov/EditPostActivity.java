@@ -113,15 +113,19 @@ public class EditPostActivity extends AppCompatActivity {
         final String newReview = etReview.getText().toString().trim();
         final String newRating = etRating.getText().toString().trim();
 
+        //update the Post in the main Posts node
         postsRef.child(postID).child("movieRating").setValue(newRating);
         postsRef.child(postID).child("movieReview").setValue(newReview);
 
+        //update the Post in the user's Posts
         userRef.child("Posts").child(postID).child("movieRating").setValue(newRating);
         userRef.child("Posts").child(postID).child("movieReview").setValue(newReview);
 
+        //update the Post in the user's Feed
         userRef.child("Feed").child(postID).child("movieRating").setValue(newRating);
         userRef.child("Feed").child(postID).child("movieReview").setValue(newReview);
 
+        //update the Post in the Feed of all of the user's Followers
         followersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -131,12 +135,15 @@ public class EditPostActivity extends AppCompatActivity {
                     usersRef.child(followerUID).child("Feed").child(postID).child("movieReview").setValue(newReview);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+
+        //Return the user to the feed
+        Intent intent = new Intent(EditPostActivity.this, FeedActivity.class);
+        startActivity(intent);
     }
 
 }
