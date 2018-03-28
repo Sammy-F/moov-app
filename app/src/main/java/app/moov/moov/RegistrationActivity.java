@@ -1,9 +1,11 @@
 package app.moov.moov;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,15 +13,27 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -37,11 +51,24 @@ public class RegistrationActivity extends AppCompatActivity {
     private String userEmail;
     private String userPassword;
 
+    private FirebaseStorage firebaseStorage;
+    private StorageReference storageRef;
+    private StorageReference imageRef;
+    private StorageReference avatarRef;
+    private StorageReference newAvatarRef;
+
+    private Uri downloadURL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         setUIViews();
+
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageRef = firebaseStorage.getReference();
+        imageRef = storageRef.child("images");
+        avatarRef = imageRef.child("avatars");
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -60,33 +87,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 userPassword = etPassword.getText().toString().trim();
 
                 if (validate()) {
-                    //Database time, bitches
                     regProgress.setVisibility(View.VISIBLE);
-
-                    //Original Signup
-
-//                    firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            //what do we do once the user is registered?
-//
-//                            if (task.isSuccessful()) {
-//                                Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
-//
-//                                FirebaseUser currentPerson=FirebaseAuth.getInstance().getCurrentUser();
-//                                DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
-//                                ref.child("Username").setValue(userName);
-//
-//                                database.getReference().child("Usernames").child(userName).setValue(firebaseAuth.getCurrentUser().getUid());
-//
-//                                startActivity(new Intent(RegistrationActivity.this, MessyFeedPage.class));
-//                            } else {
-//
-//                                regProgress.setVisibility(View.INVISIBLE);
-//                                Toast.makeText(RegistrationActivity.this, "Registration failed, please try again.", Toast.LENGTH_LONG).show();
-//                            }
-//                        }
-//                    });
 
                     database.getReference().child("Usernames").child(userName).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -108,7 +109,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                             ref.child("Username").setValue(userName);
 
                                             database.getReference().child("Usernames").child(userName).setValue(firebaseAuth.getCurrentUser().getUid());
-
+                                            database.getReference().child("Users").child(currentPerson.getUid()).child("lowername").setValue(userName.trim().toLowerCase());
                                             startActivity(new Intent(RegistrationActivity.this, FeedActivity.class));
                                             finish();
                                         } else {
