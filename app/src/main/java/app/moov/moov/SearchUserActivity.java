@@ -12,6 +12,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 /**
  * Created by Lisa on 24/03/18.
@@ -43,19 +44,24 @@ public class SearchUserActivity extends AppCompatActivity{
         btnSearchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String searchText = etUsername.getText().toString();
 
-                firebaseUserSearch();
+                firebaseUserSearch(searchText);
             }
         });
     }
 
 
-    private void firebaseUserSearch() {
+    private void firebaseUserSearch(String searchText) {
+
+        Query firebaseSearchQuery = usernamesRef.orderByChild("Username").startAt(searchText).endAt(searchText + "\uf8ff");
+
+
         FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder>(
                 User.class,
                 R.layout.user_search_layout,
                 SearchUserActivity.UsersViewHolder.class,
-                usernamesRef
+                firebaseSearchQuery
         ) {
 
             @Override

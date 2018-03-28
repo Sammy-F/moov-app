@@ -80,6 +80,7 @@ public class MovieProfile extends AppCompatActivity {
     private TextView tvNumFollowers;
     private TextView tvNumFollowing;
     private TextView tvMoviename;
+    private TextView tvMovieDesc;
     private Button btnFollow;
 
     private RecyclerView userRecycler;

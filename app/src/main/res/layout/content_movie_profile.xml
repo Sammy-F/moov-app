@@ -28,7 +28,6 @@
         android:id="@+id/tvMoviename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="@string/title_movie_profile"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,19 +116,59 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="296dp"
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/userRecycler"
-        android:layout_width="368dp"
-        android:layout_height="335dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMoviename" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/movie_btn_summary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnReviews"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.337" />
+
+    <Button
+        android:id="@+id/btnReviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/movie_btn_reviews"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.337" />
+
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="app.moov.moov.FragmentSummary"
+        android:layout_width="372dp"
+        android:layout_height="314dp"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="208dp" />
 
 
 </android.support.constraint.ConstraintLayout>
