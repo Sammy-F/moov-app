@@ -89,11 +89,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (validate()) {
                     regProgress.setVisibility(View.VISIBLE);
 
-                    database.getReference().child("Usernames").child(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+                    database.getReference().child("lusernames").child(userName.toLowerCase()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
                             if (!dataSnapshot.exists()) {
+
                                 Toast.makeText(RegistrationActivity.this, "Attempting registration. This may take a while!", Toast.LENGTH_LONG).show();
 
                                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -110,6 +111,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                                             database.getReference().child("Usernames").child(userName).setValue(firebaseAuth.getCurrentUser().getUid());
                                             database.getReference().child("Users").child(currentPerson.getUid()).child("lowername").setValue(userName.trim().toLowerCase());
+                                            database.getReference().child("lusernames").child(userName.trim().toLowerCase()).setValue(firebaseAuth.getCurrentUser().getUid());
                                             startActivity(new Intent(RegistrationActivity.this, FeedActivity.class));
                                             finish();
                                         } else {
