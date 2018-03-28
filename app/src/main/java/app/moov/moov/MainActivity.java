@@ -173,8 +173,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        numAttempts = (TextView) findViewById(R.id.numAttempts);
-        numAttempts.setText("Number of attempts remaining: 5");
+//        numAttempts = (TextView) findViewById(R.id.numAttempts);
+//        numAttempts.setText("Number of attempts remaining: 5");
     }
 
 
