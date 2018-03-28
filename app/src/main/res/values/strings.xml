@@ -87,6 +87,8 @@
     <string name="title_movie_profile">MovieProfile</string>
     <string name="movie_rating">MovieAPIRating</string>
     <string name="movie_follower_rating">FollowerRating</string>
+    <string name="movie_btn_summary">Summary</string>
+    <string name="movie_btn_reviews">Reviews</string>
 
     <string name="search">Search</string>
     <string name="title_activity_movie_search_results">MovieSearchResultsActivity</string>
