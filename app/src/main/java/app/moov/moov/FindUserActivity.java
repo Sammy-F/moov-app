@@ -37,8 +37,6 @@ public class FindUserActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private String checkUsername;
     private String userID;
-    private EditText etFindUser;
-    private RecyclerView rvFindUser;
     private ArrayList<String> userNameList;
     private SearchAdapter searchAdapter;
 
@@ -49,8 +47,6 @@ public class FindUserActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Move to setUIviews later
-        etFindUser = (EditText) findViewById(R.id.etFindUser);
-        rvFindUser = (RecyclerView) findViewById(R.id.rvFindUser);
 
         setUIViews(); // Initialize layout object variables
 
@@ -83,69 +79,8 @@ public class FindUserActivity extends AppCompatActivity {
 
             }
         });
-
-        rvFindUser.setHasFixedSize(true);
-        rvFindUser.setLayoutManager(new LinearLayoutManager(this));
-        rvFindUser.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        userNameList = new ArrayList<>();
-
-
-        etFindUser.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (!editable.toString().isEmpty()) {
-                    setAdapter(editable.toString());
-                    userNameList.clear();
-                    rvFindUser.removeAllViews();
-
-                }
-
-            }
-
-        });
     }
 
-
-    private void setAdapter(final String searchString) {
-
-        database.getReference().child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userNameList.clear();
-                rvFindUser.removeAllViews();
-                int counter = 0;
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                    String uid = snapshot.getKey();
-                    String userName = snapshot.child("Username").getValue(String.class);
-                    if (userName.contains(searchString)) {
-                        userNameList.add(userName);
-                        counter++;
-                    }
-                    if (counter == 15)
-                        break;
-                }
-
-                searchAdapter = new SearchAdapter(FindUserActivity.this, userNameList);
-                rvFindUser.setAdapter(searchAdapter);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
     /**
      * Initialzies layout object variables
      */
