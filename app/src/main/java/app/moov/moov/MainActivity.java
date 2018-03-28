@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btnLogin;
     private Button btnRegister;
+    private Button btnForgotPass;
     private int counter = 5;
     private TextView numAttempts;
     private FirebaseAuth firebaseAuth;
@@ -144,6 +145,14 @@ public class MainActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnForgotPass = (Button) findViewById(R.id.btnForgot);
+        btnForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
         numAttempts = (TextView) findViewById(R.id.numAttempts);
         numAttempts.setText("Number of attempts remaining: 5");
     }

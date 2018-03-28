@@ -63,6 +63,14 @@
             android:name=".MovieProfile"
             android:label="MovieProfile"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".UserSettingsActivity"
+            android:label="@string/title_activity_user_settings"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:label="@string/title_activity_forgot_password"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

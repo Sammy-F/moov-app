@@ -17,6 +17,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="change_username">Change Username</string>
+    <string name="hint_new_username">Type new username</string>
+
+    <string name="account">Edit Profile</string>
+    <string name="following">Follow</string>
 
     <string name="choose_movie">Choose Movie</string>
 
@@ -64,7 +69,7 @@
     <string name="btn_remove">Remove</string>
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
-    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="forgot_password_msg">We just need your registered Email to send you password reset instructions.</string>
 
     <string name="mLogo">Moov Logo</string>
     <string name="title_activity_main2">Main2Activity</string>
@@ -87,6 +92,8 @@
     <string name="title_activity_movie_search_results">MovieSearchResultsActivity</string>
     <string name="title_activity_choose_movie">ChooseMovieActivity</string>
     <string name="title_activity_edit_post">EditPostActivity</string>
+    <string name="title_activity_user_settings">UserSettingsActivity</string>
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
 
 
 </resources>

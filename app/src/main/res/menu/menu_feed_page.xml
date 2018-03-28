@@ -30,4 +30,10 @@
         android:title="logoutIcon"
         />
 
+    <item
+        android:id="@+id/settingsIcon"
+        app:showAsAction="always"
+        android:icon="@drawable/settingsicon"
+        android:title="settingsIcon" />
+
 </menu>

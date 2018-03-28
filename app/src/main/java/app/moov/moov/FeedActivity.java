@@ -213,6 +213,11 @@ public class FeedActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        if (id==R.id.settingsIcon) {
+            Intent intent = new Intent(FeedActivity.this,UserSettingsActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
