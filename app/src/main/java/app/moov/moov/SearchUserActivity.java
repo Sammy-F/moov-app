@@ -54,14 +54,14 @@ public class SearchUserActivity extends AppCompatActivity{
 
     private void firebaseUserSearch(String searchText) {
 
-        Query firebaseSearchQuery = usernamesRef.orderByChild("Username").startAt(searchText).endAt(searchText+ "\uf8ff");
+        Query firebaseSearchQuery = usernamesRef.orderByChild("Username").startAt(searchText).endAt(searchText + "\uf8ff");
 
 
         FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder>(
                 User.class,
                 R.layout.user_search_layout,
                 SearchUserActivity.UsersViewHolder.class,
-                usernamesRef
+                firebaseSearchQuery
         ) {
 
             @Override
