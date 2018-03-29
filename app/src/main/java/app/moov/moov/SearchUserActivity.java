@@ -1,11 +1,17 @@
 package app.moov.moov;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -75,11 +81,12 @@ public class SearchUserActivity extends AppCompatActivity{
                     @Override
                     public void onClick(View view) {
                         //Clicked
-                            Toast.makeText(SearchUserActivity.this,"You clicked on" + username, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SearchUserActivity.this,"You clicked on " + username, Toast.LENGTH_SHORT).show();
 
 
-//                            Intent intent = new Intent(SearchUserActivity.this, UserProfileActivity.class);
-//                            startActivity(intent);
+                            Intent intent = new Intent(SearchUserActivity.this, UserProfileActivity.class);
+                            intent.putExtra("Username", username);
+                            startActivity(intent);
 
 
                     }
@@ -89,6 +96,14 @@ public class SearchUserActivity extends AppCompatActivity{
         searchResultList.setAdapter(firebaseRecyclerAdapter);
     }
 
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 
     //VIEWHOLDER CLASS
@@ -113,4 +128,7 @@ public class SearchUserActivity extends AppCompatActivity{
         searchResultList.setHasFixedSize(true);
         searchResultList.setLayoutManager(new LinearLayoutManager(this));
     }
+
+
+
 }
