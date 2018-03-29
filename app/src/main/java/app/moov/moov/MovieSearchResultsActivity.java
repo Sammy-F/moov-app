@@ -1,5 +1,7 @@
 package app.moov.moov;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,19 +11,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -35,14 +53,19 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
     private RecyclerView searchRecycler;
     private String searchQuery;
 
-    private List<MovieDb> searchResults;
+//    private List<MovieDb> searchResults;
 
     private FirebaseAuth firebaseAuth;
+
+    private Context thisContext;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_search_results);
+
+        thisContext = this;
 
         firebaseAuth = FirebaseAuth.getInstance();
         searchQuery = getIntent().getStringExtra("searchQuery");
@@ -59,45 +82,117 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
      */
     private void setUIViews() {
 
-        APISearchHandler myHandler = new APISearchHandler(searchQuery);
-        myHandler.execute();
+        final ProgressBar progressBar = findViewById(R.id.resultsProgress);
+        progressBar.setVisibility(View.VISIBLE);
 
-        try {
-            searchResults = myHandler.get();
-        } catch (InterruptedException e) {
-            searchResults = null;
-        } catch (ExecutionException f) {
-            searchResults = null;
-        }
+        //run search handler
+//        APISearchHandler myHandler = new APISearchHandler(searchQuery);
+//        myHandler.execute();
+//
+//        try {
+//            searchResults = myHandler.get();
+//        } catch (InterruptedException e) {
+//            searchResults = null;
+//        } catch (ExecutionException f) {
+//            searchResults = null;
+//        }
+//
+//        myHandler.cancel(true);
 
-        myHandler.cancel(true);
+        searchQuery = searchQuery.replaceAll(" ", "+");
 
-        if (searchResults == null) {
-            Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
-        } else if (searchResults.size() > 0 && searchResults.size() <= 20) {
-            searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
-            searchRecycler.setHasFixedSize(true);
+        String url = "https://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&query=" + searchQuery;
 
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-            searchRecycler.setLayoutManager(mLayoutManager);
+        RequestQueue queue;
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
+        Network network = new BasicNetwork(new HurlStack());
+        queue = new RequestQueue(cache, network);
+        queue.start();
 
-            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(this, searchResults);
-            searchRecycler.setAdapter(searchAdapter);
-        }
-        else if (searchResults.size() > 20) { // Cap the result size to 20
-            searchResults = searchResults.subList(0, 19);
-            searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
-            searchRecycler.setHasFixedSize(true);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray resultsArray = response.getJSONArray("results");
+                    List<JSONObject> convertedArray = new ArrayList<JSONObject>();
 
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-            searchRecycler.setLayoutManager(mLayoutManager);
+                    for (int i = 0; i < resultsArray.length(); i++) {
+                        JSONObject thisMovie = resultsArray.getJSONObject(i);
+                        convertedArray.add(thisMovie);
+                    }
 
-            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(this, searchResults);
-            searchRecycler.setAdapter(searchAdapter);
-        }
-        else {
-            Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
-        }
+                    if (convertedArray.size() == 0) {
+                        Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
+                    } else if (convertedArray.size() > 0 && convertedArray.size() <= 20) {
+                        searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
+                        searchRecycler.setHasFixedSize(true);
+
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(thisContext);
+                        searchRecycler.setLayoutManager(mLayoutManager);
+
+                        JSONMovieResultsAdapter searchAdapter = new JSONMovieResultsAdapter(thisContext, convertedArray);
+                        searchRecycler.setAdapter(searchAdapter);
+                    }
+                    else if (convertedArray.size() > 20) { // Cap the result size to 20
+                        convertedArray = convertedArray.subList(0, 19);
+                        searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
+                        searchRecycler.setHasFixedSize(true);
+
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(thisContext);
+                        searchRecycler.setLayoutManager(mLayoutManager);
+
+                        JSONMovieResultsAdapter searchAdapter = new JSONMovieResultsAdapter(thisContext, convertedArray);
+                        searchRecycler.setAdapter(searchAdapter);
+                    }
+                    else {
+                        Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
+                    }
+
+                    progressBar.setVisibility(View.INVISIBLE);
+
+                } catch (org.json.JSONException e) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(MovieSearchResultsActivity.this,"An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                    Log.e("JSON Error", "Unable to get JSON Object Array");
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(MovieSearchResultsActivity.this,"An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                Log.e("JSON Error", "Unable to get JSON Object Array");
+            }
+        });
+        queue.add(jsonObjectRequest);
+
+//        if (searchResults == null) {
+//            Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
+//        } else if (searchResults.size() > 0 && searchResults.size() <= 20) {
+//            searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
+//            searchRecycler.setHasFixedSize(true);
+//
+//            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+//            searchRecycler.setLayoutManager(mLayoutManager);
+//
+//            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(this, searchResults);
+//            searchRecycler.setAdapter(searchAdapter);
+//        }
+//        else if (searchResults.size() > 20) { // Cap the result size to 20
+//            searchResults = searchResults.subList(0, 19);
+//            searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
+//            searchRecycler.setHasFixedSize(true);
+//
+//            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+//            searchRecycler.setLayoutManager(mLayoutManager);
+//
+//            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(this, searchResults);
+//            searchRecycler.setAdapter(searchAdapter);
+//        }
+//        else {
+//            Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 
