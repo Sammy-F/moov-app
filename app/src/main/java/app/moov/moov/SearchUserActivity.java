@@ -1,4 +1,5 @@
 package app.moov.moov;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +30,8 @@ public class SearchUserActivity extends AppCompatActivity{
     private FirebaseDatabase database;
     private DatabaseReference usernamesRef;
     private RecyclerView searchResultList;
+    private String userID;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +45,12 @@ public class SearchUserActivity extends AppCompatActivity{
         database = FirebaseDatabase.getInstance();
         usernamesRef = database.getReference().child("Users");
         firebaseAuth = FirebaseAuth.getInstance();
+        userID = firebaseAuth.getCurrentUser().getUid();
 
         btnSearchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String searchText = etUsername.getText().toString();
-
                 firebaseUserSearch(searchText);
             }
         });
@@ -53,9 +58,7 @@ public class SearchUserActivity extends AppCompatActivity{
 
 
     private void firebaseUserSearch(String searchText) {
-
         Query firebaseSearchQuery = usernamesRef.orderByChild("Username").startAt(searchText).endAt(searchText + "\uf8ff");
-
 
         FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder>(
                 User.class,
@@ -67,12 +70,26 @@ public class SearchUserActivity extends AppCompatActivity{
             @Override
             protected void populateViewHolder(SearchUserActivity.UsersViewHolder viewHolder, User model, int position) {
                 viewHolder.setUsername(model.getUsername());
+                username = model.getUsername();
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Clicked
+                            Toast.makeText(SearchUserActivity.this,"You clicked on" + username, Toast.LENGTH_SHORT).show();
+
+
+//                            Intent intent = new Intent(SearchUserActivity.this, UserProfileActivity.class);
+//                            startActivity(intent);
+
+
+                    }
+                });
             }
-
         };
-
         searchResultList.setAdapter(firebaseRecyclerAdapter);
     }
+
+
 
     //VIEWHOLDER CLASS
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
