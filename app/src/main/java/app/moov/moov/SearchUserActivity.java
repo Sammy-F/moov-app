@@ -28,6 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Lisa on 24/03/18.
+ * Modified by Sammy 3/29/2018
+ *
+ * Class handles user searching and
+ * will handle movie searching in the future.
  */
 
 public class SearchUserActivity extends AppCompatActivity{
