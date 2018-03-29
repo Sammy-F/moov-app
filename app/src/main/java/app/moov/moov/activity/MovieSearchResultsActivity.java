@@ -32,6 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.util.JSONMovieResultsAdapter;
 import app.moov.moov.R;
 import info.movito.themoviedbapi.TmdbApi;

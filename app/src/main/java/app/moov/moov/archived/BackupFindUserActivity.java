@@ -1,4 +1,4 @@
-package app.moov.moov.activity;
+package app.moov.moov.archived;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import app.moov.moov.R;
+import app.moov.moov.activity.OtherUserProfile;
+import app.moov.moov.activity.UserProfileActivity;
 
 public class BackupFindUserActivity extends AppCompatActivity {
 

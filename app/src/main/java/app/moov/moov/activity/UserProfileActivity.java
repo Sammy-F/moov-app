@@ -314,7 +314,7 @@ public class UserProfileActivity extends AppCompatActivity {
         }
 
         if (id==R.id.searchIcon) {
-            Intent intent = new Intent(UserProfileActivity.this,FindUserActivity.class);
+            Intent intent = new Intent(UserProfileActivity.this,SearchUserActivity.class);
             startActivity(intent);
         }
 

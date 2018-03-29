@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.util.MovieGetterByID;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
