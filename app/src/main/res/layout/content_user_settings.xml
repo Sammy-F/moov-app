@@ -34,13 +34,6 @@
                 android:text="@string/profile" />
 
             <Button
-                android:id="@+id/btnChangeAvatar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/change_avatar"
-                android:gravity="start|center_vertical"/>
-
-            <Button
                 android:id="@+id/btnChangeUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -19,9 +19,12 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Lisa on 24/03/18.
@@ -38,6 +41,7 @@ public class SearchUserActivity extends AppCompatActivity{
     private RecyclerView searchResultList;
     private String userID;
     private String username;
+//    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class SearchUserActivity extends AppCompatActivity{
         setUIViews(); // Initialize layout object variables
 
         database = FirebaseDatabase.getInstance();
+        //usernamesRef = database.getReference().child("Users");
         usernamesRef = database.getReference().child("Users");
         firebaseAuth = FirebaseAuth.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
@@ -74,21 +79,35 @@ public class SearchUserActivity extends AppCompatActivity{
         ) {
 
             @Override
-            protected void populateViewHolder(SearchUserActivity.UsersViewHolder viewHolder, User model, int position) {
+            protected void populateViewHolder(final SearchUserActivity.UsersViewHolder viewHolder, User model, int position) {
                 viewHolder.setUsername(model.getUsername());
                 username = model.getUsername();
+
+                database.getReference().child("Usernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        uid = (String) dataSnapshot.getValue();
+                        viewHolder.setUID((String) dataSnapshot.getValue());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //Clicked
-                            Toast.makeText(SearchUserActivity.this,"You clicked on " + username, Toast.LENGTH_SHORT).show();
-
-
-                            Intent intent = new Intent(SearchUserActivity.this, UserProfileActivity.class);
-                            intent.putExtra("Username", username);
-                            startActivity(intent);
-
-
+                            if (viewHolder.getUid().equals(firebaseAuth.getCurrentUser().getUid())) {
+                                Intent intent = new Intent(SearchUserActivity.this, UserProfileActivity.class);
+                                startActivity(intent);
+                            }
+                            else {
+                                Intent intent = new Intent(SearchUserActivity.this, OtherUserProfile.class);
+                                intent.putExtra("thisUserID", viewHolder.getUid());
+                                startActivity(intent);
+                            }
                     }
                 });
             }
@@ -109,6 +128,7 @@ public class SearchUserActivity extends AppCompatActivity{
     //VIEWHOLDER CLASS
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
         View mView;
+        private String thisUid;
         public UsersViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
@@ -118,6 +138,12 @@ public class SearchUserActivity extends AppCompatActivity{
             TextView tvUserName = (TextView) itemView.findViewById(R.id.tvUsername);
             tvUserName.setText(userName);
         }
+
+        public void setUID(String UID) {
+            this.thisUid = UID;
+        }
+
+        public String getUid() { return thisUid; }
     }
 
     private void setUIViews() {

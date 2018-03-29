@@ -6,11 +6,10 @@ package app.moov.moov;
 
 public class User {
     private String Username;
-    private String UID;
     public User() {
     }
 
-    public User(String Username) {
+    public User(String Username, String UID) {
         this.Username = Username;
     }
 
@@ -20,13 +19,5 @@ public class User {
 
     public void setUsername(String Username) {
         this.Username = Username;
-    }
-
-    public String getUID() {
-        return UID;
-    }
-
-    public void setUID(String UID) {
-        this.UID = UID;
     }
 }
