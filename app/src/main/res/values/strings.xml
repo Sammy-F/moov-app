@@ -19,8 +19,6 @@
     </string>
     <string name="change_username">Change Username</string>
     <string name="hint_new_username">Type new username</string>
-
-    <string name="account">Edit Profile</string>
     <string name="following">Follow</string>
 
     <string name="choose_movie">Choose Movie</string>
@@ -47,6 +45,14 @@
     <string name="btn_go">Let\'s Go!</string>
 
     <string name="search_for_movie">Search for a movie</string>
+
+    <string name="change_avatar">Change Avatar</string>
+    <string name="account">Account</string>
+    <string name="delete_account">Delete account</string>
+    <string name="support">Support</string>
+    <string name="report_problem">Report a Problem</string>
+
+    <string name="profile">Profile</string>
 
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
@@ -96,6 +102,7 @@
     <string name="title_activity_edit_post">EditPostActivity</string>
     <string name="title_activity_user_settings">UserSettingsActivity</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="title_activity_change_avatar">ChangeAvatarActivity</string>
 
 
 </resources>

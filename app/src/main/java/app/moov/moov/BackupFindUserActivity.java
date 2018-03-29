@@ -67,8 +67,6 @@ public class BackupFindUserActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
     }
