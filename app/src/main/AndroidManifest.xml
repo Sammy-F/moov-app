@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,51 +25,51 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".PostActivity" />
+        <activity android:name=".activity.RegistrationActivity" />
+        <activity android:name=".activity.PostActivity" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".activity.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".OtherUserProfile"
+            android:name=".activity.OtherUserProfile"
             android:label="@string/title_activity_other_user_profile"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".FindUserActivity"
+            android:name=".activity.FindUserActivity"
             android:label="@string/title_activity_find_user"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".FeedActivity"
+            android:name=".activity.FeedActivity"
             android:label="@string/title_activity_feed"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".MovieSearchResultsActivity"
+            android:name=".activity.MovieSearchResultsActivity"
             android:label="@string/title_activity_movie_search_results"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ChooseMovieActivity"
+            android:name=".activity.ChooseMovieActivity"
             android:label="@string/title_activity_choose_movie"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".SearchUserActivity"
+            android:name=".activity.SearchUserActivity"
             android:label="SearchUserActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".EditPostActivity"
+            android:name=".activity.EditPostActivity"
             android:label="@string/title_activity_edit_post"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".MovieProfile"
+            android:name=".activity.MovieProfile"
             android:label="MovieProfile"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".UserSettingsActivity"
+            android:name=".activity.UserSettingsActivity"
             android:label="@string/title_activity_user_settings"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".activity.ForgotPasswordActivity"
             android:label="@string/title_activity_forgot_password"
             android:theme="@style/AppTheme" />
     </application>

@@ -1,4 +1,4 @@
-package app.moov.moov;
+package app.moov.moov.util;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,28 +9,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import app.moov.moov.R;
+import app.moov.moov.activity.PostActivity;
 import info.movito.themoviedbapi.model.MovieDb;
 
 /**
  * Created by Sammy on 3/21/2018.
  */
 
-public class JSONMovieResultsAdapter extends RecyclerView.Adapter<JSONMovieResultsAdapter.ResultsViewHolder> {
-    private List<JSONObject> movieResults;
+public class MovieResultsAdapter extends RecyclerView.Adapter<MovieResultsAdapter.ResultsViewHolder> {
+    private List<MovieDb> movieResults;
     private Context c;
 
     /**
      * Construct the Adapter using a list of MovieDb objects
      * @param movieResults
      */
-    public JSONMovieResultsAdapter(Context c, List<JSONObject> movieResults) {
+    public MovieResultsAdapter(Context c, List<MovieDb> movieResults) {
         this.movieResults = movieResults;
         this.c = c;
     }
@@ -43,8 +40,8 @@ public class JSONMovieResultsAdapter extends RecyclerView.Adapter<JSONMovieResul
      * @return
      */
     @Override
-    public JSONMovieResultsAdapter.ResultsViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                        int viewType) {
+    public MovieResultsAdapter.ResultsViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                    int viewType) {
 
         View ourView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.movie_results_layout, parent, false);
@@ -59,18 +56,11 @@ public class JSONMovieResultsAdapter extends RecyclerView.Adapter<JSONMovieResul
      * @param position
      */
     @Override
-    public void onBindViewHolder(final JSONMovieResultsAdapter.ResultsViewHolder holder, int position) {
-        try {
-            String title = (String) movieResults.get(position).get("original_title");
-            String summary = (String) movieResults.get(position).get("overview");
-            int id = (Integer) movieResults.get(position).get("id");
+    public void onBindViewHolder(final MovieResultsAdapter.ResultsViewHolder holder, int position) {
+        holder.setTitle(movieResults.get(position).getTitle());
+        holder.setSummary(movieResults.get(position).getOverview());
+        holder.setID(movieResults.get(position).getId());
 
-            holder.setTitle(title);
-            holder.setSummary(summary);
-            holder.setID(id);
-        } catch (JSONException e) {
-            //TODO: handle exception
-        }
         holder.getBtnChoose().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

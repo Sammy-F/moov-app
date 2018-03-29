@@ -1,4 +1,4 @@
-package app.moov.moov;
+package app.moov.moov.model;
 
 /**
  * Created by Sammy on 3/29/2018.

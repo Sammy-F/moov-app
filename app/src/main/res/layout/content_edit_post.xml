@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="app.moov.moov.EditPostActivity"
+    tools:context="app.moov.moov.activity.EditPostActivity"
     tools:showIn="@layout/activity_edit_post">
 
     <TextView

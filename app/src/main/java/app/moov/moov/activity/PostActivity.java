@@ -1,4 +1,4 @@
-package app.moov.moov;
+package app.moov.moov.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +20,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
+
+import app.moov.moov.model.Post;
+import app.moov.moov.R;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -157,9 +160,6 @@ public class PostActivity extends AppCompatActivity {
 
                 startActivity(new Intent(PostActivity.this, FeedActivity.class));
                 finish();
-
-
-
         }
     }
 
