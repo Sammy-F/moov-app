@@ -57,7 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private StorageReference avatarRef;
     private StorageReference newAvatarRef;
 
-    private Uri downloadURL;
+    private FirebaseUser currentPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +67,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageRef = firebaseStorage.getReference();
-        imageRef = storageRef.child("images");
-        avatarRef = imageRef.child("avatars");
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -105,7 +103,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
 
-                                            FirebaseUser currentPerson=FirebaseAuth.getInstance().getCurrentUser();
+                                            currentPerson=FirebaseAuth.getInstance().getCurrentUser();
                                             DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
                                             ref.child("Username").setValue(userName);
 

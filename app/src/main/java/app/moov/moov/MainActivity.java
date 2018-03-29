@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnRegister;
     private Button btnForgotPass;
     private int counter = 5;
-    private TextView numAttempts;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
     private VideoView mVideoView;
@@ -142,9 +141,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, FeedActivity.class));
                     finish();
                 } else{
-                    Toast.makeText(MainActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Login failed. Number of attempts remaining: " + counter, Toast.LENGTH_SHORT).show();
                     counter--;
-                    numAttempts.setText("Number of attempts remaining: " + counter);
                     if (counter == 0) {
                         btnLogin.setEnabled(false);
                     }
