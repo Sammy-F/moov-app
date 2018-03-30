@@ -1,5 +1,6 @@
 package app.moov.moov.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -58,7 +59,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Log.d(firebaseAuth.getCurrentUser().getUid(), "Email sent");
+                        Log.d("Email sent", "Email sent to user");
+                        Toast.makeText(ForgotPasswordActivity.this, "Password change email sent.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(ForgotPasswordActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                     else {
                         Toast.makeText(ForgotPasswordActivity.this, "Something went wrong.", Toast.LENGTH_SHORT).show();

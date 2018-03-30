@@ -3,8 +3,6 @@ package app.moov.moov.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,7 +15,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 
 import app.moov.moov.R;
@@ -97,7 +94,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         etNewPass = (EditText) findViewById(R.id.etPass);
         etNewPassAgain = (EditText) findViewById(R.id.etPassAgain);
         etEmail = (EditText) findViewById(R.id.etEmail);
-        etCurrentPass = (EditText) findViewById(R.id.etCurrentPass);
+        etCurrentPass = (EditText) findViewById(R.id.etPass);
         btnChangePass = (Button) findViewById(R.id.btnChangePass);
 
         btnChangePass.setOnClickListener(new View.OnClickListener() {

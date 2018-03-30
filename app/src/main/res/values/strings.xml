@@ -7,6 +7,7 @@
 
     <!-- Strings related to login -->
     <string name="reauthenticate">Please input your login details.</string>
+    <string name="reauthenticate_email_change">Please input your login details and new email.</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -63,6 +64,7 @@
     <string name="send_password_reset_email">Send Password reset email</string>
     <string name="remove_user">Remove user</string>
     <string name="current_pass">Current Password</string>
+    <string name="hint_current_email">Current Email</string>
     <string name="new_pass">New Password</string>
     <string name="new_pass_again">New Password (again)</string>
     <string name="title_activity_profile">Firebase</string>
@@ -73,6 +75,7 @@
     <string name="btn_reset_password">Reset Password</string>
     <string name="btn_back"><![CDATA[<< Back]]></string>
     <string name="hint_new_email">New Email</string>
+    <string name="hint_new_email_again">New Email (again)</string>
     <string name="btn_change">Change</string>
     <string name="btn_send">Send</string>
     <string name="btn_remove">Remove</string>
@@ -107,6 +110,7 @@
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
     <string name="title_activity_change_avatar">ChangeAvatarActivity</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_change_email">ChangeEmailActivity</string>
 
 
 </resources>
