@@ -9,8 +9,8 @@
 
     <VideoView
         android:id="@+id/bgVideoView"
-        android:layout_width="1080dp"
-        android:layout_height="1920dp"
+        android:layout_width="1181dp"
+        android:layout_height="2100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.611"
