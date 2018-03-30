@@ -43,7 +43,6 @@ public class SearchUserActivity extends AppCompatActivity{
     private RecyclerView searchResultList;
     private String userID;
     private String username;
-//    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,6 @@ public class SearchUserActivity extends AppCompatActivity{
         setUIViews(); // Initialize layout object variables
 
         database = FirebaseDatabase.getInstance();
-        //usernamesRef = database.getReference().child("Users");
         usernamesRef = database.getReference().child("Users");
         firebaseAuth = FirebaseAuth.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
@@ -64,28 +62,28 @@ public class SearchUserActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 String searchText = etUsername.getText().toString();
-                firebaseUserSearch(searchText);
+                firebaseUserSearch(searchText.toLowerCase());
             }
         });
     }
 
 
     private void firebaseUserSearch(String searchText) {
-        Query firebaseSearchQuery = usernamesRef.orderByChild("Username").startAt(searchText).endAt(searchText + "\uf8ff");
+        Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchText).endAt(searchText + "\uf8ff");
 
         FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder>(
                 User.class,
-                R.layout.user_search_layout,
+                R.layout.user_search_result_layout,
                 SearchUserActivity.UsersViewHolder.class,
                 firebaseSearchQuery
         ) {
 
             @Override
             protected void populateViewHolder(final SearchUserActivity.UsersViewHolder viewHolder, User model, int position) {
-                viewHolder.setUsername(model.getUsername());
-                username = model.getUsername();
+                viewHolder.setUsername(model.getUsername()); //changed back
+                username = model.getlowername();
+                database.getReference().child("lusernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
 
-                database.getReference().child("Usernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 //                        uid = (String) dataSnapshot.getValue();
@@ -156,7 +154,5 @@ public class SearchUserActivity extends AppCompatActivity{
         searchResultList.setHasFixedSize(true);
         searchResultList.setLayoutManager(new LinearLayoutManager(this));
     }
-
-
 
 }

@@ -6,11 +6,21 @@ package app.moov.moov.model;
 
 public class User {
     private String Username;
+    private String lowername;
     public User() {
     }
 
-    public User(String Username, String UID) {
+    public User(String lowername, String Username, String UID) {
+        this.lowername = lowername;
         this.Username = Username;
+    }
+
+    public String getlowername() {
+        return lowername;
+    }
+
+    public void serlowername(String lowername) {
+        this.lowername = lowername;
     }
 
     public String getUsername() {
