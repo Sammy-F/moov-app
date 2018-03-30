@@ -17,6 +17,8 @@ import info.movito.themoviedbapi.model.MovieDb;
 
 /**
  * Created by Sammy on 3/21/2018.
+ *
+ * DEPRECATED
  */
 
 public class MovieResultsAdapter extends RecyclerView.Adapter<MovieResultsAdapter.ResultsViewHolder> {

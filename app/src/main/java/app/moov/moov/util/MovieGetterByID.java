@@ -17,6 +17,8 @@ import info.movito.themoviedbapi.model.core.MovieResultsPage;
  *
  * Class allows us to get a MovieDb object
  * from the Tmdb API in a separate thread.
+ *
+ * DEPRECATED
  */
 
 public class MovieGetterByID {

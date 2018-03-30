@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +20,10 @@ import app.moov.moov.activity.PostActivity;
 
 /**
  * Created by Sammy on 3/21/2018.
+ *
+ * Adapter takes a List of JSONObjects
+ * pulled from the Tmdb API search results
+ * field and inflates movie_results_layout.
  */
 
 public class JSONMovieResultsAdapter extends RecyclerView.Adapter<JSONMovieResultsAdapter.ResultsViewHolder> {
@@ -68,7 +73,7 @@ public class JSONMovieResultsAdapter extends RecyclerView.Adapter<JSONMovieResul
             holder.setSummary(summary);
             holder.setID(id);
         } catch (JSONException e) {
-            //TODO: handle exception
+            Toast.makeText(c, e.getMessage(), Toast.LENGTH_LONG).show();
         }
         holder.getBtnChoose().setOnClickListener(new View.OnClickListener() {
             @Override

@@ -55,10 +55,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String currentPass = etCurrentPass.getText().toString().trim();
 
+        /**
+         * Check if authentication strings exist.
+         */
         if (newPass.length() == 0 || newPassAgain.length() == 0 || email.length() == 0 || currentPass.length() == 0) {
             Toast.makeText(ChangePasswordActivity.this, "Please input all details!", Toast.LENGTH_SHORT).show();
         }
-        else if (!newPass.equals(newPassAgain)) {
+        else if (!newPass.equals(newPassAgain)) { // Check if the password strings match
             Toast.makeText(ChangePasswordActivity.this, "The passwords do not match!", Toast.LENGTH_SHORT).show();
         }
         else {
@@ -76,16 +79,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ChangePasswordActivity.this, "An error occurred. Please try again later.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ChangePasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
                     Toast.makeText(ChangePasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
                 }
             });
         }

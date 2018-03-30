@@ -35,6 +35,7 @@ import java.util.List;
 import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.util.JSONMovieResultsAdapter;
 import app.moov.moov.R;
+import app.moov.moov.util.VolleySingleton;
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.TmdbSearch;
 import info.movito.themoviedbapi.model.MovieDb;
@@ -95,11 +96,11 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
 
         String url = "https://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&query=" + searchQuery;
 
-        RequestQueue queue;
+        RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
         Network network = new BasicNetwork(new HurlStack());
-        queue = new RequestQueue(cache, network);
-        queue.start();
+//        queue = new RequestQueue(cache, network);
+//        queue.start();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
