@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="app.moov.moov.FindUserActivity"
-    tools:showIn="@layout/activity_search_user">
+    tools:context="app.moov.moov.activity.SearchUserActivity"
+    tools:showIn="@layout/activity_search_user"
+    >
 
     <TextView
         android:id="@+id/tvPrompUID"

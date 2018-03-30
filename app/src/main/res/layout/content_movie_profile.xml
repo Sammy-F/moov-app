@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="app.moov.moov.OtherUserProfile"
+    tools:context="app.moov.moov.activity.OtherUserProfile"
     tools:showIn="@layout/activity_movie_profile">
 
 
@@ -164,7 +164,7 @@
 
     <fragment
         android:id="@+id/fragment3"
-        android:name="app.moov.moov.FragmentSummary"
+        android:name="app.moov.moov.util.FragmentSummary"
         android:layout_width="372dp"
         android:layout_height="314dp"
         tools:layout_editor_absoluteX="7dp"

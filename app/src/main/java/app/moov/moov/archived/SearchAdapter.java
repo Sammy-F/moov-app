@@ -1,4 +1,4 @@
-package app.moov.moov;
+package app.moov.moov.archived;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import app.moov.moov.R;
 
 /**
  * Created by Lisa on 10/03/18.

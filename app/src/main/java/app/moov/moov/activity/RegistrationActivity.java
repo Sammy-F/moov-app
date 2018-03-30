@@ -1,11 +1,9 @@
-package app.moov.moov;
+package app.moov.moov.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,13 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,13 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.net.URL;
+import app.moov.moov.R;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -57,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private StorageReference avatarRef;
     private StorageReference newAvatarRef;
 
-    private Uri downloadURL;
+    private FirebaseUser currentPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +57,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageRef = firebaseStorage.getReference();
-        imageRef = storageRef.child("images");
-        avatarRef = imageRef.child("avatars");
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -105,7 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
 
-                                            FirebaseUser currentPerson=FirebaseAuth.getInstance().getCurrentUser();
+                                            currentPerson=FirebaseAuth.getInstance().getCurrentUser();
                                             DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
                                             ref.child("Username").setValue(userName);
 

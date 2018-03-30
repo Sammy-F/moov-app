@@ -1,6 +1,5 @@
-package app.moov.moov;
+package app.moov.moov.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import app.moov.moov.R;
+import app.moov.moov.activity.PostActivity;
 import info.movito.themoviedbapi.model.MovieDb;
 
 /**

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.moov.moov.MovieSearchResultsActivity">
+    tools:context="app.moov.moov.activity.MovieSearchResultsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,5 +22,11 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_movie_search_results" />
+
+    <ProgressBar
+        android:id="@+id/resultsProgress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </android.support.design.widget.CoordinatorLayout>
