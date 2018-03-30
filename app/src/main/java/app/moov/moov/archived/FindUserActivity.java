@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import app.moov.moov.R;
 import app.moov.moov.activity.OtherUserProfile;
 import app.moov.moov.activity.UserProfileActivity;
-import app.moov.moov.util.SearchAdapter;
 
 public class FindUserActivity extends AppCompatActivity {
 
