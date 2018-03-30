@@ -45,7 +45,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater = LayoutInflater.from(c);
-        view = mInflater.inflate(R.layout.movie_search_result, parent, false);
+        view = mInflater.inflate(R.layout.movie_search_results2_layout, parent, false);
         return new MyViewHolder(view);
     }
 
