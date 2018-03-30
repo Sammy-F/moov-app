@@ -37,10 +37,10 @@ public class SearchUserActivity extends AppCompatActivity{
     private TextView tvPromptUID;
     private EditText etUsername;
     private Button btnSearchUser;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference usernamesRef;
-    private RecyclerView searchResultList;
+//    private FirebaseAuth firebaseAuth;
+//    private FirebaseDatabase database;
+//    private DatabaseReference usernamesRef;
+//    private RecyclerView searchResultList;
     private String userID;
     private String username;
 
@@ -53,67 +53,69 @@ public class SearchUserActivity extends AppCompatActivity{
 
         setUIViews(); // Initialize layout object variables
 
-        database = FirebaseDatabase.getInstance();
-        usernamesRef = database.getReference().child("Users");
-        firebaseAuth = FirebaseAuth.getInstance();
-        userID = firebaseAuth.getCurrentUser().getUid();
+//        database = FirebaseDatabase.getInstance();
+//        usernamesRef = database.getReference().child("Users");
+//        firebaseAuth = FirebaseAuth.getInstance();
+//        userID = firebaseAuth.getCurrentUser().getUid();
 
         btnSearchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String searchText = etUsername.getText().toString();
-                firebaseUserSearch(searchText.toLowerCase());
+                String searchText = etUsername.getText().toString().toLowerCase();
+                Intent intent = new Intent(SearchUserActivity.this, UserSearchResultsActivity.class);
+                intent.putExtra("searchString", searchText);
+                startActivity(intent);
             }
         });
     }
 
 
-    private void firebaseUserSearch(String searchText) {
-        Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchText).endAt(searchText + "\uf8ff");
-
-        FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder>(
-                User.class,
-                R.layout.user_search_result_layout,
-                SearchUserActivity.UsersViewHolder.class,
-                firebaseSearchQuery
-        ) {
-
-            @Override
-            protected void populateViewHolder(final SearchUserActivity.UsersViewHolder viewHolder, User model, int position) {
-                viewHolder.setUsername(model.getUsername()); //changed back
-                username = model.getlowername();
-                database.getReference().child("lusernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        uid = (String) dataSnapshot.getValue();
-                        viewHolder.setUID((String) dataSnapshot.getValue());
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //Clicked
-                            if (viewHolder.getUid().equals(firebaseAuth.getCurrentUser().getUid())) {
-                                Intent intent = new Intent(SearchUserActivity.this, UserProfileActivity.class);
-                                startActivity(intent);
-                            }
-                            else {
-                                Intent intent = new Intent(SearchUserActivity.this, OtherUserProfile.class);
-                                intent.putExtra("thisUserID", viewHolder.getUid());
-                                startActivity(intent);
-                            }
-                    }
-                });
-            }
-        };
-        searchResultList.setAdapter(firebaseRecyclerAdapter);
-    }
+//    private void firebaseUserSearch(String searchText) {
+//        Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchText).endAt(searchText + "\uf8ff");
+//
+//        FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, SearchUserActivity.UsersViewHolder>(
+//                User.class,
+//                R.layout.user_search_result_layout,
+//                SearchUserActivity.UsersViewHolder.class,
+//                firebaseSearchQuery
+//        ) {
+//
+//            @Override
+//            protected void populateViewHolder(final SearchUserActivity.UsersViewHolder viewHolder, User model, int position) {
+//                viewHolder.setUsername(model.getUsername()); //changed back
+//                username = model.getlowername();
+//                database.getReference().child("lusernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+////                        uid = (String) dataSnapshot.getValue();
+//                        viewHolder.setUID((String) dataSnapshot.getValue());
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+//                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        //Clicked
+//                            if (viewHolder.getUid().equals(firebaseAuth.getCurrentUser().getUid())) {
+//                                Intent intent = new Intent(SearchUserActivity.this, UserProfileActivity.class);
+//                                startActivity(intent);
+//                            }
+//                            else {
+//                                Intent intent = new Intent(SearchUserActivity.this, OtherUserProfile.class);
+//                                intent.putExtra("thisUserID", viewHolder.getUid());
+//                                startActivity(intent);
+//                            }
+//                    }
+//                });
+//            }
+//        };
+//        searchResultList.setAdapter(firebaseRecyclerAdapter);
+//    }
 
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -125,34 +127,34 @@ public class SearchUserActivity extends AppCompatActivity{
     }
 
 
-    //VIEWHOLDER CLASS
-    public static class UsersViewHolder extends RecyclerView.ViewHolder {
-        View mView;
-        private String thisUid;
-        public UsersViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        public void setUsername(String userName) {
-            TextView tvUserName = (TextView) itemView.findViewById(R.id.tvUsername);
-            tvUserName.setText(userName);
-        }
-
-        public void setUID(String UID) {
-            this.thisUid = UID;
-        }
-
-        public String getUid() { return thisUid; }
-    }
+//    //VIEWHOLDER CLASS
+//    public static class UsersViewHolder extends RecyclerView.ViewHolder {
+//        View mView;
+//        private String thisUid;
+//        public UsersViewHolder(View itemView) {
+//            super(itemView);
+//            mView = itemView;
+//        }
+//
+//        public void setUsername(String userName) {
+//            TextView tvUserName = (TextView) itemView.findViewById(R.id.tvUsername);
+//            tvUserName.setText(userName);
+//        }
+//
+//        public void setUID(String UID) {
+//            this.thisUid = UID;
+//        }
+//
+//        public String getUid() { return thisUid; }
+//    }
 
     private void setUIViews() {
         tvPromptUID = (TextView) findViewById(R.id.tvPrompUID);
         etUsername = (EditText) findViewById(R.id.etUsername);
         btnSearchUser = (Button) findViewById(R.id.btnSearchUser);
-        searchResultList = (RecyclerView) findViewById(R.id.rvSearchResult);
-        searchResultList.setHasFixedSize(true);
-        searchResultList.setLayoutManager(new LinearLayoutManager(this));
+//        searchResultList = (RecyclerView) findViewById(R.id.rvSearchResult);
+//        searchResultList.setHasFixedSize(true);
+//        searchResultList.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }
