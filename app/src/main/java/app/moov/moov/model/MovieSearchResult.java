@@ -13,9 +13,9 @@ public class MovieSearchResult {
     }
 
     public MovieSearchResult(String movieTitle, String year, int thumbnail) {
-        MovieTitle = movieTitle;
-        Year = year;
-        Thumbnail = thumbnail;
+        this.MovieTitle = movieTitle;
+        this.Year = year;
+        this.Thumbnail = thumbnail;
     }
 
     public String getMovieTitle() {

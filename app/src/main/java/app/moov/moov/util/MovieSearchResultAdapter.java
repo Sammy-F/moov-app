@@ -5,14 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.List;
-
 import app.moov.moov.R;
-import info.movito.themoviedbapi.model.ArtworkType;
 import info.movito.themoviedbapi.model.MovieDb;
 
 /**
@@ -31,10 +26,11 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieSearchResultAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View view;
-        LayoutInflater mInflater = LayoutInflater.from(c);
-        view = mInflater.inflate(R.layout.movie_search_result, parent, false);
+        LayoutInflater mInflater = LayoutInflater.from(c); //not sure if we should just do LayoutInflater.from(c)
+        view = mInflater.inflate(R.layout.movie_search_results2_layout, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -52,7 +48,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvMovieTitle;
-        ImageView ivMoviePoster;
+//        ImageView ivMoviePoster;
         private int movieID;
         private View itemView;
         private String movieTitle;
@@ -60,13 +56,13 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         public MyViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
+            TextView movieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
 
         }
 
         public void setTitle(String title) {
             this.movieTitle = title;
-            TextView movieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
-            movieTitle.setText(title);
+//            movieTitle.setText(title);
         }
 
         public void setID(int movieID) {
@@ -76,7 +72,6 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         public int getID() { return movieID; }
 
         public String getTitle() { return movieTitle; }
-
 
     }
 }
