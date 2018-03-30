@@ -12,8 +12,6 @@ import app.moov.moov.R;
  * Created by EFrost on 3/28/2018.
  */
 
-
-
 public class FragmentSummary extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,

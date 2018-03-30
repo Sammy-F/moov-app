@@ -19,7 +19,7 @@ public class User {
         return lowername;
     }
 
-    public void serlowername(String lowername) {
+    public void setlowername(String lowername) {
         this.lowername = lowername;
     }
 
