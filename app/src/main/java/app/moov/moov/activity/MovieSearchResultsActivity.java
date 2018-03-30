@@ -35,6 +35,7 @@ import java.util.List;
 import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.util.JSONMovieResultsAdapter;
 import app.moov.moov.R;
+import app.moov.moov.util.MovieSearchResultAdapter;
 import app.moov.moov.util.VolleySingleton;
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.TmdbSearch;
@@ -123,7 +124,7 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(thisContext);
                         searchRecycler.setLayoutManager(mLayoutManager);
 
-                        JSONMovieResultsAdapter searchAdapter = new JSONMovieResultsAdapter(thisContext, convertedArray);
+                        MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
                     else if (convertedArray.size() > 20) { // Cap the result size to 20
@@ -134,7 +135,7 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(thisContext);
                         searchRecycler.setLayoutManager(mLayoutManager);
 
-                        JSONMovieResultsAdapter searchAdapter = new JSONMovieResultsAdapter(thisContext, convertedArray);
+                        MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
                     else {

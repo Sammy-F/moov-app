@@ -1,6 +1,8 @@
 package app.moov.moov.util;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
 import app.moov.moov.R;
+import app.moov.moov.activity.PostActivity;
 import info.movito.themoviedbapi.model.ArtworkType;
 import info.movito.themoviedbapi.model.MovieDb;
 
@@ -23,9 +34,9 @@ import info.movito.themoviedbapi.model.MovieDb;
 public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchResultAdapter.MyViewHolder> {
 
     private Context c;
-    private List<MovieDb> movieResults;
+    private List<JSONObject> movieResults;
 
-    public MovieSearchResultAdapter(Context c, List<MovieDb> movieResults) {
+    public MovieSearchResultAdapter(Context c, List<JSONObject> movieResults) {
         this.c = c;
         this.movieResults = movieResults;
     }
@@ -40,7 +51,33 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
 
     @Override
     public void onBindViewHolder(final MovieSearchResultAdapter.MyViewHolder holder, int position) {
-        holder.tvMovieTitle.setText(movieResults.get(position).getTitle());
+
+        try {
+            String title = (String) movieResults.get(position).get("original_title");
+            int id = (Integer) movieResults.get(position).get("id");
+
+            holder.setTitle(title);
+            holder.setID(id);
+
+            String url = "https://image.tmdb.org/t/p/w400/" + movieResults.get(position).get("poster_path");
+
+            ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
+                @Override
+                public void onResponse(Bitmap response) {
+                    holder.ivMoviePoster.setImageBitmap(response);
+                }
+            }, 0, 0, null, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //TODO: Handle error
+                }
+            });
+
+        } catch (JSONException e) {
+            Toast.makeText(c, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+//        holder.tvMovieTitle.setText(movieResults.get(position).getTitle());
 //        holder.ivMoviePoster.setImageResource(movieResults.get(position).getImages(ArtworkType.POSTER));
 
     }
