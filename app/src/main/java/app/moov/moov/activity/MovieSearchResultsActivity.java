@@ -193,33 +193,33 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
     /**
      * Internal class handles searches in separate thread.
      */
-    static class APISearchHandler extends AsyncTask<String, Void, List<MovieDb>> {
-        private List<MovieDb> resultList;
-        private String searchQuery;
-        Exception exception;
-
-        public APISearchHandler(String searchQuery) {
-            super();
-            this.searchQuery = searchQuery;
-        }
-
-        /**
-         * Processes run when execute() is called
-         * @param searchQueries
-         * @return
-         */
-        protected List<MovieDb> doInBackground(String[] searchQueries) {
-            try {
-                TmdbSearch movieSearch = new TmdbSearch(new TmdbApi("3744632a440f06514578b01d1b6e9d27")); //TODO: Save API Key elsewhere
-                MovieResultsPage results = movieSearch.searchMovie(searchQuery, null, "en", false, 0);
-                resultList = results.getResults();
-                return resultList;
-            } catch (Exception e) {
-                this.exception = e;
-                return null;
-            }
-        }
-    }
+//    static class APISearchHandler extends AsyncTask<String, Void, List<MovieDb>> {
+//        private List<MovieDb> resultList;
+//        private String searchQuery;
+//        Exception exception;
+//
+//        public APISearchHandler(String searchQuery) {
+//            super();
+//            this.searchQuery = searchQuery;
+//        }
+//
+//        /**
+//         * Processes run when execute() is called
+//         * @param searchQueries
+//         * @return
+//         */
+//        protected List<MovieDb> doInBackground(String[] searchQueries) {
+//            try {
+//                TmdbSearch movieSearch = new TmdbSearch(new TmdbApi("3744632a440f06514578b01d1b6e9d27")); //TODO: Save API Key elsewhere
+//                MovieResultsPage results = movieSearch.searchMovie(searchQuery, null, "en", false, 0);
+//                resultList = results.getResults();
+//                return resultList;
+//            } catch (Exception e) {
+//                this.exception = e;
+//                return null;
+//            }
+//        }
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
