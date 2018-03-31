@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="app.moov.moov.activity.ChangeEmailActivity"
-    tools:showIn="@layout/activity_change_email">
+    tools:showIn="@layout/activity_change_email"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/constraintLayout">
 
     <Button
         android:id="@+id/btnChangeEmail"

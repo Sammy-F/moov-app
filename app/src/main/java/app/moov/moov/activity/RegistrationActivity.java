@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -136,6 +138,15 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword2 = (EditText) findViewById(R.id.etPassword2);
         etEmail = (EditText) findViewById(R.id.etEmail);
         regProgress = (ProgressBar) findViewById(R.id.regProcess);
+
+        findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
     }
 
     private void goLogin(){
