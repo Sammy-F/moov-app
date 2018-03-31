@@ -29,7 +29,7 @@ import app.moov.moov.R;
  * Created by Sammy 3/25/18
  */
 
-public class EditPostActivity extends AppCompatActivity {
+public class EditPostActivity extends ToolbarBaseActivity {
 
     private EditText etRating;
     private EditText etReview;

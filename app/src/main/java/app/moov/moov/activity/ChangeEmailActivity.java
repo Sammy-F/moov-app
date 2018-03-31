@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import app.moov.moov.R;
 
-public class ChangeEmailActivity extends AppCompatActivity {
+public class ChangeEmailActivity extends ToolbarBaseActivity {
 
     private EditText etCurrentEmail;
     private EditText etNewEmail;

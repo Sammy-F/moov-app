@@ -25,7 +25,7 @@ import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 
-public class OtherUserProfile extends AppCompatActivity {
+public class OtherUserProfile extends ToolbarBaseActivity {
 
     private String thisUserID;
     private String currentUID;

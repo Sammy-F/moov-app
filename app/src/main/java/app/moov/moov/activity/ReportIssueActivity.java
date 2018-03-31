@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import app.moov.moov.R;
 
-public class ReportIssueActivity extends AppCompatActivity {
+public class ReportIssueActivity extends ToolbarBaseActivity {
 
     EditText etSubject;
     EditText etMessageBody;

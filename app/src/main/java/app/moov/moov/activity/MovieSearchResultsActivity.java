@@ -39,7 +39,7 @@ import app.moov.moov.util.VolleySingleton;
  * Class handles movie results after
  * searching for one to post about.
  */
-public class MovieSearchResultsActivity extends AppCompatActivity {
+public class MovieSearchResultsActivity extends ToolbarBaseActivity {
 
     private RecyclerView searchRecycler;
     private String searchQuery;

@@ -34,7 +34,7 @@ import app.moov.moov.R;
  * Modified by Sammy 3/25/18
  */
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends ToolbarBaseActivity {
 
     private TextView tvUsername;
     private TextView tvNumFollowing;

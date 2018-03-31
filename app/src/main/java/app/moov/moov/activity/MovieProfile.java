@@ -26,7 +26,7 @@ import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 
-public class MovieProfile extends AppCompatActivity {
+public class MovieProfile extends ToolbarBaseActivity {
 
     private Context thisContext;
 

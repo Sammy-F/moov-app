@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import app.moov.moov.R;
 
-public class ChangePasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends ToolbarBaseActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseUser user;

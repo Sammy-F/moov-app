@@ -42,7 +42,7 @@ import app.moov.moov.util.VolleySingleton;
  * Modified by Sammy 3/30/2018
  */
 
-public class MovieSearchResultsActivity2 extends AppCompatActivity {
+public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
 
     private RecyclerView searchRecycler;
     private String searchQuery;

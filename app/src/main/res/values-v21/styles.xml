@@ -9,5 +9,17 @@
         <item name="android:colorBackground">@color/bg_main</item>
         <item name="android:statusBarColor">@color/toolbar_color</item>
         <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+
+        <item name="logo">@drawable/logo_trimmed</item>
+        <item name="displayOptions">useLogo|showHome</item>
     </style>
+
+    <style name="ActionButtonStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+    </style>
+
 </resources>

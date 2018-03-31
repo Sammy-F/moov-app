@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import app.moov.moov.R;
 
-public class UserSettingsActivity extends AppCompatActivity {
+public class UserSettingsActivity extends ToolbarBaseActivity {
 
     Button btnChangePass;
     Button btnChangeEmail;

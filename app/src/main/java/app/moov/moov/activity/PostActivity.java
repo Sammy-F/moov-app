@@ -26,7 +26,7 @@ import java.util.Calendar;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 
-public class PostActivity extends AppCompatActivity {
+public class PostActivity extends ToolbarBaseActivity {
 
     private Uri uri = null;
 //    private EditText editTextMovieTitle;

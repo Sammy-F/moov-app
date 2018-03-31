@@ -18,7 +18,7 @@ import app.moov.moov.R;
  * Class for testing movie searching.
  */
 
-public class ChooseMovieActivity extends AppCompatActivity {
+public class ChooseMovieActivity extends ToolbarBaseActivity {
 
     private EditText etMovieQuery;
     private Button btnSearchMovies;

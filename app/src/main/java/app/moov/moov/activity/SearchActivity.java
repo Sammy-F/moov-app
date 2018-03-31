@@ -22,7 +22,7 @@ import app.moov.moov.R;
  * will handle movie searching in the future.
  */
 
-public class SearchActivity extends AppCompatActivity{
+public class SearchActivity extends ToolbarBaseActivity{
 
     private TextView tvPromptUID;
     private EditText etUsername;

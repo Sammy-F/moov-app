@@ -28,7 +28,7 @@ import app.moov.moov.model.User;
  * Modified by Sammy 3/30/2019
  */
 
-public class UserSearchResultsActivity extends AppCompatActivity {
+public class UserSearchResultsActivity extends ToolbarBaseActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;

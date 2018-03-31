@@ -118,6 +118,8 @@
     <string name="have_issue">Have an issue? Let us know!</string>
     <string name="subject">Subject</string>
     <string name="issue_description">Describe your problem.</string>
+    <string name="title_activity_tool_bar">ToolBarActivity</string>
+    <string name="title_activity_toolbar_base">ToolbarBaseActivity</string>
 
 
 </resources>

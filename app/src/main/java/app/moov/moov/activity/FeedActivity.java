@@ -28,7 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 
-public class FeedActivity extends AppCompatActivity {
+public class FeedActivity extends ToolbarBaseActivity {
 
     private RecyclerView feedRecycler;
     private FirebaseDatabase database;
@@ -176,44 +176,4 @@ public class FeedActivity extends AppCompatActivity {
 //        }
 //
 //    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_feed_page, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id==R.id.addIcon) {
-            Intent intent = new Intent(FeedActivity.this,ChooseMovieActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.logoutIcon) {
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(FeedActivity.this, MainActivity.class));
-        }
-
-        if (id==R.id.profileIcon) {
-            Intent intent = new Intent(FeedActivity.this, UserProfileActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.searchIcon) {
-            Intent intent = new Intent(FeedActivity.this,SearchActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.settingsIcon) {
-            Intent intent = new Intent(FeedActivity.this,UserSettingsActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }
