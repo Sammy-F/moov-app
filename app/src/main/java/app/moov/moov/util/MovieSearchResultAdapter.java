@@ -1,10 +1,13 @@
 package app.moov.moov.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -65,28 +69,35 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
 
             String posterUrl = "https://image.tmdb.org/t/p/w400" + movieResults.get(position).get("poster_path");
 
-            Target target = new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//            Target target = new Target() {
+//                @Override
+//                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//
+//                    holder.setMoviePoster(bitmap);
+//
+//                }
+//
+//                @Override
+//                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+//
+//                    Log.e("Bitmap Error", e.getMessage());
+//
+//                }
+//
+//                @Override
+//                public void onPrepareLoad(Drawable placeHolderDrawable) {
+//
+//                }
+//            };
 
-                    holder.setMoviePoster(bitmap);
+//            DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+//            int height = (int)(160 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
+//            int width = (int)(120 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
+//
+//
+//            Picasso.get().load(posterUrl).resize(width, height).into(target);
 
-                }
-
-                @Override
-                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-                    Log.e("Bitmap Error", e.getMessage());
-
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                }
-            };
-
-            Picasso.get();
+            Glide.with(c).load(posterUrl).into(holder.ivMoviePoster);
 
             //old way of getting image
 //            ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {

@@ -101,6 +101,8 @@ public class MovieSearchResultsActivity2 extends AppCompatActivity {
                     } else if (convertedArray.size() > 0 && convertedArray.size() <= 20) {
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
+                        searchRecycler.setDrawingCacheEnabled(true);
+                        searchRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
                         GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
                         searchRecycler.setLayoutManager(mLayoutManager);
@@ -108,10 +110,12 @@ public class MovieSearchResultsActivity2 extends AppCompatActivity {
                         MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
-                    else if (convertedArray.size() > 20) { // Cap the result size to 20
-                        convertedArray = convertedArray.subList(0, 19);
+                    else if (convertedArray.size() > 10) { // Cap the result size to 10
+                        convertedArray = convertedArray.subList(0, 10);
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
+                        searchRecycler.setDrawingCacheEnabled(true);
+                        searchRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
                         GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
                         searchRecycler.setLayoutManager(mLayoutManager);
