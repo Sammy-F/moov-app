@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,7 +65,7 @@ public class UserSearchResultsActivity extends AppCompatActivity {
 
         FirebaseRecyclerAdapter<User, UserSearchResultsActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserSearchResultsActivity.UsersViewHolder>(
                 User.class,
-                R.layout.user_search_result_layout,
+                R.layout.cv_user_search_result,
                 UserSearchResultsActivity.UsersViewHolder.class,
                 firebaseSearchQuery
         ) {
@@ -116,7 +115,6 @@ public class UserSearchResultsActivity extends AppCompatActivity {
         searchResultList.setLayoutManager(new LinearLayoutManager(this));
         progressBar = (ProgressBar) findViewById(R.id.resultsProgress);
         progressBar.setVisibility(View.VISIBLE);
-//        firebaseUserSearch();
     }
 
     //VIEWHOLDER CLASS
@@ -139,54 +137,6 @@ public class UserSearchResultsActivity extends AppCompatActivity {
 
         public String getUid() { return thisUid; }
     }
-
-//    private void firebaseUserSearch() {
-//        Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchString).endAt(searchString + "\uf8ff");
-//
-//        FirebaseRecyclerAdapter<User, UserSearchResultsActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserSearchResultsActivity.UsersViewHolder>(
-//                User.class,
-//                R.layout.user_search_result_layout,
-//                UserSearchResultsActivity.UsersViewHolder.class,
-//                firebaseSearchQuery
-//        ) {
-//
-//            @Override
-//            protected void populateViewHolder(final UserSearchResultsActivity.UsersViewHolder viewHolder, User model, int position) {
-//                viewHolder.setUsername(model.getUsername()); //changed back
-//                username = model.getlowername();
-//                database.getReference().child("lusernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-////                        uid = (String) dataSnapshot.getValue();
-//                        viewHolder.setUID((String) dataSnapshot.getValue());
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-//                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        //Clicked
-//                        if (viewHolder.getUid().equals(firebaseAuth.getCurrentUser().getUid())) {
-//                            Intent intent = new Intent(UserSearchResultsActivity.this, UserProfileActivity.class);
-//                            startActivity(intent);
-//                        }
-//                        else {
-//                            Intent intent = new Intent(UserSearchResultsActivity.this, OtherUserProfile.class);
-//                            intent.putExtra("thisUserID", viewHolder.getUid());
-//                            startActivity(intent);
-//                        }
-//                    }
-//                });
-//            }
-//        };
-//        searchResultList.setAdapter(firebaseRecyclerAdapter);
-//        progressBar.setVisibility(View.INVISIBLE);
-//    }
 }
 
 

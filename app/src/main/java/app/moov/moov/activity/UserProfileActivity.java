@@ -133,7 +133,7 @@ public class UserProfileActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder>(
 
                 Post.class,
-                R.layout.self_cv_layout,
+                R.layout.cv_own_post,
                 UserProfileActivity.ProfileFeedHolder.class,
                 userPostsRef.orderByChild("time")
 
@@ -314,7 +314,7 @@ public class UserProfileActivity extends AppCompatActivity {
         }
 
         if (id==R.id.searchIcon) {
-            Intent intent = new Intent(UserProfileActivity.this,SearchUserActivity.class);
+            Intent intent = new Intent(UserProfileActivity.this,SearchActivity.class);
             startActivity(intent);
         }
 
