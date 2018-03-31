@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import app.moov.moov.R;
+import app.moov.moov.fragment.TabSearchMovieFragment;
+import app.moov.moov.fragment.TabSearchUserFragment;
 import app.moov.moov.util.SectionsPageAdapter;
 
 /**
