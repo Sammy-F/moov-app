@@ -53,7 +53,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
     public void onBindViewHolder(final MovieSearchResultAdapter.MyViewHolder holder, int position) {
 
         try {
-            String title = (String) movieResults.get(position).get("original_title");
+            String title = (String) movieResults.get(position).get("title");
             int id = (Integer) movieResults.get(position).get("id");
 
             holder.setTitle(title);

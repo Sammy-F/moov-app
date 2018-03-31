@@ -65,7 +65,7 @@ public class JSONMovieResultsAdapter extends RecyclerView.Adapter<JSONMovieResul
     @Override
     public void onBindViewHolder(final JSONMovieResultsAdapter.ResultsViewHolder holder, int position) {
         try {
-            String title = (String) movieResults.get(position).get("original_title");
+            String title = (String) movieResults.get(position).get("title");
             String summary = (String) movieResults.get(position).get("overview");
             int id = (Integer) movieResults.get(position).get("id");
 
