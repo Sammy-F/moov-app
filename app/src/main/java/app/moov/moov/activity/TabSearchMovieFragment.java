@@ -1,11 +1,13 @@
 package app.moov.moov.activity;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -47,14 +49,14 @@ public class TabSearchMovieFragment extends Fragment {
         });
         etMovieTitle = (EditText) view.findViewById(R.id.etMovieTitle);
         tvPromptUID = (TextView) view.findViewById(R.id.tvPrompUID);
-//        view.findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-//                return true;
-//            }
-//        });
+        view.findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
 
         btnSearchMovie.setOnClickListener(new View.OnClickListener() {
             @Override

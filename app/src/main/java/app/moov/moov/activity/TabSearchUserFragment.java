@@ -49,14 +49,14 @@ public class TabSearchUserFragment extends Fragment {
         });
         etUsername = (EditText) view.findViewById(R.id.etUsername);
         tvPromptUID = (TextView) view.findViewById(R.id.tvPrompUID);
-//        view.findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-//                return true;
-//            }
-//        });
+        view.findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
         return view;
 
     }
