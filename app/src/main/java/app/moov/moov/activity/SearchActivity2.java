@@ -32,7 +32,7 @@ public class SearchActivity2 extends AppCompatActivity{
     SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
     private void setupViewPager(ViewPager viewPager) {
         adapter.addFragment(new TabUserFragment(), "USER_FRAGMENT");
-        adapter.addFragment(new TabUserFragment2(), "USER_FRAGMENT2");
+        adapter.addFragment(new TabSearchUserFragment(), "SEARCH USER");
 
         viewPager.setAdapter(adapter);
     }
