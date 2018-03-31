@@ -5,7 +5,9 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -74,6 +76,15 @@ public class PostActivity extends AppCompatActivity {
 //        editTextRating = (EditText) findViewById(R.id.editTextRating);
         ratingBar = (RatingBar) findViewById(R.id.editTextRating);
         editTextWriteReview = (EditText) findViewById(R.id.editTextWriteReview);
+
+        findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
     }
 
 //    public void shareButtonClicked(View view) {
