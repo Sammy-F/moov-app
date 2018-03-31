@@ -3,17 +3,12 @@ package app.moov.moov.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
 
 import app.moov.moov.R;
 
@@ -55,7 +50,7 @@ public class ToolbarBaseActivity extends AppCompatActivity {
         }
 
         if (id==R.id.searchIcon) {
-            Intent intent = new Intent(this,SearchActivity2.class);
+            Intent intent = new Intent(this,SearchActivity.class);
             startActivity(intent);
         }
 

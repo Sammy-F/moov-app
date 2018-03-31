@@ -3,7 +3,6 @@ package app.moov.moov.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import app.moov.moov.archived.OldSearchActivity;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 
@@ -318,7 +318,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         }
 
         if (id==R.id.searchIcon) {
-            Intent intent = new Intent(UserProfileActivity.this,SearchActivity.class);
+            Intent intent = new Intent(UserProfileActivity.this,OldSearchActivity.class);
             startActivity(intent);
         }
 

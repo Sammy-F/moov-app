@@ -53,7 +53,7 @@
             android:label="@string/title_activity_choose_movie"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.SearchActivity"
+            android:name=".archived.OldSearchActivity"
             android:label="SearchUserActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
@@ -95,7 +95,7 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".activity.SearchActivity2"
+            android:name=".activity.SearchActivity"
             android:label="SearchActivity2"
             android:theme="@style/AppTheme" />
         <activity
