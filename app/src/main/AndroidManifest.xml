@@ -93,6 +93,11 @@
             android:name=".activity.MovieSearchResultsActivity2"
             android:label="MovieSearchResultsActivity2"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activity.SearchActivity2"
+            android:label="SearchActivity2"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.ToolBarActivity"
             android:label="@string/title_activity_tool_bar"

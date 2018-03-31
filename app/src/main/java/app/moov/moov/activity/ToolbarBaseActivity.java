@@ -55,7 +55,7 @@ public class ToolbarBaseActivity extends AppCompatActivity {
         }
 
         if (id==R.id.searchIcon) {
-            Intent intent = new Intent(this,SearchActivity.class);
+            Intent intent = new Intent(this,SearchActivity2.class);
             startActivity(intent);
         }
 
