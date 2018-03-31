@@ -12,15 +12,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.model.Post;
@@ -225,16 +229,25 @@ public class MovieProfile extends ToolbarBaseActivity {
 
         super.onStart();
 
-        FirebaseRecyclerAdapter<Post, MovieProfile.MovieProfileHolder> FBRA = new FirebaseRecyclerAdapter<Post, MovieProfile.MovieProfileHolder>(
+        Query keysQuery = thisMoviePostsRef.orderByChild("timestamp");
 
-                Post.class,
-                R.layout.cv_layout,
-                MovieProfile.MovieProfileHolder.class,
-                thisMoviePostsRef.orderByChild("time")
+        FirebaseRecyclerOptions<Post> options =
+                new FirebaseRecyclerOptions.Builder<Post>()
+                        .setIndexedQuery(keysQuery, postsRef, Post.class)
+                        .build();
 
-        ) {
+        FirebaseRecyclerAdapter<Post, MovieProfile.MovieProfileHolder> FBRA = new FirebaseRecyclerAdapter<Post, MovieProfile.MovieProfileHolder>(options) {
+
             @Override
-            protected void populateViewHolder(MovieProfile.MovieProfileHolder viewHolder, Post model, int position) {
+            public MovieProfile.MovieProfileHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.cv_layout, parent, false);
+
+                return new MovieProfile.MovieProfileHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(MovieProfile.MovieProfileHolder viewHolder, int position, Post model) {
 
                 final MovieProfile.MovieProfileHolder viewHolder1 = viewHolder;
 
@@ -246,6 +259,7 @@ public class MovieProfile extends ToolbarBaseActivity {
 
             }
         };
+        FBRA.startListening();
         userRecycler.setAdapter(FBRA);
 
     }

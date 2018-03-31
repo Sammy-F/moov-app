@@ -11,11 +11,11 @@
 
     <application
         android:allowBackup="true"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
+        android:logo="@drawable/logo_trimmed"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:icon="@drawable/logo"
-        android:logo="@drawable/logo_trimmed"
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
@@ -100,6 +100,10 @@
         <activity
             android:name=".activity.ToolbarBaseActivity"
             android:label="@string/title_activity_toolbar_base"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.FollowersFollowingActivity"
+            android:label="@string/title_activity_followers_following"
             android:theme="@style/AppTheme"></activity>
     </application>
 

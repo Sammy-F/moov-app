@@ -129,10 +129,16 @@ public class PostActivity extends ToolbarBaseActivity {
 
                         newPostRef.setValue(newPost);
 
-                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
-                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);
+                        // Switching to pointers ONLY
+//                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
+//                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);
+                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPostRef.getKey());
+                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).child("timestamp").setValue(timePosted);
+                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPostRef.getKey());
+                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).child("timestamp").setValue(timePosted);
 
-                        moviePostsRef.child(newPostRef.getKey()).setValue(newPost);
+                        moviePostsRef.child(newPostRef.getKey()).setValue(newPostRef.getKey());
+                        moviePostsRef.child(newPostRef.getKey()).child("timestamp").setValue(timePosted);
 
                         /**
                          * Store the new post in all user's feeds.
@@ -143,7 +149,9 @@ public class PostActivity extends ToolbarBaseActivity {
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                                     String UID = postSnapshot.getKey();
-                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPost);
+                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPostRef.getKey());
+                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).child("timestamp").setValue(timePosted);
+//                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPost);
                                 }
                             }
 

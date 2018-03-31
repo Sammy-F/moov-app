@@ -7,23 +7,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
+import app.moov.moov.model.User;
 
 public class OtherUserProfile extends ToolbarBaseActivity {
 
@@ -219,17 +224,28 @@ public class OtherUserProfile extends ToolbarBaseActivity {
 
         super.onStart();
 
+        Query query = thisUserRef.child("Posts").orderByChild("timestamp");
+
+        FirebaseRecyclerOptions<Post> options =
+                new FirebaseRecyclerOptions.Builder<Post>()
+                        .setIndexedQuery(query, ref.child("Posts"), Post.class)
+                        .build();
+
         /**
          * Internal Adapter for use with the RecyclerView
          */
-        FirebaseRecyclerAdapter<Post, OtherUserProfile.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, OtherUserProfile.ProfileFeedHolder>(
-                Post.class,
-                R.layout.cv_layout,
-                ProfileFeedHolder.class,
-                thisUserRef.child("Posts").orderByChild("time")
-        ) {
+        FirebaseRecyclerAdapter<Post, OtherUserProfile.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, OtherUserProfile.ProfileFeedHolder>(options) {
+
             @Override
-            protected void populateViewHolder(OtherUserProfile.ProfileFeedHolder viewHolder, final Post model, int position) {
+            public OtherUserProfile.ProfileFeedHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.cv_layout, parent, false);
+
+                return new OtherUserProfile.ProfileFeedHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(OtherUserProfile.ProfileFeedHolder viewHolder, int position, final Post model) {
 
                 final OtherUserProfile.ProfileFeedHolder viewHolder1 = viewHolder;
                 final int movieID = model.getMovieID();
@@ -249,6 +265,7 @@ public class OtherUserProfile extends ToolbarBaseActivity {
 
             }
         };
+        FBRA.startListening();
         userRecycler.setAdapter(FBRA);
     }
 
