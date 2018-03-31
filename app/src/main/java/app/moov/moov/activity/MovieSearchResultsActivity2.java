@@ -3,6 +3,7 @@ package app.moov.moov.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,6 +33,7 @@ import java.util.List;
 
 import app.moov.moov.R;
 import app.moov.moov.util.JSONMovieResultsAdapter;
+import app.moov.moov.util.MovieSearchResultAdapter;
 import app.moov.moov.util.VolleySingleton;
 
 /**
@@ -99,10 +102,10 @@ public class MovieSearchResultsActivity2 extends AppCompatActivity {
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
 
-                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(thisContext);
+                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
                         searchRecycler.setLayoutManager(mLayoutManager);
 
-                        JSONMovieResultsAdapter searchAdapter = new JSONMovieResultsAdapter(thisContext, convertedArray);
+                        MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
                     else if (convertedArray.size() > 20) { // Cap the result size to 20
@@ -110,10 +113,10 @@ public class MovieSearchResultsActivity2 extends AppCompatActivity {
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
 
-                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(thisContext);
+                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
                         searchRecycler.setLayoutManager(mLayoutManager);
 
-                        JSONMovieResultsAdapter searchAdapter = new JSONMovieResultsAdapter(thisContext, convertedArray);
+                        MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
                     else {

@@ -43,7 +43,8 @@ public class ChooseMovieActivity extends AppCompatActivity {
                 if (searchQuery.length() == 0) {
                     Toast.makeText(ChooseMovieActivity.this,"Please input a search query.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(ChooseMovieActivity.this, MovieSearchResultsActivity.class);
+//                    Intent intent = new Intent(ChooseMovieActivity.this, MovieSearchResultsActivity.class);
+                    Intent intent = new Intent(ChooseMovieActivity.this, MovieSearchResultsActivity2.class); //testing moviesearchresultsactivity2
                     intent.putExtra("searchQuery", searchQuery);
                     startActivity(intent);
                 }

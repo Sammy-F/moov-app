@@ -3,7 +3,9 @@ package app.moov.moov.util;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,19 +63,43 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
             holder.setTitle(title);
             holder.setID(id);
 
-            String url = "https://image.tmdb.org/t/p/w400/" + movieResults.get(position).get("poster_path");
+            String posterUrl = "https://image.tmdb.org/t/p/w400" + movieResults.get(position).get("poster_path");
 
-            ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            Target target = new Target() {
                 @Override
-                public void onResponse(Bitmap response) {
-                    holder.ivMoviePoster.setImageBitmap(response);
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+
+                    holder.setMoviePoster(bitmap);
+
                 }
-            }, 0, 0, null, new Response.ErrorListener() {
+
                 @Override
-                public void onErrorResponse(VolleyError error) {
-                    //TODO: Handle error
+                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                    Log.e("Bitmap Error", e.getMessage());
+
                 }
-            });
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                }
+            };
+
+            Picasso.get();
+
+            //old way of getting image
+//            ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
+//                @Override
+//                public void onResponse(Bitmap response) {
+//                    holder.ivMoviePoster.setImageBitmap(response);
+//                }
+//            }, 0, 0, null, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    //TODO: Handle error
+//                }
+//            });
 
         } catch (JSONException e) {
             Toast.makeText(c, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -97,6 +125,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         public MyViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
+            this.ivMoviePoster = (ImageView) itemView.findViewById(R.id.ivMoviePoster);
 
         }
 
@@ -113,6 +142,10 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         public int getID() { return movieID; }
 
         public String getTitle() { return movieTitle; }
+
+        public void setMoviePoster(Bitmap bitmap) {
+            ivMoviePoster.setImageBitmap(bitmap);
+        }
 
 
     }

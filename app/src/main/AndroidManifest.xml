@@ -88,6 +88,10 @@
             android:name=".activity.ReportIssueActivity"
             android:label="@string/title_activity_report_issue"
             android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".activity.MovieSearchResultsActivity2"
+            android:label="MovieSearchResultsActivity2"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
