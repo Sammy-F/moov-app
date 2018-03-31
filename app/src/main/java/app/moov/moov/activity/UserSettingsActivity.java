@@ -16,6 +16,8 @@ import app.moov.moov.R;
 public class UserSettingsActivity extends AppCompatActivity {
 
     Button btnChangePass;
+    Button btnChangeEmail;
+    Button btnReportIssue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,24 @@ public class UserSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Class destination = ChangePasswordActivity.class;
+                btnClick(destination);
+            }
+        });
+
+        btnChangeEmail = (Button) findViewById(R.id.btnGoChangEmail);
+        btnChangeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Class destination = ChangeEmailActivity.class;
+                btnClick(destination);
+            }
+        });
+
+        btnReportIssue = (Button) findViewById(R.id.btnReportProblem);
+        btnReportIssue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Class destination = ReportIssueActivity.class;
                 btnClick(destination);
             }
         });

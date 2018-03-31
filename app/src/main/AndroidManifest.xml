@@ -79,11 +79,15 @@
         <activity
             android:name=".activity.ChangeEmailActivity"
             android:label="@string/title_activity_change_email"
-            android:theme="@style/AppTheme"></activity>
-
-        <activity android:name=".activity.UserSearchResultsActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.UserSearchResultsActivity"
             android:label="UserSearchResultsActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.ReportIssueActivity"
+            android:label="@string/title_activity_report_issue"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

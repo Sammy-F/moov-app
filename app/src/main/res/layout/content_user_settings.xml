@@ -47,11 +47,11 @@
                 android:text="@string/account" />
 
             <Button
-                android:id="@+id/btnChangEmail"
+                android:id="@+id/btnGoChangEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/change_email"
-                android:gravity="start|center_vertical"/>
+                android:gravity="start|center_vertical"
+                android:text="@string/change_email" />
 
             <Button
                 android:id="@+id/btnChangePassword"

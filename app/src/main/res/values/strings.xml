@@ -111,6 +111,11 @@
     <string name="title_activity_change_avatar">ChangeAvatarActivity</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
     <string name="title_activity_change_email">ChangeEmailActivity</string>
+    <string name="title_activity_report_issue">ReportIssueActivity</string>
+
+    <string name="have_issue">Have an issue? Let us know!</string>
+    <string name="subject">Subject</string>
+    <string name="issue_description">Describe your problem.</string>
 
 
 </resources>
