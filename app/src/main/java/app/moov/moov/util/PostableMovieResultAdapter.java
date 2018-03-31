@@ -43,7 +43,7 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater = LayoutInflater.from(c);
-        view = mInflater.inflate(R.layout.movie_search_results2_layout, parent, false);
+        view = mInflater.inflate(R.layout.movie_results_layout, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -57,7 +57,8 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
             holder.setTitle(title);
             holder.setID(id);
 
-            String posterUrl = "https://image.tmdb.org/t/p/w185" + movieResults.get(position).get("poster_path");
+            final String posterUrl = "https://image.tmdb.org/t/p/w185" + movieResults.get(position).get("poster_path");
+
             Glide.with(c).asBitmap().load(posterUrl).into(holder.ivMoviePoster);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +67,7 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
                     Intent intent = new Intent(c, PostActivity.class);
                     intent.putExtra("movieID", id);
                     intent.putExtra("movieTitle", title);
+                    intent.putExtra("posterURL", posterUrl);
                     c.startActivity(intent);
                 }
             });

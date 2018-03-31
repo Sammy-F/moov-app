@@ -52,6 +52,7 @@ public class PostActivity extends ToolbarBaseActivity {
 
     private int movieID;
     private String movieTitle;
+    private String posterURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class PostActivity extends ToolbarBaseActivity {
 
         movieID = getIntent().getIntExtra("movieID", 0); //defaults movieID to 0 if not set
         movieTitle = getIntent().getStringExtra("movieTitle").trim(); //get standardized title from search
+        posterURL = getIntent().getStringExtra("posterURL");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -110,7 +112,7 @@ public class PostActivity extends ToolbarBaseActivity {
         final long timePosted = Calendar.getInstance().getTimeInMillis();
         final String stringRating = Integer.toString(rating);
 
-            if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(review)) {
+            if (!TextUtils.isEmpty(movieTitle)) {
                 String user = mAuth.getCurrentUser().getUid();
 //                     currentUserDB = mDatabase.child(user);
 //                     Map<String, String> newPost = new HashMap<>();
@@ -130,7 +132,7 @@ public class PostActivity extends ToolbarBaseActivity {
 
                         newPostRef = postsRef.push();
 
-                        final Post newPost = new Post(username, user, movieTitle, stringRating, review, timePosted, newPostRef.getKey(), movieID); //TODO: Update w/ actual movie ID
+                        final Post newPost = new Post(username, user, movieTitle, stringRating, review, timePosted, newPostRef.getKey(), movieID, posterURL); //TODO: Update w/ actual movie ID
 
                         newPostRef.setValue(newPost);
 
@@ -158,8 +160,6 @@ public class PostActivity extends ToolbarBaseActivity {
 
                             }
                         });
-
-
 
                     }
 

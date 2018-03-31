@@ -2,12 +2,14 @@ package app.moov.moov.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -33,6 +35,7 @@ import java.util.List;
 
 import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.R;
+import app.moov.moov.util.GridSpacingItemDecoration;
 import app.moov.moov.util.PostableMovieResultAdapter;
 import app.moov.moov.util.VolleySingleton;
 /**
@@ -107,16 +110,26 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
                         GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
                         searchRecycler.setLayoutManager(mLayoutManager);
 
+                        Resources r = getResources();
+                        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, r.getDisplayMetrics());
+
+                        searchRecycler.addItemDecoration(new GridSpacingItemDecoration(2, px, true));
+
                         PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
-                    else if (convertedArray.size() > 20) { // Cap the result size to 20
-                        convertedArray = convertedArray.subList(0, 19);
+                    else if (convertedArray.size() > 40) { // Cap the result size to 40
+                        convertedArray = convertedArray.subList(0, 40);
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
 
                         GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
                         searchRecycler.setLayoutManager(mLayoutManager);
+
+                        Resources r = getResources();
+                        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, r.getDisplayMetrics());
+
+                        searchRecycler.addItemDecoration(new GridSpacingItemDecoration(2, px, true));
 
                         PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
@@ -143,34 +156,6 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
             }
         });
         queue.add(jsonObjectRequest);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id==R.id.addIcon) {
-            Intent intent = new Intent(MovieSearchResultsActivity.this,PostActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.logoutIcon) {
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(MovieSearchResultsActivity.this, MainActivity.class));
-        }
-
-        if (id==R.id.profileIcon) {
-            Intent intent = new Intent(MovieSearchResultsActivity.this, UserProfileActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.searchIcon) {
-            Intent intent = new Intent(MovieSearchResultsActivity.this,FindUserActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }

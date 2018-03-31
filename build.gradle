@@ -3,8 +3,13 @@
 buildscript {
     
     repositories {
+        mavenCentral()
         google()
         jcenter()
+        maven {
+            name 'glide-snapshot'
+            url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'

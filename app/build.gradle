@@ -39,7 +39,7 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:0.4.4'
     compile 'com.google.android.gms:play-services-auth:11.8.0'
 
-    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    compile 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 
     compile 'com.android.volley:volley:1.1.0'

@@ -91,7 +91,7 @@
     <string name="new_post">Create New Post</string>
     <string name="movie">Movie Title</string>
     <string name="rating">Rating out of Ten</string>
-    <string name="posttext">Write your thoughts!</string>
+    <string name="posttext">Write your thoughts! (optional)</string>
     <string name="share">Share</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_other_user_profile">OtherUserProfile</string>
