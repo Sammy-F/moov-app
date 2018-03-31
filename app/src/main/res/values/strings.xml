@@ -120,6 +120,7 @@
     <string name="issue_description">Describe your problem.</string>
     <string name="title_activity_tool_bar">ToolBarActivity</string>
     <string name="title_activity_toolbar_base">ToolbarBaseActivity</string>
+    <string name="title_activity_followers_following">FollowersFollowingActivity</string>
 
 
 </resources>

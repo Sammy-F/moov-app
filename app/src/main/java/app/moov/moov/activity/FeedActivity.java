@@ -16,9 +16,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -26,9 +28,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import org.w3c.dom.Text;
 
@@ -88,18 +92,25 @@ public class FeedActivity extends ToolbarBaseActivity {
     protected void onStart() {
         super.onStart();
 
+        Query keysQuery = postsRef;
+
+        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                .setIndexedQuery(keysQuery, baseRef.child("Posts"), Post.class)
+                .build();
+
         // Creates new Adapter to user with the RecyclerView using
         // our internal FeedViewHolder.
-        FirebaseRecyclerAdapter <Post, FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedViewHolder>(
-
-                Post.class,
-                R.layout.new_cv_layout,
-                FeedViewHolder.class,
-                postsRef.orderByChild("time")
-
-        ) {
+        FirebaseRecyclerAdapter <Post, FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedViewHolder>(options) {
             @Override
-            protected void populateViewHolder(FeedViewHolder viewHolder, Post model, int position) {
+            public FeedViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.new_cv_layout, parent, false);
+
+                return new FeedViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(FeedViewHolder viewHolder, int position, Post model) {
 
                 final FeedViewHolder viewHolder1 = viewHolder;
 
@@ -141,6 +152,7 @@ public class FeedActivity extends ToolbarBaseActivity {
 
             }
         };
+        FBRA.startListening();
         feedRecycler.setAdapter(FBRA);
     }
 

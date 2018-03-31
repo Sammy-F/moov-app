@@ -7,20 +7,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import app.moov.moov.model.Post;
@@ -124,20 +128,27 @@ public class UserProfileActivity extends ToolbarBaseActivity {
 
         super.onStart();
 
+        Query query = userPostsRef.orderByChild("timestamp");
+
+        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                .setIndexedQuery(query, ref.child("Posts"), Post.class)
+                .build();
+
         /**
          * Create custom adapter using ProfileFeedHolder,
          * populate using data pulled from Firebase.
          */
-        FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder>(
-
-                Post.class,
-                R.layout.cv_own_post,
-                UserProfileActivity.ProfileFeedHolder.class,
-                userPostsRef.orderByChild("time")
-
-        ) {
+        FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder>(options) {
             @Override
-            protected void populateViewHolder(UserProfileActivity.ProfileFeedHolder viewHolder, Post model, int position) {
+            public UserProfileActivity.ProfileFeedHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.cv_own_post, parent, false);
+
+                return new UserProfileActivity.ProfileFeedHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(UserProfileActivity.ProfileFeedHolder viewHolder, int position, Post model) {
                 final Post model1 = model;
 
                 viewHolder.setTitle(model.getMovieTitle());
@@ -211,7 +222,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
                 });
             }
         };
-
+        FBRA.startListening();
         profileFeedRecycler.setAdapter(FBRA);
 
     }
