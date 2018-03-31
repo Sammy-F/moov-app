@@ -78,6 +78,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/report_problem"
                 android:gravity="start|center_vertical"/>
+
+            <Button
+                android:id="@+id/btnLogOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/logout" />
         </LinearLayout>
 
     </ScrollView>

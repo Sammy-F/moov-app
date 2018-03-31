@@ -13,6 +13,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TabHost;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import app.moov.moov.R;
 
 public class UserSettingsActivity extends AppCompatActivity {
@@ -20,10 +22,14 @@ public class UserSettingsActivity extends AppCompatActivity {
     Button btnChangePass;
     Button btnChangeEmail;
     Button btnReportIssue;
+    Button btnLogOut;
+    private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_user_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,6 +65,17 @@ public class UserSettingsActivity extends AppCompatActivity {
                 Class destination = ReportIssueActivity.class;
                 btnClick(destination);
             }
+        });
+
+        btnLogOut = (Button) findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                finish();
+                startActivity(new Intent(UserSettingsActivity.this, MainActivity.class));
+            }
+
         });
 
         findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
