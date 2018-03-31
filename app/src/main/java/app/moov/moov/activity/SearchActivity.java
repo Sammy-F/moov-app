@@ -2,8 +2,10 @@ package app.moov.moov.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -27,6 +29,7 @@ public class SearchActivity extends AppCompatActivity{
     private Button btnSearchUser;
     private String userID;
     private String username;
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,5 +64,13 @@ public class SearchActivity extends AppCompatActivity{
         tvPromptUID = (TextView) findViewById(R.id.tvPrompUID);
         etUsername = (EditText) findViewById(R.id.etUsername);
         btnSearchUser = (Button) findViewById(R.id.btnSearchUser);
+        findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
     }
 }
