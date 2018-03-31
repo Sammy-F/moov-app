@@ -66,7 +66,7 @@ public class TabSearchMovieFragment extends Fragment {
                     Toast.makeText(getActivity(),"Please input a search query.", Toast.LENGTH_SHORT).show();
                 } else {
 //                    Intent intent = new Intent(ChooseMovieActivity.this, MovieSearchResultsActivity.class);
-                    Intent intent = new Intent(getActivity(), MovieSearchResultsActivity.class);
+                    Intent intent = new Intent(getActivity(), MovieSearchResultsActivity2.class);
                     intent.putExtra("searchQuery", searchQuery);
                     startActivity(intent);
                 }
@@ -82,5 +82,4 @@ public class TabSearchMovieFragment extends Fragment {
         }
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-
 }
