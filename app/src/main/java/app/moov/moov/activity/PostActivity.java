@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -107,21 +108,13 @@ public class PostActivity extends ToolbarBaseActivity {
     public void shareButtonClicked(View view){
 //        final String movieTitle = editTextMovieTitle.getText().toString().trim();
 //        final String rating = editTextRating.getText().toString().trim();
-        final int rating = ratingBar.getNumStars();
+        final int rating = (int) ratingBar.getRating();
         final String review = editTextWriteReview.getText().toString().trim();
         final long timePosted = Calendar.getInstance().getTimeInMillis();
         final String stringRating = Integer.toString(rating);
 
             if (!TextUtils.isEmpty(movieTitle)) {
                 String user = mAuth.getCurrentUser().getUid();
-//                     currentUserDB = mDatabase.child(user);
-//                     Map<String, String> newPost = new HashMap<>();
-//                     newPost.put("Title", movieTitle);
-//                     newPost.put("Rating", rating);
-//                     newPost.put("Review", review);
-//                     usersRef.child(user).child("Posts").setValue(new HashMap<String, String>());
-//                    currentUserDB.child("Posts").child(movieTitle).child("Rating").setValue(rating);
-//                    currentUserDB.child("Posts").child(movieTitle).child("Review").setValue(review);
 
                 usersRef.child(user).child("Username").addValueEventListener(new ValueEventListener() {
                     @Override
@@ -151,7 +144,6 @@ public class PostActivity extends ToolbarBaseActivity {
 
                                     String UID = postSnapshot.getKey();
                                     usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPost);
-
                                 }
                             }
 
