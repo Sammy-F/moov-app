@@ -23,10 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import app.moov.moov.util.MovieGetterByID;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
-import info.movito.themoviedbapi.model.MovieDb;
 
 /**
  * UserProfileActivity displays the user's profile
@@ -167,12 +165,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         final int movieID = model1.getMovieID();
-
                         // Temporary actions until movie page is finished.
-                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
-                        MovieDb thisMovie = movieGetter.getMovie();
-                        String movieTitle = thisMovie.getTitle();
-                        Toast.makeText(UserProfileActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
                     }
                 });
 

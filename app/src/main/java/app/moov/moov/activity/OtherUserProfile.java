@@ -22,10 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import app.moov.moov.archived.FindUserActivity;
-import app.moov.moov.util.MovieGetterByID;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
-import info.movito.themoviedbapi.model.MovieDb;
 
 public class OtherUserProfile extends AppCompatActivity {
 
@@ -231,7 +229,7 @@ public class OtherUserProfile extends AppCompatActivity {
                 thisUserRef.child("Posts").orderByChild("time")
         ) {
             @Override
-            protected void populateViewHolder(OtherUserProfile.ProfileFeedHolder viewHolder, Post model, int position) {
+            protected void populateViewHolder(OtherUserProfile.ProfileFeedHolder viewHolder, final Post model, int position) {
 
                 final OtherUserProfile.ProfileFeedHolder viewHolder1 = viewHolder;
                 final int movieID = model.getMovieID();
@@ -244,9 +242,7 @@ public class OtherUserProfile extends AppCompatActivity {
                 viewHolder.getBtnMovieTitle().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
-                        MovieDb thisMovie = movieGetter.getMovie();
-                        String movieTitle = thisMovie.getTitle();
+                        String movieTitle = model.getMovieTitle();
                         Toast.makeText(OtherUserProfile.this,movieTitle, Toast.LENGTH_SHORT).show();
                     }
                 });

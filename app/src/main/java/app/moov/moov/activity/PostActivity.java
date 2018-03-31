@@ -77,7 +77,7 @@ public class PostActivity extends AppCompatActivity {
         ratingBar = (RatingBar) findViewById(R.id.editTextRating);
         editTextWriteReview = (EditText) findViewById(R.id.editTextWriteReview);
 
-        findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.postConstraint).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);

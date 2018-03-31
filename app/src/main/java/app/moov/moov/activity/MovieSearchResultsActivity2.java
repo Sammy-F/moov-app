@@ -23,7 +23,6 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.firebase.auth.FirebaseAuth;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.moov.moov.R;
-import app.moov.moov.util.JSONMovieResultsAdapter;
+//import app.moov.moov.util.JSONMovieResultsAdapter;
 import app.moov.moov.util.MovieSearchResultAdapter;
 import app.moov.moov.util.VolleySingleton;
 

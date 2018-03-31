@@ -23,10 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import app.moov.moov.archived.FindUserActivity;
-import app.moov.moov.util.MovieGetterByID;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
-import info.movito.themoviedbapi.model.MovieDb;
 
 public class MovieProfile extends AppCompatActivity {
 
@@ -35,8 +33,6 @@ public class MovieProfile extends AppCompatActivity {
     private int movieID;
     private String movieTitle;
 
-    private MovieDb movieDb;
-    private MovieGetterByID movieGetter;
 
     private String currentUID;
 
@@ -82,11 +78,6 @@ public class MovieProfile extends AppCompatActivity {
     }
 
     private void setUIViews() {
-
-        movieGetter = new MovieGetterByID(this, movieID);
-        movieDb = movieGetter.getMovie();
-
-        movieTitle = movieDb.getTitle();
 
         tvMoviename = (TextView) findViewById(R.id.tvMoviename);
         tvMoviename.setText(movieTitle);

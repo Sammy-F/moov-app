@@ -2,10 +2,9 @@ package app.moov.moov.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -33,15 +32,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.moov.moov.archived.FindUserActivity;
-import app.moov.moov.util.JSONMovieResultsAdapter;
 import app.moov.moov.R;
-import app.moov.moov.util.MovieSearchResultAdapter;
+import app.moov.moov.util.PostableMovieResultAdapter;
 import app.moov.moov.util.VolleySingleton;
-import info.movito.themoviedbapi.TmdbApi;
-import info.movito.themoviedbapi.TmdbSearch;
-import info.movito.themoviedbapi.model.MovieDb;
-import info.movito.themoviedbapi.model.core.MovieResultsPage;
-
+/**
+ * Class handles movie results after
+ * searching for one to post about.
+ */
 public class MovieSearchResultsActivity extends AppCompatActivity {
 
     private RecyclerView searchRecycler;
@@ -79,20 +76,6 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
         final ProgressBar progressBar = findViewById(R.id.resultsProgress);
         progressBar.setVisibility(View.VISIBLE);
 
-        //run search handler
-//        APISearchHandler myHandler = new APISearchHandler(searchQuery);
-//        myHandler.execute();
-//
-//        try {
-//            searchResults = myHandler.get();
-//        } catch (InterruptedException e) {
-//            searchResults = null;
-//        } catch (ExecutionException f) {
-//            searchResults = null;
-//        }
-//
-//        myHandler.cancel(true);
-
         searchQuery = searchQuery.replaceAll(" ", "+");
 
         String url = "https://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&language=en-US&query=" + searchQuery;
@@ -121,10 +104,10 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
 
-                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(thisContext);
+                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
                         searchRecycler.setLayoutManager(mLayoutManager);
 
-                        JSONMovieResultsAdapter searchAdapter = new JSONMovieResultsAdapter(thisContext, convertedArray);
+                        PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
                     else if (convertedArray.size() > 20) { // Cap the result size to 20
@@ -132,10 +115,10 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
 
-                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(thisContext);
+                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
                         searchRecycler.setLayoutManager(mLayoutManager);
 
-                        JSONMovieResultsAdapter searchAdapter = new JSONMovieResultsAdapter(thisContext, convertedArray);
+                        PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
                     else {
@@ -160,66 +143,7 @@ public class MovieSearchResultsActivity extends AppCompatActivity {
             }
         });
         queue.add(jsonObjectRequest);
-
-//        if (searchResults == null) {
-//            Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
-//        } else if (searchResults.size() > 0 && searchResults.size() <= 20) {
-//            searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
-//            searchRecycler.setHasFixedSize(true);
-//
-//            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-//            searchRecycler.setLayoutManager(mLayoutManager);
-//
-//            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(this, searchResults);
-//            searchRecycler.setAdapter(searchAdapter);
-//        }
-//        else if (searchResults.size() > 20) { // Cap the result size to 20
-//            searchResults = searchResults.subList(0, 19);
-//            searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
-//            searchRecycler.setHasFixedSize(true);
-//
-//            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-//            searchRecycler.setLayoutManager(mLayoutManager);
-//
-//            MovieResultsAdapter searchAdapter = new MovieResultsAdapter(this, searchResults);
-//            searchRecycler.setAdapter(searchAdapter);
-//        }
-//        else {
-//            Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
-//        }
-
     }
-
-    /**
-     * Internal class handles searches in separate thread.
-     */
-//    static class APISearchHandler extends AsyncTask<String, Void, List<MovieDb>> {
-//        private List<MovieDb> resultList;
-//        private String searchQuery;
-//        Exception exception;
-//
-//        public APISearchHandler(String searchQuery) {
-//            super();
-//            this.searchQuery = searchQuery;
-//        }
-//
-//        /**
-//         * Processes run when execute() is called
-//         * @param searchQueries
-//         * @return
-//         */
-//        protected List<MovieDb> doInBackground(String[] searchQueries) {
-//            try {
-//                TmdbSearch movieSearch = new TmdbSearch(new TmdbApi("3744632a440f06514578b01d1b6e9d27")); //TODO: Save API Key elsewhere
-//                MovieResultsPage results = movieSearch.searchMovie(searchQuery, null, "en", false, 0);
-//                resultList = results.getResults();
-//                return resultList;
-//            } catch (Exception e) {
-//                this.exception = e;
-//                return null;
-//            }
-//        }
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

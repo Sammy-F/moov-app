@@ -1,11 +1,11 @@
 package app.moov.moov.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +29,12 @@ import app.moov.moov.activity.PostActivity;
  * NOTE: THIS IS THE ADAPTER FOR SEARCHING FOR MOVIES REGULARLY, NOT ON POST ACTIVITY
  */
 
-public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchResultAdapter.MyViewHolder> {
+public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMovieResultAdapter.MyViewHolder> {
 
     private Context c;
     private List<JSONObject> movieResults;
 
-    public MovieSearchResultAdapter(Context c, List<JSONObject> movieResults) {
+    public PostableMovieResultAdapter(Context c, List<JSONObject> movieResults) {
         this.c = c;
         this.movieResults = movieResults;
     }
@@ -48,10 +48,10 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
     }
 
     @Override
-    public void onBindViewHolder(final MovieSearchResultAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final PostableMovieResultAdapter.MyViewHolder holder, int position) {
 
         try {
-            String title = (String) movieResults.get(position).get("title");
+            final String title = (String) movieResults.get(position).get("title");
             final int id = (Integer) movieResults.get(position).get("id");
 
             holder.setTitle(title);
@@ -63,8 +63,9 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(c, MovieProfile.class);
+                    Intent intent = new Intent(c, PostActivity.class);
                     intent.putExtra("movieID", id);
+                    intent.putExtra("movieTitle", title);
                     c.startActivity(intent);
                 }
             });
@@ -72,6 +73,9 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         } catch (JSONException e) {
             Toast.makeText(c, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+//        holder.tvMovieTitle.setText(movieResults.get(position).getTitle());
+//        holder.ivMoviePoster.setImageResource(movieResults.get(position).getImages(ArtworkType.POSTER));
 
     }
 
