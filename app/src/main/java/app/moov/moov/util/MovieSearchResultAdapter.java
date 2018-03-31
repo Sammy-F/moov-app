@@ -67,7 +67,11 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
             holder.setTitle(title);
             holder.setID(id);
 
-            String posterUrl = "https://image.tmdb.org/t/p/w400" + movieResults.get(position).get("poster_path");
+            DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+//            int height = (int)(160 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
+//            int width = (int)(120 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
+
+            String posterUrl = "https://image.tmdb.org/t/p/w185" + movieResults.get(position).get("poster_path");
 
 //            Target target = new Target() {
 //                @Override
@@ -90,14 +94,11 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
 //                }
 //            };
 
-//            DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-//            int height = (int)(160 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
-//            int width = (int)(120 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
 //
 //
 //            Picasso.get().load(posterUrl).resize(width, height).into(target);
 
-            Glide.with(c).load(posterUrl).into(holder.ivMoviePoster);
+            Glide.with(c).asBitmap().load(posterUrl).into(holder.ivMoviePoster);
 
             //old way of getting image
 //            ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
