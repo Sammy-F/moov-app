@@ -25,7 +25,7 @@ public class ToolbarBaseActivity extends AppCompatActivity {
 
     public void toolBarSetup(Toolbar toolbar) {
         if (Build.VERSION.SDK_INT > 21) {
-            toolbar.setElevation(1);
+            toolbar.setElevation(5);
         }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
