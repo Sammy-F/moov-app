@@ -29,7 +29,8 @@
 
     <string name="choose_movie">Choose Movie</string>
 
-    <string name="delete_post">Delete post</string>
+    <string name="delete_post">Delete Post</string>
+    <string name="edit_post">Edit Post</string>
 
     <string name="review">Review</string>
 

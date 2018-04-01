@@ -12,10 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -235,34 +238,55 @@ public class OtherUserProfile extends ToolbarBaseActivity {
         /**
          * Internal Adapter for use with the RecyclerView
          */
-        FirebaseRecyclerAdapter<Post, OtherUserProfile.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, OtherUserProfile.ProfileFeedHolder>(options) {
-
+        FirebaseRecyclerAdapter <Post, ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, ProfileFeedHolder>(options) {
             @Override
-            public OtherUserProfile.ProfileFeedHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public ProfileFeedHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.cv_layout, parent, false);
+                        .inflate(R.layout.new_cv_layout, parent, false);
 
-                return new OtherUserProfile.ProfileFeedHolder(view);
+                return new ProfileFeedHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(OtherUserProfile.ProfileFeedHolder viewHolder, int position, final Post model) {
+            protected void onBindViewHolder(ProfileFeedHolder viewHolder, int position, Post model) {
 
-                final OtherUserProfile.ProfileFeedHolder viewHolder1 = viewHolder;
-                final int movieID = model.getMovieID();
+                final ProfileFeedHolder viewHolder1 = viewHolder;
 
                 viewHolder.setTitle(model.getMovieTitle());
-                viewHolder.setRating(model.getMovieRating());
+                viewHolder.setRating(Float.parseFloat(model.getMovieRating()));
                 viewHolder.setReview(model.getMovieReview());
+                if (model.getMovieReview().equals("")) {
+                    viewHolder.getReviewView().setTextSize(0);
+                    viewHolder.getReviewView().setPadding(0, 0, 0, 0);
+                    viewHolder.getReviewView().setVisibility(View.GONE);
+                    viewHolder.getReviewView().setHeight(0);
+                }
                 viewHolder.setUsername(model.getUsername());
 
-                viewHolder.getBtnMovieTitle().setOnClickListener(new View.OnClickListener() {
+                String posterUrl = model.getPosterURL();
+                Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.ivPoster);
+
+//                try {
+//                    Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.getIvPoster());
+//                }  catch (NullPointerException e) {
+//                    Log.e("Image skipped", "Unable to get image for " + posterUrl);
+//                }
+
+                final int movieID = model.getMovieID();
+
+                viewHolder.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        String movieTitle = model.getMovieTitle();
-                        Toast.makeText(OtherUserProfile.this,movieTitle, Toast.LENGTH_SHORT).show();
+                    public void onClick(View view) { //temporary button response
+                        Intent intent = new Intent(thisContext, MovieProfile.class);
+                        intent.putExtra("movieID", movieID);
+                        startActivity(intent); //go to movie's profile
+//                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
+//                        MovieDb thisMovie = movieGetter.getMovie();
+//                        String movieTitle = thisMovie.getTitle();
+//                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
                     }
                 });
+
 
             }
         };
@@ -275,36 +299,45 @@ public class OtherUserProfile extends ToolbarBaseActivity {
      */
     public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
 
-        private Button btnMovieTitle;
+        private TextView btnMovieTitle;
+        private TextView movieReview;
+        private ImageView ivPoster;
 
         public ProfileFeedHolder(View itemView) {
             super(itemView);
             View mView = itemView;
-            btnMovieTitle = (Button) itemView.findViewById(R.id.MovieTitle);
+            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
+            ivPoster = itemView.findViewById(R.id.ivPoster);
         }
 
         public void setTitle(String title) {
             btnMovieTitle.setText(title);
         }
 
-        public void setRating(String rating) {
-            TextView movieRating = (TextView) itemView.findViewById(R.id.MovieRating);
-            movieRating.setText(rating);
+        public void setRating(float rating) {
+            RatingBar movieRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
+            movieRating.setIsIndicator(true);
+            movieRating.setRating(rating);
         }
 
         public void setReview(String review) {
-            TextView movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
+            movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
             movieReview.setText(review);
         }
+
+        public TextView getReviewView() { return movieReview; }
 
         public void setUsername(String username) {
             TextView userName = (TextView) itemView.findViewById(R.id.Username);
             userName.setText(username);
         }
 
-        public Button getBtnMovieTitle() { return btnMovieTitle; }
+        public TextView getBtnMovieTitle() { return btnMovieTitle; }
+
+        public ImageView getIvPoster() {
+            return ivPoster;
+        }
 
     }
-
 
 }

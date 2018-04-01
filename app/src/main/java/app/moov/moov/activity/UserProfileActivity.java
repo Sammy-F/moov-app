@@ -27,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import app.moov.moov.archived.OldSearchActivity;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 
