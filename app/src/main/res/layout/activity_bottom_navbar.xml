@@ -7,11 +7,9 @@
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.FeedActivity"
+    tools:context=".activity.FeedActivity">
 
-    >
-
-    <android.support.design.internal.BottomNavigationItemView
+    <android.support.design.widget.BottomNavigationView
         android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -19,7 +17,8 @@
         android:visibility="visible"
         app:menu="@menu/menu_nav_bar">
 
-    </android.support.design.internal.BottomNavigationItemView>
+    </android.support.design.widget.BottomNavigationView>
+
 </android.support.design.widget.CoordinatorLayout>
 
 

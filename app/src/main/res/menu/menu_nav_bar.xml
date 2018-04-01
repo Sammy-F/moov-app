@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:icon="@drawable/listicon"
-        android:title="Home"
-        android:visible="true" />
+        android:icon="@drawable/homeicon"
+        android:title="Home" />
     <item
         android:icon="@drawable/searchicon"
-        android:title="Search"
-        android:visible="true" />
+        android:title="Search" />
     <item
         android:icon="@drawable/personicon"
-        android:title="Profile"
-        android:visible="true" />
+        android:title="Profile" />
 </menu>
