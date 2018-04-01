@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,11 @@ public class UserProfileActivity extends ToolbarBaseActivity {
 
     private Context thisContext;
 
+    private String userID;
+
+    private LinearLayout llFollowers;
+    private LinearLayout llFollowing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +76,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         final String uid = user.getUid();
+        userID = user.getUid();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
         userRef = database.getReference().child("Users").child(uid);
@@ -285,6 +292,30 @@ public class UserProfileActivity extends ToolbarBaseActivity {
 
         tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
         tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
+
+        llFollowers = (LinearLayout) findViewById(R.id.llFollowers);
+        llFollowing = (LinearLayout) findViewById(R.id.llFollowing);
+
+        llFollowers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserProfileActivity.this, FollowersFollowingActivity.class);
+                intent.putExtra("type", "followers");
+                intent.putExtra("uid", userID);
+                startActivity(intent);
+            }
+        });
+
+        llFollowing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserProfileActivity.this, FollowersFollowingActivity.class);
+                intent.putExtra("type", "following");
+                intent.putExtra("uid", userID);
+                startActivity(intent);
+            }
+        });
+
 
         profileFeedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
         profileFeedRecycler.setHasFixedSize(true);

@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import app.moov.moov.R;
 import app.moov.moov.model.Post;
 import app.moov.moov.model.User;
+import app.moov.moov.util.UserResultViewHolder;
 
 /**
  * Created by Lisa on 30/03/18.
@@ -72,18 +73,18 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
                         .setQuery(firebaseSearchQuery, User.class)
                         .build();
 
-        FirebaseRecyclerAdapter<User, UserSearchResultsActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserSearchResultsActivity.UsersViewHolder>(options) {
+        FirebaseRecyclerAdapter<User, UserResultViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserResultViewHolder>(options) {
 
             @Override
-            public UserSearchResultsActivity.UsersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public UserResultViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.cv_user_search_result, parent, false);
 
-                return new UserSearchResultsActivity.UsersViewHolder(view);
+                return new UserResultViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(final UserSearchResultsActivity.UsersViewHolder viewHolder, int position, User model) {
+            protected void onBindViewHolder(final UserResultViewHolder viewHolder, int position, User model) {
                 viewHolder.setUsername(model.getUsername()); //changed back
                 username = model.getlowername();
                 database.getReference().child("lusernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -130,26 +131,26 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    //VIEWHOLDER CLASS
-    public static class UsersViewHolder extends RecyclerView.ViewHolder {
-        View mView;
-        private String thisUid;
-        public UsersViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        public void setUsername(String userName) {
-            TextView tvUserName = (TextView) itemView.findViewById(R.id.tvUsername);
-            tvUserName.setText(userName);
-        }
-
-        public void setUID(String UID) {
-            this.thisUid = UID;
-        }
-
-        public String getUid() { return thisUid; }
-    }
+//    //VIEWHOLDER CLASS
+//    public static class UsersViewHolder extends RecyclerView.ViewHolder {
+//        View mView;
+//        private String thisUid;
+//        public UsersViewHolder(View itemView) {
+//            super(itemView);
+//            mView = itemView;
+//        }
+//
+//        public void setUsername(String userName) {
+//            TextView tvUserName = (TextView) itemView.findViewById(R.id.tvUsername);
+//            tvUserName.setText(userName);
+//        }
+//
+//        public void setUID(String UID) {
+//            this.thisUid = UID;
+//        }
+//
+//        public String getUid() { return thisUid; }
+//    }
 }
 
 
