@@ -32,8 +32,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.R;
 import app.moov.moov.util.GridSpacingItemDecoration;
 import app.moov.moov.util.PostableMovieResultAdapter;
