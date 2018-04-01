@@ -28,8 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import app.moov.moov.archived.FindUserActivity;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 import app.moov.moov.model.User;
