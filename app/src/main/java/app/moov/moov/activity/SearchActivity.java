@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import app.moov.moov.R;
 import app.moov.moov.fragment.TabSearchMovieFragment;
@@ -15,14 +14,14 @@ import app.moov.moov.util.SectionsPageAdapter;
  * Created by Lisa on 31/03/18.
  */
 
-public class SearchActivity extends AppCompatActivity{
+public class SearchActivity extends ToolbarBaseActivity{
     private SectionsPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search2);
+        setContentView(R.layout.activity_search_activity);
 
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);

@@ -124,5 +124,8 @@
     <string name="title_activity_toolbar_base">ToolbarBaseActivity</string>
     <string name="title_activity_followers_following">FollowersFollowingActivity</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
