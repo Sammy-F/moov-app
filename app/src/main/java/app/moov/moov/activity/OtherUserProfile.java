@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,9 @@ public class OtherUserProfile extends ToolbarBaseActivity {
 
     private Context thisContext;
 
+    private LinearLayout llFollowers;
+    private LinearLayout llFollowing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,30 @@ public class OtherUserProfile extends ToolbarBaseActivity {
 
         tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
         tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
+
+        llFollowers = (LinearLayout) findViewById(R.id.llFollowers);
+        llFollowing = (LinearLayout) findViewById(R.id.llFollowing);
+
+        llFollowers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OtherUserProfile.this, FollowersFollowingActivity.class);
+                intent.putExtra("type", "followers");
+                intent.putExtra("uid", thisUserID);
+                startActivity(intent);
+            }
+        });
+
+        llFollowing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OtherUserProfile.this, FollowersFollowingActivity.class);
+                intent.putExtra("type", "following");
+                intent.putExtra("uid", thisUserID);
+                startActivity(intent);
+            }
+        });
+
 
         userRecycler = (RecyclerView) findViewById(R.id.userRecycler);
         userRecycler.setHasFixedSize(true);
