@@ -12,10 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -144,53 +148,37 @@ public class UserProfileActivity extends ToolbarBaseActivity {
          * Create custom adapter using ProfileFeedHolder,
          * populate using data pulled from Firebase.
          */
-        FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, UserProfileActivity.ProfileFeedHolder>(options) {
+        FirebaseRecyclerAdapter <Post, ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, ProfileFeedHolder>(options) {
             @Override
-            public UserProfileActivity.ProfileFeedHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public ProfileFeedHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.cv_own_post, parent, false);
+                        .inflate(R.layout.new_self_cv_layout, parent, false);
 
-                return new UserProfileActivity.ProfileFeedHolder(view);
+                return new ProfileFeedHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(UserProfileActivity.ProfileFeedHolder viewHolder, int position, Post model) {
-                final Post model1 = model;
+            protected void onBindViewHolder(ProfileFeedHolder viewHolder, int position, Post model) {
+
+                final ProfileFeedHolder viewHolder1 = viewHolder;
+
+                final Post finalModel = model;
 
                 viewHolder.setTitle(model.getMovieTitle());
-                viewHolder.setRating(model.getMovieRating());
+                viewHolder.setRating(Float.parseFloat(model.getMovieRating()));
                 viewHolder.setReview(model.getMovieReview());
+                if (model.getMovieReview().equals("")) {
+                    viewHolder.getReviewView().setTextSize(0);
+                    viewHolder.getReviewView().setPadding(0, 0, 0, 0);
+                    viewHolder.getReviewView().setVisibility(View.GONE);
+                    viewHolder.getReviewView().setHeight(0);
+                }
                 viewHolder.setUsername(model.getUsername());
 
-                // Handles going to EditPostActivity when Edit Button is clicked
-
-                viewHolder.getEditBtn().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(UserProfileActivity.this, EditPostActivity.class);
-                        intent.putExtra("rating", model1.getMovieRating());
-                        intent.putExtra("review", model1.getMovieReview());
-                        intent.putExtra("movieTitle", model1.getMovieTitle());
-                        intent.putExtra("postID", model1.getPID());
-                        startActivity(intent);
-                    }
-                });
-
-                // Handles going to MoviePage when title is clicked
-
-                viewHolder.getMovieBtn().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        final int movieID = model1.getMovieID();
-                        // Temporary actions until movie page is finished.
-                    }
-                });
-
-                // Handles deletion when Delete Post button is clicked
                 viewHolder.getDelButton().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        final String pid = model1.getPID();
+                        final String pid = finalModel.getPID();
                         userRef.child("Feed").child(pid).removeValue();
                         userRef.child("Posts").child(pid).removeValue();
                         ref.child("Posts").child(pid).removeValue();
@@ -218,7 +206,6 @@ public class UserProfileActivity extends ToolbarBaseActivity {
 
                                 }
                             }
-
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
 
@@ -226,6 +213,44 @@ public class UserProfileActivity extends ToolbarBaseActivity {
                         });
                     }
                 });
+
+                viewHolder.getEditButton().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(UserProfileActivity.this, EditPostActivity.class);
+                        intent.putExtra("initRating", finalModel.getMovieRating());
+                        intent.putExtra("initReview", finalModel.getMovieReview());
+                        intent.putExtra("postID", finalModel.getPID());
+                        intent.putExtra("movieTitle", finalModel.getMovieTitle());
+                        startActivity(intent);
+                    }
+                });
+
+                String posterUrl = model.getPosterURL();
+                Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.ivPoster);
+
+//                try {
+//                    Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.getIvPoster());
+//                }  catch (NullPointerException e) {
+//                    Log.e("Image skipped", "Unable to get image for " + posterUrl);
+//                }
+
+                final int movieID = model.getMovieID();
+
+                viewHolder.getIvPoster().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) { //temporary button response
+                        Intent intent = new Intent(thisContext, MovieProfile.class);
+                        intent.putExtra("movieID", movieID);
+                        startActivity(intent); //go to movie's profile
+//                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
+//                        MovieDb thisMovie = movieGetter.getMovie();
+//                        String movieTitle = thisMovie.getTitle();
+//                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
         };
         FBRA.startListening();
@@ -240,42 +265,52 @@ public class UserProfileActivity extends ToolbarBaseActivity {
      */
     public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
 
-        Button deleteBtn;
-        Button movieBtn;
-        Button editBtn;
+        private TextView btnMovieTitle;
+        private TextView movieReview;
+        private ImageView ivPoster;
+        private Button editButton;
+        private Button delButton;
 
         public ProfileFeedHolder(View itemView) {
             super(itemView);
             View mView = itemView;
-            this.deleteBtn = (Button) mView.findViewById(R.id.delBtn);
-            this.movieBtn = (Button) mView.findViewById(R.id.MovieTitle);
-            this.editBtn = (Button) mView.findViewById(R.id.editBtn);
+            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
+            ivPoster = itemView.findViewById(R.id.ivPoster);
+            delButton = itemView.findViewById(R.id.btnDelete);
+            editButton = itemView.findViewById(R.id.btnEdit);
         }
 
         public void setTitle(String title) {
-            movieBtn.setText(title);
+            btnMovieTitle.setText(title);
         }
 
-        public void setRating(String rating) {
-            TextView movieRating = (TextView) itemView.findViewById(R.id.MovieRating);
-            movieRating.setText(rating);
+        public void setRating(float rating) {
+            RatingBar movieRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
+            movieRating.setIsIndicator(true);
+            movieRating.setRating(rating);
         }
 
         public void setReview(String review) {
-            TextView movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
+            movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
             movieReview.setText(review);
         }
+
+        public TextView getReviewView() { return movieReview; }
 
         public void setUsername(String username) {
             TextView userName = (TextView) itemView.findViewById(R.id.Username);
             userName.setText(username);
         }
 
-        public Button getDelButton() { return deleteBtn; }
+        public TextView getBtnMovieTitle() { return btnMovieTitle; }
 
-        public Button getMovieBtn() { return movieBtn; }
+        public ImageView getIvPoster() {
+            return ivPoster;
+        }
 
-        public Button getEditBtn() { return editBtn; }
+        public Button getDelButton() { return delButton; }
+
+        public Button getEditButton() { return editButton; }
 
     }
 
