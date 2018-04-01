@@ -27,6 +27,7 @@ public class ReportIssueActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_report_issue);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         setUIViews();
 

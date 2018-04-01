@@ -69,6 +69,7 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         setUIViews();
     }

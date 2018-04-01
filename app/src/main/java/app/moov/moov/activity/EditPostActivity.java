@@ -60,6 +60,7 @@ public class EditPostActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_edit_post);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
 

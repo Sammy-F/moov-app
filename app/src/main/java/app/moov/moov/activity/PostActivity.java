@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -59,6 +60,9 @@ public class PostActivity extends ToolbarBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         movieID = getIntent().getIntExtra("movieID", 0); //defaults movieID to 0 if not set
         movieTitle = getIntent().getStringExtra("movieTitle").trim(); //get standardized title from search

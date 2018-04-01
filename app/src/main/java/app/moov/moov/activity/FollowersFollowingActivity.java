@@ -49,6 +49,7 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_followers_following);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         userID = getIntent().getStringExtra("uid");
         resultsType = getIntent().getStringExtra("type");

@@ -23,12 +23,12 @@
         android:title="profileIcon"
         />
 
-    <item
-        android:id="@+id/logoutIcon"
-        app:showAsAction="always"
-        android:icon="@drawable/goodbyeicon"
-        android:title="logoutIcon"
-        />
+    <!--<item-->
+        <!--android:id="@+id/logoutIcon"-->
+        <!--app:showAsAction="always"-->
+        <!--android:icon="@drawable/goodbyeicon"-->
+        <!--android:title="logoutIcon"-->
+        <!--/>-->
 
     <item
         android:id="@+id/settingsIcon"

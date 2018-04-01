@@ -50,6 +50,7 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_user_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         database = FirebaseDatabase.getInstance();
         usernamesRef = database.getReference().child("Users");
@@ -131,26 +132,6 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-//    //VIEWHOLDER CLASS
-//    public static class UsersViewHolder extends RecyclerView.ViewHolder {
-//        View mView;
-//        private String thisUid;
-//        public UsersViewHolder(View itemView) {
-//            super(itemView);
-//            mView = itemView;
-//        }
-//
-//        public void setUsername(String userName) {
-//            TextView tvUserName = (TextView) itemView.findViewById(R.id.tvUsername);
-//            tvUserName.setText(userName);
-//        }
-//
-//        public void setUID(String UID) {
-//            this.thisUid = UID;
-//        }
-//
-//        public String getUid() { return thisUid; }
-//    }
 }
 
 

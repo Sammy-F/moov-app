@@ -65,6 +65,7 @@ public class MovieProfile extends ToolbarBaseActivity {
         setContentView(R.layout.activity_movie_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         thisContext = this;
 
@@ -194,34 +195,6 @@ public class MovieProfile extends ToolbarBaseActivity {
 //            }
 //        });
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id==R.id.addIcon) {
-            Intent intent = new Intent(MovieProfile.this,PostActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.logoutIcon) {
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(MovieProfile.this, MainActivity.class));
-        }
-
-        if (id==R.id.profileIcon) {
-            Intent intent = new Intent(MovieProfile.this, UserProfileActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.searchIcon) {
-            Intent intent = new Intent(MovieProfile.this,FindUserActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

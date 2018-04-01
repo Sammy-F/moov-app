@@ -39,6 +39,7 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_change_password);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();

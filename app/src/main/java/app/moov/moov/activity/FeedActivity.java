@@ -59,6 +59,7 @@ public class FeedActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_feed2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         thisContext = this;
 

@@ -289,6 +289,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
         tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
@@ -325,41 +326,6 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         orderedManager.setStackFromEnd(true);
 
         profileFeedRecycler.setLayoutManager(orderedManager);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_feed_page, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id==R.id.addIcon) {
-            Intent intent = new Intent(UserProfileActivity.this,ChooseMovieActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.logoutIcon) {
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(UserProfileActivity.this, MainActivity.class));
-        }
-
-        if (id==R.id.searchIcon) {
-            Intent intent = new Intent(UserProfileActivity.this,OldSearchActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.profileIcon) {
-            //save time by not creating a new intent just to return to the same page
-//            Intent intent = new Intent(UserProfileActivity.this,UserProfileActivity.class);
-//            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }

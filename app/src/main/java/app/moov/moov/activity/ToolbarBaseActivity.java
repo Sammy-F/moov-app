@@ -21,6 +21,9 @@ public class ToolbarBaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toolbar_base);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    }
+
+    public void toolBarSetup(Toolbar toolbar) {
         if (Build.VERSION.SDK_INT > 21) {
             toolbar.setElevation(1);
         }
@@ -37,12 +40,12 @@ public class ToolbarBaseActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if (id==R.id.logoutIcon) {
-            signOutAuth = FirebaseAuth.getInstance();
-            signOutAuth.signOut();
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
-        }
+//        if (id==R.id.logoutIcon) {
+//            signOutAuth = FirebaseAuth.getInstance();
+//            signOutAuth.signOut();
+//            finish();
+//            startActivity(new Intent(this, MainActivity.class));
+//        }
 
         if (id==R.id.profileIcon) {
             Intent intent = new Intent(this, UserProfileActivity.class);

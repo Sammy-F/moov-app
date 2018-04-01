@@ -33,6 +33,7 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_user_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         setUIViews();
 

@@ -30,6 +30,7 @@ public class ChooseMovieActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_choose_movie);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         setUIViews();
     }

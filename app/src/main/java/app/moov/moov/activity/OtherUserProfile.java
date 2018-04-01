@@ -63,6 +63,7 @@ public class OtherUserProfile extends ToolbarBaseActivity {
         setContentView(R.layout.activity_other_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
         thisContext = this;
 
@@ -217,34 +218,6 @@ public class OtherUserProfile extends ToolbarBaseActivity {
             }
         });
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id==R.id.addIcon) {
-            Intent intent = new Intent(OtherUserProfile.this,ChooseMovieActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.logoutIcon) {
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(OtherUserProfile.this, MainActivity.class));
-        }
-
-        if (id==R.id.profileIcon) {
-            Intent intent = new Intent(OtherUserProfile.this, UserProfileActivity.class);
-            startActivity(intent);
-        }
-
-        if (id==R.id.searchIcon) {
-            Intent intent = new Intent(OtherUserProfile.this,FindUserActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
