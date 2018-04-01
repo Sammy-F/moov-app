@@ -4,10 +4,9 @@
 
     <item
         android:id="@+id/addIcon"
-        app:showAsAction="always"
         android:icon="@drawable/addicon"
         android:title="addIcon"
-        />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/searchIcon"
