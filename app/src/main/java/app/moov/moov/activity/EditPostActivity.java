@@ -2,13 +2,13 @@ package app.moov.moov.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +31,7 @@ import app.moov.moov.R;
 
 public class EditPostActivity extends ToolbarBaseActivity {
 
-    private EditText etRating;
+    private RatingBar rbRating;
     private EditText etReview;
     private TextView tvMovieTitle;
     private Button btnShare;
@@ -86,12 +86,11 @@ public class EditPostActivity extends ToolbarBaseActivity {
 
     private void setUIViews() {
 
-        etRating = (EditText) findViewById(R.id.etRating);
+        rbRating = (RatingBar) findViewById(R.id.rbRating);
         etReview = (EditText) findViewById(R.id.etReview);
         tvMovieTitle = (TextView) findViewById(R.id.tvMovieTitle);
         btnShare = (Button) findViewById(R.id.btnShare);
 
-        etRating.setText(initRating);
         etReview.setText(initReview);
         tvMovieTitle.setText(movieTitle);
 
@@ -107,12 +106,7 @@ public class EditPostActivity extends ToolbarBaseActivity {
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etRating.getText().toString().length() > 0 && etReview.getText().toString().length() > 0) {
-                    editPost();
-                }
-                else {
-                    Toast.makeText(EditPostActivity.this,"Please input a review and rating!", Toast.LENGTH_LONG).show();
-                }
+                editPost();
             }
         });
 
@@ -123,7 +117,7 @@ public class EditPostActivity extends ToolbarBaseActivity {
      */
     private void editPost() {
         final String newReview = etReview.getText().toString().trim();
-        final String newRating = etRating.getText().toString().trim();
+        final String newRating = Integer.toString((int) rbRating.getRating());
 
         //update the Post in the main Posts node
         postsRef.child(postID).child("movieRating").setValue(newRating);
