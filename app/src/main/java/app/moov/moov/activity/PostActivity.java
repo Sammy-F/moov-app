@@ -129,7 +129,7 @@ public class PostActivity extends ToolbarBaseActivity {
 
                         newPostRef = postsRef.push();
 
-                        final Post newPost = new Post(username, user, movieTitle, stringRating, review, timePosted, newPostRef.getKey(), movieID, posterURL); //TODO: Update w/ actual movie ID
+                        final Post newPost = new Post(username, user, movieTitle, stringRating, review, timePosted * -1, newPostRef.getKey(), movieID, posterURL); //TODO: Update w/ actual movie ID
 
                         newPostRef.setValue(newPost);
 
@@ -137,12 +137,12 @@ public class PostActivity extends ToolbarBaseActivity {
 //                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
 //                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);
                         usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPostRef.getKey());
-                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).child("timestamp").setValue(timePosted);
+                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).child("timestamp").setValue(timePosted * -1);
                         usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPostRef.getKey());
-                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).child("timestamp").setValue(timePosted);
+                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).child("timestamp").setValue(timePosted * -1);
 
                         moviePostsRef.child(newPostRef.getKey()).setValue(newPostRef.getKey());
-                        moviePostsRef.child(newPostRef.getKey()).child("timestamp").setValue(timePosted);
+                        moviePostsRef.child(newPostRef.getKey()).child("timestamp").setValue(timePosted * -1);
 
                         /**
                          * Store the new post in all user's feeds.
@@ -154,7 +154,7 @@ public class PostActivity extends ToolbarBaseActivity {
 
                                     String UID = postSnapshot.getKey();
                                     usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPostRef.getKey());
-                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).child("timestamp").setValue(timePosted);
+                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).child("timestamp").setValue(timePosted * -1);
 //                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPost);
                                 }
                             }

@@ -10,6 +10,7 @@ package app.moov.moov.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -66,26 +67,11 @@ public class FeedActivity extends ToolbarBaseActivity {
 
     }
 
-    /**
-     * Initialize layout objects, called in onCreate
-     */
-    private void setUIViews() {
-        feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
-        feedRecycler.setHasFixedSize(true);
-
-        orderedManager = new LinearLayoutManager(this);
-        orderedManager.setReverseLayout(true);
-        orderedManager.setStackFromEnd(true);
-
-        feedRecycler.setLayoutManager(orderedManager);
-
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
 
-        Query keysQuery = postsRef;
+        Query keysQuery = postsRef.orderByChild("timestamp");
 
         FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
                 .setIndexedQuery(keysQuery, baseRef.child("Posts"), Post.class)
@@ -147,6 +133,21 @@ public class FeedActivity extends ToolbarBaseActivity {
         };
         FBRA.startListening();
         feedRecycler.setAdapter(FBRA);
+    }
+
+    /**
+     * Initialize layout objects, called in onCreate
+     */
+    private void setUIViews() {
+        feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
+        feedRecycler.setHasFixedSize(true);
+
+        orderedManager = new LinearLayoutManager(this);
+//        orderedManager.setReverseLayout(true);
+//        orderedManager.setStackFromEnd(true);
+
+        feedRecycler.setLayoutManager(orderedManager);
+
     }
 
     /**

@@ -116,8 +116,8 @@ public class OtherUserProfile extends ToolbarBaseActivity {
         userRecycler.setHasFixedSize(true);
 
         orderedManager = new LinearLayoutManager(this);
-        orderedManager.setReverseLayout(true);
-        orderedManager.setStackFromEnd(true);
+//        orderedManager.setReverseLayout(true);
+//        orderedManager.setStackFromEnd(true);
 
         userRecycler.setLayoutManager(orderedManager);
 
