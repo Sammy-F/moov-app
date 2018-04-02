@@ -3,6 +3,7 @@ package app.moov.moov.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,9 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
+
+        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        setUpNavBar(navBar);
 
         setUIViews();
 

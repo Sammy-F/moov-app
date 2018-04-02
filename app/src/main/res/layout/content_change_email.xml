@@ -8,6 +8,7 @@
     tools:context="app.moov.moov.activity.ChangeEmailActivity"
     tools:showIn="@layout/activity_change_email"
     android:clickable="true"
+    android:layout_marginBottom="56dp"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:id="@+id/constraintLayout">
