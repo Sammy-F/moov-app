@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
+import app.moov.moov.util.FirebaseSwitchingAdapter;
 
 /**
  * UserProfileActivity displays the user's profile
@@ -148,115 +149,8 @@ public class UserProfileActivity extends ToolbarBaseActivity {
                 .setIndexedQuery(query, ref.child("Posts"), Post.class)
                 .build();
 
-        /**
-         * Create custom adapter using ProfileFeedHolder,
-         * populate using data pulled from Firebase.
-         */
-        FirebaseRecyclerAdapter <Post, ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, ProfileFeedHolder>(options) {
-            @Override
-            public ProfileFeedHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.new_self_cv_layout, parent, false);
+        FirebaseSwitchingAdapter FBRA = new FirebaseSwitchingAdapter(options, thisContext);
 
-                return new ProfileFeedHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(ProfileFeedHolder viewHolder, int position, Post model) {
-
-                final ProfileFeedHolder viewHolder1 = viewHolder;
-
-                final Post finalModel = model;
-
-                viewHolder.setTitle(model.getMovieTitle());
-                viewHolder.setRating(Float.parseFloat(model.getMovieRating()));
-                viewHolder.setReview(model.getMovieReview());
-                if (model.getMovieReview().equals("")) {
-                    viewHolder.getReviewView().setTextSize(0);
-                    viewHolder.getReviewView().setPadding(0, 0, 0, 0);
-                    viewHolder.getReviewView().setVisibility(View.GONE);
-                    viewHolder.getReviewView().setHeight(0);
-                }
-                viewHolder.setUsername(model.getUsername());
-
-                viewHolder.getDelButton().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        final String pid = finalModel.getPID();
-                        userRef.child("Feed").child(pid).removeValue();
-                        userRef.child("Posts").child(pid).removeValue();
-                        ref.child("Posts").child(pid).removeValue();
-
-                        // Remove post from follower feeds
-                        userRef.child("Followers").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot follower : dataSnapshot.getChildren()) {
-                                    String UID = follower.getKey();
-
-                                    allUsers.child(UID).child("Feed").child(pid).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            if (dataSnapshot.exists()) {
-                                                dataSnapshot.getRef().removeValue();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-
-                                        }
-                                    });
-
-                                }
-                            }
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-                });
-
-                viewHolder.getEditButton().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(UserProfileActivity.this, EditPostActivity.class);
-                        intent.putExtra("initRating", finalModel.getMovieRating());
-                        intent.putExtra("initReview", finalModel.getMovieReview());
-                        intent.putExtra("postID", finalModel.getPID());
-                        intent.putExtra("movieTitle", finalModel.getMovieTitle());
-                        startActivity(intent);
-                    }
-                });
-
-                String posterUrl = model.getPosterURL();
-                Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.ivPoster);
-
-//                try {
-//                    Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.getIvPoster());
-//                }  catch (NullPointerException e) {
-//                    Log.e("Image skipped", "Unable to get image for " + posterUrl);
-//                }
-
-                final int movieID = model.getMovieID();
-
-                viewHolder.getIvPoster().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfile.class);
-                        intent.putExtra("movieID", movieID);
-                        startActivity(intent); //go to movie's profile
-//                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
-//                        MovieDb thisMovie = movieGetter.getMovie();
-//                        String movieTitle = thisMovie.getTitle();
-//                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-            }
-        };
         FBRA.startListening();
         profileFeedRecycler.setAdapter(FBRA);
 
