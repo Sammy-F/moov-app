@@ -35,6 +35,7 @@ import com.google.firebase.database.Query;
 
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
+import app.moov.moov.util.FirebaseSwitchingAdapter;
 
 public class FeedActivity extends ToolbarBaseActivity {
 
@@ -80,61 +81,7 @@ public class FeedActivity extends ToolbarBaseActivity {
                 .setIndexedQuery(keysQuery, baseRef.child("Posts"), Post.class)
                 .build();
 
-        // Creates new Adapter to user with the RecyclerView using
-        // our internal FeedViewHolder.
-        FirebaseRecyclerAdapter <Post, FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedViewHolder>(options) {
-
-            @Override
-            public FeedViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.new_cv_layout, parent, false);
-
-                return new FeedViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(FeedViewHolder viewHolder, int position, Post model) {
-
-                final FeedViewHolder viewHolder1 = viewHolder;
-
-                viewHolder.setTitle(model.getMovieTitle());
-                viewHolder.setRating(Float.parseFloat(model.getMovieRating()));
-                viewHolder.setReview(model.getMovieReview());
-                if (model.getMovieReview().equals("")) {
-                    viewHolder.getReviewView().setTextSize(0);
-                    viewHolder.getReviewView().setPadding(0, 0, 0, 0);
-                    viewHolder.getReviewView().setVisibility(View.GONE);
-                    viewHolder.getReviewView().setHeight(0);
-                }
-                viewHolder.setUsername(model.getUsername());
-
-                String posterUrl = model.getPosterURL();
-                Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.ivPoster);
-
-//                try {
-//                    Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.getIvPoster());
-//                }  catch (NullPointerException e) {
-//                    Log.e("Image skipped", "Unable to get image for " + posterUrl);
-//                }
-
-                final int movieID = model.getMovieID();
-
-                viewHolder.getIvPoster().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfile.class);
-                        intent.putExtra("movieID", movieID);
-                        startActivity(intent); //go to movie's profile
-//                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
-//                        MovieDb thisMovie = movieGetter.getMovie();
-//                        String movieTitle = thisMovie.getTitle();
-//                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-            }
-        };
+        FirebaseSwitchingAdapter FBRA = new FirebaseSwitchingAdapter(options, thisContext);
         FBRA.startListening();
         feedRecycler.setAdapter(FBRA);
     }
@@ -153,69 +100,4 @@ public class FeedActivity extends ToolbarBaseActivity {
         feedRecycler.setLayoutManager(orderedManager);
 
     }
-
-    /**
-     * Internal ViewHolder class used
-     * for the Feed's RecyclerView
-     */
-    public static class FeedViewHolder extends RecyclerView.ViewHolder{
-
-        private TextView btnMovieTitle;
-        private TextView movieReview;
-        private ImageView ivPoster;
-
-        public FeedViewHolder(View itemView) {
-            super(itemView);
-            View mView = itemView;
-            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
-        }
-
-        public void setTitle(String title) {
-            btnMovieTitle.setText(title);
-        }
-
-        public void setRating(float rating) {
-            RatingBar movieRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
-            movieRating.setIsIndicator(true);
-            movieRating.setRating(rating);
-        }
-
-        public void setReview(String review) {
-            movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
-            movieReview.setText(review);
-        }
-
-        public TextView getReviewView() { return movieReview; }
-
-        public void setUsername(String username) {
-            TextView userName = (TextView) itemView.findViewById(R.id.Username);
-            userName.setText(username);
-        }
-
-        public TextView getBtnMovieTitle() { return btnMovieTitle; }
-
-        public ImageView getIvPoster() {
-            return ivPoster;
-        }
-
-    }
-
-
-//    /**
-//     * Internal ViewHolder class used
-//     * for the Feed's RecyclerView
-//     */
-//    public class rvHolder extends RecyclerView.ViewHolder {
-//
-//        public rvHolder(View itemView) {
-//            super(itemView);
-//            View mView = itemView;
-//        }
-//
-//        public void setTitle(String movieTitle) {
-//            TextView thisMovie = (TextView) itemView.findViewById(R.id.MovieTitle);
-//        }
-//
-//    }
 }
