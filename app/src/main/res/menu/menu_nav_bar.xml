@@ -5,13 +5,17 @@
     <item
         android:id="@+id/navBarHomeIcon"
         android:icon="@drawable/homeicon"
-        android:title="Home" />
+        android:state_checked="false"
+        android:title="Home"
+        android:visible="true" />
     <item
         android:id="@+id/navBarSearchIcon"
         android:icon="@drawable/searchicon"
-        android:title="Search" />
+        android:title="Search"
+        android:visible="true" />
     <item
         android:id="@+id/navBarPersonIcon"
         android:icon="@drawable/personicon"
-        android:title="Profile" />
+        android:title="Profile"
+        android:visible="true" />
 </menu>
