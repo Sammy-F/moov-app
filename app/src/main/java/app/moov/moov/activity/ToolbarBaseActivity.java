@@ -42,15 +42,15 @@ public class ToolbarBaseActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if (id==R.id.profileIcon) {
-            Intent intent = new Intent(this, UserProfileActivity.class);
-            startActivity(intent);
-        }
+//        if (id==R.id.profileIcon) {
+//            Intent intent = new Intent(this, UserProfileActivity.class);
+//            startActivity(intent);
+//        }
 
-        if (id==R.id.searchIcon) {
-            Intent intent = new Intent(this,SearchActivity.class);
-            startActivity(intent);
-        }
+//        if (id==R.id.searchIcon) {
+//            Intent intent = new Intent(this,SearchActivity.class);
+//            startActivity(intent);
+//        }
 
         if (id==R.id.settingsIcon) {
             Intent intent = new Intent(this,UserSettingsActivity.class);
