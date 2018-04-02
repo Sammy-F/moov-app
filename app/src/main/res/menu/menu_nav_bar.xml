@@ -3,12 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/navBarHomeIcon"
         android:icon="@drawable/homeicon"
         android:title="Home" />
     <item
+        android:id="@+id/navBarSearchIcon"
         android:icon="@drawable/searchicon"
         android:title="Search" />
     <item
+        android:id="@+id/navBarPersonIcon"
         android:icon="@drawable/personicon"
         android:title="Profile" />
 </menu>

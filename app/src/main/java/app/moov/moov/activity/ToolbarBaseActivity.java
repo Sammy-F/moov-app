@@ -3,6 +3,8 @@ package app.moov.moov.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -40,13 +42,6 @@ public class ToolbarBaseActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-//        if (id==R.id.logoutIcon) {
-//            signOutAuth = FirebaseAuth.getInstance();
-//            signOutAuth.signOut();
-//            finish();
-//            startActivity(new Intent(this, MainActivity.class));
-//        }
-
         if (id==R.id.profileIcon) {
             Intent intent = new Intent(this, UserProfileActivity.class);
             startActivity(intent);
@@ -74,6 +69,31 @@ public class ToolbarBaseActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_feed_page, menu);
         return true;
+    }
+
+    public void setUpNavBar(BottomNavigationView navBar) {
+        navBar.setOnNavigationItemSelectedListener(                new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.navBarSearchIcon) {
+                    Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                    startActivity(intent);
+                }
+
+                if (item.getItemId() == R.id.navBarHomeIcon) {
+                    Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
+                    startActivity(intent);
+                }
+
+                if (item.getItemId() == R.id.navBarPersonIcon) {
+                    Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                    startActivity(intent);
+                }
+
+                return true;
+            }
+        });
+
     }
 
 }
