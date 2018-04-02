@@ -39,15 +39,13 @@ public class FeedActivity extends ToolbarBaseActivity {
     private DatabaseReference baseRef;
     private DatabaseReference postsRef;
     private FirebaseAuth firebaseAuth;
-
     private LinearLayoutManager orderedManager;
-
     private String uid;
-
     private Context thisContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -56,15 +54,13 @@ public class FeedActivity extends ToolbarBaseActivity {
 
         thisContext = this;
 
-        setUIViews();
-
         firebaseAuth = FirebaseAuth.getInstance();
         uid = firebaseAuth.getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
         baseRef = database.getReference();
-//        postsRef = baseRef.child("Posts");
         postsRef = baseRef.child("Users").child(uid).child("Feed");
 
+        setUIViews();
     }
 
     @Override
@@ -80,6 +76,7 @@ public class FeedActivity extends ToolbarBaseActivity {
         // Creates new Adapter to user with the RecyclerView using
         // our internal FeedViewHolder.
         FirebaseRecyclerAdapter <Post, FeedViewHolder> FBRA = new FirebaseRecyclerAdapter<Post, FeedViewHolder>(options) {
+
             @Override
             public FeedViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
                 View view = LayoutInflater.from(parent.getContext())
