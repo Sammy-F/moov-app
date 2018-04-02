@@ -27,7 +27,7 @@
             app:layout_constraintHorizontal_bias="0.963"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="50.0" />
 
         <TextView
             android:id="@+id/MovieReview"
@@ -76,7 +76,8 @@
             app:layout_constraintHorizontal_bias="0.187"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Username"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintWidth_max="220dp"/>
 
         <RatingBar
             android:id="@+id/ratingBar"
