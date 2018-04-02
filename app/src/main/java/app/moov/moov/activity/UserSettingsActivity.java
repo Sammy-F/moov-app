@@ -77,8 +77,10 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
             @Override
             public void onClick(View view) {
                 firebaseAuth.signOut();
-                finish();
-                startActivity(new Intent(UserSettingsActivity.this, MainActivity.class));
+                Intent intent = new Intent(UserSettingsActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                killActivity();
             }
 
         });
@@ -92,6 +94,10 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
             }
         });
 
+    }
+
+    private void killActivity() {
+        this.finish();
     }
 
     private void btnClick(Class destination) {
