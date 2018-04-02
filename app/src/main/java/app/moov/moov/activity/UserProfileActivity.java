@@ -3,6 +3,7 @@ package app.moov.moov.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -72,6 +73,9 @@ public class UserProfileActivity extends ToolbarBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        setUpNavBar(navBar);
 
         thisContext = this;
 

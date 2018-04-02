@@ -22,4 +22,15 @@
 
     <include layout="@layout/content_user_profile" />
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:visibility="visible"
+        app:menu="@menu/menu_nav_bar">
+
+    </android.support.design.widget.BottomNavigationView>
+
+
 </android.support.design.widget.CoordinatorLayout>
