@@ -124,28 +124,28 @@ public class EditPostActivity extends ToolbarBaseActivity {
         postsRef.child(postID).child("movieReview").setValue(newReview);
 
         //update the Post in the user's Posts
-        userRef.child("Posts").child(postID).child("movieRating").setValue(newRating);
-        userRef.child("Posts").child(postID).child("movieReview").setValue(newReview);
+//        userRef.child("Posts").child(postID).child("movieRating").setValue(newRating);
+//        userRef.child("Posts").child(postID).child("movieReview").setValue(newReview);
 
         //update the Post in the user's Feed
-        userRef.child("Feed").child(postID).child("movieRating").setValue(newRating);
-        userRef.child("Feed").child(postID).child("movieReview").setValue(newReview);
+//        userRef.child("Feed").child(postID).child("movieRating").setValue(newRating);
+//        userRef.child("Feed").child(postID).child("movieReview").setValue(newReview);
 
         //update the Post in the Feed of all of the user's Followers
-        followersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot followerSnapshot : dataSnapshot.getChildren()) {
-                    String followerUID = followerSnapshot.getKey();
-                    usersRef.child(followerUID).child("Feed").child(postID).child("movieRating").setValue(newRating);
-                    usersRef.child(followerUID).child("Feed").child(postID).child("movieReview").setValue(newReview);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        followersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot followerSnapshot : dataSnapshot.getChildren()) {
+//                    String followerUID = followerSnapshot.getKey();
+//                    usersRef.child(followerUID).child("Feed").child(postID).child("movieRating").setValue(newRating);
+//                    usersRef.child(followerUID).child("Feed").child(postID).child("movieReview").setValue(newReview);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         //Return the user to the feed
         Intent intent = new Intent(EditPostActivity.this, FeedActivity.class);

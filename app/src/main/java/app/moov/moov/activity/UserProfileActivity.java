@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 import app.moov.moov.util.FirebaseSwitchingAdapter;
+import app.moov.moov.util.SelfProfileSwitchingAdapter;
 
 /**
  * UserProfileActivity displays the user's profile
@@ -149,7 +150,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
                 .setIndexedQuery(query, ref.child("Posts"), Post.class)
                 .build();
 
-        FirebaseSwitchingAdapter FBRA = new FirebaseSwitchingAdapter(options, thisContext);
+        SelfProfileSwitchingAdapter FBRA = new SelfProfileSwitchingAdapter(options, thisContext);
 
         FBRA.startListening();
         profileFeedRecycler.setAdapter(FBRA);

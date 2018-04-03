@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 import app.moov.moov.model.User;
+import app.moov.moov.util.FirebaseSwitchingAdapter;
 
 public class OtherUserProfile extends ToolbarBaseActivity {
 
@@ -237,61 +238,8 @@ public class OtherUserProfile extends ToolbarBaseActivity {
                         .setIndexedQuery(query, ref.child("Posts"), Post.class)
                         .build();
 
-        /**
-         * Internal Adapter for use with the RecyclerView
-         */
-        FirebaseRecyclerAdapter <Post, ProfileFeedHolder> FBRA = new FirebaseRecyclerAdapter<Post, ProfileFeedHolder>(options) {
-            @Override
-            public ProfileFeedHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.new_cv_layout, parent, false);
+            FirebaseSwitchingAdapter FBRA = new FirebaseSwitchingAdapter(options, thisContext);
 
-                return new ProfileFeedHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(ProfileFeedHolder viewHolder, int position, Post model) {
-
-                final ProfileFeedHolder viewHolder1 = viewHolder;
-
-                viewHolder.setTitle(model.getMovieTitle());
-                viewHolder.setRating(Float.parseFloat(model.getMovieRating()));
-                viewHolder.setReview(model.getMovieReview());
-                if (model.getMovieReview().equals("")) {
-                    viewHolder.getReviewView().setTextSize(0);
-                    viewHolder.getReviewView().setPadding(0, 0, 0, 0);
-                    viewHolder.getReviewView().setVisibility(View.GONE);
-                    viewHolder.getReviewView().setHeight(0);
-                }
-                viewHolder.setUsername(model.getUsername());
-
-                String posterUrl = model.getPosterURL();
-                Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.ivPoster);
-
-//                try {
-//                    Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder.getIvPoster());
-//                }  catch (NullPointerException e) {
-//                    Log.e("Image skipped", "Unable to get image for " + posterUrl);
-//                }
-
-                final int movieID = model.getMovieID();
-
-                viewHolder.getIvPoster().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfile.class);
-                        intent.putExtra("movieID", movieID);
-                        startActivity(intent); //go to movie's profile
-//                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
-//                        MovieDb thisMovie = movieGetter.getMovie();
-//                        String movieTitle = thisMovie.getTitle();
-//                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-            }
-        };
         FBRA.startListening();
         userRecycler.setAdapter(FBRA);
     }
