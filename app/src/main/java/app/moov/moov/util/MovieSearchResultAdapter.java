@@ -43,7 +43,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater = LayoutInflater.from(c);
-        view = mInflater.inflate(R.layout.movie_search_results2_layout, parent, false);
+        view = mInflater.inflate(R.layout.movie_results_layout, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -53,9 +53,11 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         try {
             String title = (String) movieResults.get(position).get("title");
             final int id = (Integer) movieResults.get(position).get("id");
+            final String releaseDate = (String) movieResults.get(position).get("release_date");
 
             holder.setTitle(title);
             holder.setID(id);
+            holder.setReleaseYear(releaseDate);
 
             String posterUrl = "https://image.tmdb.org/t/p/w185" + movieResults.get(position).get("poster_path");
             Glide.with(c).asBitmap().load(posterUrl).into(holder.ivMoviePoster);
@@ -86,6 +88,8 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         private int movieID;
         private View itemView;
         private String movieTitle;
+        private String releaseDate;
+        private String releaseYear;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +103,14 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
             TextView movieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
             movieTitle.setText(title);
         }
+
+        public void setReleaseYear(String releaseDate) {
+            this.releaseDate = releaseDate;
+            releaseYear = releaseDate.substring(0, 4);
+            TextView tvReleaseYear = (TextView) itemView.findViewById(R.id.tvReleaseYear);
+            tvReleaseYear.setText(releaseYear);
+        }
+
 
         public void setID(int movieID) {
             this.movieID = movieID;
