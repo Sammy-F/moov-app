@@ -8,6 +8,7 @@
     tools:context="app.moov.moov.activity.ReportIssueActivity"
     tools:showIn="@layout/activity_report_issue"
     android:clickable="true"
+    android:layout_marginBottom="56dp"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:id="@+id/constraintLayout"
