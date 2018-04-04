@@ -52,6 +52,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
     private TextView tvNumFollowers;
 
     private String username;
+    private String userID;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
@@ -64,8 +65,6 @@ public class UserProfileActivity extends ToolbarBaseActivity {
     private LinearLayoutManager orderedManager;
 
     private Context thisContext;
-
-    private String userID;
 
     private LinearLayout llFollowers;
     private LinearLayout llFollowing;
@@ -117,7 +116,6 @@ public class UserProfileActivity extends ToolbarBaseActivity {
 
             }
         });
-
 
         /**
          * Inside gets current user's username

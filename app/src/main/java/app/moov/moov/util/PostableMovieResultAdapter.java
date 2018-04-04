@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -53,9 +54,12 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
         try {
             final String title = (String) movieResults.get(position).get("title");
             final int id = (Integer) movieResults.get(position).get("id");
+            final Integer releaseDeate = (Integer) movieResults.get(position).get("primary_release_year");
+
 
             holder.setTitle(title);
             holder.setID(id);
+
 
             final String posterUrl = "https://image.tmdb.org/t/p/w185" + movieResults.get(position).get("poster_path");
 
@@ -76,9 +80,6 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
             Toast.makeText(c, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-//        holder.tvMovieTitle.setText(movieResults.get(position).getTitle());
-//        holder.ivMoviePoster.setImageResource(movieResults.get(position).getImages(ArtworkType.POSTER));
-
     }
 
     @Override
@@ -89,9 +90,11 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvMovieTitle;
         ImageView ivMoviePoster;
+        TextView tvReleaseYear;
         private int movieID;
         private View itemView;
         private String movieTitle;
+        private Integer releaseYear;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -106,6 +109,12 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
             movieTitle.setText(title);
         }
 
+        public void setReleaseYear(Integer year) {
+            this.releaseYear = year;
+            TextView tvReleaseYear = (TextView) itemView.findViewById(R.id.tvReleaseYear);
+            tvReleaseYear.setText(year);
+        }
+
         public void setID(int movieID) {
             this.movieID = movieID;
         }
@@ -117,7 +126,6 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
         public void setMoviePoster(Bitmap bitmap) {
             ivMoviePoster.setImageBitmap(bitmap);
         }
-
 
     }
 }

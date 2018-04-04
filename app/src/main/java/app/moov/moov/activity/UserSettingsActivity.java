@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import app.moov.moov.R;
 
+/**
+ *
+ */
 public class UserSettingsActivity extends ToolbarBaseActivity {
 
     Button btnChangePass;
@@ -26,18 +29,19 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
     Button btnLogOut;
     private FirebaseAuth firebaseAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_user_settings);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         setUpNavBar(navBar);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         setUIViews();
 

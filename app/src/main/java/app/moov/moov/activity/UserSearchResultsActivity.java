@@ -46,7 +46,9 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_user_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,17 +58,16 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         usernamesRef = database.getReference().child("Users");
         firebaseAuth = FirebaseAuth.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
-
         searchString = getIntent().getStringExtra("searchString");
 
         setUIViews(); // Initialize layout object variables
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        //Firebase Query using the string that was entered
         Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchString).endAt(searchString + "\uf8ff");
 
         FirebaseRecyclerOptions<User> options =
@@ -88,6 +89,8 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
             protected void onBindViewHolder(final UserResultViewHolder viewHolder, int position, User model) {
                 viewHolder.setUsername(model.getUsername()); //changed back
                 username = model.getlowername();
+
+                //Retrieve the user information from Firebase
                 database.getReference().child("lusernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
@@ -104,6 +107,7 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         //Clicked
                         if (viewHolder.getUid().equals(firebaseAuth.getCurrentUser().getUid())) {
                             Intent intent = new Intent(UserSearchResultsActivity.this, UserProfileActivity.class);

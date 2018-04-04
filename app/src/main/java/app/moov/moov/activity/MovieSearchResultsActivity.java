@@ -83,10 +83,8 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
         String url = "https://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&language=en-US&query=" + searchQuery;
 
         RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
-        Network network = new BasicNetwork(new HurlStack());
-//        queue = new RequestQueue(cache, network);
-//        queue.start();
+//        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
+//        Network network = new BasicNetwork(new HurlStack());
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
