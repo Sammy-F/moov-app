@@ -54,11 +54,11 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
         try {
             final String title = (String) movieResults.get(position).get("title");
             final int id = (Integer) movieResults.get(position).get("id");
-            final Integer releaseDeate = (Integer) movieResults.get(position).get("primary_release_year");
-
+            final String releaseDate = (String) movieResults.get(position).get("release_date");
 
             holder.setTitle(title);
             holder.setID(id);
+            holder.setReleaseYear(releaseDate);
 
 
             final String posterUrl = "https://image.tmdb.org/t/p/w185" + movieResults.get(position).get("poster_path");
@@ -94,7 +94,8 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
         private int movieID;
         private View itemView;
         private String movieTitle;
-        private Integer releaseYear;
+        private String releaseDate;
+        private String releaseYear;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -109,10 +110,11 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
             movieTitle.setText(title);
         }
 
-        public void setReleaseYear(Integer year) {
-            this.releaseYear = year;
+        public void setReleaseYear(String releaseDate) {
+            this.releaseDate = releaseDate;
+            releaseYear = releaseDate.substring(0, 4);
             TextView tvReleaseYear = (TextView) itemView.findViewById(R.id.tvReleaseYear);
-            tvReleaseYear.setText(year);
+            tvReleaseYear.setText(releaseYear);
         }
 
         public void setID(int movieID) {
