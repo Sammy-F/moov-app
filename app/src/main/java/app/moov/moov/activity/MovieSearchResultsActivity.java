@@ -102,7 +102,7 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
 
                     if (convertedArray.size() == 0) {
                         Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
-                    } else if (convertedArray.size() > 0 && convertedArray.size() <= 20) {
+                    } else if (convertedArray.size() > 0 && convertedArray.size() <= 40) {
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
 
