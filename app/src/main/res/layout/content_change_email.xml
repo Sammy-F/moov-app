@@ -66,7 +66,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/etNewEmail"
+        android:id="@+id/etNewUsername"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNewEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etNewUsername"
         app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

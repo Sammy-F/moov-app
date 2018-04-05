@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,7 +52,7 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
     private void setUIViews() {
         etCurrentEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPass);
-        etNewEmail = (EditText) findViewById(R.id.etNewEmail);
+        etNewEmail = (EditText) findViewById(R.id.etNewUsername);
         etNewEmailAgain = (EditText) findViewById(R.id.etNewEmailAgain);
         btnChangeEmail = (Button) findViewById(R.id.btnChangeEmail);
 

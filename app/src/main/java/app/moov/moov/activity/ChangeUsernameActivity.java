@@ -37,7 +37,7 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_change_email);
+        setContentView(R.layout.activity_change_email);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
@@ -72,7 +72,6 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
     }
 
     private void changeEmail() {
-
 
     }
 
