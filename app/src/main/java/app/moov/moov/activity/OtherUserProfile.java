@@ -93,7 +93,7 @@ public class OtherUserProfile extends ToolbarBaseActivity {
         thisUserRef = usersRef.child(thisUserID);
 
         firebaseStorage = FirebaseStorage.getInstance();
-        avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(thisUserID);
+        avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(thisUserID + ".png");
 
         setUIViews();
     }
