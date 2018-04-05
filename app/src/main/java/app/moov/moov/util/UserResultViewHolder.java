@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import app.moov.moov.R;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Sammy on 3/31/2018.
@@ -14,9 +15,12 @@ import app.moov.moov.R;
 public class UserResultViewHolder extends RecyclerView.ViewHolder {
     public View mView;
     private String thisUid;
+    private CircleImageView ivAvatar;
     public UserResultViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
+
+        ivAvatar = (CircleImageView) itemView.findViewById(R.id.ivUserIcon);
     }
 
     public void setUsername(String userName) {
@@ -29,4 +33,6 @@ public class UserResultViewHolder extends RecyclerView.ViewHolder {
     }
 
     public String getUid() { return thisUid; }
+
+    public CircleImageView getIvAvatar() { return ivAvatar; }
 }

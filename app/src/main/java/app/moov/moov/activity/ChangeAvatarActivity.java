@@ -30,10 +30,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import app.moov.moov.R;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChangeAvatarActivity extends ToolbarBaseActivity {
 
-    private ImageView ivCurrentAvatar;
+    private CircleImageView ivCurrentAvatar;
     private TextView tvAvatarInfo;
     private Button btnAvChange;
     private Button btnAvConfirm;
@@ -125,7 +126,7 @@ public class ChangeAvatarActivity extends ToolbarBaseActivity {
     }
 
     private void setUIViews() {
-        ivCurrentAvatar = (ImageView) findViewById(R.id.ivCurrentAvatar);
+        ivCurrentAvatar = (CircleImageView) findViewById(R.id.ivCurrentAvatar);
         tvAvatarInfo = (TextView) findViewById(R.id.tvAvInfo);
         btnAvChange = (Button) findViewById(R.id.btnAvChange);
         btnAvConfirm = (Button) findViewById(R.id.btnConfirmNew);

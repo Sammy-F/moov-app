@@ -1,6 +1,7 @@
 package app.moov.moov.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import app.moov.moov.R;
 import app.moov.moov.model.Post;
@@ -68,7 +73,7 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         super.onStart();
 
         //Firebase Query using the string that was entered
-        Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchString).endAt(searchString + "\uf8ff");
+        final Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchString).endAt(searchString + "\uf8ff");
 
         FirebaseRecyclerOptions<User> options =
                 new FirebaseRecyclerOptions.Builder<User>()
@@ -77,10 +82,16 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
 
         FirebaseRecyclerAdapter<User, UserResultViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserResultViewHolder>(options) {
 
+            private FirebaseStorage firebaseStorage;
+            private StorageReference allAvRef;
+
             @Override
             public UserResultViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.cv_user_search_result, parent, false);
+
+                firebaseStorage = FirebaseStorage.getInstance();
+                allAvRef = firebaseStorage.getReference().child("images").child("avatars");
 
                 return new UserResultViewHolder(view);
             }
@@ -95,8 +106,15 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-//                        uid = (String) dataSnapshot.getValue();
-                        viewHolder.setUID((String) dataSnapshot.getValue());
+                        String uid = (String) dataSnapshot.getValue();
+                        viewHolder.setUID(uid);
+                        StorageReference avatarRef = allAvRef.child(uid + ".png");
+                        avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(UserSearchResultsActivity.this).asBitmap().load(uri.toString()).into(viewHolder.getIvAvatar());
+                            }
+                        });
                     }
 
                     @Override

@@ -42,6 +42,7 @@ import app.moov.moov.model.Post;
 import app.moov.moov.R;
 import app.moov.moov.util.FirebaseSwitchingAdapter;
 import app.moov.moov.util.SelfProfileSwitchingAdapter;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * UserProfileActivity displays the user's profile
@@ -75,7 +76,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
     private LinearLayout llFollowers;
     private LinearLayout llFollowing;
 
-    private ImageView ivAvatar;
+    private CircleImageView ivAvatar;
     private FirebaseStorage firebaseStorage;
     private StorageReference avatarRef;
 
@@ -238,7 +239,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
-        ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
+        ivAvatar = (CircleImageView) findViewById(R.id.ivAvatar);
 
         avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

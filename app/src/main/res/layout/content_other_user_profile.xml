@@ -10,7 +10,10 @@
     tools:showIn="@layout/activity_other_user_profile">
 
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFFFFF"
         android:id="@+id/ivAvatar"
         android:layout_width="95dp"
         android:layout_height="94dp"

@@ -38,6 +38,7 @@ import app.moov.moov.model.Post;
 import app.moov.moov.R;
 import app.moov.moov.model.User;
 import app.moov.moov.util.FirebaseSwitchingAdapter;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OtherUserProfile extends ToolbarBaseActivity {
 
@@ -65,7 +66,7 @@ public class OtherUserProfile extends ToolbarBaseActivity {
     private LinearLayout llFollowers;
     private LinearLayout llFollowing;
 
-    private ImageView ivAvatar;
+    private CircleImageView ivAvatar;
 
     private FirebaseStorage firebaseStorage;
     private StorageReference avatarRef;
@@ -103,7 +104,7 @@ public class OtherUserProfile extends ToolbarBaseActivity {
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         btnFollow = (Button) findViewById(R.id.btnFollow);
 
-        ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
+        ivAvatar = (CircleImageView) findViewById(R.id.ivAvatar);
 
         avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
