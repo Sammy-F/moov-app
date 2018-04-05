@@ -5,14 +5,14 @@
     app:itemTextColor="#FFFFFF"
     app:itemIconTint="#FFFFFF">
     <item
-        android:id="@+id/navBarSearchIcon"
-        android:icon="@drawable/searchicon"
-        android:title="Search"
-        android:visible="true" />
-    <item
         android:id="@+id/navBarHomeIcon"
         android:icon="@drawable/homeicon"
         android:title="Feed"
+        android:visible="true" />
+    <item
+        android:id="@+id/navBarSearchIcon"
+        android:icon="@drawable/searchicon"
+        android:title="Search"
         android:visible="true" />
     <item
         android:id="@+id/navBarPersonIcon"
