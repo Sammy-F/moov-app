@@ -32,6 +32,11 @@
     <string name="delete_post">Delete Post</string>
     <string name="edit_post">Edit Post</string>
 
+    <string name="current_avatar">Current Avatar</string>
+    <string name="new_avatar">New Avatar</string>
+    <string name="select_new_avatar">Select new avatar</string>
+    <string name="confirm_new">Confirm new avatar</string>
+
     <string name="review">Review</string>
 
     <string name="input_friend_username">Input your friend\'s username</string>

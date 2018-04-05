@@ -28,6 +28,7 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
     Button btnReportIssue;
     Button btnLogOut;
     private FirebaseAuth firebaseAuth;
+    Button btnChangeAv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,15 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
     }
 
     private void setUIViews() {
+
+        btnChangeAv = (Button) findViewById(R.id.btnChangeAvatar);
+        btnChangeAv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Class destination = ChangeAvatarActivity.class;
+                btnClick(destination);
+            }
+        });
 
         btnChangePass = (Button) findViewById(R.id.btnChangePassword);
         btnChangePass.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,9 @@ package app.moov.moov.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
@@ -69,6 +75,12 @@ public class UserProfileActivity extends ToolbarBaseActivity {
     private LinearLayout llFollowers;
     private LinearLayout llFollowing;
 
+    private ImageView ivAvatar;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference avatarRef;
+
+    final long ONE_MEGABYTE = 1024 * 1024;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,12 +91,16 @@ public class UserProfileActivity extends ToolbarBaseActivity {
 
         thisContext = this;
 
-        setUIViews();
-
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         final String uid = user.getUid();
         userID = user.getUid();
+
+        firebaseStorage = FirebaseStorage.getInstance();
+        avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(userID + ".png");
+
+        setUIViews();
+
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
         userRef = database.getReference().child("Users").child(uid);
@@ -221,6 +237,23 @@ public class UserProfileActivity extends ToolbarBaseActivity {
 
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
+
+        ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
+
+        avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(thisContext).asBitmap().load(uri.toString()).into(ivAvatar);
+            }
+        });
+
+//        avatarRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+//            @Override
+//            public void onSuccess(byte[] bytes) {
+//                Bitmap currentAvatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                ivAvatar.setImageBitmap(currentAvatar);
+//            }
+//        });
 
         tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
         tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);

@@ -1,6 +1,7 @@
 package app.moov.moov.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +27,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import app.moov.moov.R;
 
@@ -99,9 +108,12 @@ public class RegistrationActivity extends AppCompatActivity {
                                             DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
                                             ref.child("Username").setValue(userName);
 
-                                            database.getReference().child("Usernames").child(userName).setValue(firebaseAuth.getCurrentUser().getUid());
+                                            String thisUID = firebaseAuth.getUid();
+
+                                            database.getReference().child("Usernames").child(userName).setValue(thisUID);
                                             database.getReference().child("Users").child(currentPerson.getUid()).child("lowername").setValue(userName.trim().toLowerCase());
-                                            database.getReference().child("lusernames").child(userName.trim().toLowerCase()).setValue(firebaseAuth.getCurrentUser().getUid());
+                                            database.getReference().child("lusernames").child(userName.trim().toLowerCase()).setValue(thisUID);
+                                            avatarSetup(thisUID);
                                             startActivity(new Intent(RegistrationActivity.this, FeedActivity.class));
                                             finish();
                                         } else {
@@ -152,6 +164,28 @@ public class RegistrationActivity extends AppCompatActivity {
     private void goLogin(){
         Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    private void avatarSetup(String newUID) {
+        final long ONE_MEGABYTE = 1024 * 1024;
+
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference baseRef = firebaseStorage.getReference();
+        final StorageReference avatarRef = baseRef.child("images").child("avatars").child(newUID + ".png");
+        StorageReference defaultRef = firebaseStorage.getReferenceFromUrl("gs://moov-app.appspot.com/images/avatars/logo.png");
+
+        defaultRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                avatarRef.putBytes(bytes);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RegistrationActivity.this, "Wasn't able to get image.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private Boolean validate(){
