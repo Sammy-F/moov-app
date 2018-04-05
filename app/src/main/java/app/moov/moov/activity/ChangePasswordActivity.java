@@ -22,6 +22,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 import app.moov.moov.R;
 
+/**
+ * Modified by Sammy 4/5/2018
+ *
+ * Class that handles the Activity for changing
+ * the user's password.
+ */
+
 public class ChangePasswordActivity extends ToolbarBaseActivity {
 
     FirebaseAuth firebaseAuth;
@@ -52,6 +59,12 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
 
     }
 
+    /**
+     * Method run when the change password button
+     * is pressed.
+     * Reauthenticates the user and then changes their password
+     * if their inputs are valid.
+     */
     private void changePass() {
 
         final String newPass = etNewPass.getText().toString().trim();
@@ -59,9 +72,7 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
         String email = etEmail.getText().toString().trim();
         String currentPass = etCurrentPass.getText().toString().trim();
 
-        /**
-         * Check if authentication strings exist.
-         */
+        // Check if authentication strings exist.
         if (newPass.length() == 0 || newPassAgain.length() == 0 || email.length() == 0 || currentPass.length() == 0) {
             Toast.makeText(ChangePasswordActivity.this, "Please input all details!", Toast.LENGTH_SHORT).show();
         }
@@ -69,8 +80,10 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
             Toast.makeText(ChangePasswordActivity.this, "The passwords do not match!", Toast.LENGTH_SHORT).show();
         }
         else {
+            // Initialize credentials using the user's input login info
             AuthCredential credential = EmailAuthProvider.getCredential(email, currentPass);
-            user.reauthenticate(credential).addOnSuccessListener(new OnSuccessListener<Void>() {
+            user.reauthenticate(credential)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     user.updatePassword(newPass).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -97,6 +110,10 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
 
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews() {
         etNewPass = (EditText) findViewById(R.id.etPass);
         etNewPassAgain = (EditText) findViewById(R.id.etPassAgain);

@@ -28,6 +28,8 @@ import app.moov.moov.activity.PostActivity;
 /**
  * Created by Lisa on 29/03/18.
  * NOTE: THIS IS THE ADAPTER FOR SEARCHING FOR MOVIES REGULARLY, NOT ON POST ACTIVITY
+ *
+ * Modified by Sammy 4/5/2018
  */
 
 public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMovieResultAdapter.MyViewHolder> {
@@ -63,6 +65,7 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
 
             final String posterUrl = "https://image.tmdb.org/t/p/w185" + movieResults.get(position).get("poster_path");
 
+            // Load the movie poster into the ImageView
             Glide.with(c).asBitmap().load(posterUrl).into(holder.ivMoviePoster);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {

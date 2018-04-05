@@ -24,6 +24,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 import app.moov.moov.R;
 
+/**
+ * Modified by Sammy 4/5/2018
+ *
+ * Class that handles the Activity for changing
+ * the user's email.
+ */
+
 public class ChangeEmailActivity extends ToolbarBaseActivity {
 
     private EditText etCurrentEmail;
@@ -52,35 +59,18 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
         setUIViews();
     }
 
-    private void setUIViews() {
-        etCurrentEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPass);
-        etNewEmail = (EditText) findViewById(R.id.etNewEmail);
-        etNewEmailAgain = (EditText) findViewById(R.id.etNewEmailAgain);
-        btnChangeEmail = (Button) findViewById(R.id.btnChangeEmail);
-
-        btnChangeEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeEmail();
-            }
-        });
-        findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                return true;
-            }
-        });
-    }
-
+    /**
+     * Method called when the change email button is clicked.
+     * Reauthorize the user in case their session has exceeded the max
+     * and change the email if their credentials are valid.
+     */
     private void changeEmail() {
         String currentEmail = etCurrentEmail.getText().toString().trim().toLowerCase();
         String password = etPassword.getText().toString().trim();
         final String newEmail = etNewEmail.getText().toString().trim().toLowerCase();
         String newEmailAgain = etNewEmailAgain.getText().toString().trim().toLowerCase();
 
+        // Check that the strings are not empty and that the emails match.
         if (currentEmail.length() == 0 || password.length() == 0 || newEmail.length() == 0 || newEmailAgain.length() == 0) {
             Toast.makeText(this, "Please input all details!", Toast.LENGTH_SHORT).show();
         }
@@ -89,6 +79,7 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
         }
         else {
 
+            // Initialize the credentials using the user's provided login info
             AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, password);
             user.reauthenticate(credential).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -115,6 +106,32 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
             });
 
         }
+    }
+
+    /**
+     * Set up the Views in the Activity
+     */
+    private void setUIViews() {
+        etCurrentEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPass);
+        etNewEmail = (EditText) findViewById(R.id.etNewEmail);
+        etNewEmailAgain = (EditText) findViewById(R.id.etNewEmailAgain);
+        btnChangeEmail = (Button) findViewById(R.id.btnChangeEmail);
+
+        btnChangeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeEmail();
+            }
+        });
+        findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
     }
 
 }

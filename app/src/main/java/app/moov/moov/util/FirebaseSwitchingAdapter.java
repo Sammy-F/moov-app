@@ -25,6 +25,9 @@ import app.moov.moov.model.Post;
 
 /**
  * Created by Sammy on 4/2/2018.
+ *
+ * Adapter that changes ViewHolders depending on
+ * whether a Post has a comment or not.
  */
 
 public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, RecyclerView.ViewHolder> {
@@ -90,7 +93,7 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
     }
 
     /**
-     * Internal ViewHolder class
+     * Internal ViewHolder class used when the Post has no review.
      */
     public static class FeedViewHolderWithoutReview extends RecyclerView.ViewHolder{
 
@@ -148,6 +151,12 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
 
     }
 
+    /**
+     * Assign the ViewType for the item based on whether a
+     * review exists or not
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         if (getItem(position).getMovieReview().equals("")) {
@@ -161,6 +170,8 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
     @Override
     protected void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, final Post model) {
 
+        //Decide which ViewType the Post has (i.e. with review or without review)
+        // and sets up the item depending on this ViewType.
         switch(viewHolder.getItemViewType()) {
             case 0:
                 final FeedViewHolderWithoutReview viewHolder1 = (FeedViewHolderWithoutReview) viewHolder;
@@ -189,10 +200,6 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
                         Intent intent = new Intent(thisContext, MovieProfile.class);
                         intent.putExtra("movieID", movieID);
                         thisContext.startActivity(intent); //go to movie's profile
-//                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
-//                        MovieDb thisMovie = movieGetter.getMovie();
-//                        String movieTitle = thisMovie.getTitle();
-//                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -205,6 +212,8 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
                 viewHolderWith.setUsername(model.getUsername());
 
                 String posterUrlWith = model.getPosterURL();
+
+                // Load and place the movie poster in the ImageView
                 Glide.with(thisContext).asBitmap().load(posterUrlWith).into(viewHolderWith.ivPoster);
 
                 final int movieIDWith = model.getMovieID();

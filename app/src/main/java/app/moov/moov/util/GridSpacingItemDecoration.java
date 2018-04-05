@@ -5,6 +5,8 @@ import android.view.View;
 
 /**
  * Class by edwardaa @ StackOverflow
+ * Allows us to control the specing between items
+ * in a GridLayoutManager
  */
 
 public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {

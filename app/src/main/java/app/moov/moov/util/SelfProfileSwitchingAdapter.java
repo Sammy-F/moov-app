@@ -32,6 +32,9 @@ import app.moov.moov.model.Post;
 
 /**
  * Created by Sammy on 4/2/2018.
+ *
+ * Adapter that changes ViewHolders depending on
+ * whether a Post has a comment or not.
  */
 
 public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, RecyclerView.ViewHolder> {

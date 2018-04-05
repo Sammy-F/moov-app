@@ -32,6 +32,13 @@ import java.io.IOException;
 import app.moov.moov.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Created by Sammy 4/4/2018
+ * Modified by Sammy 4/5/2018
+ *
+ * Class that handles the page for changing
+ * the user's avatar.
+ */
 public class ChangeAvatarActivity extends ToolbarBaseActivity {
 
     private CircleImageView ivCurrentAvatar;
@@ -87,24 +94,30 @@ public class ChangeAvatarActivity extends ToolbarBaseActivity {
                 tvAvatarInfo.setText(getString(R.string.new_avatar));
                 btnAvConfirm.setEnabled(true);
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 Toast.makeText(ChangeAvatarActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 Toast.makeText(ChangeAvatarActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
     }
 
+    /**
+     * Initialize and run an intent to get the user's image
+     * input for the new avatar.
+     */
     private void chooseNewAvatar() {
-
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, GET_FROM_GALLERY);
-
     }
 
+    /**
+     * Method called when avatar confirmation button is clicked.
+     * Get the scaled image from the avatar ImageView, convert it
+     * to a Bitmap, then to a bytes[], and upload it to
+     * the user's avatar reference in Firebase Storage.
+     */
     private void confirmNewAvatar() {
 
         Bitmap newAvatar = ((BitmapDrawable)ivCurrentAvatar.getDrawable()).getBitmap();
@@ -125,6 +138,9 @@ public class ChangeAvatarActivity extends ToolbarBaseActivity {
         finish();
     }
 
+    /**
+     * Set up the Views in the Activity.
+     */
     private void setUIViews() {
         ivCurrentAvatar = (CircleImageView) findViewById(R.id.ivCurrentAvatar);
         tvAvatarInfo = (TextView) findViewById(R.id.tvAvInfo);
