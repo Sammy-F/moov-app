@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/navBarHomeIcon"
-        android:icon="@drawable/homeicon"
-        android:state_checked="false"
-        android:title="Home"
-        android:visible="true" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:itemTextColor="#FFFFFF"
+    app:itemIconTint="#FFFFFF">
     <item
         android:id="@+id/navBarSearchIcon"
         android:icon="@drawable/searchicon"
         android:title="Search"
+        android:visible="true" />
+    <item
+        android:id="@+id/navBarHomeIcon"
+        android:icon="@drawable/homeicon"
+        android:title="Feed"
         android:visible="true" />
     <item
         android:id="@+id/navBarPersonIcon"

@@ -41,6 +41,8 @@
         android:layout_height="56dp"
         android:layout_gravity="bottom"
         android:visibility="visible"
+        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="#FFFFFF"
         app:menu="@menu/menu_nav_bar">
 
     </android.support.design.widget.BottomNavigationView>

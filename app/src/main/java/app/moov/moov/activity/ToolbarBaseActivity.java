@@ -75,13 +75,14 @@ public class ToolbarBaseActivity extends AppCompatActivity {
         navBar.setOnNavigationItemSelectedListener(                new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.navBarSearchIcon) {
-                    Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-                    startActivity(intent);
-                }
 
                 if (item.getItemId() == R.id.navBarHomeIcon) {
                     Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
+                    startActivity(intent);
+                }
+
+                if (item.getItemId() == R.id.navBarSearchIcon) {
+                    Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                     startActivity(intent);
                 }
 
