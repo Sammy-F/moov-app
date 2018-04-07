@@ -75,7 +75,7 @@ public class FeedActivity extends ToolbarBaseActivity {
     protected void onStart() {
         super.onStart();
 
-        Query keysQuery = postsRef.orderByChild("timestamp");
+        Query keysQuery = postsRef.orderByChild("timestamp").limit(25);
 
         FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
                 .setIndexedQuery(keysQuery, baseRef.child("Posts"), Post.class)
