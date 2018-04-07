@@ -2,6 +2,7 @@ package app.moov.moov.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,15 +16,19 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import app.moov.moov.R;
+import app.moov.moov.model.Post;
+import app.moov.moov.util.FirebaseSwitchingAdapter;
 import app.moov.moov.util.VolleySingleton;
 
 /**
@@ -34,11 +39,13 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
     private FirebaseDatabase database;
     private DatabaseReference ref;
     private RecyclerView movieRecycler;
-    ImageView ivMoviePoster;
-    TextView tvMovieTitle;
-    TextView tvReleaseYear;
-    TextView tvRunTime;
-    TextView tvMovieSummary;
+//    ImageView ivMoviePoster;
+    private TextView tvMovieTitle;
+    private TextView tvReleaseYear;
+    private TextView tvRunTime;
+    private TextView tvMovieSummary;
+    private LinearLayoutManager orderedManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,12 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
     }
 
     private void setUIViews() {
+
+        movieRecycler = (RecyclerView) findViewById(R.id.movieRecycler);
+        movieRecycler.setHasFixedSize(true);
+        orderedManager = new LinearLayoutManager(this);
+        movieRecycler.setLayoutManager(orderedManager);
+
         String movieID = getIntent().getStringExtra("movieID");
         String url = "https://api.themoviedb.org/3/movie/343611?api_key=" + movieID;
         RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
@@ -92,7 +105,7 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
                         tvRunTime.setText(runtime.toString());
                     }
 
-                    ivMoviePoster = (ImageView) findViewById(R.id.ivMoviePoster);
+//                    ivMoviePoster = (ImageView) findViewById(R.id.ivMoviePoster);
 
 
                 } catch (org.json.JSONException e) {
@@ -110,5 +123,8 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
 
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
+}

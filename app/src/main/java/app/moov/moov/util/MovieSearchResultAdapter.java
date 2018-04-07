@@ -22,6 +22,7 @@ import java.util.List;
 
 import app.moov.moov.R;
 import app.moov.moov.activity.MovieProfile;
+import app.moov.moov.activity.MovieProfileActivity2;
 import app.moov.moov.activity.PostActivity;
 
 /**
@@ -65,7 +66,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(c, MovieProfile.class);
+                    Intent intent = new Intent(c, MovieProfileActivity2.class);
                     intent.putExtra("movieID", id);
                     c.startActivity(intent);
                 }

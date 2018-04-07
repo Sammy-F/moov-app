@@ -65,6 +65,12 @@
             android:name=".activity.MovieProfile"
             android:label="MovieProfile"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activity.MovieProfileActivity2"
+            android:label="MovieProfile"
+            android:theme="@style/AppTheme" />
+
         <activity
             android:name=".activity.UserSettingsActivity"
             android:label="@string/title_activity_user_settings"
