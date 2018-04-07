@@ -9,6 +9,10 @@
     <string name="reauthenticate">Please input your login details.</string>
     <string name="reauthenticate_email_change">Please input your login details and new email.</string>
     <string name="prompt_email">Email</string>
+    <string name="year">Year</string>
+    <string name="runtime">Runtime</string>
+    <string name="movie_summary">Movie Summary</string>
+
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>

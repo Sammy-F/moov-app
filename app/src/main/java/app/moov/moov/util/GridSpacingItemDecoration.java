@@ -5,7 +5,7 @@ import android.view.View;
 
 /**
  * Class by edwardaa @ StackOverflow
- * Allows us to control the specing between items
+ * Allows us to control the spacing between items
  * in a GridLayoutManager
  */
 
