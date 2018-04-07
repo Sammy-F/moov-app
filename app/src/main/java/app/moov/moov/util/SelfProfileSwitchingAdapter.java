@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import app.moov.moov.R;
 import app.moov.moov.activity.EditPostActivity;
 import app.moov.moov.activity.MovieProfile;
+import app.moov.moov.activity.MovieProfileActivity2;
 import app.moov.moov.activity.OtherUserProfile;
 import app.moov.moov.model.Post;
 
@@ -310,7 +311,7 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
                 viewHolder1.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfile.class);
+                        Intent intent = new Intent(thisContext, MovieProfileActivity2.class);
                         intent.putExtra("movieID", movieID);
                         thisContext.startActivity(intent); //go to movie's profile
 

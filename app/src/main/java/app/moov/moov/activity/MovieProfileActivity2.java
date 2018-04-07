@@ -34,6 +34,8 @@ import app.moov.moov.util.VolleySingleton;
 
 /**
  * Created by Lisa on 07/04/18.
+ *
+ * Modified by Sammy 4/7/2018
  */
 
 public class MovieProfileActivity2 extends ToolbarBaseActivity{
@@ -75,7 +77,6 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
         movieRecycler.setLayoutManager(orderedManager);
 
         DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
-
         Query keysQuery = FirebaseDatabase.getInstance().getReference().child("PostsByMovie").child(Integer.toString(movieID)).orderByChild("timestamp");
 
         FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
@@ -114,15 +115,19 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
                         tvMovieSummary.setText(summary);
                     }
 
-                    Integer runtime = (Integer) response.get("runtime");
                     tvRunTime = (TextView) findViewById(R.id.tvRuntime);
-                    if(runtime != null) {
-                        tvRunTime.setText(runtime.toString());
+
+                    try {
+                        Integer runtime = (Integer) response.get("runtime");
+                        tvRunTime.setText(Integer.toString(runtime));
+                    } catch (ClassCastException e) { //catch null runtimes
+                        String unknown = "Run time unknown";
+                        tvRunTime.setText(unknown);
                     }
 
                     ivMoviePoster = (ImageView) findViewById(R.id.ivMoviePoster);
 
-                    String posterUrl = "https://image.tmdb.org/t/p/w185/" + movieDetail.get("poster_path");
+                    String posterUrl = "https://image.tmdb.org/t/p/w185/" + ((String) movieDetail.get("poster_path"));
 
                     Glide.with(MovieProfileActivity2.this).asBitmap().load(posterUrl).into(ivMoviePoster);
 
