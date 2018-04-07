@@ -80,7 +80,7 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
 
         progressBar.setVisibility(View.VISIBLE);
         searchQuery = searchQuery.replaceAll(" ", "+");
-        String url = "https://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&query=" + searchQuery;
+        String url = "https://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&query=" + searchQuery + "&page=1";
 
         RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);

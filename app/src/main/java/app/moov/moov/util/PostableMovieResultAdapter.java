@@ -115,9 +115,15 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
 
         public void setReleaseYear(String releaseDate) {
             this.releaseDate = releaseDate;
-            releaseYear = releaseDate.substring(0, 4);
-            TextView tvReleaseYear = (TextView) itemView.findViewById(R.id.tvReleaseYear);
-            tvReleaseYear.setText(releaseYear);
+            if (this.releaseDate.length() == 0 || this.releaseDate == null ) {
+                TextView tvReleaseYear = (TextView) itemView.findViewById(R.id.tvReleaseYear);
+                tvReleaseYear.setText("");
+            }
+            else {
+                releaseYear = releaseDate.substring(0, 4);
+                TextView tvReleaseYear = (TextView) itemView.findViewById(R.id.tvReleaseYear);
+                tvReleaseYear.setText(releaseYear);
+            }
         }
 
         public void setID(int movieID) {
