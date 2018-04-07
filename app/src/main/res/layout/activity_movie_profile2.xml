@@ -20,8 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_feed" />
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navBar"
         android:layout_width="match_parent"
@@ -33,5 +31,7 @@
         app:menu="@menu/menu_nav_bar">
 
     </android.support.design.widget.BottomNavigationView>
+
+    <include layout="@layout/content_movie_profile2" />
 
 </android.support.design.widget.CoordinatorLayout>
