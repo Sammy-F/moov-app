@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -39,12 +40,13 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
     private FirebaseDatabase database;
     private DatabaseReference ref;
     private RecyclerView movieRecycler;
-//    ImageView ivMoviePoster;
+    ImageView ivMoviePoster;
     private TextView tvMovieTitle;
     private TextView tvReleaseYear;
     private TextView tvRunTime;
     private TextView tvMovieSummary;
     private LinearLayoutManager orderedManager;
+    private int movieID;
 
 
     @Override
@@ -56,6 +58,8 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
         toolBarSetup(toolbar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         setUpNavBar(navBar);
+
+        movieID = getIntent().getIntExtra("movieID", 0);
 
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
@@ -70,11 +74,22 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
         orderedManager = new LinearLayoutManager(this);
         movieRecycler.setLayoutManager(orderedManager);
 
-        String movieID = getIntent().getStringExtra("movieID");
-        String url = "https://api.themoviedb.org/3/movie/343611?api_key=" + movieID;
+        DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
+
+        Query keysQuery = FirebaseDatabase.getInstance().getReference().child("PostsByMovie").child(Integer.toString(movieID)).orderByChild("timestamp");
+
+        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                .setIndexedQuery(keysQuery, baseRef.child("Posts"), Post.class)
+                .build();
+
+        FirebaseSwitchingAdapter FBRA = new FirebaseSwitchingAdapter(options, this);
+        FBRA.startListening();
+        movieRecycler.setAdapter(FBRA);
+
+        String url = "https://api.themoviedb.org/3/movie/"+ Integer.toString(movieID) + "?api_key=3744632a440f06514578b01d1b6e9d27";
         RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
 
-        JsonObjectRequest JsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -105,8 +120,11 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
                         tvRunTime.setText(runtime.toString());
                     }
 
-//                    ivMoviePoster = (ImageView) findViewById(R.id.ivMoviePoster);
+                    ivMoviePoster = (ImageView) findViewById(R.id.ivMoviePoster);
 
+                    String posterUrl = "https://image.tmdb.org/t/p/w185/" + movieDetail.get("poster_path");
+
+                    Glide.with(MovieProfileActivity2.this).asBitmap().load(posterUrl).into(ivMoviePoster);
 
                 } catch (org.json.JSONException e) {
                     Toast.makeText(MovieProfileActivity2.this, "Sorry", Toast.LENGTH_LONG).show();
@@ -120,6 +138,8 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
                 Log.e("JSON Error", "Unable to get JSON Object Array");
             }
         });
+
+        queue.add(jsonObjectRequest);
 
     }
 
