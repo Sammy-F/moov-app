@@ -100,7 +100,7 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
 
                     if (convertedArray.size() == 0) {
                         Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
-                    } else if (convertedArray.size() > 0 && convertedArray.size() <= 40) {
+                    } else if (convertedArray.size() > 0) {
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
 
@@ -115,24 +115,24 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
                         PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
-                    else if (convertedArray.size() > 40) { // Cap the result size to 40
-                        convertedArray = convertedArray.subList(0, 40);
-                        searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
-                        searchRecycler.setHasFixedSize(true);
-
-                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
-                        searchRecycler.setLayoutManager(mLayoutManager);
-
-                        Resources r = getResources();
-                        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, r.getDisplayMetrics());
-
-                        searchRecycler.addItemDecoration(new GridSpacingItemDecoration(2, px, true));
-
-                        PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
-                        searchRecycler.setAdapter(searchAdapter);
-                    }
+//                    else if (convertedArray.size() > 30) { // Cap the result size to 30
+//                        convertedArray = convertedArray.subList(0, 29);
+//                        searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
+//                        searchRecycler.setHasFixedSize(true);
+//
+//                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
+//                        searchRecycler.setLayoutManager(mLayoutManager);
+//
+//                        Resources r = getResources();
+//                        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, r.getDisplayMetrics());
+//
+//                        searchRecycler.addItemDecoration(new GridSpacingItemDecoration(2, px, true));
+//
+//                        PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
+//                        searchRecycler.setAdapter(searchAdapter);
+//                    }
                     else {
-                        Toast.makeText(MovieSearchResultsActivity.this,"No Results Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MovieSearchResultsActivity.this,"An error occurred.", Toast.LENGTH_SHORT).show();
                     }
 
                     progressBar.setVisibility(View.INVISIBLE);

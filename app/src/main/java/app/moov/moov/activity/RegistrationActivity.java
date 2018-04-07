@@ -119,7 +119,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                         } else {
 
                                             regProgress.setVisibility(View.INVISIBLE);
-                                            Toast.makeText(RegistrationActivity.this, "Registration failed, please try again.", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });

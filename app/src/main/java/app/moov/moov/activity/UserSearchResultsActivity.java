@@ -73,7 +73,7 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         super.onStart();
 
         //Firebase Query using the string that was entered
-        final Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchString).endAt(searchString + "\uf8ff");
+        final Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchString).endAt(searchString + "\uf8ff").limitToFirst(20); //capping at 20 users
 
         FirebaseRecyclerOptions<User> options =
                 new FirebaseRecyclerOptions.Builder<User>()

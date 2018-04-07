@@ -100,7 +100,7 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
 
                     if (convertedArray.size() == 0) {
                         Toast.makeText(MovieSearchResultsActivity2.this,"No Results Found", Toast.LENGTH_SHORT).show();
-                    } else if (convertedArray.size() > 0 && convertedArray.size() <= 20) {
+                    } else if (convertedArray.size() > 0) {
                         searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
                         searchRecycler.setHasFixedSize(true);
                         searchRecycler.setDrawingCacheEnabled(true);
@@ -112,21 +112,21 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
                         MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
-                    else if (convertedArray.size() > 10) { // Cap the result size to 10
-                        convertedArray = convertedArray.subList(0, 10);
-                        searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
-                        searchRecycler.setHasFixedSize(true);
-                        searchRecycler.setDrawingCacheEnabled(true);
-                        searchRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-
-                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
-                        searchRecycler.setLayoutManager(mLayoutManager);
-
-                        MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
-                        searchRecycler.setAdapter(searchAdapter);
-                    }
+//                    else if (convertedArray.size() > 30) { // Cap the result size to 30
+//                        convertedArray = convertedArray.subList(0, 29);
+//                        searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
+//                        searchRecycler.setHasFixedSize(true);
+//                        searchRecycler.setDrawingCacheEnabled(true);
+//                        searchRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+//
+//                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
+//                        searchRecycler.setLayoutManager(mLayoutManager);
+//
+//                        MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
+//                        searchRecycler.setAdapter(searchAdapter);
+//                    }
                     else {
-                        Toast.makeText(MovieSearchResultsActivity2.this,"No Results Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MovieSearchResultsActivity2.this,"An error occurred", Toast.LENGTH_SHORT).show();
                     }
 
                     progressBar.setVisibility(View.INVISIBLE);
