@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -58,16 +62,18 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         private ImageView ivPoster;
         private View mView;
         private TextView userName;
-        private Button editBtn;
-        private Button delBtn;
+//        private Button editBtn;
+//        private Button delBtn;
+        private ImageButton ibDetail;
 
         public FeedViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
             btnMovieTitle = mView.findViewById(R.id.MovieTitle);
             ivPoster = mView.findViewById(R.id.ivPoster);
-            editBtn = mView.findViewById(R.id.btnEdit);
-            delBtn = mView.findViewById(R.id.btnDelete);
+//            editBtn = mView.findViewById(R.id.btnEdit);
+//            delBtn = mView.findViewById(R.id.btnDelete);
+            ibDetail = mView.findViewById(R.id.ibDetail);
         }
 
         public void setTitle(String title) {
@@ -111,16 +117,18 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         private ImageView ivPoster;
         private View mView;
         private TextView userName;
-        Button editBtn;
-        Button delBtn;
+//        Button editBtn;
+//        Button delBtn;
+        private ImageButton ibDetail;
 
         public FeedViewHolderWithoutReview(View itemView) {
             super(itemView);
             mView = itemView;
             btnMovieTitle = mView.findViewById(R.id.MovieTitle);
             ivPoster = mView.findViewById(R.id.ivPoster);
-            editBtn = mView.findViewById(R.id.btnEdit);
-            delBtn = mView.findViewById(R.id.btnDelete);
+//            editBtn = mView.findViewById(R.id.btnEdit);
+//            delBtn = mView.findViewById(R.id.btnDelete);
+            ibDetail = mView.findViewById(R.id.ibDetail);
         }
 
         public void setTitle(String title) {
@@ -153,12 +161,12 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
 
         if (viewType == 0) {
             View viewWithoutReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.nr_new_self_cv_layout, parent, false);
+                    .inflate(R.layout.nr_new_self_cv_layout_2, parent, false);
             return new FeedViewHolderWithoutReview(viewWithoutReview);
         }
         else {
             View viewWithReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.new_self_cv_layout, parent, false);
+                    .inflate(R.layout.new_self_cv_layout_2, parent, false);
 
             return new FeedViewHolder(viewWithReview);
         }
@@ -235,17 +243,44 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
 
     }
 
+    private void showPopupMenu(View view, int position, Post model) {
+        PopupMenu popup = new PopupMenu(view.getContext(), view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_cardview_options, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener(position, model));
+        popup.show();
+    }
+
+    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+        private int position;
+        private Post thisPost;
+        public MyMenuItemClickListener(int position, Post model) {
+            this.position = position;
+            this.thisPost = model;
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.deletePost:
+                    deletePost(thisPost.getPID(), thisPost.getUID());
+                    return true;
+                case R.id.editPost:
+                    editPost(thisPost.getPID(), thisPost.getMovieReview(), thisPost.getMovieTitle(), thisPost.getMovieRating());
+                    return true;
+            }
+            return false;
+        }
+    }
+
     @Override
-    protected void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, final Post model) {
+    protected void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position, final Post model) {
 
         switch(viewHolder.getItemViewType()) {
             case 0:
                 final FeedViewHolderWithoutReview viewHolder1 = (FeedViewHolderWithoutReview) viewHolder;
 
                 final Post thisPost = model;
-
-                final String pid = thisPost.getPID();
-                final String uid = thisPost.getUID();
 
                 viewHolder1.setTitle(model.getMovieTitle());
                 viewHolder1.setRating(Float.parseFloat(model.getMovieRating()));
@@ -256,19 +291,13 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
 
                 final int movieID = model.getMovieID();
 
-                viewHolder1.editBtn.setOnClickListener(new View.OnClickListener() {
+                (viewHolder1).ibDetail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        editPost(thisPost.getPID(), thisPost.getMovieReview(), thisPost.getMovieTitle(), thisPost.getMovieRating());
+                        showPopupMenu(viewHolder1.ibDetail, position, model);
                     }
                 });
 
-                viewHolder1.delBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        deletePost(pid, uid);
-                    }
-                });
 
                 viewHolder1.getUsername().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -285,10 +314,7 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
                         Intent intent = new Intent(thisContext, MovieProfileActivity2.class);
                         intent.putExtra("movieID", movieID);
                         thisContext.startActivity(intent); //go to movie's profile
-//                        MovieGetterByID movieGetter = new MovieGetterByID(thisContext, movieID);
-//                        MovieDb thisMovie = movieGetter.getMovie();
-//                        String movieTitle = thisMovie.getTitle();
-//                        Toast.makeText(FeedActivity.this,movieTitle, Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 break;
@@ -310,19 +336,13 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
 
                 final int movieIDWith = model.getMovieID();
 
-                viewHolderWith.editBtn.setOnClickListener(new View.OnClickListener() {
+                viewHolderWith.ibDetail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        editPost(ourPost.getPID(), ourPost.getMovieReview(), ourPost.getMovieTitle(), ourPost.getMovieRating());
+                        showPopupMenu(viewHolderWith.ibDetail, position, model);
                     }
                 });
 
-                viewHolderWith.delBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        deletePost(pid2, uid2);
-                    }
-                });
 
                 viewHolderWith.getUserName().setOnClickListener(new View.OnClickListener() {
                     @Override
