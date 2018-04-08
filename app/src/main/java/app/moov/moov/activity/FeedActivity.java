@@ -68,6 +68,8 @@ public class FeedActivity extends ToolbarBaseActivity {
     private int mVisibleItemCount;
     private int mfirstVisibleItemPos;
 
+    private long maxPosts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -89,6 +91,18 @@ public class FeedActivity extends ToolbarBaseActivity {
         database = FirebaseDatabase.getInstance();
         baseRef = database.getReference();
         postsRef = baseRef.child("Users").child(uid).child("Feed");
+
+        postsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                maxPosts = dataSnapshot.getChildrenCount();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         setUIViews();
     }
@@ -236,7 +250,8 @@ public class FeedActivity extends ToolbarBaseActivity {
                 mVisibleItemCount = orderedManager.getChildCount();
                 mfirstVisibleItemPos = orderedManager.findFirstVisibleItemPosition();
 
-                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos))) {
+                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (mAdapter.getItemCount() <= maxPosts)
+                        && mfirstVisibleItemPos >= 0) {
 
                     loadPosts(mAdapter.getLastItemTimestamp());
                     isLoading = true;

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -141,11 +142,11 @@ public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
      */
     @Override
     public int getItemViewType(int position) {
-        if (getItem(position).getMovieReview().equals("")) {
-            return 0;
+        if (!postList.get(position).getMovieReview().equals("")) {
+            return 1;
         }
         else {
-            return 1;
+            return 0;
         }
     }
 
@@ -155,8 +156,7 @@ public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             View viewWithoutReview = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.nr_new_cv_layout, parent, false);
             return new FeedViewHolderWithoutReview(viewWithoutReview);
-        }
-        else {
+        } else {
             View viewWithReview = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.new_cv_layout, parent, false);
 
@@ -244,7 +244,8 @@ public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemCount() {
-        return postList.size();
+        return postList == null ? 0 : postList.size();
+//        return postList.size();
     }
 
     public Long getLastItemTimestamp() {
