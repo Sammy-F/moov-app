@@ -155,12 +155,12 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
 
         if (viewType == 0) {
             View viewWithoutReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.nr_new_self_cv_layout_2, parent, false);
+                    .inflate(R.layout.nr_new_self_cv_layout, parent, false);
             return new FeedViewHolderWithoutReview(viewWithoutReview);
         }
         else {
             View viewWithReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.new_self_cv_layout_2, parent, false);
+                    .inflate(R.layout.new_self_cv_layout, parent, false);
 
             return new FeedViewHolder(viewWithReview);
         }
