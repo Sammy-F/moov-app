@@ -76,6 +76,9 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
         if (newPass.length() == 0 || newPassAgain.length() == 0 || email.length() == 0 || currentPass.length() == 0) {
             Toast.makeText(ChangePasswordActivity.this, "Please input all details!", Toast.LENGTH_SHORT).show();
         }
+        else if (!email.equals(user.getEmail())){
+            Toast.makeText(ChangePasswordActivity.this, "The email you've entered is not correct!", Toast.LENGTH_SHORT).show();
+        }
         else if (!newPass.equals(newPassAgain)) { // Check if the password strings match
             Toast.makeText(ChangePasswordActivity.this, "The passwords do not match!", Toast.LENGTH_SHORT).show();
         }

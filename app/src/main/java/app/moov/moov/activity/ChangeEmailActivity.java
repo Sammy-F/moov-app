@@ -81,6 +81,9 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
         if (currentEmail.length() == 0 || password.length() == 0 || newEmail.length() == 0 || newEmailAgain.length() == 0) {
             Toast.makeText(this, "Please input all details!", Toast.LENGTH_SHORT).show();
         }
+        else if (!currentEmail.equals(user.getEmail())){
+            Toast.makeText(this, "Your current e-mail is not correct!", Toast.LENGTH_SHORT).show();
+        }
         else if (!newEmail.equals(newEmailAgain)) {
             Toast.makeText(this, "The emails do not match!", Toast.LENGTH_LONG).show();
         }
