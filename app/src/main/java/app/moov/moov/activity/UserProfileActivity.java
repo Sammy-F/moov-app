@@ -190,8 +190,6 @@ public class UserProfileActivity extends ToolbarBaseActivity {
             View mView = itemView;
             btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
             ivPoster = itemView.findViewById(R.id.ivPoster);
-            delButton = itemView.findViewById(R.id.btnDelete);
-            editButton = itemView.findViewById(R.id.btnEdit);
         }
 
         public void setTitle(String title) {
@@ -287,8 +285,6 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         profileFeedRecycler.setHasFixedSize(true);
 
         orderedManager = new LinearLayoutManager(this);
-//        orderedManager.setReverseLayout(true);
-//        orderedManager.setStackFromEnd(true);
 
         profileFeedRecycler.setLayoutManager(orderedManager);
     }
