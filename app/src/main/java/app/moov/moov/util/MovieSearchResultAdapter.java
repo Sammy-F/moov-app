@@ -1,11 +1,9 @@
 package app.moov.moov.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +19,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import app.moov.moov.R;
-import app.moov.moov.activity.MovieProfile;
-import app.moov.moov.activity.MovieProfileActivity2;
-import app.moov.moov.activity.PostActivity;
+import app.moov.moov.activity.MovieProfileActivity;
 
 /**
  * Created by Lisa on 29/03/18.
@@ -66,7 +62,7 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(c, MovieProfileActivity2.class);
+                    Intent intent = new Intent(c, MovieProfileActivity.class);
                     intent.putExtra("movieID", id);
                     c.startActivity(intent);
                 }

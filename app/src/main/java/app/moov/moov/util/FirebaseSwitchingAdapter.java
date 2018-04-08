@@ -14,13 +14,8 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 import app.moov.moov.R;
-import app.moov.moov.activity.MovieProfile;
-import app.moov.moov.activity.MovieProfileActivity2;
+import app.moov.moov.activity.MovieProfileActivity;
 import app.moov.moov.activity.OtherUserProfile;
 import app.moov.moov.model.Post;
 
@@ -198,7 +193,7 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
                 viewHolder1.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfile.class);
+                        Intent intent = new Intent(thisContext, MovieProfileActivity.class);
                         intent.putExtra("movieID", movieID);
                         thisContext.startActivity(intent); //go to movie's profile
                     }
@@ -231,7 +226,7 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
                 viewHolderWith.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfileActivity2.class);
+                        Intent intent = new Intent(thisContext, MovieProfileActivity.class);
                         intent.putExtra("movieID", movieIDWith);
                         thisContext.startActivity(intent); //go to movie's profile
                     }

@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -24,14 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 import app.moov.moov.R;
 import app.moov.moov.activity.EditPostActivity;
-import app.moov.moov.activity.MovieProfile;
-import app.moov.moov.activity.MovieProfileActivity2;
+import app.moov.moov.activity.MovieProfileActivity;
 import app.moov.moov.activity.OtherUserProfile;
 import app.moov.moov.model.Post;
 
@@ -311,7 +305,7 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
                 viewHolder1.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfileActivity2.class);
+                        Intent intent = new Intent(thisContext, MovieProfileActivity.class);
                         intent.putExtra("movieID", movieID);
                         thisContext.startActivity(intent); //go to movie's profile
 
@@ -356,7 +350,7 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
                 viewHolderWith.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfile.class);
+                        Intent intent = new Intent(thisContext, MovieProfileActivity.class);
                         intent.putExtra("movieID", movieIDWith);
                         thisContext.startActivity(intent); //go to movie's profile
                     }

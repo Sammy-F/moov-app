@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,13 +17,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.storage.FirebaseStorage;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import app.moov.moov.R;
@@ -38,7 +34,7 @@ import app.moov.moov.util.VolleySingleton;
  * Modified by Sammy 4/7/2018
  */
 
-public class MovieProfileActivity2 extends ToolbarBaseActivity{
+public class MovieProfileActivity extends ToolbarBaseActivity{
     private FirebaseDatabase database;
     private DatabaseReference ref;
     private RecyclerView movieRecycler;
@@ -54,7 +50,7 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_profile2);
+        setContentView(R.layout.activity_movie_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
@@ -129,17 +125,17 @@ public class MovieProfileActivity2 extends ToolbarBaseActivity{
 
                     String posterUrl = "https://image.tmdb.org/t/p/w185/" + ((String) movieDetail.get("poster_path"));
 
-                    Glide.with(MovieProfileActivity2.this).asBitmap().load(posterUrl).into(ivMoviePoster);
+                    Glide.with(MovieProfileActivity.this).asBitmap().load(posterUrl).into(ivMoviePoster);
 
                 } catch (org.json.JSONException e) {
-                    Toast.makeText(MovieProfileActivity2.this, "Sorry", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MovieProfileActivity.this, "Sorry", Toast.LENGTH_LONG).show();
 
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MovieProfileActivity2.this,"An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MovieProfileActivity.this,"An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
                 Log.e("JSON Error", "Unable to get JSON Object Array");
             }
         });
