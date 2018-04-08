@@ -53,11 +53,6 @@
             android:label="@string/title_activity_choose_movie"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".archived.OldSearchActivity"
-            android:label="SearchUserActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".activity.EditPostActivity"
             android:label="@string/title_activity_edit_post"
             android:theme="@style/AppTheme" />
