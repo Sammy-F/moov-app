@@ -12,6 +12,7 @@
     <string name="year">Year</string>
     <string name="runtime">Runtime</string>
     <string name="movie_summary">Movie Summary</string>
+    <string name="new_username">Please input your new username</string>
 
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>

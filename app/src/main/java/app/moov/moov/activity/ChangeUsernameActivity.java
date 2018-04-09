@@ -18,6 +18,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import app.moov.moov.R;
 
@@ -27,12 +32,12 @@ import app.moov.moov.R;
 
 public class ChangeUsernameActivity extends ToolbarBaseActivity{
 
-    private EditText etCurrentUserName;
     private EditText etNewUserName;
     private Button btnChangeUsername;
-
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
+    private DatabaseReference usernameReference;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +52,19 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
+        database = FirebaseDatabase.getInstance();
+        usernameReference = database.getReference().child("Usernames");
         setUIViews();
     }
 
     private void setUIViews() {
-        etCurrentUserName = (EditText) findViewById(R.id.etEmail); ///CHANGE THIS
-        etNewUserName = (EditText) findViewById(R.id.etPass); ///CHANGE THIS
+        etNewUserName = (EditText) findViewById(R.id.etChangeUsername);
+        btnChangeUsername = (Button) findViewById(R.id.btnChangeUsername);
 
         btnChangeUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                changeUsername();
+                changeUsername();
             }
         });
 
@@ -71,7 +78,27 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
         });
     }
 
-    private void changeEmail() {
+    private void changeUsername() {
+        final String newUsername = etNewUserName.getText().toString().trim();
+        //Check to see whether the username exists
+        usernameReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (newUsername.exists()) {
+//                    Toast.makeText(ChangeUsernameActivity.this, dataSnapshot + " already exists! Please choose another username", Toast.LENGTH_LONG).show();
+//                } else {
+//
+//                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
     }
 
