@@ -30,6 +30,7 @@ public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     private Context thisContext;
     private List<Post> postList;
+    private long lastTimestamp;
 
     public PaginationRecyclerAdapter(Context thisContext) {
         super();
@@ -247,6 +248,14 @@ public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         return postList == null ? 0 : postList.size();
 //        return postList.size();
     }
+
+    public void setLastTimeStamp(long newTime) {
+
+        this.lastTimestamp = newTime;
+
+    }
+
+    public Long getLastTimestamp() { return this.lastTimestamp; }
 
     public Long getLastItemTimestamp() {
         Log.e("timestamp post", Long.toString(postList.get(postList.size() -1).getTime()));
