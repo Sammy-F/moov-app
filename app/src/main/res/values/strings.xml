@@ -62,6 +62,7 @@
     <string name="btn_go">Let\'s Go!</string>
 
     <string name="search_for_movie">Search for a movie</string>
+    <string name="search_movie_to_review">Find a movie to review</string>
 
     <string name="change_avatar">Change Avatar</string>
     <string name="account">Account</string>
