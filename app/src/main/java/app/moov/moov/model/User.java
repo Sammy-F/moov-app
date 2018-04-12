@@ -7,12 +7,16 @@ package app.moov.moov.model;
 public class User {
     private String Username;
     private String lowername;
+    private String FirstName;
+    private String LastName;
     public User() {
     }
 
-    public User(String lowername, String Username, String UID) {
+    public User(String lowername, String Username, String UID, String FirstName, String LastName) {
         this.lowername = lowername;
         this.Username = Username;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
     }
 
     public String getlowername() {
@@ -30,4 +34,12 @@ public class User {
     public void setUsername(String Username) {
         this.Username = Username;
     }
+
+    public String getFirstName() { return FirstName; }
+
+    public void setFirstName(String FirstName) { this.FirstName = FirstName; }
+
+    public String getLastName() { return LastName; }
+
+    public void setLastName(String LastName) { this.LastName = LastName; }
 }

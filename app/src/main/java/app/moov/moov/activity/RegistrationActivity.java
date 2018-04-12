@@ -44,6 +44,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText etPassword;
     private EditText etPassword2;
     private EditText etEmail;
+    private EditText etFirstName;
+    private EditText etLastName;
+
     private ProgressBar regProgress;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
@@ -51,6 +54,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private String userName;
     private String userEmail;
     private String userPassword;
+    private String firstName;
+    private String lastName;
 
     private FirebaseStorage firebaseStorage;
     private StorageReference storageRef;
@@ -84,6 +89,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 userName = etUsername.getText().toString().trim();
                 userEmail = etEmail.getText().toString().trim();
                 userPassword = etPassword.getText().toString().trim();
+                firstName = etFirstName.getText().toString().trim();
+                lastName = etLastName.getText().toString().trim();
 
                 if (validate()) {
                     regProgress.setVisibility(View.VISIBLE);
@@ -107,6 +114,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                             currentPerson=FirebaseAuth.getInstance().getCurrentUser();
                                             DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentPerson.getUid());
                                             ref.child("Username").setValue(userName);
+                                            ref.child("FirstName").setValue(firstName);
+                                            ref.child("LastName").setValue(lastName);
 
                                             String thisUID = firebaseAuth.getUid();
 
@@ -150,6 +159,8 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword2 = (EditText) findViewById(R.id.etPassword2);
         etEmail = (EditText) findViewById(R.id.etEmail);
         regProgress = (ProgressBar) findViewById(R.id.regProcess);
+        etFirstName = (EditText) findViewById(R.id.etFirstName);
+        etLastName = (EditText) findViewById(R.id.etLastName);
 
         findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -193,8 +204,10 @@ public class RegistrationActivity extends AppCompatActivity {
         String password1 = etPassword.getText().toString();
         String password2 = etPassword2.getText().toString();
         String email = etEmail.getText().toString();
+        String firstName = etFirstName.getText().toString().trim();
+        String lastName = etLastName.getText().toString().trim();
 
-        if (name.isEmpty() || password1.isEmpty() || password2.isEmpty() || email.isEmpty()) {
+        if (name.isEmpty() || password1.isEmpty() || password2.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
             Toast.makeText(RegistrationActivity.this, "Please enter all details!", Toast.LENGTH_LONG).show();
             return false;
         } else if (!password1.trim().equals(password2.trim())){

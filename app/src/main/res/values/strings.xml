@@ -14,6 +14,9 @@
     <string name="movie_summary">Movie Summary</string>
     <string name="new_username">Please input your new username</string>
 
+    <string name="hint_first_name">First name</string>
+    <string name="hint_last_name">Last name</string>
+
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>

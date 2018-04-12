@@ -99,6 +99,7 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
             @Override
             protected void onBindViewHolder(final UserResultViewHolder viewHolder, int position, User model) {
                 viewHolder.setUsername(model.getUsername()); //changed back
+                viewHolder.setFullName(model.getFirstName() + " " + model.getLastName());
                 username = model.getlowername();
 
                 //Retrieve the user information from Firebase
