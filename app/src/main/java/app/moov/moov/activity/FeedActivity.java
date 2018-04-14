@@ -28,34 +28,35 @@ import java.util.Iterator;
 
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
+import app.moov.moov.util.PaginatingPostsActivity;
 import app.moov.moov.util.PaginationRecyclerAdapter;
 
-public class FeedActivity extends ToolbarBaseActivity {
+public class FeedActivity extends PaginatingPostsActivity {
 
-    private RecyclerView feedRecycler;
-    private FirebaseDatabase database;
-    private DatabaseReference baseRef;
-    private DatabaseReference postsRef;
-    private FirebaseAuth firebaseAuth;
-    private LinearLayoutManager orderedManager;
-    private String uid;
-    private Context thisContext;
+//    private RecyclerView feedRecycler;
+//    private FirebaseDatabase database;
+//    private DatabaseReference baseRef;
+//    private DatabaseReference postsRef;
+//    private FirebaseAuth firebaseAuth;
+//    private LinearLayoutManager orderedManager;
+//    private String uid;
+//    private Context thisContext;
 
-    private String lastTime;
-    private boolean isLoading;
+//    private String lastTime;
+//    private boolean isLoading;
 
-    private PaginationRecyclerAdapter mAdapter;
+//    private PaginationRecyclerAdapter mAdapter;
 
-    private final int POSTS_PER_LOAD = 15;
-    private int mTotalItemCount;
-    private int mVisibleItemCount;
-    private int mfirstVisibleItemPos;
-
-    private long maxPosts;
-
-    private long numPosts;
-    private int maxPages;
-    private int currentPage;
+//    private final int POSTS_PER_LOAD = 15;
+//    private int mTotalItemCount;
+//    private int mVisibleItemCount;
+//    private int mfirstVisibleItemPos;
+//
+//    private long maxPosts;
+//
+//    private long numPosts;
+//    private int maxPages;
+//    private int currentPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,142 +70,88 @@ public class FeedActivity extends ToolbarBaseActivity {
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         setUpNavBar(navBar);
 
-        isLoading = true;
+//        isLoading = true;
+//        thisContext = this;
+//
+//        firebaseAuth = FirebaseAuth.getInstance();
+//        uid = firebaseAuth.getCurrentUser().getUid();
+//        database = FirebaseDatabase.getInstance();
+//        baseRef = database.getReference();
+//        postsRef = baseRef.child("Users").child(uid).child("Feed");
 
-        thisContext = this;
+//        postsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                finishedCounting(dataSnapshot.getChildrenCount());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        postsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                maxPosts = dataSnapshot.getChildrenCount();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         uid = firebaseAuth.getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
         baseRef = database.getReference();
         postsRef = baseRef.child("Users").child(uid).child("Feed");
-
-        postsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                finishedCounting(dataSnapshot.getChildrenCount());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        postsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                maxPosts = dataSnapshot.getChildrenCount();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        setupDatabaseRefs();
 
         setUIViews();
     }
 
-    private void finishedCounting(long numPosts) {
-        this.numPosts = numPosts;
-        this.maxPages = (int) numPosts/POSTS_PER_LOAD;
-        this.currentPage = 1;
-    }
+//    private void finishedCounting(long numPosts) {
+//        this.numPosts = numPosts;
+//        this.maxPages = (int) numPosts/POSTS_PER_LOAD;
+//        this.currentPage = 1;
+//    }
 
-    private void loadPosts(long lastTimestamp) {
-        Log.e("firing loader post", "loadPosts() fired");
-
-        Query loadQuery = postsRef.orderByChild("timestamp").startAt(mAdapter.getLastTimestamp()).limitToFirst(POSTS_PER_LOAD);
-
-        Log.e("query created", "created query");
-        Log.e("query info", loadQuery.toString());
-
-        ValueEventListener mListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterator<DataSnapshot> dataIter = dataSnapshot.getChildren().iterator();
-                int length = (int) dataSnapshot.getChildrenCount();
-
-                if (length == POSTS_PER_LOAD) {
-                    for (int i = 0; i < length - 2; i++) {
-                        baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-
-                    baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                } else {
-                    for (int i = 0; i < length; i++) {
-                        baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-                }
-//                for (DataSnapshot nextPost : dataSnapshot.getChildren()) {
-//                    Log.e("post key found", nextPost.getKey());
-//                    baseRef.child("Posts").child(nextPost.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            mAdapter.addItem(dataSnapshot.getValue(Post.class));
-//                            Log.e("new post found", dataSnapshot.getValue(Post.class).toString());
-//                        }
+//    private void loadPosts(long lastTimestamp) {
+//        Log.e("firing loader post", "loadPosts() fired");
 //
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
+//        Query loadQuery = postsRef.orderByChild("timestamp").startAt(mAdapter.getLastTimestamp()).limitToFirst(POSTS_PER_LOAD);
 //
-//                        }
-//                    });
-//                }
-                isLoading = false;
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                Log.e("was cancelled", "cancelled new post key load");
-                isLoading = false;
-
-            }
-        };
-
-        loadQuery.addListenerForSingleValueEvent(mListener);
-//        loadQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//        Log.e("query created", "created query");
+//        Log.e("query info", loadQuery.toString());
+//
+//        ValueEventListener mListener = new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Log.e("added listener", "value event listener added to query");
-//                for (DataSnapshot nextPost : dataSnapshot.getChildren()) {
-//                    Log.e("post key found", nextPost.getKey());
-//                    baseRef.child("Posts").child(nextPost.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                Iterator<DataSnapshot> dataIter = dataSnapshot.getChildren().iterator();
+//                int length = (int) dataSnapshot.getChildrenCount();
+//
+//                if (length == POSTS_PER_LOAD) {
+//                    for (int i = 0; i < length - 2; i++) {
+//                        baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
+//                    }
+//
+//                    baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
 //                        @Override
 //                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            mAdapter.addItem(dataSnapshot.getValue(Post.class));
-//                            Log.e("new post found", dataSnapshot.getValue(Post.class).toString());
+//                            mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
 //                        }
 //
 //                        @Override
@@ -212,6 +159,20 @@ public class FeedActivity extends ToolbarBaseActivity {
 //
 //                        }
 //                    });
+//                } else {
+//                    for (int i = 0; i < length; i++) {
+//                        baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
+//                    }
 //                }
 //                isLoading = false;
 //            }
@@ -222,16 +183,17 @@ public class FeedActivity extends ToolbarBaseActivity {
 //                isLoading = false;
 //
 //            }
-//        });
-
-        loadQuery.removeEventListener(mListener);
-
-        isLoading = false;
-        mAdapter.notifyDataSetChanged();
-
-        currentPage++;
-
-    }
+//        };
+//
+//        loadQuery.addListenerForSingleValueEvent(mListener);
+//        loadQuery.removeEventListener(mListener);
+//
+//        isLoading = false;
+//        mAdapter.notifyDataSetChanged();
+//
+//        currentPage++;
+//
+//    }
 
     /**
      * Initialize layout objects, called in onCreate
@@ -247,69 +209,41 @@ public class FeedActivity extends ToolbarBaseActivity {
         feedRecycler.setLayoutManager(orderedManager);
         feedRecycler.setItemAnimator(new DefaultItemAnimator());
 
-        // load first set of posts
-        Query keysQuery = postsRef.orderByChild("timestamp").limitToFirst(POSTS_PER_LOAD);
-
-        mAdapter = new PaginationRecyclerAdapter(thisContext);
-
-        feedRecycler.setAdapter(mAdapter);
-
-        keysQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterator<DataSnapshot> dataIter = dataSnapshot.getChildren().iterator();
-                int length = (int) dataSnapshot.getChildrenCount();
-
-                if (length == POSTS_PER_LOAD) {
-                    for (int i = 0; i < length - 2; i++) {
-                        baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-
-                    baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
-                            Log.e("last time", Long.toString(dataSnapshot.getValue(Post.class).getTime()));
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-                } else {
-                    for (int i = 0; i < length; i++) {
-                        baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-                }
-//                for (DataSnapshot post : dataSnapshot.getChildren()) {
-//                    Log.e("found", "found post key");
-//                    baseRef.child("Posts").child(post.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+        initPostLoad();
+//        // load first set of posts
+//        Query keysQuery = postsRef.orderByChild("timestamp").limitToFirst(POSTS_PER_LOAD);
+//
+//        mAdapter = new PaginationRecyclerAdapter(thisContext);
+//
+//        feedRecycler.setAdapter(mAdapter);
+//
+//        keysQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                Iterator<DataSnapshot> dataIter = dataSnapshot.getChildren().iterator();
+//                int length = (int) dataSnapshot.getChildrenCount();
+//
+//                if (length == POSTS_PER_LOAD) {
+//                    for (int i = 0; i < length - 2; i++) {
+//                        baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
+//                    }
+//
+//                    baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
 //                        @Override
 //                        public void onDataChange(DataSnapshot dataSnapshot) {
-////                            postList.add(dataSnapshot.getValue(Post.class));
+//                            mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
+//                            Log.e("last time", Long.toString(dataSnapshot.getValue(Post.class).getTime()));
 //                        }
 //
 //                        @Override
@@ -317,44 +251,57 @@ public class FeedActivity extends ToolbarBaseActivity {
 //
 //                        }
 //                    });
+//
+//                } else {
+//                    for (int i = 0; i < length; i++) {
+//                        baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
+//                    }
 //                }
-//                mAdapter.addAll(postList);
-                Log.e("numitems post", Integer.toString(mAdapter.getItemCount()));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                isLoading = false;
-
-            }
-        });
-
-        isLoading = false;
-        mAdapter.notifyDataSetChanged();
-
-        Log.e("post list", mAdapter.getPostList().toString());
-
-        feedRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-//                mTotalItemCount = (int) numPosts;
-                mTotalItemCount = orderedManager.getItemCount();
-                mVisibleItemCount = orderedManager.getChildCount();
-                mfirstVisibleItemPos = orderedManager.findFirstVisibleItemPosition();
-
-                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (currentPage <= maxPages)
-//                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (mAdapter.getItemCount() <= maxPosts)
-                        && mfirstVisibleItemPos >= 0) {
-
-                    loadPosts(mAdapter.getLastTimestamp());
-                    isLoading = true;
-
-                }
-
-            }
-        });
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//                isLoading = false;
+//
+//            }
+//        });
+//
+//        isLoading = false;
+//        mAdapter.notifyDataSetChanged();
+//
+//        Log.e("post list", mAdapter.getPostList().toString());
+//
+//        feedRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+////                mTotalItemCount = (int) numPosts;
+//                mTotalItemCount = orderedManager.getItemCount();
+//                mVisibleItemCount = orderedManager.getChildCount();
+//                mfirstVisibleItemPos = orderedManager.findFirstVisibleItemPosition();
+//
+//                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (currentPage <= maxPages)
+////                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (mAdapter.getItemCount() <= maxPosts)
+//                        && mfirstVisibleItemPos >= 0) {
+//
+//                    loadPosts(mAdapter.getLastTimestamp());
+//                    isLoading = true;
+//
+//                }
+//
+//            }
+//        });
 
     }
 }
