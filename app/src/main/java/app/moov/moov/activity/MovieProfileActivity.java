@@ -99,30 +99,30 @@ public class MovieProfileActivity extends ToolbarBaseActivity{
                     String title = (String) response.get("title");
                     tvMovieTitle = (TextView) findViewById(R.id.tvMovieTitle);
                     if (title != null) {
-                        tvMovieTitle.setText(title);
+                        tvMovieTitle.setText("Movie Title: " + title);
                     }
 
                     String releaseDate = (String) response.get("release_date");
                     tvReleaseYear = (TextView) findViewById(R.id.tvReleaseYear);
                     if (releaseDate!=null) {
                         String subString = releaseDate.substring(0, 4);
-                        tvReleaseYear.setText(subString);
+                        tvReleaseYear.setText("Release Year: " + subString);
                     }
 
                     String summary = (String) response.get("overview");
                     tvMovieSummary = (TextView) findViewById(R.id.tvMovieSummary);
                     if (summary!=null) {
-                        tvMovieSummary.setText(summary);
+                        tvMovieSummary.setText("Movie Summary: " + summary);
                     }
 
                     tvRunTime = (TextView) findViewById(R.id.tvRuntime);
 
                     try {
                         Integer runtime = (Integer) response.get("runtime");
-                        tvRunTime.setText(Integer.toString(runtime));
+                        tvRunTime.setText("Runtime: " + Integer.toString(runtime));
                     } catch (ClassCastException e) { //catch null runtimes
                         String unknown = "Run time unknown";
-                        tvRunTime.setText(unknown);
+                        tvRunTime.setText("Runtime: " +unknown);
                     }
 
                     ivMoviePoster = (ImageView) findViewById(R.id.ivMoviePoster);

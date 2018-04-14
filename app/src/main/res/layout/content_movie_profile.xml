@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v4.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
@@ -34,8 +35,8 @@
 
         <TextView
             android:id="@+id/tvMovieTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="227dp"
+            android:layout_height="43dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="36dp"
@@ -54,11 +55,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/year"
+            app:layout_constraintBottom_toTopOf="@id/tvRuntime"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.162"
+            app:layout_constraintHorizontal_bias="0.072"
             app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
-            app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
-            app:layout_constraintBottom_toTopOf="@id/tvRuntime"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
 
         <TextView
             android:id="@+id/tvRuntime"
@@ -71,7 +72,7 @@
             android:text="@string/runtime"
             app:layout_constraintBottom_toTopOf="@+id/tvMovieSummary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.18"
+            app:layout_constraintHorizontal_bias="0.129"
             app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
             app:layout_constraintTop_toBottomOf="@+id/tvReleaseYear"
             app:layout_constraintVertical_bias="0.0" />
