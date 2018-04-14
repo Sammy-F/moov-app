@@ -142,10 +142,10 @@ public class OtherUserProfile extends ToolbarBaseActivity {
 
         userRecycler = (RecyclerView) findViewById(R.id.userRecycler);
         userRecycler.setHasFixedSize(true);
+
         orderedManager = new LinearLayoutManager(this);
-        orderedManager.setAutoMeasureEnabled(true);
-        userRecycler.setLayoutManager(orderedManager);
-        userRecycler.setNestedScrollingEnabled(true);
+//        orderedManager.setReverseLayout(true);
+//        orderedManager.setStackFromEnd(true);
 
         userRecycler.setLayoutManager(orderedManager);
 
