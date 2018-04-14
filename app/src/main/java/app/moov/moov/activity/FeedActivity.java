@@ -45,6 +45,7 @@ public class FeedActivity extends PaginatingPostsActivity {
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         setUpNavBar(navBar);
 
+        // initialize the variables in the super class
         firebaseAuth = FirebaseAuth.getInstance();
         uid = firebaseAuth.getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
@@ -59,6 +60,8 @@ public class FeedActivity extends PaginatingPostsActivity {
      * Initialize layout objects, called in onCreate
      */
     private void setUIViews() {
+
+        //initialize the remaining variables in the super class
         feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
         feedRecycler.setHasFixedSize(true);
 
