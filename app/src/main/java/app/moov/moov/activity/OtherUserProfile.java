@@ -40,12 +40,6 @@ public class OtherUserProfile extends PaginatingPostsActivity {
     private String thisUserID;
     private String currentUID;
 
-//    private FirebaseAuth firebaseAuth;
-//    private FirebaseDatabase database;
-//    private DatabaseReference baseRef;
-//    private RecyclerView feedRecycler;
-//    private LinearLayoutManager orderedManager;
-
     private TextView tvNumFollowers;
     private TextView tvNumFollowing;
     private TextView tvUsername;
@@ -223,7 +217,6 @@ public class OtherUserProfile extends PaginatingPostsActivity {
                             thisUserRef.child("Followers").child(currentUID).removeValue();
                             currentUserRef.child("Following").child(thisUserID).removeValue();
                             btnFollow.setText("Follow");
-//                            Toast.makeText(OtherUserProfile.this,"You already follow them.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -239,76 +232,9 @@ public class OtherUserProfile extends PaginatingPostsActivity {
         feedRecycler.setHasFixedSize(true);
 
         orderedManager = new LinearLayoutManager(this);
-//        orderedManager.setReverseLayout(true);
-//        orderedManager.setStackFromEnd(true);
-
         feedRecycler.setLayoutManager(orderedManager);
 
         initPostLoad();
     }
-
-//    @Override
-//    protected void onStart() {
-//
-//        super.onStart();
-//
-//        Query query = thisUserRef.child("Posts").orderByChild("timestamp");
-//
-//        FirebaseRecyclerOptions<Post> options =
-//                new FirebaseRecyclerOptions.Builder<Post>()
-//                        .setIndexedQuery(query, baseRef.child("Posts"), Post.class)
-//                        .build();
-//
-//            FirebaseSwitchingAdapter FBRA = new FirebaseSwitchingAdapter(options, thisContext);
-//
-//        FBRA.startListening();
-//        feedRecycler.setAdapter(FBRA);
-//    }
-
-    /**
-     * ViewHolder class for use on the profile
-     */
-//    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
-//
-//        private TextView btnMovieTitle;
-//        private TextView movieReview;
-//        private ImageView ivPoster;
-//
-//        public ProfileFeedHolder(View itemView) {
-//            super(itemView);
-//            View mView = itemView;
-//            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
-//            ivPoster = itemView.findViewById(R.id.ivPoster);
-//        }
-//
-//        public void setTitle(String title) {
-//            btnMovieTitle.setText(title);
-//        }
-//
-//        public void setRating(float rating) {
-//            RatingBar movieRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
-//            movieRating.setIsIndicator(true);
-//            movieRating.setRating(rating);
-//        }
-//
-//        public void setReview(String review) {
-//            movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
-//            movieReview.setText(review);
-//        }
-//
-//        public TextView getReviewView() { return movieReview; }
-//
-//        public void setUsername(String username) {
-//            TextView userName = (TextView) itemView.findViewById(R.id.Username);
-//            userName.setText(username);
-//        }
-//
-//        public TextView getBtnMovieTitle() { return btnMovieTitle; }
-//
-//        public ImageView getIvPoster() {
-//            return ivPoster;
-//        }
-//
-//    }
 
 }
