@@ -33,31 +33,6 @@ import app.moov.moov.util.PaginationRecyclerAdapter;
 
 public class FeedActivity extends PaginatingPostsActivity {
 
-//    private RecyclerView feedRecycler;
-//    private FirebaseDatabase database;
-//    private DatabaseReference baseRef;
-//    private DatabaseReference postsRef;
-//    private FirebaseAuth firebaseAuth;
-//    private LinearLayoutManager orderedManager;
-//    private String uid;
-//    private Context thisContext;
-
-//    private String lastTime;
-//    private boolean isLoading;
-
-//    private PaginationRecyclerAdapter mAdapter;
-
-//    private final int POSTS_PER_LOAD = 15;
-//    private int mTotalItemCount;
-//    private int mVisibleItemCount;
-//    private int mfirstVisibleItemPos;
-//
-//    private long maxPosts;
-//
-//    private long numPosts;
-//    private int maxPages;
-//    private int currentPage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
