@@ -68,6 +68,7 @@ public class MovieProfileActivity extends ToolbarBaseActivity{
     private void setUIViews() {
 
         movieRecycler = (RecyclerView) findViewById(R.id.movieRecycler);
+        movieRecycler.setFocusable(false);
         movieRecycler.setHasFixedSize(true);
         orderedManager = new LinearLayoutManager(this);
 //        orderedManager.setAutoMeasureEnabled(true);
@@ -112,14 +113,14 @@ public class MovieProfileActivity extends ToolbarBaseActivity{
                     String summary = (String) response.get("overview");
                     tvMovieSummary = (TextView) findViewById(R.id.tvMovieSummary);
                     if (summary!=null) {
-                        tvMovieSummary.setText("Movie Summary: " + summary);
+                        tvMovieSummary.setText("Summary: " + summary);
                     }
 
                     tvRunTime = (TextView) findViewById(R.id.tvRuntime);
 
                     try {
                         Integer runtime = (Integer) response.get("runtime");
-                        tvRunTime.setText("Runtime: " + Integer.toString(runtime));
+                        tvRunTime.setText("Runtime: " + Integer.toString(runtime) + " minutes");
                     } catch (ClassCastException e) { //catch null runtimes
                         String unknown = "Run time unknown";
                         tvRunTime.setText("Runtime: " +unknown);
