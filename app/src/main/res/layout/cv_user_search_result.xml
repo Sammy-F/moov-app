@@ -14,18 +14,18 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tvFullname"
+            android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/tvUsername"
-            android:layout_below="@+id/tvUsername"
+            android:layout_alignEnd="@+id/tvFullname"
+            android:layout_below="@+id/tvFullname"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:text="Full Name"
+            android:text="@string/hint_username"
             android:textColor="@color/card_username"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/tvUsername"
+            app:layout_constraintBottom_toTopOf="@+id/tvFullname"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.156"
             app:layout_constraintStart_toEndOf="@+id/ivUserIcon"
@@ -33,7 +33,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/tvUsername"
+            android:id="@+id/tvFullname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/ivUserIcon"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@+id/ivUserIcon"
-            android:text="Username"
+            android:text="@string/hint_name"
             android:textColor="@color/card_username"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
