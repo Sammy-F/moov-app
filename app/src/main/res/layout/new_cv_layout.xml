@@ -9,48 +9,19 @@
     android:layout_margin="16dp"
     card_view:cardCornerRadius="7dp">
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/ivPoster"
-            android:layout_width="90dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/iv_border"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@id/MovieReview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.963"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/MovieReview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/card_movietitle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivPoster"
-            app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp">
 
         <TextView
             android:id="@+id/Username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/ivPoster"
+            android:layout_marginStart="11dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/hint_username"
             android:textColor="@color/card_username"
@@ -64,35 +35,44 @@
 
         <TextView
             android:id="@+id/MovieTitle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_alignStart="@+id/Username"
+            android:layout_below="@+id/Username"
+            android:layout_marginTop="14dp"
             android:background="@color/cardview_light_background"
             android:text="@string/movie"
-            android:textColor="@color/card_movietitle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ivPoster"
-            app:layout_constraintHorizontal_bias="0.314"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Username"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintWidth_max="220dp" />
+            android:textColor="@color/card_movietitle" />
+
+        <TextView
+            android:id="@+id/MovieReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/ratingBar"
+            android:layout_below="@+id/ivPoster"
+            android:layout_marginTop="16dp"
+            android:text="moveireview"
+            android:textColor="@color/card_movietitle" />
+
 
         <RatingBar
             android:id="@+id/ratingBar"
             style="@style/Widget.AppCompat.RatingBar.Indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ivPoster"
-            app:layout_constraintHorizontal_bias="0.156"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/MovieTitle"
-            app:layout_constraintVertical_bias="0.0" />
-    </android.support.constraint.ConstraintLayout>
+            android:layout_alignStart="@+id/MovieTitle"
+            android:layout_below="@+id/MovieTitle"
+            android:layout_marginTop="20dp" />
+
+        <ImageView
+            android:id="@+id/ivPoster"
+            android:layout_width="90dp"
+            android:layout_height="120dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/iv_border"
+            android:scaleType="centerCrop" />
+
+    </RelativeLayout>
 </android.support.v7.widget.CardView>
