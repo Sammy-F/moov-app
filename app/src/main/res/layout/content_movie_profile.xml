@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_marginBottom="56dp"
@@ -9,11 +10,14 @@
     tools:showIn="@layout/activity_movie_profile">
 
     <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="56dp"
-        android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="56dp"
+    android:layout_height="match_parent"
+
+    >
 
         <ImageView
             android:id="@+id/ivMoviePoster"
@@ -88,7 +92,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/movieRecycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="396dp"
             android:layout_marginBottom="56dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
