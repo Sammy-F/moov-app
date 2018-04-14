@@ -70,7 +70,12 @@ public class MovieProfileActivity extends ToolbarBaseActivity{
         movieRecycler = (RecyclerView) findViewById(R.id.movieRecycler);
         movieRecycler.setHasFixedSize(true);
         orderedManager = new LinearLayoutManager(this);
+        orderedManager.setAutoMeasureEnabled(true);
         movieRecycler.setLayoutManager(orderedManager);
+        movieRecycler.setNestedScrollingEnabled(true);
+
+//        movieRecycler.setNestedScrollingEnabled(false);
+
 
         DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
         Query keysQuery = FirebaseDatabase.getInstance().getReference().child("PostsByMovie").child(Integer.toString(movieID)).orderByChild("timestamp");

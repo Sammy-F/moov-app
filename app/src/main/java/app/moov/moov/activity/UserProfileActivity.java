@@ -284,6 +284,7 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         profileFeedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
         profileFeedRecycler.setHasFixedSize(true);
 
+//        profileFeedRecycler.setNestedScrollingEnabled(false);
         orderedManager = new LinearLayoutManager(this);
 
         profileFeedRecycler.setLayoutManager(orderedManager);
