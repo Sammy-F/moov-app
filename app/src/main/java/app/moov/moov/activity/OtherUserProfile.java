@@ -5,14 +5,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,32 +31,25 @@ import com.google.firebase.storage.StorageReference;
 
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
-import app.moov.moov.model.User;
 import app.moov.moov.util.FirebaseSwitchingAdapter;
+import app.moov.moov.util.PaginatingPostsActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class OtherUserProfile extends ToolbarBaseActivity {
+public class OtherUserProfile extends PaginatingPostsActivity {
 
     private String thisUserID;
     private String currentUID;
-
-    private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference ref;
-    private DatabaseReference usersRef;
-
-    private DatabaseReference currentUserRef;
-    private DatabaseReference thisUserRef;
 
     private TextView tvNumFollowers;
     private TextView tvNumFollowing;
     private TextView tvUsername;
     private Button btnFollow;
 
-    private RecyclerView userRecycler;
-    private LinearLayoutManager orderedManager;
-
     private Context thisContext;
+
+    private DatabaseReference usersRef;
+    private DatabaseReference currentUserRef;
+    private DatabaseReference thisUserRef;
 
     private LinearLayout llFollowers;
     private LinearLayout llFollowing;
@@ -87,14 +75,17 @@ public class OtherUserProfile extends ToolbarBaseActivity {
         thisUserID = getIntent().getStringExtra("thisUserID");
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        ref = database.getReference();
-        usersRef = ref.child("Users");
+        baseRef = database.getReference();
+        usersRef = baseRef.child("Users");
         currentUID = firebaseAuth.getCurrentUser().getUid();
         currentUserRef = usersRef.child(currentUID);
         thisUserRef = usersRef.child(thisUserID);
+        postsRef = thisUserRef.child("Posts");
 
         firebaseStorage = FirebaseStorage.getInstance();
         avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(thisUserID + ".png");
+
+        setupDatabaseRefs();
 
         setUIViews();
     }
@@ -139,15 +130,6 @@ public class OtherUserProfile extends ToolbarBaseActivity {
             }
         });
 
-
-        userRecycler = (RecyclerView) findViewById(R.id.userRecycler);
-        userRecycler.setHasFixedSize(true);
-
-        orderedManager = new LinearLayoutManager(this);
-//        orderedManager.setReverseLayout(true);
-//        orderedManager.setStackFromEnd(true);
-
-        userRecycler.setLayoutManager(orderedManager);
 
         // Set the text for the follow/unfollow button
         thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -235,7 +217,6 @@ public class OtherUserProfile extends ToolbarBaseActivity {
                             thisUserRef.child("Followers").child(currentUID).removeValue();
                             currentUserRef.child("Following").child(thisUserID).removeValue();
                             btnFollow.setText("Follow");
-//                            Toast.makeText(OtherUserProfile.this,"You already follow them.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -247,70 +228,13 @@ public class OtherUserProfile extends ToolbarBaseActivity {
             }
         });
 
-    }
+        feedRecycler = (RecyclerView) findViewById(R.id.userRecycler);
+        feedRecycler.setHasFixedSize(true);
 
-    @Override
-    protected void onStart() {
+        orderedManager = new LinearLayoutManager(this);
+        feedRecycler.setLayoutManager(orderedManager);
 
-        super.onStart();
-
-        Query query = thisUserRef.child("Posts").orderByChild("timestamp");
-
-        FirebaseRecyclerOptions<Post> options =
-                new FirebaseRecyclerOptions.Builder<Post>()
-                        .setIndexedQuery(query, ref.child("Posts"), Post.class)
-                        .build();
-
-            FirebaseSwitchingAdapter FBRA = new FirebaseSwitchingAdapter(options, thisContext);
-
-        FBRA.startListening();
-        userRecycler.setAdapter(FBRA);
-    }
-
-    /**
-     * ViewHolder class for use on the profile
-     */
-    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
-
-        private TextView btnMovieTitle;
-        private TextView movieReview;
-        private ImageView ivPoster;
-
-        public ProfileFeedHolder(View itemView) {
-            super(itemView);
-            View mView = itemView;
-            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
-        }
-
-        public void setTitle(String title) {
-            btnMovieTitle.setText(title);
-        }
-
-        public void setRating(float rating) {
-            RatingBar movieRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
-            movieRating.setIsIndicator(true);
-            movieRating.setRating(rating);
-        }
-
-        public void setReview(String review) {
-            movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
-            movieReview.setText(review);
-        }
-
-        public TextView getReviewView() { return movieReview; }
-
-        public void setUsername(String username) {
-            TextView userName = (TextView) itemView.findViewById(R.id.Username);
-            userName.setText(username);
-        }
-
-        public TextView getBtnMovieTitle() { return btnMovieTitle; }
-
-        public ImageView getIvPoster() {
-            return ivPoster;
-        }
-
+        initPostLoad();
     }
 
 }

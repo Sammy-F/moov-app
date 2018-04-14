@@ -2,21 +2,14 @@ package app.moov.moov.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -24,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +32,7 @@ import com.google.firebase.storage.StorageReference;
 
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
-import app.moov.moov.util.FirebaseSwitchingAdapter;
+import app.moov.moov.util.PaginatingPostsActivity;
 import app.moov.moov.util.SelfProfileSwitchingAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -52,7 +44,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Modified by Sammy 3/25/18
  */
 
-public class UserProfileActivity extends ToolbarBaseActivity {
+public class UserProfileActivity extends PaginatingPostsActivity {
 
     private TextView tvUsername;
     private TextView tvNumFollowing;
@@ -61,17 +53,16 @@ public class UserProfileActivity extends ToolbarBaseActivity {
     private String username;
     private String userID;
 
-    private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference ref;
-    private DatabaseReference userRef;
-    private DatabaseReference userPostsRef;
+//    private FirebaseAuth firebaseAuth;
+//    private FirebaseDatabase database;
+//    private DatabaseReference baseRef;
+//    private DatabaseReference postsRef;
+    //    private RecyclerView profileFeedRecycler;
+    //    private Context thisContext;
+
     private DatabaseReference allUsers;
 
-    private RecyclerView profileFeedRecycler;
-    private LinearLayoutManager orderedManager;
-
-    private Context thisContext;
+    private DatabaseReference userRef;
 
     private LinearLayout llFollowers;
     private LinearLayout llFollowing;
@@ -100,13 +91,16 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(userID + ".png");
 
-        setUIViews();
+//        setUIViews();
 
         database = FirebaseDatabase.getInstance();
-        ref = database.getReference();
+        baseRef = database.getReference();
         userRef = database.getReference().child("Users").child(uid);
-        userPostsRef = database.getReference().child("Users").child(uid).child("Posts");
-        allUsers = ref.child("Users");
+        postsRef = database.getReference().child("Users").child(uid).child("Posts");
+        allUsers = baseRef.child("Users");
+
+        setupDatabaseRefs();
+        setUIViews();
 
         // Set text for number of Followers user has
         userRef.child("Followers").addValueEventListener(new ValueEventListener() {
@@ -154,77 +148,77 @@ public class UserProfileActivity extends ToolbarBaseActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-
-        super.onStart();
-
-        Query query = userPostsRef.orderByChild("timestamp");
-
-        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                .setIndexedQuery(query, ref.child("Posts"), Post.class)
-                .build();
-
-        SelfProfileSwitchingAdapter FBRA = new SelfProfileSwitchingAdapter(options, thisContext);
-
-        FBRA.startListening();
-        profileFeedRecycler.setAdapter(FBRA);
-
-    }
+//    @Override
+//    protected void onStart() {
+//
+//        super.onStart();
+//
+//        Query query = postsRef.orderByChild("timestamp");
+//
+//        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+//                .setIndexedQuery(query, baseRef.child("Posts"), Post.class)
+//                .build();
+//
+//        SelfProfileSwitchingAdapter FBRA = new SelfProfileSwitchingAdapter(options, thisContext);
+//
+//        FBRA.startListening();
+//        profileFeedRecycler.setAdapter(FBRA);
+//
+//    }
 
     /**
      * Internal ViewHolder class used with
      * the custom Adapter for our profile
      * RecyclerView
      */
-    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
-
-        private TextView btnMovieTitle;
-        private TextView movieReview;
-        private ImageView ivPoster;
-        private Button editButton;
-        private Button delButton;
-
-        public ProfileFeedHolder(View itemView) {
-            super(itemView);
-            View mView = itemView;
-            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
-        }
-
-        public void setTitle(String title) {
-            btnMovieTitle.setText(title);
-        }
-
-        public void setRating(float rating) {
-            RatingBar movieRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
-            movieRating.setIsIndicator(true);
-            movieRating.setRating(rating);
-        }
-
-        public void setReview(String review) {
-            movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
-            movieReview.setText(review);
-        }
-
-        public TextView getReviewView() { return movieReview; }
-
-        public void setUsername(String username) {
-            TextView userName = (TextView) itemView.findViewById(R.id.Username);
-            userName.setText(username);
-        }
-
-        public TextView getBtnMovieTitle() { return btnMovieTitle; }
-
-        public ImageView getIvPoster() {
-            return ivPoster;
-        }
-
-        public Button getDelButton() { return delButton; }
-
-        public Button getEditButton() { return editButton; }
-
-    }
+//    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
+//
+//        private TextView btnMovieTitle;
+//        private TextView movieReview;
+//        private ImageView ivPoster;
+//        private Button editButton;
+//        private Button delButton;
+//
+//        public ProfileFeedHolder(View itemView) {
+//            super(itemView);
+//            View mView = itemView;
+//            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
+//            ivPoster = itemView.findViewById(R.id.ivPoster);
+//        }
+//
+//        public void setTitle(String title) {
+//            btnMovieTitle.setText(title);
+//        }
+//
+//        public void setRating(float rating) {
+//            RatingBar movieRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
+//            movieRating.setIsIndicator(true);
+//            movieRating.setRating(rating);
+//        }
+//
+//        public void setReview(String review) {
+//            movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
+//            movieReview.setText(review);
+//        }
+//
+//        public TextView getReviewView() { return movieReview; }
+//
+//        public void setUsername(String username) {
+//            TextView userName = (TextView) itemView.findViewById(R.id.Username);
+//            userName.setText(username);
+//        }
+//
+//        public TextView getBtnMovieTitle() { return btnMovieTitle; }
+//
+//        public ImageView getIvPoster() {
+//            return ivPoster;
+//        }
+//
+//        public Button getDelButton() { return delButton; }
+//
+//        public Button getEditButton() { return editButton; }
+//
+//    }
 
     /**
      * Initialize layout variables
@@ -281,13 +275,15 @@ public class UserProfileActivity extends ToolbarBaseActivity {
         });
 
 
-        profileFeedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
-        profileFeedRecycler.setHasFixedSize(true);
+        feedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
+        feedRecycler.setHasFixedSize(true);
 
 //        profileFeedRecycler.setNestedScrollingEnabled(false);
         orderedManager = new LinearLayoutManager(this);
 
-        profileFeedRecycler.setLayoutManager(orderedManager);
+        feedRecycler.setLayoutManager(orderedManager);
+
+        initPostLoad();
     }
 
 }
