@@ -13,6 +13,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 import app.moov.moov.R;
 import app.moov.moov.activity.MovieProfileActivity;
 import app.moov.moov.activity.OtherUserProfile;
+import app.moov.moov.activity.UserProfileActivity;
 import app.moov.moov.model.Post;
 
 /**
@@ -190,9 +192,14 @@ public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
                 viewHolder1.getUsername().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(thisContext, OtherUserProfile.class);
-                        intent.putExtra("thisUserID", thisPost.getUID());
-                        thisContext.startActivity(intent);
+                        if (thisPost.getUID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            Intent intent = new Intent(thisContext, UserProfileActivity.class);
+                            thisContext.startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(thisContext, OtherUserProfile.class);
+                            intent.putExtra("thisUserID", thisPost.getUID());
+                            thisContext.startActivity(intent);
+                        }
                     }
                 });
 

@@ -73,7 +73,8 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         super.onStart();
 
         //Firebase Query using the string that was entered
-        final Query firebaseSearchQuery = usernamesRef.orderByChild("lowername").startAt(searchString).endAt(searchString + "\uf8ff").limitToFirst(20); //capping at 20 users
+        final Query firebaseSearchQuery = usernamesRef.orderByChild("lowername")
+                .startAt(searchString).endAt(searchString + "\uf8ff").limitToFirst(20); //capping at 20 users
 
         FirebaseRecyclerOptions<User> options =
                 new FirebaseRecyclerOptions.Builder<User>()
@@ -126,7 +127,6 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         //Clicked
                         if (viewHolder.getUid().equals(firebaseAuth.getCurrentUser().getUid())) {
                             Intent intent = new Intent(UserSearchResultsActivity.this, UserProfileActivity.class);
@@ -144,7 +144,6 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         firebaseRecyclerAdapter.startListening();
         searchResultList.setAdapter(firebaseRecyclerAdapter);
         progressBar.setVisibility(View.INVISIBLE);
-
     }
 
     private void setUIViews() {

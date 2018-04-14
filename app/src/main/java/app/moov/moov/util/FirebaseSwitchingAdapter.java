@@ -13,10 +13,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import app.moov.moov.R;
 import app.moov.moov.activity.MovieProfileActivity;
 import app.moov.moov.activity.OtherUserProfile;
+import app.moov.moov.activity.UserProfileActivity;
 import app.moov.moov.model.Post;
 
 /**
@@ -217,9 +219,14 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
                 viewHolderWith.getUserName().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(thisContext, OtherUserProfile.class);
-                        intent.putExtra("thisUserID", model.getUID());
-                        thisContext.startActivity(intent);
+                        if (model.getUID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            Intent intent = new Intent(thisContext, UserProfileActivity.class);
+                            thisContext.startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(thisContext, OtherUserProfile.class);
+                            intent.putExtra("thisUserID", model.getUID());
+                            thisContext.startActivity(intent);
+                        }
                     }
                 });
 
