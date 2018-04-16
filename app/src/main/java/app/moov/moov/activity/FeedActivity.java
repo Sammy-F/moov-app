@@ -41,7 +41,7 @@ public class FeedActivity extends PaginatingPostsActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
-        ConnectionTester connectionTester = new ConnectionTester(this);
+        ConnectionTester connectionTester = new ConnectionTester();
 
         if (connectionTester.connectionExists()) {
             activitySetup();

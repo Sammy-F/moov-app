@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ConnectionTester connectionTester = new ConnectionTester(this);
+        ConnectionTester connectionTester = new ConnectionTester();
 
         if (connectionTester.connectionExists()) {
             activitySetup();
