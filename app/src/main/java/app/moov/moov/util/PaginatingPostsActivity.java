@@ -1,6 +1,7 @@
 package app.moov.moov.util;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -256,6 +257,14 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
         };
 
         loadQuery.addListenerForSingleValueEvent(mListener);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // Actions to do after 10 seconds
+            }
+        }, 100);
+
         loadQuery.removeEventListener(mListener);
 
         isLoading = false;

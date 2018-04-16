@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import app.moov.moov.R;
+import app.moov.moov.util.ConnectionTester;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,43 +48,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setUIViews();
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        progressDialog = new ProgressDialog(this);
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-
-        // If user is already signed in, bring them to the Feed
-        if (user != null) {
-            finish();
-            startActivity(new Intent(MainActivity.this,FeedActivity.class));
-            finish();
-        }
-
-        // Call register() when register button is clicked
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                register();
-            }
-        });
-
-        // Check if login details are valid and do so
-        // if they are by calling validate()
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (!isEmpty(etEmail) && !isEmpty(etPassword)) {
-                    validate(etEmail.getText().toString().trim(), etPassword.getText().toString().trim());
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "Please input username and password.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
 
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.bg_video);
@@ -97,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.setLooping(true);
             }
         });
+
+        ConnectionTester connectionTester = new ConnectionTester(this);
+
+        if (connectionTester.connectionExists()) {
+            activitySetup();
+        } else {
+            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     /**
@@ -149,6 +122,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void activitySetup() {
+
+        setUIViews();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        // If user is already signed in, bring them to the Feed
+        if (user != null) {
+            finish();
+            startActivity(new Intent(MainActivity.this,FeedActivity.class));
+            finish();
+        }
+
+        // Call register() when register button is clicked
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                register();
+            }
+        });
+
+        // Check if login details are valid and do so
+        // if they are by calling validate()
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!isEmpty(etEmail) && !isEmpty(etPassword)) {
+                    validate(etEmail.getText().toString().trim(), etPassword.getText().toString().trim());
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Please input username and password.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 

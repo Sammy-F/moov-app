@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +29,7 @@ import java.util.Iterator;
 
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
+import app.moov.moov.util.ConnectionTester;
 import app.moov.moov.util.PaginatingPostsActivity;
 import app.moov.moov.util.PaginationRecyclerAdapter;
 
@@ -38,6 +40,19 @@ public class FeedActivity extends PaginatingPostsActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+
+        ConnectionTester connectionTester = new ConnectionTester(this);
+
+        if (connectionTester.connectionExists()) {
+            activitySetup();
+        } else {
+            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void activitySetup() {
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
@@ -54,6 +69,7 @@ public class FeedActivity extends PaginatingPostsActivity {
         setupDatabaseRefs();
 
         setUIViews();
+
     }
 
     /**
