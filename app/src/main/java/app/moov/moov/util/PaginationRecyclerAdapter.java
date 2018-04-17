@@ -28,7 +28,7 @@ import app.moov.moov.model.Post;
  * Created by Sammy on 4/7/2018.
  */
 
-public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PaginationRecyclerAdapter extends PaginationAdapter {
 
     private Context thisContext;
     private List<Post> postList;
@@ -256,12 +256,14 @@ public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 //        return postList.size();
     }
 
+    @Override
     public void setLastTimeStamp(long newTime) {
 
         this.lastTimestamp = newTime;
 
     }
 
+    @Override
     public Long getLastTimestamp() { return this.lastTimestamp; }
 
     public Long getLastItemTimestamp() {
@@ -275,12 +277,14 @@ public class PaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         notifyItemRangeInserted(initSize, postList.size());
     }
 
+    @Override
     public void addItem(Post newPost) {
         int initSize = postList.size();
         postList.add(newPost);
         notifyItemInserted(initSize);
     }
 
+    @Override
     public List<Post> getPostList() { return postList; }
 
 }

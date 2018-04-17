@@ -57,36 +57,39 @@ public class FeedActivity extends PaginatingPostsActivity {
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
+        Context thisContext = this;
+
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         setUpNavBar(navBar);
 
         // initialize the variables in the super class
-        firebaseAuth = FirebaseAuth.getInstance();
-        uid = firebaseAuth.getCurrentUser().getUid();
-        database = FirebaseDatabase.getInstance();
-        baseRef = database.getReference();
-        postsRef = baseRef.child("Users").child(uid).child("Feed");
-        setupDatabaseRefs();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference baseRef = database.getReference();
+        DatabaseReference postsRef = baseRef.child("Users").child(uid).child("Feed");
 
-        setUIViews();
+        RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
+
+        paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
 
     }
 
     /**
      * Initialize layout objects, called in onCreate
      */
-    private void setUIViews() {
+//    private void setUIViews() {
 
         //initialize the remaining variables in the super class
-        feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
-        feedRecycler.setHasFixedSize(true);
-
-        orderedManager = new LinearLayoutManager(this);
-
-        feedRecycler.setLayoutManager(orderedManager);
-        feedRecycler.setItemAnimator(new DefaultItemAnimator());
-
-        initPostLoad();
-
-    }
+//        feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
+//        feedRecycler.setHasFixedSize(true);
+//
+//        orderedManager = new LinearLayoutManager(this);
+//
+//        feedRecycler.setLayoutManager(orderedManager);
+//        feedRecycler.setItemAnimator(new DefaultItemAnimator());
+//
+//        initPostLoad();
+//
+//    }
 }

@@ -37,6 +37,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OtherUserProfile extends PaginatingPostsActivity {
 
+    private Context thisContext;
+
     private String thisUserID;
     private String currentUID;
 
@@ -44,8 +46,6 @@ public class OtherUserProfile extends PaginatingPostsActivity {
     private TextView tvNumFollowing;
     private TextView tvUsername;
     private Button btnFollow;
-
-    private Context thisContext;
 
     private DatabaseReference usersRef;
     private DatabaseReference currentUserRef;
@@ -73,21 +73,23 @@ public class OtherUserProfile extends PaginatingPostsActivity {
         thisContext = this;
 
         thisUserID = getIntent().getStringExtra("thisUserID");
-        firebaseAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        baseRef = database.getReference();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference baseRef = database.getReference();
         usersRef = baseRef.child("Users");
         currentUID = firebaseAuth.getCurrentUser().getUid();
         currentUserRef = usersRef.child(currentUID);
         thisUserRef = usersRef.child(thisUserID);
-        postsRef = thisUserRef.child("Posts");
+        DatabaseReference postsRef = thisUserRef.child("Posts");
 
         firebaseStorage = FirebaseStorage.getInstance();
         avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(thisUserID + ".png");
 
-        setupDatabaseRefs();
+        RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.userRecycler);
 
         setUIViews();
+
+        paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
     }
 
     private void setUIViews() {
@@ -227,14 +229,6 @@ public class OtherUserProfile extends PaginatingPostsActivity {
                 });
             }
         });
-
-        feedRecycler = (RecyclerView) findViewById(R.id.userRecycler);
-        feedRecycler.setHasFixedSize(true);
-
-        orderedManager = new LinearLayoutManager(this);
-        feedRecycler.setLayoutManager(orderedManager);
-
-        initPostLoad();
     }
 
 }

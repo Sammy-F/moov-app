@@ -2,6 +2,7 @@ package app.moov.moov.util;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,7 +17,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Iterator;
 
+import app.moov.moov.activity.MovieProfileActivity;
 import app.moov.moov.activity.ToolbarBaseActivity;
+import app.moov.moov.activity.UserProfileActivity;
 import app.moov.moov.model.Post;
 
 /**
@@ -31,36 +34,64 @@ import app.moov.moov.model.Post;
 
 public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
 
+    private final int MISC_ACTIVITY_TYPE = 0;
+    private final int USER_PROFILE_ACTIVITY_TYPE = 1;
+    private final int MOVIE_PROFILE_ACTIVITY_TYPE = 2;
+
+    private int activityType;
+
     // Must initialzie to work
-    public RecyclerView feedRecycler;
-    public FirebaseDatabase database;
-    public DatabaseReference baseRef;
-    public DatabaseReference postsRef;
-    public FirebaseAuth firebaseAuth;
-    public LinearLayoutManager orderedManager;
-    public String uid;
-    public Context thisContext;
+    private RecyclerView feedRecycler;
+    private FirebaseDatabase database;
+    private DatabaseReference baseRef;
+    private DatabaseReference postsRef;
+    private FirebaseAuth firebaseAuth;
+    private LinearLayoutManager orderedManager;
+    private Context thisContext;
 
     // All of this is handled by the abstract class
-    public String lastTime;
-    public boolean isLoading;
+    private String lastTime;
+    private boolean isLoading;
 
-    public final int POSTS_PER_LOAD = 15;
-    public int mTotalItemCount;
-    public int mVisibleItemCount;
-    public int mfirstVisibleItemPos;
+    private final int POSTS_PER_LOAD = 15;
+    private int mTotalItemCount;
+    private int mVisibleItemCount;
+    private int mfirstVisibleItemPos;
 
-    public long maxPosts;
+    private long maxPosts;
 
-    public long numPosts;
-    public int maxPages;
-    public int currentPage;
+    private long numPosts;
+    private int maxPages;
+    private int currentPage;
+//
+//    public PaginationRecyclerAdapter mAdapter;
 
-    public PaginationRecyclerAdapter mAdapter;
+    public PaginationAdapter mAdapter;
+
+    public void paginationSetup(Context thisContext, FirebaseAuth firebaseAuth, FirebaseDatabase database,
+                                DatabaseReference baseRef, DatabaseReference postsKeysRef, RecyclerView feedRecycler) {
+
+        this.thisContext = thisContext;
+        this.firebaseAuth = firebaseAuth;
+        this.database = database;
+        this.baseRef = baseRef;
+        this.postsRef = postsKeysRef;
+        this.feedRecycler = feedRecycler;
+        orderedManager = new LinearLayoutManager(thisContext);
+
+        setupDatabaseRefs();
+
+        feedRecycler.setHasFixedSize(true);
+        feedRecycler.setLayoutManager(orderedManager);
+        feedRecycler.setItemAnimator(new DefaultItemAnimator());
+
+        initPostLoad();
+
+    }
 
     public void setupDatabaseRefs()  {
         isLoading = true;
-        thisContext = this;
+//        thisContext = this;
 
         postsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -93,12 +124,32 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
         this.currentPage = 1;
     }
 
+    private int getContextType() {
+        if (thisContext instanceof UserProfileActivity) {
+            return USER_PROFILE_ACTIVITY_TYPE;
+        }
+        else if (thisContext instanceof MovieProfileActivity) {
+            return MOVIE_PROFILE_ACTIVITY_TYPE;
+        } else {
+            return MISC_ACTIVITY_TYPE;
+        }
+    }
+
     public void initPostLoad() {
+
+        activityType = getContextType();
 
         // load first set of posts
         Query keysQuery = postsRef.orderByChild("timestamp").limitToFirst(POSTS_PER_LOAD);
 
-        mAdapter = new PaginationRecyclerAdapter(thisContext);
+        if (activityType == USER_PROFILE_ACTIVITY_TYPE) {
+            UserProfileActivity mActivity = (UserProfileActivity) thisContext;
+            mAdapter = new SelfPaginationRecyclerAdapter(mActivity);
+        } else if (activityType == MOVIE_PROFILE_ACTIVITY_TYPE) {
+            mAdapter = new PaginationRecyclerAdapter(thisContext);
+        } else {
+            mAdapter = new PaginationRecyclerAdapter(thisContext);
+        }
 
         feedRecycler.setAdapter(mAdapter);
 
