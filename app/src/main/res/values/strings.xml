@@ -101,7 +101,7 @@
     <string name="btn_remove">Remove</string>
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
-    <string name="forgot_password_msg">If you need help resetting your password, we can help by sending a link to reset it.</string>
+    <string name="forgot_password_msg">Please enter your email. We will send a link to your email for you to reset your password.</string>
 
     <string name="mLogo">Moov Logo</string>
     <string name="title_activity_main2">Main2Activity</string>
