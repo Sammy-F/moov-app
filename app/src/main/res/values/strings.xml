@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moov</string>
     <string name="title_activity_login">SIGN IN</string>
-    <string name="register">Register</string>
+    <string name="register">REGISTER</string>
 
     <string name="placeholder">Just some sad placeholder text. Sorry!</string>
 
@@ -61,8 +61,8 @@
 
     <string name="btn_link_to_register">Not a member?</string>
     <string name="btn_register">SIGN UP</string>
-    <string name="btn_already_registered">Already registered? Log in now!</string>
-    <string name="btn_go">Let\'s Go!</string>
+    <string name="btn_already_registered">Already registered?</string>
+    <string name="btn_go">Reset Password</string>
 
     <string name="search_for_movie">Search for a movie</string>
     <string name="search_movie_to_review">Find a movie to review</string>
@@ -101,7 +101,7 @@
     <string name="btn_remove">Remove</string>
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
-    <string name="forgot_password_msg">We just need your registered Email to send you password reset instructions.</string>
+    <string name="forgot_password_msg">If you need help resetting your password, we can help by sending a link to reset it.</string>
 
     <string name="mLogo">Moov Logo</string>
     <string name="title_activity_main2">Main2Activity</string>
