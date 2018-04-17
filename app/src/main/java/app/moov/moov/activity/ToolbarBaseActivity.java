@@ -18,12 +18,12 @@ public class ToolbarBaseActivity extends AppCompatActivity {
 
     FirebaseAuth signOutAuth;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toolbar_base);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_toolbar_base);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//    }
 
     public void toolBarSetup(Toolbar toolbar) {
         if (Build.VERSION.SDK_INT > 21) {

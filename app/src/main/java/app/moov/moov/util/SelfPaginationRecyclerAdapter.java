@@ -1,5 +1,6 @@
 package app.moov.moov.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -37,15 +38,15 @@ import app.moov.moov.model.Post;
  * Created by Sammy on 4/7/2018.
  */
 
-public class SelfPaginationRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
 
-    private Context thisContext;
+    private UserProfileActivity mActivity;
     private List<Post> postList;
     private long lastTimestamp;
 
-    public SelfPaginationRecyclerAdapter(Context thisContext) {
+    public SelfPaginationRecyclerAdapter(UserProfileActivity mActivity) {
         super();
-        this.thisContext = thisContext;
+        this.mActivity = mActivity;
         postList = new ArrayList<Post>();
     }
 
@@ -199,22 +200,29 @@ public class SelfPaginationRecyclerAdapter extends RecyclerView.Adapter<Recycler
                 viewHolder1.setUsername(thisPost.getUsername());
 
                 String posterUrl = thisPost.getPosterURL();
-                Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder1.getIvPoster());
+                Glide.with(mActivity).asBitmap().load(posterUrl).into(viewHolder1.getIvPoster());
 
                 final int movieID = thisPost.getMovieID();
 
                 final int thisPos = position;
 
+                viewHolder1.ibDetail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showPopupMenu(viewHolder1.ibDetail, thisPos, thisPost);
+                    }
+                });
+
                 viewHolder1.getUsername().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (thisPost.getUID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                            Intent intent = new Intent(thisContext, UserProfileActivity.class);
-                            thisContext.startActivity(intent);
+                            Intent intent = new Intent(mActivity, UserProfileActivity.class);
+                            mActivity.startActivity(intent);
                         } else {
-                            Intent intent = new Intent(thisContext, OtherUserProfile.class);
+                            Intent intent = new Intent(mActivity, OtherUserProfile.class);
                             intent.putExtra("thisUserID", thisPost.getUID());
-                            thisContext.startActivity(intent);
+                            mActivity.startActivity(intent);
                         }
                     }
                 });
@@ -222,9 +230,9 @@ public class SelfPaginationRecyclerAdapter extends RecyclerView.Adapter<Recycler
                 viewHolder1.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfileActivity.class);
+                        Intent intent = new Intent(mActivity, MovieProfileActivity.class);
                         intent.putExtra("movieID", movieID);
-                        thisContext.startActivity(intent); //go to movie's profile
+                        mActivity.startActivity(intent); //go to movie's profile
                     }
                 });
                 break;
@@ -241,25 +249,32 @@ public class SelfPaginationRecyclerAdapter extends RecyclerView.Adapter<Recycler
                 String posterUrlWith = reviewedThisPost.getPosterURL();
 
                 // Load and place the movie poster in the ImageView
-                Glide.with(thisContext).asBitmap().load(posterUrlWith).into(viewHolderWith.getIvPoster());
+                Glide.with(mActivity).asBitmap().load(posterUrlWith).into(viewHolderWith.getIvPoster());
 
                 final int movieIDWith = reviewedThisPost.getMovieID();
+
+                viewHolderWith.ibDetail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showPopupMenu(viewHolderWith.ibDetail, viewHolderWith.getAdapterPosition(), reviewedThisPost);
+                    }
+                });
 
                 viewHolderWith.getUserName().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(thisContext, OtherUserProfile.class);
+                        Intent intent = new Intent(mActivity, OtherUserProfile.class);
                         intent.putExtra("thisUserID", reviewedThisPost.getUID());
-                        thisContext.startActivity(intent);
+                        mActivity.startActivity(intent);
                     }
                 });
 
                 viewHolderWith.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response
-                        Intent intent = new Intent(thisContext, MovieProfileActivity.class);
+                        Intent intent = new Intent(mActivity, MovieProfileActivity.class);
                         intent.putExtra("movieID", movieIDWith);
-                        thisContext.startActivity(intent); //go to movie's profile
+                        mActivity.startActivity(intent); //go to movie's profile
                     }
                 });
                 break;
@@ -272,12 +287,14 @@ public class SelfPaginationRecyclerAdapter extends RecyclerView.Adapter<Recycler
 //        return postList.size();
     }
 
+    @Override
     public void setLastTimeStamp(long newTime) {
 
         this.lastTimestamp = newTime;
 
     }
 
+    @Override
     public Long getLastTimestamp() { return this.lastTimestamp; }
 
     public Long getLastItemTimestamp() {
@@ -291,21 +308,23 @@ public class SelfPaginationRecyclerAdapter extends RecyclerView.Adapter<Recycler
         notifyItemRangeInserted(initSize, postList.size());
     }
 
+    @Override
     public void addItem(Post newPost) {
         int initSize = postList.size();
         postList.add(newPost);
         notifyItemInserted(initSize);
     }
 
+    @Override
     public List<Post> getPostList() { return postList; }
 
     private void editPost(String pid, String review, String movieTitle, String rating) {
-        Intent intent = new Intent(thisContext, EditPostActivity.class);
+        Intent intent = new Intent(mActivity, EditPostActivity.class);
         intent.putExtra("rating", rating);
         intent.putExtra("review", review);
         intent.putExtra("movieTitle", movieTitle);
         intent.putExtra("postID", pid);
-        thisContext.startActivity(intent);
+        mActivity.startActivity(intent);
     }
 
     /**
@@ -356,6 +375,9 @@ public class SelfPaginationRecyclerAdapter extends RecyclerView.Adapter<Recycler
 
             }
         });
+
+        mActivity.finish();
+        mActivity.startActivity(mActivity.getIntent());
 
     }
 

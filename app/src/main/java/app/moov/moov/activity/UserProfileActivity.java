@@ -46,6 +46,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserProfileActivity extends PaginatingPostsActivity {
 
+    private Context thisContext;
+
     private TextView tvUsername;
     private TextView tvNumFollowing;
     private TextView tvNumFollowers;
@@ -83,7 +85,7 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
         thisContext = this;
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         final String uid = user.getUid();
         userID = user.getUid();
@@ -93,13 +95,13 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
 //        setUIViews();
 
-        database = FirebaseDatabase.getInstance();
-        baseRef = database.getReference();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference baseRef = database.getReference();
         userRef = database.getReference().child("Users").child(uid);
-        postsRef = database.getReference().child("Users").child(uid).child("Posts");
+        DatabaseReference postsRef = database.getReference().child("Users").child(uid).child("Posts");
         allUsers = baseRef.child("Users");
+        RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
 
-        setupDatabaseRefs();
         setUIViews();
 
         // Set text for number of Followers user has
@@ -145,6 +147,8 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
             }
         });
+
+        paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
 
     }
 
@@ -273,17 +277,6 @@ public class UserProfileActivity extends PaginatingPostsActivity {
                 startActivity(intent);
             }
         });
-
-
-        feedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
-        feedRecycler.setHasFixedSize(true);
-
-//        profileFeedRecycler.setNestedScrollingEnabled(false);
-        orderedManager = new LinearLayoutManager(this);
-
-        feedRecycler.setLayoutManager(orderedManager);
-
-        initPostLoad();
     }
 
 }
