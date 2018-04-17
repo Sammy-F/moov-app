@@ -74,6 +74,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mVideoView = (VideoView) findViewById(R.id.bgVideoView);
+
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.bg_video);
+
+        mVideoView.setVideoURI(uri);
+        mVideoView.start();
+
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mediaPlayer.setLooping(true);
+            }
+        });
+
+    }
+
     /**
      * Go to the registration page.
      */
