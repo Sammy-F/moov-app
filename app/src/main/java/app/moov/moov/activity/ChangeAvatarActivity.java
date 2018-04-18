@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -128,14 +129,22 @@ public class ChangeAvatarActivity extends ToolbarBaseActivity {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             newAvatar.compress(Bitmap.CompressFormat.PNG, 0, bos);
             byte[] bitmapdata = bos.toByteArray();
-            avatarRef.putBytes(bitmapdata);
+            avatarRef.putBytes(bitmapdata).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Intent intent = new Intent(ChangeAvatarActivity.this, FeedActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ChangeAvatarActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
-        Intent intent = new Intent(ChangeAvatarActivity.this, FeedActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     /**
