@@ -29,6 +29,7 @@ import java.util.List;
 
 import app.moov.moov.R;
 import app.moov.moov.activity.EditPostActivity;
+import app.moov.moov.activity.FeedActivity;
 import app.moov.moov.activity.MovieProfileActivity;
 import app.moov.moov.activity.OtherUserProfile;
 import app.moov.moov.activity.UserProfileActivity;
@@ -102,6 +103,8 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
             return ivPoster;
         }
 
+        public ImageButton getIbDetail() { return ibDetail; }
+
     }
 
     /**
@@ -147,6 +150,8 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
         public ImageView getIvPoster() {
             return ivPoster;
         }
+
+        public ImageButton getIbDetail() { return ibDetail; }
 
     }
 
@@ -205,13 +210,13 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
                 final int movieID = thisPost.getMovieID();
 
                 final int thisPos = position;
-
-                viewHolder1.ibDetail.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showPopupMenu(viewHolder1.ibDetail, thisPos, thisPost);
-                    }
-                });
+//
+//                viewHolder1.getIbDetail().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        showPopupMenu(viewHolder1.getIbDetail(), viewHolder1.getAdapterPosition(), thisPost);
+//                    }
+//                });
 
                 viewHolder1.getUsername().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -253,10 +258,10 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
 
                 final int movieIDWith = reviewedThisPost.getMovieID();
 
-                viewHolderWith.ibDetail.setOnClickListener(new View.OnClickListener() {
+                viewHolderWith.getIbDetail().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        showPopupMenu(viewHolderWith.ibDetail, viewHolderWith.getAdapterPosition(), reviewedThisPost);
+                        showPopupMenu(viewHolderWith.getIbDetail(), viewHolderWith.getAdapterPosition(), reviewedThisPost);
                     }
                 });
 
@@ -332,31 +337,34 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
      * @param pid
      * @param uid
      */
-    private void deletePost(String pid, String uid) {
+    private void deletePost(String pid, String uid, int movieId) {
         final String thisPid = pid;
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
         final DatabaseReference allUsers = database.getReference().child("Users");
         DatabaseReference userRef = allUsers.child(uid);
-        DatabaseReference userPostRef = userRef.child("Posts").child(pid);
         DatabaseReference postRef = ref.child("Posts").child(pid);
 
         userRef.child("Feed").child(pid).removeValue();
-        userPostRef.removeValue();
+        userRef.child("Posts").child(pid).removeValue();
         postRef.removeValue();
+
+        ref.child("PostsByMovie").child(Integer.toString(movieId)).child(pid).removeValue();
 
         userRef.child("Followers").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot follower : dataSnapshot.getChildren()) {
-                    String UID = follower.getKey();
+                    final String UID = follower.getKey();
+                    Log.e("this uid", UID);
 
                     allUsers.child(UID).child("Feed").child(thisPid).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.e("this uid", UID);
                             if (dataSnapshot.exists()) {
-                                database.getReference().removeValue();
+                                allUsers.child(UID).child("Feed").child(thisPid).removeValue();
                             }
                         }
 
@@ -377,7 +385,7 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
         });
 
         mActivity.finish();
-        mActivity.startActivity(mActivity.getIntent());
+        mActivity.startActivity(new Intent(mActivity, FeedActivity.class));
 
     }
 
@@ -401,7 +409,7 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.deletePost:
-                    deletePost(thisPost.getPID(), thisPost.getUID());
+                    deletePost(thisPost.getPID(), thisPost.getUID(), thisPost.getMovieID());
                     return true;
                 case R.id.editPost:
                     editPost(thisPost.getPID(), thisPost.getMovieReview(), thisPost.getMovieTitle(), thisPost.getMovieRating());

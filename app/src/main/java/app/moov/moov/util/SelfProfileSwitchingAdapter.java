@@ -193,7 +193,7 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
      * @param pid
      * @param uid
      */
-    private void deletePost(String pid, String uid) {
+    private void deletePost(String pid, String uid, int movieId) {
         final String thisPid = pid;
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
@@ -205,6 +205,8 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         userRef.child("Feed").child(pid).removeValue();
         userPostRef.removeValue();
         postRef.removeValue();
+
+        ref.child("PostsByMovie").child(Integer.toString(movieId)).child(pid).removeValue();
 
         userRef.child("Followers").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -259,7 +261,7 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.deletePost:
-                    deletePost(thisPost.getPID(), thisPost.getUID());
+                    deletePost(thisPost.getPID(), thisPost.getUID(), thisPost.getMovieID());
                     return true;
                 case R.id.editPost:
                     editPost(thisPost.getPID(), thisPost.getMovieReview(), thisPost.getMovieTitle(), thisPost.getMovieRating());
