@@ -45,6 +45,7 @@ public class OtherUserProfile extends PaginatingPostsActivity {
     private TextView tvNumFollowers;
     private TextView tvNumFollowing;
     private TextView tvUsername;
+    private TextView tvFullname;
     private Button btnFollow;
 
     private DatabaseReference usersRef;
@@ -96,6 +97,7 @@ public class OtherUserProfile extends PaginatingPostsActivity {
 
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         btnFollow = (Button) findViewById(R.id.btnFollow);
+        tvFullname = (TextView) findViewById(R.id.tvFullname);
 
         ivAvatar = (CircleImageView) findViewById(R.id.ivAvatar);
 
@@ -198,6 +200,35 @@ public class OtherUserProfile extends PaginatingPostsActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(OtherUserProfile.this,"Getting username failed.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        /**
+         * Add full name text
+         */
+        thisUserRef.child("FirstName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String firstName = dataSnapshot.getValue() + " ";
+                tvFullname.setText(firstName);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        thisUserRef.child("LastName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String fullName = tvFullname.getText().toString() + dataSnapshot.getValue(String.class);
+                tvFullname.setText(fullName);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

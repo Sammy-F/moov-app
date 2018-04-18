@@ -51,6 +51,7 @@ public class UserProfileActivity extends PaginatingPostsActivity {
     private TextView tvUsername;
     private TextView tvNumFollowing;
     private TextView tvNumFollowers;
+    private TextView tvFullName;
 
     private String username;
     private String userID;
@@ -95,7 +96,7 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
 //        setUIViews();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference baseRef = database.getReference();
         userRef = database.getReference().child("Users").child(uid);
         DatabaseReference postsRef = database.getReference().child("Users").child(uid).child("Posts");
@@ -144,6 +145,32 @@ public class UserProfileActivity extends PaginatingPostsActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(UserProfileActivity.this,"Getting username failed.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        userRef.child("FirstName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String firstName = dataSnapshot.getValue() + " ";
+                tvFullName.setText(firstName);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        userRef.child("LastName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String fullName = tvFullName.getText().toString() + dataSnapshot.getValue(String.class);
+                tvFullName.setText(fullName);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
@@ -231,6 +258,8 @@ public class UserProfileActivity extends PaginatingPostsActivity {
     private void setUIViews() {
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        tvFullName = (TextView) findViewById(R.id.tvFullname);
 
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);

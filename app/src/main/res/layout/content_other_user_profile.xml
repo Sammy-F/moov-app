@@ -15,11 +15,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="2dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@id/userRecycler"
-        app:layout_constraintEnd_toStartOf="@id/btnFollow"
-        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvUsername" />
 
@@ -44,16 +45,15 @@
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="150dp"
         android:text="@string/title_activity_user_profile"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
-        app:layout_constraintVertical_bias="0.031" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -147,11 +147,11 @@
         android:maxHeight="0dp"
         android:textColor="#ffff"
         app:layout_constraintBottom_toTopOf="@+id/userRecycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
-        app:layout_constraintStart_toEndOf="@+id/tvUsername"
+        app:layout_constraintEnd_toStartOf="@+id/tvUsername"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llFollowers"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/userRecycler"
