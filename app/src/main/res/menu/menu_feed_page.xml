@@ -29,10 +29,10 @@
         <!--android:title="logoutIcon"-->
         <!--/>-->
 
-    <item
-        android:id="@+id/addIcon"
-        android:icon="@drawable/addicon"
-        android:title="addIcon"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/addIcon"-->
+        <!--android:icon="@drawable/addicon"-->
+        <!--android:title="addIcon"-->
+        <!--app:showAsAction="always" />-->
 
 </menu>
