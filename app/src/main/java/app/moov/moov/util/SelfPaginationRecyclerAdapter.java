@@ -162,7 +162,7 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
      */
     @Override
     public int getItemViewType(int position) {
-        if (!postList.get(position).getMovieReview().equals("")) {
+        if (!(postList.get(position).getMovieReview() == null) || !postList.get(position).getMovieReview().equals("")) {
             return 1;
         }
         else {
