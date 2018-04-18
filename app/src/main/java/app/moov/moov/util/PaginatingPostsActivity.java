@@ -29,7 +29,7 @@ import app.moov.moov.model.Post;
 /**
  * Abstract custom Activity to be used on pages with basic posts
  *
- * All classes that extend this must initialize feedRecycler
+ * All classes that extend this should paginationSetup()
  */
 
 public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
