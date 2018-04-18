@@ -223,6 +223,9 @@ public class RegistrationActivity extends AppCompatActivity {
         } else if (!password1.trim().equals(password2.trim())){
             Toast.makeText(RegistrationActivity.this, "The passwords do not match.", Toast.LENGTH_LONG).show();
             return false;
+        } else if (name.length() > 12) {
+            Toast.makeText(RegistrationActivity.this, "Username must be 12 characters or shorter", Toast.LENGTH_LONG).show();
+            return false;
         } else {
             return true;
         }
