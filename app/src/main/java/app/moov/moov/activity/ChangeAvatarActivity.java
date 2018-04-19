@@ -66,6 +66,7 @@ public class ChangeAvatarActivity extends ToolbarBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
         firebaseStorage = FirebaseStorage.getInstance();

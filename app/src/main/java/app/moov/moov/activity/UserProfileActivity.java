@@ -82,6 +82,7 @@ public class UserProfileActivity extends PaginatingPostsActivity {
         setContentView(R.layout.activity_user_profile);
 
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
         thisContext = this;

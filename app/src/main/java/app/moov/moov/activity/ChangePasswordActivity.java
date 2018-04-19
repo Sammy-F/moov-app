@@ -50,6 +50,7 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
         toolBarSetup(toolbar);
 
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
         firebaseAuth = FirebaseAuth.getInstance();

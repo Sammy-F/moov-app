@@ -2,6 +2,7 @@ package app.moov.moov.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
@@ -31,6 +32,10 @@ public class ChooseMovieActivity extends ToolbarBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
+
+        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
+        setUpNavBar(navBar);
 
         setUIViews();
     }

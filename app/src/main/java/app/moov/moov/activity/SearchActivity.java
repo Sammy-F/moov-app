@@ -28,7 +28,9 @@ public class SearchActivity extends ToolbarBaseActivity{
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
+
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
 

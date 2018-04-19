@@ -60,6 +60,7 @@ public class FeedActivity extends PaginatingPostsActivity {
         Context thisContext = this;
 
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
         // initialize the variables in the super class

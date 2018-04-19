@@ -2,6 +2,7 @@ package app.moov.moov.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,10 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
+
+        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
+        setUpNavBar(navBar);
 
         userID = getIntent().getStringExtra("uid");
         resultsType = getIntent().getStringExtra("type");

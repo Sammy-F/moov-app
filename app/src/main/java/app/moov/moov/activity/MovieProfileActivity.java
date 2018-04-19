@@ -55,6 +55,7 @@ public class MovieProfileActivity extends ToolbarBaseActivity{
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
         movieID = getIntent().getIntExtra("movieID", 0);

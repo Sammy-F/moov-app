@@ -69,6 +69,7 @@ public class OtherUserProfile extends PaginatingPostsActivity {
         toolBarSetup(toolbar);
 
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
         thisContext = this;
