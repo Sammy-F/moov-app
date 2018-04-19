@@ -18,6 +18,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import app.moov.moov.R;
 
@@ -39,6 +40,10 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
+
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
+
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);

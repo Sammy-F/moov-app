@@ -18,7 +18,7 @@
     <item
         android:id="@+id/addIcon"
         android:icon="@drawable/addicon"
-        android:title="addIcon"
+        android:title="Post"
         android:visible="true" />
 
     <item

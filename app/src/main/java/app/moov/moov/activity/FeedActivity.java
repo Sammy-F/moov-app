@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 import java.util.Iterator;
 
 import app.moov.moov.model.Post;
@@ -59,6 +61,8 @@ public class FeedActivity extends PaginatingPostsActivity {
 
         Context thisContext = this;
 
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);

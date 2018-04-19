@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 import app.moov.moov.R;
 
 public class ReportIssueActivity extends ToolbarBaseActivity {
@@ -33,6 +35,9 @@ public class ReportIssueActivity extends ToolbarBaseActivity {
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
+
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
 
         setUIViews();
 

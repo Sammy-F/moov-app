@@ -91,6 +91,11 @@ public class ToolbarBaseActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
+//                if (item.getItemId() == R.id.addIcon) {
+//                    Intent intent = new Intent(getApplicationContext(), ChooseMovieActivity.class);
+//                    startActivity(intent);
+//                }
+
                 return true;
             }
         });

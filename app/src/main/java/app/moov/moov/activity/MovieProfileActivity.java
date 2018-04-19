@@ -20,6 +20,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import org.json.JSONObject;
 
@@ -54,9 +55,12 @@ public class MovieProfileActivity extends ToolbarBaseActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
+
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
 
         movieID = getIntent().getIntExtra("movieID", 0);
 

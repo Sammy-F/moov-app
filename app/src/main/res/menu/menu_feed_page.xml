@@ -9,27 +9,6 @@
         app:showAsAction="always" />
 
     <!--<item-->
-        <!--android:id="@+id/searchIcon"-->
-        <!--app:showAsAction="always"-->
-        <!--android:icon="@drawable/searchicon"-->
-        <!--android:title="searchIcon"-->
-        <!--/>-->
-
-    <!--<item-->
-        <!--android:id="@+id/profileIcon"-->
-        <!--app:showAsAction="always"-->
-        <!--android:icon="@drawable/personicon"-->
-        <!--android:title="profileIcon"-->
-        <!--/>-->
-
-    <!--<item-->
-        <!--android:id="@+id/logoutIcon"-->
-        <!--app:showAsAction="always"-->
-        <!--android:icon="@drawable/goodbyeicon"-->
-        <!--android:title="logoutIcon"-->
-        <!--/>-->
-
-    <!--<item-->
         <!--android:id="@+id/addIcon"-->
         <!--android:icon="@drawable/addicon"-->
         <!--android:title="addIcon"-->

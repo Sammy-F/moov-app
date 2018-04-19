@@ -62,7 +62,7 @@ public class PostActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_post);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        toolBarSetup(toolbar);
+        toolBarSetup(toolbar);
 
         movieID = getIntent().getIntExtra("movieID", 0); //defaults movieID to 0 if not set
         movieTitle = getIntent().getStringExtra("movieTitle").trim(); //get standardized title from search

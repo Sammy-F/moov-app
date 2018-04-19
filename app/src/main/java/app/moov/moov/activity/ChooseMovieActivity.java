@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 import app.moov.moov.R;
 
 /**
@@ -32,6 +34,9 @@ public class ChooseMovieActivity extends ToolbarBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
+//
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
 
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);

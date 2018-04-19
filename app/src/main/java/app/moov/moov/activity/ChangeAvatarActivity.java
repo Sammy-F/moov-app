@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -65,6 +66,10 @@ public class ChangeAvatarActivity extends ToolbarBaseActivity {
         setContentView(R.layout.activity_change_avatar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
+
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);

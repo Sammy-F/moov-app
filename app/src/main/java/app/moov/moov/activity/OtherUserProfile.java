@@ -28,6 +28,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
@@ -68,6 +69,8 @@ public class OtherUserProfile extends PaginatingPostsActivity {
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);

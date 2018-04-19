@@ -7,6 +7,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 import app.moov.moov.R;
 import app.moov.moov.fragment.TabSearchMovieFragment;
 import app.moov.moov.fragment.TabSearchUserFragment;
@@ -29,10 +31,11 @@ public class SearchActivity extends ToolbarBaseActivity{
         toolBarSetup(toolbar);
 
 
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
-
 
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
