@@ -16,7 +16,7 @@
         android:visible="true" />
 
     <item
-        android:id="@+id/addIcon"
+        android:id="@+id/navBarAddIcon"
         android:icon="@drawable/addicon"
         android:title="Post"
         android:visible="true" />

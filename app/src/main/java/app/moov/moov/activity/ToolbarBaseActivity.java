@@ -36,11 +36,11 @@ public class ToolbarBaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id==R.id.addIcon) {
-            Intent intent = new Intent(this,ChooseMovieActivity.class);
-            startActivity(intent);
-        }
+//
+//        if (id==R.id.navBarAddIcon) {
+//            Intent intent = new Intent(this,ChooseMovieActivity.class);
+//            startActivity(intent);
+//        }
 
 //        if (id==R.id.profileIcon) {
 //            Intent intent = new Intent(this, UserProfileActivity.class);
@@ -91,10 +91,10 @@ public class ToolbarBaseActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-//                if (item.getItemId() == R.id.addIcon) {
-//                    Intent intent = new Intent(getApplicationContext(), ChooseMovieActivity.class);
-//                    startActivity(intent);
-//                }
+                if (item.getItemId() == R.id.navBarAddIcon) {
+                    Intent intent = new Intent(getApplicationContext(), ChooseMovieActivity.class);
+                    startActivity(intent);
+                }
 
                 return true;
             }
