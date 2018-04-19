@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     app:itemTextColor="#FFFFFF"
-    app:itemIconTint="#FFFFFF">
+    app:itemIconTint="#ffffff">
     <item
         android:id="@+id/navBarHomeIcon"
         android:icon="@drawable/homeicon"
