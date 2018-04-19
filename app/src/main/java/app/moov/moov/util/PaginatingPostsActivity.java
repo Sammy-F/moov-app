@@ -165,7 +165,9 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                         baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
+                                if (dataSnapshot.exists()) {
+                                    mAdapter.addItem(dataSnapshot.getValue(Post.class));
+                                }
                             }
 
                             @Override
@@ -178,7 +180,9 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                     baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
+                            if (dataSnapshot.exists()) {
+                                mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
+                            }
                             Log.e("last time", Long.toString(dataSnapshot.getValue(Post.class).getTime()));
                         }
 
@@ -193,7 +197,9 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                         baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
+                                if (dataSnapshot.exists())  {
+                                    mAdapter.addItem(dataSnapshot.getValue(Post.class));
+                                }
                             }
 
                             @Override
@@ -260,7 +266,9 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                         baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
+                                if (dataSnapshot.exists()) {
+                                    mAdapter.addItem(dataSnapshot.getValue(Post.class));
+                                }
                             }
 
                             @Override
@@ -273,7 +281,9 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                     baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
+                            if (dataSnapshot.exists()) {
+                                mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
+                            }
                         }
 
                         @Override
@@ -286,7 +296,9 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                         baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                mAdapter.addItem(dataSnapshot.getValue(Post.class));
+                                if (dataSnapshot.exists()) {
+                                    mAdapter.addItem(dataSnapshot.getValue(Post.class));
+                                }
                             }
 
                             @Override
