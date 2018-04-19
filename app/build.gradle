@@ -51,8 +51,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 
-    compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
-    compile "com.android.support:design:26.+"
+//    compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+//    compile "com.android.support:design:26.+"
 }
 
 
