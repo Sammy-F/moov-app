@@ -63,10 +63,34 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
     private long numPosts;
     private int maxPages;
     private int currentPage;
+
+    private int movieID;
 //
 //    public PaginationRecyclerAdapter mAdapter;
 
     public PaginationAdapter mAdapter;
+
+    public void movieProfilePaginationSetup(Context thisContext, FirebaseAuth firebaseAuth, FirebaseDatabase database,
+                                DatabaseReference baseRef, DatabaseReference postsKeysRef, RecyclerView feedRecycler, int movieID) {
+
+        this.thisContext = thisContext;
+        this.firebaseAuth = firebaseAuth;
+        this.database = database;
+        this.baseRef = baseRef;
+        this.postsRef = postsKeysRef;
+        this.feedRecycler = feedRecycler;
+        this.movieID = movieID;
+        orderedManager = new LinearLayoutManager(thisContext);
+
+        setupDatabaseRefs();
+
+        feedRecycler.setHasFixedSize(true);
+        feedRecycler.setLayoutManager(orderedManager);
+        feedRecycler.setItemAnimator(new DefaultItemAnimator());
+
+        initPostLoad();
+
+    }
 
     public void paginationSetup(Context thisContext, FirebaseAuth firebaseAuth, FirebaseDatabase database,
                                 DatabaseReference baseRef, DatabaseReference postsKeysRef, RecyclerView feedRecycler) {
@@ -146,7 +170,7 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
             UserProfileActivity mActivity = (UserProfileActivity) thisContext;
             mAdapter = new SelfPaginationRecyclerAdapter(mActivity);
         } else if (activityType == MOVIE_PROFILE_ACTIVITY_TYPE) {
-            mAdapter = new PaginationRecyclerAdapter(thisContext);
+            mAdapter = new MovieProfilePaginatingRecyclerAdapter(thisContext, movieID);
         } else {
             mAdapter = new PaginationRecyclerAdapter(thisContext);
         }
