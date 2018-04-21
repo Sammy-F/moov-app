@@ -75,6 +75,7 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
      */
     private void setUIViews() {
 
+
         final ProgressBar progressBar = findViewById(R.id.resultsProgress);
         progressBar.setVisibility(View.VISIBLE);
 
