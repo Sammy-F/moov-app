@@ -1,11 +1,14 @@
 package app.moov.moov.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +46,6 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
     private LinearLayoutManager orderedManager;
     private int movieID;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,20 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
 
         movieProfilePaginationSetup(this, FirebaseAuth.getInstance(), database,
                 baseRef, postsRef, movieRecycler, movieID);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent();
+                intent.putExtra("movieID", movieID);
+                intent.putExtra("movieTitle", getMovieProfilePaginatingRecyclerAdapter().getMovieTitle());
+                intent.putExtra("posterURL", getMovieProfilePaginatingRecyclerAdapter().getPosterURL());
+                startActivity(intent);
+
+            }
+        });
 
     }
 

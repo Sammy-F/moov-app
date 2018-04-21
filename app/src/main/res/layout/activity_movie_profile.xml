@@ -20,6 +20,17 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/addicon"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="right|bottom" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navBar"
         android:layout_width="match_parent"
@@ -32,6 +43,8 @@
 
     </android.support.design.widget.BottomNavigationView>
 
-    <include layout="@layout/content_movie_profile" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_movie_profile" />
 
 </android.support.design.widget.CoordinatorLayout>

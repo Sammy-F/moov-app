@@ -46,6 +46,9 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
     private long lastTimestamp;
     private int movieID;
 
+    private String mMovieTitle;
+    private String mPosterURL;
+
     private Post placeholderPost;
 
     private final int PLACEHOLDER_TYPE = 2;
@@ -76,6 +79,9 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
 
         private Context thisContext;
 
+        private String movieTitle;
+        private String posterURL;
+
         public MovieProfileViewHolder(View itemView, Context thisContext) {
             super(itemView);
             mView = itemView;
@@ -95,6 +101,9 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
             runSetup();
         }
 
+        public String getPosterURL() { return posterURL; }
+        public String getMovieTitle() { return movieTitle; }
+
         private void runSetup() {
             String url = "https://api.themoviedb.org/3/movie/"+ Integer.toString(movieID) + "?api_key=3744632a440f06514578b01d1b6e9d27";
             RequestQueue queue = VolleySingleton.getInstance(thisContext.getApplicationContext()).getRequestQueue();
@@ -108,6 +117,7 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
                         String title = (String) response.get("title");
                         if (title != null) {
                             tvMovieTitle.setText("Movie Title: " + title);
+                            movieTitle = title;
                         }
 
                         String releaseDate = (String) response.get("release_date");
@@ -129,9 +139,13 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
                             tvMovieRuntime.setText("Runtime: " +unknown);
                         }
 
-                        String posterUrl = "https://image.tmdb.org/t/p/w185/" + ((String) movieDetail.get("poster_path"));
+                        if (movieDetail.get("poster_path") != null) {
+                            posterURL = "https://image.tmdb.org/t/p/w185/" + ((String) movieDetail.get("poster_path"));
+                        } else {
+                            posterURL = "";
+                        }
 
-                        Glide.with(thisContext).asBitmap().load(posterUrl).into(ivMoviePoster);
+                        Glide.with(thisContext).asBitmap().load(posterURL).into(ivMoviePoster);
 
                     } catch (org.json.JSONException e) {
                         Toast.makeText(thisContext, "Sorry", Toast.LENGTH_LONG).show();
@@ -366,6 +380,8 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
             case PLACEHOLDER_TYPE:
                 final MovieProfilePaginatingRecyclerAdapter.MovieProfileViewHolder profileHolder = (MovieProfilePaginatingRecyclerAdapter.MovieProfileViewHolder) viewHolder;
                 profileHolder.setMovieID(this.movieID);
+                mMovieTitle = profileHolder.getMovieTitle();
+                mPosterURL = profileHolder.getPosterURL();
         }
     }
 
@@ -405,5 +421,8 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
 
     @Override
     public List<Post> getPostList() { return postList; }
+
+    public String getMovieTitle() { return mMovieTitle; }
+    public String getPosterURL() { return mPosterURL; }
 
 }
