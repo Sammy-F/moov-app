@@ -11,6 +11,8 @@ import app.moov.moov.R;
 
 public class FullPostActivity extends ToolbarBaseActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
