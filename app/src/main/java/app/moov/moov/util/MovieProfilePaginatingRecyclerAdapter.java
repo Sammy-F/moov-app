@@ -139,8 +139,12 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
                             tvMovieRuntime.setText("Runtime: " +unknown);
                         }
 
-                        if (movieDetail.get("poster_path") != null) {
-                            posterURL = "https://image.tmdb.org/t/p/w185/" + ((String) movieDetail.get("poster_path"));
+                        if (movieDetail.get("poster_path") != null && !movieDetail.get("poster_path").equals("")) {
+                            try {
+                                posterURL = "https://image.tmdb.org/t/p/w185/" + ((String) movieDetail.get("poster_path"));
+                            } catch (ClassCastException e) {
+                                posterURL = "";
+                            }
                         } else {
                             posterURL = "";
                         }
@@ -313,7 +317,9 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
                 viewHolder1.setUsername(thisPost.getUsername());
 
                 String posterUrl = thisPost.getPosterURL();
-                Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder1.getIvPoster());
+                if (!posterUrl.equals("")) {
+                    Glide.with(thisContext).asBitmap().load(posterUrl).into(viewHolder1.getIvPoster());
+                }
 
                 final int movieID = thisPost.getMovieID();
 
