@@ -87,6 +87,9 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
         else if (!newPass.equals(newPassAgain)) { // Check if the password strings match
             Toast.makeText(ChangePasswordActivity.this, "The passwords do not match!", Toast.LENGTH_SHORT).show();
         }
+        else if (newPass.length() <6 ) { // Check if the password strings match
+            Toast.makeText(ChangePasswordActivity.this, "Your password must be at least 6 characters long!", Toast.LENGTH_SHORT).show();
+        }
         else {
             // Initialize credentials using the user's input login info
             AuthCredential credential = EmailAuthProvider.getCredential(email, currentPass);
