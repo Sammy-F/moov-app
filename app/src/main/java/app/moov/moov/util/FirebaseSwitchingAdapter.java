@@ -137,12 +137,12 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
 
         if (viewType == 0) {
             View viewWithoutReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.nr_new_cv_layout, parent, false);
+                    .inflate(R.layout.feed_noreivew_cv_layout, parent, false);
             return new FeedViewHolderWithoutReview(viewWithoutReview);
         }
         else {
             View viewWithReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.new_cv_layout, parent, false);
+                    .inflate(R.layout.feed_review_cv_layout, parent, false);
 
             return new FeedViewHolder(viewWithReview);
         }

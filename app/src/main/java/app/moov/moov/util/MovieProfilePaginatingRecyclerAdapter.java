@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -270,11 +269,11 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NO_REVIEW_TYPE) {
             View viewWithoutReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.nr_new_cv_layout, parent, false);
+                    .inflate(R.layout.feed_noreivew_cv_layout, parent, false);
             return new FeedViewHolderWithoutReview(viewWithoutReview);
         } else if (viewType == WITH_REVIEW_TYPE) {
             View viewWithReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.new_cv_layout, parent, false);
+                    .inflate(R.layout.feed_review_cv_layout, parent, false);
 
             return new FeedViewHolder(viewWithReview);
         } else {
