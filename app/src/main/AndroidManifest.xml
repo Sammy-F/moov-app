@@ -15,9 +15,9 @@
         android:label="@string/app_name"
         android:logo="@drawable/moov_icon"
         android:roundIcon="@drawable/moov_icon"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:screenOrientation="portrait">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait">
@@ -57,12 +57,10 @@
             android:name=".activity.EditPostActivity"
             android:label="@string/title_activity_edit_post"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".activity.MovieProfileActivity"
             android:label="MovieProfile"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".activity.UserSettingsActivity"
             android:label="@string/title_activity_user_settings"
@@ -110,6 +108,10 @@
         <activity
             android:name=".activity.ChangeAvatarActivity"
             android:label="@string/title_activity_change_avatar"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.FullPostActivity"
+            android:label="@string/title_activity_full_post"
             android:theme="@style/AppTheme"></activity>
     </application>
 

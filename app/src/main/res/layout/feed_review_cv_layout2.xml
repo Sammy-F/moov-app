@@ -33,7 +33,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.048" />
 
-
         <TextView
             android:id="@+id/MovieTitle"
             android:layout_width="wrap_content"
@@ -44,6 +43,17 @@
             android:background="@color/cardview_light_background"
             android:text="@string/movie"
             android:textColor="@color/card_movietitle" />
+
+        <TextView
+            android:id="@+id/MovieReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/ratingBar"
+            android:layout_below="@+id/ivPoster"
+            android:layout_marginTop="16dp"
+            android:text="moveireview"
+            android:textColor="@color/card_movietitle" />
+
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -58,29 +68,12 @@
             android:id="@+id/ivPoster"
             android:layout_width="90dp"
             android:layout_height="120dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
-            android:layout_toStartOf="@+id/ibDetail"
+            android:layout_marginEnd="14dp"
             android:background="@drawable/iv_border"
             android:scaleType="centerCrop" />
 
-        <ImageButton
-            android:id="@+id/ibDetail"
-            android:layout_width="20dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
-            android:background="@null"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:src="@drawable/icdetailblacksmall"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
-            app:layout_constraintStart_toEndOf="@+id/ivPoster"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.015" />
-
     </RelativeLayout>
 </android.support.v7.widget.CardView>
+
