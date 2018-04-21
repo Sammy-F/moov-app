@@ -43,13 +43,19 @@ public class FeedActivity extends PaginatingPostsActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
+        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
+        setUpNavBar(navBar);
+
         ConnectionTester connectionTester = new ConnectionTester();
 
-        if (connectionTester.connectionExists()) {
-            activitySetup();
-        } else {
-            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
-        }
+        activitySetup();
+
+//        if (connectionTester.connectionExists()) {
+//            activitySetup();
+//        } else {
+//            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
+//        }
 
     }
 
@@ -63,9 +69,6 @@ public class FeedActivity extends PaginatingPostsActivity {
 
 //        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
 //        setUpNavBar(navBar);
-        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
-        BottomNavigationViewHelper.disableShiftMode(navBar);
-        setUpNavBar(navBar);
 
         // initialize the variables in the super class
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();

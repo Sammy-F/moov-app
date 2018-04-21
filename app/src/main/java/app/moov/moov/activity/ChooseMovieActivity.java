@@ -33,6 +33,10 @@ public class ChooseMovieActivity extends ToolbarBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
+
+        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
+        setUpNavBar(navBar);
 //
 //        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
 //        setUpNavBar(navBar);

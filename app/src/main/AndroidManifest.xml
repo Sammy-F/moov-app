@@ -16,7 +16,8 @@
         android:logo="@drawable/moov_icon"
         android:roundIcon="@drawable/moov_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait">

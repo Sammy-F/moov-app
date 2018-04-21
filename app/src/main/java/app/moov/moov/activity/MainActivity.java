@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
 
         activitySetup();
 
-        ConnectionTester connectionTester = new ConnectionTester();
-
-        if (connectionTester.connectionExists()) {
-            activitySetup();
-        } else {
-            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
-        }
+//        ConnectionTester connectionTester = new ConnectionTester();
+//
+//        if (connectionTester.connectionExists()) {
+//            activitySetup();
+//        } else {
+//            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
+//        }
 
     }
 
