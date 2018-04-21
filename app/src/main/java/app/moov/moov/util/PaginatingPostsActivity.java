@@ -65,6 +65,8 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
     private int currentPage;
 
     private int movieID;
+
+    MovieProfilePaginatingRecyclerAdapter mAdapterForMovieProfile;
 //
 //    public PaginationRecyclerAdapter mAdapter;
 
@@ -171,6 +173,7 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
             mAdapter = new SelfPaginationRecyclerAdapter(mActivity);
         } else if (activityType == MOVIE_PROFILE_ACTIVITY_TYPE) {
             mAdapter = new MovieProfilePaginatingRecyclerAdapter(thisContext, movieID);
+            mAdapterForMovieProfile = (MovieProfilePaginatingRecyclerAdapter) mAdapter;
         } else {
             mAdapter = new PaginationRecyclerAdapter(thisContext);
         }
@@ -359,6 +362,14 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
 
         currentPage++;
 
+    }
+
+    public MovieProfilePaginatingRecyclerAdapter getMovieProfilePaginatingRecyclerAdapter() {
+        if (mAdapterForMovieProfile != null) {
+            return mAdapterForMovieProfile;
+        } else {
+            return null;
+        }
     }
 
 }
