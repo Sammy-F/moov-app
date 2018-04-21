@@ -9,18 +9,20 @@
     tools:context="app.moov.moov.activity.FeedTutorialActivity"
     tools:showIn="@layout/activity_feed_tutorial">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/feedRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <Button
+        android:id="@+id/btnEndTutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Got It!"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="186dp" />
 
-
-    </android.support.v7.widget.RecyclerView>
-
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/btnEndTutorial"
+        tools:layout_editor_absoluteX="162dp" />
 </android.support.constraint.ConstraintLayout>
