@@ -19,7 +19,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+//import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import app.moov.moov.R;
 
@@ -65,6 +65,33 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
     }
 
     /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
+    private void setUIViews() {
+        etNewPass = (EditText) findViewById(R.id.etNewPass);
+        etNewPassAgain = (EditText) findViewById(R.id.etPassAgain);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etCurrentPass = (EditText) findViewById(R.id.etCurrentPass);
+        btnChangePass = (Button) findViewById(R.id.btnChangePass);
+
+        btnChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePass();
+            }
+        });
+        findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
+    }
+
+    /**
      * Method run when the change password button
      * is pressed.
      * Reauthenticates the user and then changes their password
@@ -80,12 +107,18 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
         // Check if authentication strings exist.
         if (newPass.length() == 0 || newPassAgain.length() == 0 || email.length() == 0 || currentPass.length() == 0) {
             Toast.makeText(ChangePasswordActivity.this, "Please input all details!", Toast.LENGTH_SHORT).show();
+
         }
         else if (!email.equals(user.getEmail())){
             Toast.makeText(ChangePasswordActivity.this, "The email you've entered is not correct!", Toast.LENGTH_SHORT).show();
         }
         else if (!newPass.equals(newPassAgain)) { // Check if the password strings match
             Toast.makeText(ChangePasswordActivity.this, "The passwords do not match!", Toast.LENGTH_SHORT).show();
+
+        }
+        else if (newPass.length() <6 ) { // Check if the password strings match
+            Toast.makeText(ChangePasswordActivity.this, "Your password must be at least 6 characters long!", Toast.LENGTH_SHORT).show();
+
         }
         else {
             // Initialize credentials using the user's input login info
@@ -118,31 +151,5 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
 
     }
 
-    /**
-     * Initialize the View variables used in
-     * the Activity.
-     */
-    private void setUIViews() {
-        etNewPass = (EditText) findViewById(R.id.etPass);
-        etNewPassAgain = (EditText) findViewById(R.id.etPassAgain);
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etCurrentPass = (EditText) findViewById(R.id.etPass);
-        btnChangePass = (Button) findViewById(R.id.btnChangePass);
-
-        btnChangePass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changePass();
-            }
-        });
-        findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                return true;
-            }
-        });
-    }
 
 }

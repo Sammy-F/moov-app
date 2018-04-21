@@ -1,7 +1,5 @@
 package app.moov.moov.util;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -179,11 +177,11 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             View viewWithoutReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.nr_new_self_cv_layout, parent, false);
+                    .inflate(R.layout.profile_noreview_cv_layout, parent, false);
             return new FeedViewHolderWithoutReview(viewWithoutReview);
         } else {
             View viewWithReview = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.new_self_cv_layout, parent, false);
+                    .inflate(R.layout.profile_review_cv_layout, parent, false);
 
             return new FeedViewHolder(viewWithReview);
         }

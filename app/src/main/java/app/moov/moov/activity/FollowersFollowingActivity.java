@@ -1,6 +1,7 @@
 package app.moov.moov.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -13,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+//import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import app.moov.moov.R;
 import app.moov.moov.model.User;
@@ -44,6 +49,9 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
 
     private String resultsType;
     private String userID;
+
+    private FirebaseStorage firebaseStorage;
+    private StorageReference allAvRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +86,9 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
     protected void onStart() {
         super.onStart();
 
+        firebaseStorage = FirebaseStorage.getInstance();
+        allAvRef = firebaseStorage.getReference().child("images").child("avatars");
+
         Query firebaseSearchQuery;
 
         if (resultsType.equals("followers")) {
@@ -111,7 +122,15 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 //                        uid = (String) dataSnapshot.getValue();
-                        viewHolder.setUID((String) dataSnapshot.getValue());
+                        String uid = dataSnapshot.getValue(String.class);
+                        viewHolder.setUID(uid);
+                        StorageReference avatarRef = allAvRef.child(uid + ".png");
+                        avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(FollowersFollowingActivity.this).asBitmap().load(uri.toString()).into(viewHolder.getIvAvatar());
+                            }
+                        });
                     }
 
                     @Override
