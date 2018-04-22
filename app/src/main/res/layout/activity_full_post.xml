@@ -24,4 +24,19 @@
 
     <include layout="@layout/content_full_post" />
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        app:elevation="16dp"
+        android:clickable="true"
+        android:background="@color/toolbar_color"
+        app:itemTextColor="#ffffff"
+        app:itemIconTint="#FFFFFF"
+        android:layout_gravity="bottom"
+        app:menu="@menu/menu_nav_bar">
+    </android.support.design.widget.BottomNavigationView>
+
 </android.support.design.widget.CoordinatorLayout>
