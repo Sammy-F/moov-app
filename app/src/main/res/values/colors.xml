@@ -2,15 +2,15 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#ff5aa0</color>
+    <color name="colorAccent">#ef544f</color>
 
     <color name="toolbar_color">#2D3246</color>
 
-    <color name="purple_color">#7c5eff</color>
+    <color name="purple_color">#4b519d</color>
 
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#1d202d</color>
-    <color name="bg_main">#1d202d</color>
+    <color name="bg_main">#c2c4c9</color>
     <color name="white">#ffffff</color>
     <color name="input_login">#222222</color>
     <color name="input_login_hint">#999999</color>
