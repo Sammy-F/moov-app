@@ -9,6 +9,7 @@
     tools:context="app.moov.moov.activity.MovieSearchResultsActivity2"
     tools:showIn="@layout/activity_movie_search_results2">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/movieSearchRecycler"
         android:layout_width="match_parent"
@@ -22,5 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </android.support.v7.widget.RecyclerView>
+
+
 
 </android.support.constraint.ConstraintLayout>

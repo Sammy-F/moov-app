@@ -3,6 +3,7 @@ package app.moov.moov.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -152,6 +153,11 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         searchResultList.setLayoutManager(new LinearLayoutManager(this));
         progressBar = (ProgressBar) findViewById(R.id.resultsProgress);
         progressBar.setVisibility(View.VISIBLE);
+
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
+        setUpNavBar(navBar);
+
     }
 
 }

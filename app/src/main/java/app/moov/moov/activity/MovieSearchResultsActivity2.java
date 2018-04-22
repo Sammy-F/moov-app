@@ -49,10 +49,8 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
 
     private RecyclerView searchRecycler;
     private String searchQuery;
-
     private FirebaseAuth firebaseAuth;
     private Context thisContext;
-
     private ProgressBar progressBar;
 
     @Override
@@ -62,9 +60,7 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
 
         searchQuery = getIntent().getStringExtra("searchQuery").trim();
         firebaseAuth = FirebaseAuth.getInstance();
-
         thisContext = this;
-
         firebaseAuth = FirebaseAuth.getInstance();
         searchQuery = getIntent().getStringExtra("searchQuery");
 
@@ -72,7 +68,7 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
-        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationView navBar = findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
