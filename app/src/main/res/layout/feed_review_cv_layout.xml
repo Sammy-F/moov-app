@@ -6,11 +6,11 @@
     app:cardBackgroundColor="@color/white"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_marginBottom="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    card_view:cardCornerRadius="7dp">
+    android:layout_marginBottom="3dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    card_view:cardCornerRadius="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
