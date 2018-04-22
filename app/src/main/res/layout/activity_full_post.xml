@@ -37,6 +37,7 @@
         app:itemIconTint="#FFFFFF"
         android:layout_gravity="bottom"
         app:menu="@menu/menu_nav_bar">
+
     </android.support.design.widget.BottomNavigationView>
 
 </android.support.design.widget.CoordinatorLayout>
