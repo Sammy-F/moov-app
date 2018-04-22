@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.moov.moov.R;
+import app.moov.moov.activity.FullPostActivity;
 import app.moov.moov.activity.MovieProfileActivity;
 import app.moov.moov.activity.OtherUserProfile;
 import app.moov.moov.activity.UserProfileActivity;
@@ -221,7 +222,27 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
                 viewHolderWith.setReview(reviewedThisPost.getMovieReview());
                 viewHolderWith.setUsername(reviewedThisPost.getUsername());
 
-                String posterUrlWith = reviewedThisPost.getPosterURL();
+                final String posterUrlWith = reviewedThisPost.getPosterURL();
+
+                if (reviewedThisPost.getMovieReview().length() > 200) {
+                    Log.e("got line count", "got line count");
+                    String newStr = reviewedThisPost.getMovieReview().substring(0, 199);
+                    String result = String.format(thisContext.getResources().getString(R.string.show_more), newStr);
+                    viewHolderWith.getReviewView().setText(result);
+                    viewHolderWith.getReviewView().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(thisContext, FullPostActivity.class);
+                            intent.putExtra("username", reviewedThisPost.getUsername());
+                            intent.putExtra("review", reviewedThisPost.getMovieReview());
+                            intent.putExtra("title", reviewedThisPost.getMovieTitle());
+                            intent.putExtra("posterURL", posterUrlWith);
+                            intent.putExtra("numStars", reviewedThisPost.getMovieRating());
+                            thisContext.startActivity(intent);
+
+                        }
+                    });
+                }
 
                 // Load and place the movie poster in the ImageView
                 Glide.with(thisContext).asBitmap().load(posterUrlWith).into(viewHolderWith.getIvPoster());

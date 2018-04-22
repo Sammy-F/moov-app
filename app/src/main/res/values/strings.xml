@@ -5,6 +5,9 @@
 
     <string name="placeholder">Just some sad placeholder text. Sorry!</string>
 
+    <string name="show_more">%1$s <font color = "blue"><u>Show more...</u></font></string>
+    <string name="not_show_more">%1$s</string>
+
     <!-- Strings related to login -->
     <string name="reauthenticate">Please input your login details.</string>
     <string name="reauthenticate_email_change">Please input your login details and new email.</string>
