@@ -3,6 +3,7 @@ package app.moov.moov.util;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -227,8 +228,7 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
                 if (reviewedThisPost.getMovieReview().length() > 200) {
                     Log.e("got line count", "got line count");
                     String newStr = reviewedThisPost.getMovieReview().substring(0, 199);
-                    String result = String.format(thisContext.getResources().getString(R.string.show_more), newStr);
-                    viewHolderWith.getReviewView().setText(result);
+                    viewHolderWith.getReviewView().setText(thisContext.getResources().getString(R.string.show_more, newStr));
                     viewHolderWith.getReviewView().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
