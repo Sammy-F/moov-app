@@ -5,7 +5,7 @@
 
     <string name="placeholder">Just some sad placeholder text. Sorry!</string>
 
-    <string name="show_more">%1$s <font color = "blue"><u>Show more...</u></font></string>
+    <string name="show_more" formatted="false">%1$s  <font color ="#0000FF"><u><b>Show more...</b></u></font></string>
     <string name="not_show_more">%1$s</string>
 
     <!-- Strings related to login -->
