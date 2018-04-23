@@ -72,9 +72,9 @@ public class FullPostActivity extends ToolbarBaseActivity {
             tvMovieReview.setText("Error getting review.");
         }
         if (stringIsValid(title)) {
-            tvMovieReview.setText(title);
+            tvMovieTitle.setText(title);
         } else {
-            tvMovieReview.setText("Unable to get movie title.");
+            tvMovieTitle.setText("Unable to get movie title.");
         }
 
         rbRating.setNumStars(numStars);
