@@ -15,7 +15,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/toolbar_color"
+            app:itemBackground="@color/toolbar_color"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -26,12 +27,15 @@
         android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:visibility="visible"
-        app:itemTextColor="#FFFFFF"
+        app:elevation="16dp"
+        android:clickable="true"
+        android:background="@color/toolbar_color"
+        app:itemTextColor="#ffffff"
         app:itemIconTint="#FFFFFF"
+        android:layout_gravity="bottom"
         app:menu="@menu/menu_nav_bar">
-
     </android.support.design.widget.BottomNavigationView>
 
 
