@@ -77,7 +77,7 @@ public class FullPostActivity extends ToolbarBaseActivity {
             tvMovieTitle.setText("Unable to get movie title.");
         }
 
-        rbRating.setNumStars(numStars);
+        rbRating.setRating(numStars);
 
         try {
             Glide.with(this).asBitmap().load(posterURL).into(ivMoviePoster);
