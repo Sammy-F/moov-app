@@ -23,10 +23,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/MovieTitle"
         app:layout_constraintEnd_toStartOf="@+id/ivPoster"
-        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.516" />
+        app:layout_constraintVertical_bias="0.615" />
 
     <TextView
         android:id="@+id/MovieTitle"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/Username"
         android:layout_below="@+id/Username"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@color/cardview_light_background"
@@ -42,24 +42,27 @@
         android:textColor="@color/card_movietitle"
         app:layout_constraintBottom_toTopOf="@+id/ratingBar"
         app:layout_constraintEnd_toStartOf="@+id/ivPoster"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/MovieReview"
-        android:layout_width="350dp"
-        android:layout_height="29dp"
+        android:layout_width="305dp"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/ratingBar"
         android:layout_below="@+id/ivPoster"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:text="moveireview"
         android:textColor="@color/card_movietitle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.607"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPoster" />
+        app:layout_constraintTop_toBottomOf="@+id/ivPoster"
+        app:layout_constraintVertical_bias="0.002" />
 
 
     <RatingBar
@@ -74,7 +77,7 @@
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/MovieReview"
         app:layout_constraintEnd_toStartOf="@+id/ivPoster"
-        app:layout_constraintHorizontal_bias="0.239"
+        app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -84,7 +87,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="28dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/iv_border"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
