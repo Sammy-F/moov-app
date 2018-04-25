@@ -6,7 +6,11 @@
     app:cardBackgroundColor="@color/cardview_light_background"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_margin="16dp">
+    android:layout_marginBottom="3dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    card_view:cardCornerRadius="0dp">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,48 +23,45 @@
             android:id="@+id/ivAvatar"
             android:layout_width="95dp"
             android:layout_height="94dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:contentDescription="logo"
             app:civ_border_color="@color/cardview_dark_background"
             app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/llFollowers"
-            app:layout_constraintStart_toEndOf="@id/llFollowing"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.18"
             app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/title_activity_user_profile"
-            android:textSize="24sp"
             android:textColor="@color/cardview_dark_background"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvFullname"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivAvatar"
-            app:layout_constraintVertical_bias="0.19" />
+            app:layout_constraintHorizontal_bias="0.347"
+            app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+            app:layout_constraintTop_toBottomOf="@+id/llFollowers" />
 
         <LinearLayout
             android:id="@+id/llFollowing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ivAvatar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.26">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/llFollowers"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvNumFollowing"
@@ -75,8 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Following"
-                android:textSize="18sp"
                 android:textColor="@color/cardview_dark_background"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -84,18 +85,13 @@
             android:id="@+id/llFollowers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.485"
             app:layout_constraintStart_toEndOf="@+id/ivAvatar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.26">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvNumFollowers"
@@ -110,8 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Followers"
-                android:textSize="18sp"
                 android:textColor="@color/cardview_dark_background"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -119,16 +115,16 @@
         <TextView
             android:id="@+id/tvFullname"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="136dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@id/profileRecycler"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUsername"
             android:textColor="@color/cardview_dark_background"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.386"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>
