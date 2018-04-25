@@ -29,13 +29,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="@string/hint_username"
             android:textColor="@color/card_username"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ivPoster"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.048" />
+            android:textSize="16sp" />
 
 
         <TextView
@@ -49,26 +43,16 @@
             android:text="@string/movie"
             android:textColor="@color/card_movietitle" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="@style/Widget.AppCompat.RatingBar.Indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/MovieTitle"
-            android:layout_below="@+id/MovieTitle"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            />
-
         <ImageView
             android:id="@+id/ivPoster"
             android:layout_width="90dp"
             android:layout_height="120dp"
+            android:layout_marginBottom="8dp"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="15dp"
             android:layout_toStartOf="@+id/ibDetail"
             android:background="@drawable/iv_border"
             android:scaleType="centerCrop" />
+
         <ImageButton
             android:id="@+id/ibDetail"
             android:layout_width="20dp"
@@ -79,13 +63,17 @@
             android:background="@null"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:src="@drawable/icdetailblacksmall"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
-            app:layout_constraintStart_toEndOf="@+id/ivPoster"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.015" />
+            android:src="@drawable/icdetailblacksmall" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/MovieTitle"
+            android:layout_below="@+id/MovieTitle"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
