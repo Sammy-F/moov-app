@@ -148,7 +148,7 @@ public class EditPostActivity extends ToolbarBaseActivity {
 //        });
 
         //Return the user to the feed
-        Intent intent = new Intent(EditPostActivity.this, FeedActivity.class);
+        Intent intent = new Intent(EditPostActivity.this, OtherUserProfile.class);
         startActivity(intent);
     }
 
