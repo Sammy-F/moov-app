@@ -392,13 +392,13 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
                 final int movieID = thisPost.getMovieID();
 
                 final int thisPos = position;
-//
-//                viewHolder1.getIbDetail().setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        showPopupMenu(viewHolder1.getIbDetail(), viewHolder1.getAdapterPosition(), thisPost);
-//                    }
-//                });
+
+                viewHolder1.getIbDetail().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showPopupMenu(viewHolder1.getIbDetail(), viewHolder1.getAdapterPosition(), thisPost);
+                    }
+                });
 
                 viewHolder1.getUsername().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -570,7 +570,7 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
         });
 
         mActivity.finish();
-        mActivity.startActivity(new Intent(mActivity, FeedActivity.class));
+        mActivity.startActivity(new Intent(mActivity, UserProfileActivity.class));
 
     }
 
