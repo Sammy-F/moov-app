@@ -19,72 +19,107 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:id="@+id/llSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/profile" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/futura_medium_bt"
+                android:text="@string/profile"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnChangeAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_otherstartbutton"
+                android:fontFamily="@font/futura_medium_bt"
+                android:gravity="start|center_vertical"
                 android:text="@string/change_avatar"
-                android:gravity="start|center_vertical"/>
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/tvAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/account" />
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/futura_medium_bt"
+                android:text="@string/account"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnGoChangEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_otherstartbutton"
+                android:fontFamily="@font/futura_medium_bt"
                 android:gravity="start|center_vertical"
-                android:text="@string/change_email" />
+                android:text="@string/change_email"
+                android:textAlignment="center" />
 
             <Button
                 android:id="@+id/btnChangePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_otherstartbutton"
+                android:fontFamily="@font/futura_medium_bt"
+                android:gravity="start|center_vertical"
                 android:text="@string/change_password"
-                android:gravity="start|center_vertical"/>
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/tvSupport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/futura_medium_bt"
+                android:gravity="start|center_vertical"
                 android:text="@string/support"
-                android:gravity="start|center_vertical"/>
+
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnReportProblem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/rounded_otherstartbutton"
+                android:fontFamily="@font/futura_medium_bt"
+                android:gravity="start|center_vertical"
                 android:text="@string/report_problem"
-                android:gravity="start|center_vertical"/>
+                android:textAlignment="center" />
 
             <Button
                 android:id="@+id/btnLogOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/logout" />
+                android:background="@drawable/rounded_login"
+                android:fontFamily="@font/futura_medium_bt"
+                android:text="@string/logout"
+                android:textAlignment="center" />
         </LinearLayout>
 
     </ScrollView>
