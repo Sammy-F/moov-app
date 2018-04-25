@@ -63,12 +63,13 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
-            style="@style/Widget.AppCompat.RatingBar.Indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/MovieTitle"
             android:layout_below="@+id/MovieTitle"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            style="?android:attr/ratingBarStyleSmall"
+            />
 
         <ImageView
             android:id="@+id/ivPoster"
