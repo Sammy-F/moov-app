@@ -71,6 +71,7 @@
             android:layout_alignStart="@+id/Username"
             android:layout_below="@+id/Username"
             android:layout_marginTop="16dp"
+            android:layout_toStartOf="@+id/ivPoster"
             android:background="@color/cardview_light_background"
             android:text="@string/movie"
             app:layout_constraintWidth_max="220dp"

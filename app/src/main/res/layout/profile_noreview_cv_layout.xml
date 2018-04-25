@@ -39,6 +39,7 @@
             android:layout_alignStart="@+id/Username"
             android:layout_below="@+id/Username"
             android:layout_marginTop="16dp"
+            android:layout_toStartOf="@+id/ivPoster"
             android:background="@color/cardview_light_background"
             android:text="@string/movie"
             android:textColor="@color/card_movietitle" />

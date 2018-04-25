@@ -2,8 +2,14 @@ package app.moov.moov.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -228,7 +234,11 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
                 if (reviewedThisPost.getMovieReview().length() > 200) {
                     Log.e("got line count", "got line count");
                     String newStr = reviewedThisPost.getMovieReview().substring(0, 199);
-                    viewHolderWith.getReviewView().setText(thisContext.getResources().getString(R.string.show_more, newStr));
+                    newStr = thisContext.getResources().getString(R.string.show_more, newStr);
+                    Spannable newStrSpannable = new SpannableString(newStr);
+                    newStrSpannable.setSpan(new ForegroundColorSpan(Color.BLUE), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    newStrSpannable.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    viewHolderWith.getReviewView().setText(newStrSpannable, TextView.BufferType.SPANNABLE);
                     viewHolderWith.getReviewView().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
