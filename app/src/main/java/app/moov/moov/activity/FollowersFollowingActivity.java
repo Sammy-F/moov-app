@@ -116,6 +116,7 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
             @Override
             protected void onBindViewHolder(final UserResultViewHolder viewHolder, int position, User model) {
                 viewHolder.setUsername(model.getUsername()); //changed back
+                viewHolder.setFullName(model.getFirstName() + " " + model.getLastName());
                 String username = model.getlowername();
                 database.getReference().child("lusernames").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
 
