@@ -1,7 +1,10 @@
 package app.moov.moov.util;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -10,17 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +37,12 @@ import java.util.List;
 import app.moov.moov.R;
 import app.moov.moov.activity.EditPostActivity;
 import app.moov.moov.activity.FeedActivity;
+import app.moov.moov.activity.FollowersFollowingActivity;
 import app.moov.moov.activity.MovieProfileActivity;
 import app.moov.moov.activity.OtherUserProfile;
 import app.moov.moov.activity.UserProfileActivity;
 import app.moov.moov.model.Post;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Sammy on 4/7/2018.
@@ -43,10 +54,177 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
     private List<Post> postList;
     private long lastTimestamp;
 
+    private String uid;
+
+    private Post placeholderPost;
+
+    private final int PLACEHOLDER_TYPE = 2;
+    private final int NO_REVIEW_TYPE = 0;
+    private final int WITH_REVIEW_TYPE = 1;
+
     public SelfPaginationRecyclerAdapter(UserProfileActivity mActivity) {
         super();
         this.mActivity = mActivity;
         postList = new ArrayList<Post>();
+        placeholderPost = new Post();
+        postList.add(placeholderPost);
+    }
+
+    public static class ProfileCardHolder extends RecyclerView.ViewHolder {
+        private CircleImageView ivAvatar;
+        private TextView tvUsername;
+        private TextView tvNumFollowing;
+        private TextView tvNumFollowers;
+        private TextView tvFullName;
+
+        private LinearLayout llFollowers;
+        private LinearLayout llFollowing;
+
+        private String userID;
+
+        private String username;
+
+        private Context thisContext;
+
+        public ProfileCardHolder(View itemView, Context thisContext) {
+            super(itemView);
+
+            ivAvatar = (CircleImageView) itemView.findViewById(R.id.ivAvatar);
+            tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
+            tvNumFollowing = (TextView) itemView.findViewById(R.id.tvNumFollowing);
+            tvNumFollowers = (TextView) itemView.findViewById(R.id.tvNumFollowers);
+            tvFullName = (TextView) itemView.findViewById(R.id.tvFullname);
+            llFollowers = (LinearLayout) itemView.findViewById(R.id.llFollowers);
+            llFollowing = (LinearLayout) itemView.findViewById(R.id.llFollowing);
+
+            this.thisContext = thisContext;
+        }
+
+        public void runSetup() {
+
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            final String uid = user.getUid();
+            userID = user.getUid();
+
+            FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+            StorageReference avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(userID + ".png");
+
+//        setUIViews();
+
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference baseRef = database.getReference();
+            DatabaseReference userRef = database.getReference().child("Users").child(uid);
+            DatabaseReference postsRef = database.getReference().child("Users").child(uid).child("Posts");
+            DatabaseReference allUsers = baseRef.child("Users");
+
+            avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(thisContext).asBitmap().load(uri.toString()).into(ivAvatar);
+                }
+            });
+
+//        avatarRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+//            @Override
+//            public void onSuccess(byte[] bytes) {
+//                Bitmap currentAvatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                ivAvatar.setImageBitmap(currentAvatar);
+//            }
+//        });
+
+            llFollowers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(thisContext, FollowersFollowingActivity.class);
+                    intent.putExtra("type", "followers");
+                    intent.putExtra("uid", userID);
+                    thisContext.startActivity(intent);
+                }
+            });
+
+            llFollowing.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(thisContext, FollowersFollowingActivity.class);
+                    intent.putExtra("type", "following");
+                    intent.putExtra("uid", userID);
+                    thisContext.startActivity(intent);
+                }
+            });
+
+            // Set text for number of Followers user has
+            userRef.child("Followers").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    tvNumFollowers.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            // Set next for number of users the user Follows
+            userRef.child("Following").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    tvNumFollowing.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            /**
+             * Inside gets current user's username
+             */
+            userRef.child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    username = dataSnapshot.getValue(String.class);
+
+                    tvUsername.setText(username);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(thisContext,"Getting username failed.", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            userRef.child("FirstName").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String firstName = dataSnapshot.getValue() + " ";
+                    tvFullName.setText(firstName);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            userRef.child("LastName").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String fullName = tvFullName.getText().toString() + dataSnapshot.getValue(String.class);
+                    tvFullName.setText(fullName);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+
     }
 
     /**
@@ -165,17 +343,23 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
      */
     @Override
     public int getItemViewType(int position) {
-        if (!(postList.get(position).getMovieReview() == null) || !postList.get(position).getMovieReview().equals("")) {
-            return 1;
+        if (postList.get(position) == placeholderPost) {
+            return PLACEHOLDER_TYPE;
+        } else if (!(postList.get(position).getMovieReview() == null) && !postList.get(position).getMovieReview().equals("")) {
+            return WITH_REVIEW_TYPE;
         }
         else {
-            return 0;
+            return NO_REVIEW_TYPE;
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == 0) {
+        if (viewType == PLACEHOLDER_TYPE) {
+            View placeholderView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.cv_self_user_profile, parent, false);
+            return new ProfileCardHolder(placeholderView, mActivity);
+        } else if (viewType == NO_REVIEW_TYPE) {
             View viewWithoutReview = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.profile_noreview_cv_layout, parent, false);
             return new FeedViewHolderWithoutReview(viewWithoutReview);
@@ -193,7 +377,7 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
         //Decide which ViewType the Post has (i.e. with review or without review)
         // and sets up the item depending on this ViewType.
         switch(viewHolder.getItemViewType()) {
-            case 0:
+            case NO_REVIEW_TYPE:
                 final SelfPaginationRecyclerAdapter.FeedViewHolderWithoutReview viewHolder1 = (SelfPaginationRecyclerAdapter.FeedViewHolderWithoutReview) viewHolder;
 
                 final Post thisPost = postList.get(position);
@@ -239,7 +423,7 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
                     }
                 });
                 break;
-            case 1:
+            case WITH_REVIEW_TYPE:
                 final SelfPaginationRecyclerAdapter.FeedViewHolder viewHolderWith = (SelfPaginationRecyclerAdapter.FeedViewHolder) viewHolder;
 
                 final Post reviewedThisPost = postList.get(position);
@@ -281,6 +465,9 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
                     }
                 });
                 break;
+            case PLACEHOLDER_TYPE:
+                final SelfPaginationRecyclerAdapter.ProfileCardHolder profileCardHolder = (SelfPaginationRecyclerAdapter.ProfileCardHolder) viewHolder;
+                profileCardHolder.runSetup();
         }
     }
 
