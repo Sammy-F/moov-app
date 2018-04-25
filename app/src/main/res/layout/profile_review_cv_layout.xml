@@ -84,7 +84,8 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/MovieTitle"
             android:layout_below="@+id/MovieTitle"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:numStars="5" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

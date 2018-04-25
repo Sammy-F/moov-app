@@ -247,7 +247,7 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
                             intent.putExtra("review", reviewedThisPost.getMovieReview());
                             intent.putExtra("title", reviewedThisPost.getMovieTitle());
                             intent.putExtra("posterURL", posterUrlWith);
-                            intent.putExtra("numStars", reviewedThisPost.getMovieRating());
+                            intent.putExtra("numStars", Integer.parseInt(reviewedThisPost.getMovieRating()));
                             thisContext.startActivity(intent);
 
                         }
