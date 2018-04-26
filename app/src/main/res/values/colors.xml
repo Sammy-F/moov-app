@@ -22,6 +22,12 @@
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ff6861</color>
 
+    <color name="google_red">#db3236</color>
+    <color name="google_blue">#4885ed</color>
+    <color name="google_yellow">#f4c20d</color>
+    <color name="google_green">#3cba54</color>
+
+
     <color name="card_username">#262626</color>
     <color name="card_movietitle">#5e6266</color>
 </resources>

@@ -10,6 +10,7 @@ package app.moov.moov.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +35,9 @@ import app.moov.moov.util.PaginationRecyclerAdapter;
 
 public class FeedActivity extends PaginatingPostsActivity {
 
+    private SwipeRefreshLayout swipeContainer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,13 +52,36 @@ public class FeedActivity extends PaginatingPostsActivity {
 
         activitySetup();
 
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                activitySetup();
+                swipeContainer.setRefreshing(false);
+
+            }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(
+                R.color.google_green,
+                R.color.google_yellow,
+                R.color.google_red,
+                R.color.google_blue);
+    }
+
+
 //        if (connectionTester.connectionExists()) {
 //            activitySetup();
 //        } else {
 //            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
 //        }
 
-    }
+
 
     private void activitySetup() {
 
