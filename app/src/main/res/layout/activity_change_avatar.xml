@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fontFamily="@font/futura_medium_bt"
     tools:context="app.moov.moov.activity.ChangeAvatarActivity">
 
     <android.support.design.widget.AppBarLayout
