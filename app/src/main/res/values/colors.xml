@@ -3,10 +3,11 @@
     <color name="colorPrimary">#1797AA</color>
     <color name="colorPrimaryDark">#127787</color>
     <color name="colorAccent">#FF7F50</color>
+    <color name="colorAccentDarker">#b75c00</color>
+    <color name="buttons">#0c6e7d</color>
 
     <color name="colorStar">#FF7F50</color>
     <color name="colorStarBackground">#5e6266</color>
-
     <color name="toolbar_color">#1797AA</color>
     <color name="purple_color">#4b519d</color>
     <color name="bg_login">#26ae90</color>
@@ -35,5 +36,8 @@
 
     <color name="movie_info_color">#224245</color>
     <color name="movie_summary_color">#376a70</color>
+
+    <color name="darker_text_color">#224245</color>
+
 
 </resources>
