@@ -72,7 +72,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="top"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/darker_text_color"
         android:hint="@string/posttext"
         android:inputType="textMultiLine"
         android:textColorHint="@color/colorPrimaryDark"
