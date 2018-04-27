@@ -8,21 +8,14 @@
     tools:context="app.moov.moov.activity.MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
-    <RelativeLayout
-        android:id="@+id/videoLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp">
-        <VideoView
-            android:id="@+id/bgVideoView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </RelativeLayout>
+    <VideoView
+        android:id="@+id/bgVideoView"
+        android:layout_width="1590dp"
+        android:layout_height="2827dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"

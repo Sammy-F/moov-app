@@ -57,71 +57,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RelativeLayout rootView = (RelativeLayout) findViewById(R.id.videoLayout);
-        Display display=getWindowManager().getDefaultDisplay();
-        Point size=new Point();
-        display.getSize(size);
+        mVideoView = (VideoView) findViewById(R.id.bgVideoView);
 
-        ConstraintLayout.LayoutParams rootViewParams = (ConstraintLayout.LayoutParams) rootView.getLayoutParams();
-        int videoWidth=1280;
-        int videoHeight=720;
 
-        if ((float)videoWidth/(float)videoHeight<(float)size.x/(float)size.y) {
-            rootViewParams.width=size.x;
-            rootViewParams.height=videoHeight*size.x/videoWidth;
-            rootView.setX(0);
-            rootView.setY((rootViewParams.height-size.y)/2*-1);
-        } else {
-            rootViewParams.width=videoWidth*size.y/videoHeight;
-            rootViewParams.height=size.y;
-            rootView.setX((rootViewParams.width-size.x)/2*-1);
-            rootView.setY(0);
-        }
+        mVideoView = (VideoView) findViewById(R.id.bgVideoView);
 
-        rootView.setLayoutParams(rootViewParams);
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.bg_video);
 
-        try {
-            mVideoView = (VideoView) findViewById(R.id.bgVideoView);
+        mVideoView.setVideoURI(uri);
+        mVideoView.start();
 
-            Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.shimmer_mp4);
-
-            mVideoView.setVideoURI(uri);
-
-            mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    Log.e("Video prepared", "Video was prepared");
-                    mVideoView.start();
-                    mediaPlayer.setLooping(true);
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Video error", e.getMessage());
-        }
-
-//        mVideoView = (VideoView) findViewById(R.id.bgVideoView);
-//
-//        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.bg_video);
-//
-//        mVideoView.setVideoURI(uri);
-//        mVideoView.start();
-//
-//        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mediaPlayer) {
-//                mediaPlayer.setLooping(true);
-//            }
-//        });
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mediaPlayer.setLooping(true);
+            }
+        });
 
         activitySetup();
 
-//        ConnectionTester connectionTester = new ConnectionTester();
-//
-//        if (connectionTester.connectionExists()) {
-//            activitySetup();
-//        } else {
-//            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
-//        }
+        ConnectionTester connectionTester = new ConnectionTester();
+
+        if (connectionTester.connectionExists()) {
+            activitySetup();
+        } else {
+            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -129,47 +90,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        RelativeLayout rootView = (RelativeLayout) findViewById(R.id.videoLayout);
-        Display display=getWindowManager().getDefaultDisplay();
-        Point size=new Point();
-        display.getSize(size);
+        mVideoView = (VideoView) findViewById(R.id.bgVideoView);
 
-        ConstraintLayout.LayoutParams rootViewParams = (ConstraintLayout.LayoutParams) rootView.getLayoutParams();
-        int videoWidth=1280;
-        int videoHeight=720;
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.bg_video);
 
-        if ((float)videoWidth/(float)videoHeight<(float)size.x/(float)size.y) {
-            rootViewParams.width=size.x;
-            rootViewParams.height=videoHeight*size.x/videoWidth;
-            rootView.setX(0);
-            rootView.setY((rootViewParams.height-size.y)/2*-1);
-        } else {
-            rootViewParams.width=videoWidth*size.y/videoHeight;
-            rootViewParams.height=size.y;
-            rootView.setX((rootViewParams.width-size.x)/2*-1);
-            rootView.setY(0);
-        }
+        mVideoView.setVideoURI(uri);
+        mVideoView.start();
 
-        rootView.setLayoutParams(rootViewParams);
-
-        try {
-            mVideoView = (VideoView) findViewById(R.id.bgVideoView);
-
-            Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.shimmer_mp4);
-
-            mVideoView.setVideoURI(uri);
-
-            mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    Log.e("Video prepared", "Video was prepared");
-                    mVideoView.start();
-                    mediaPlayer.setLooping(true);
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Video error", e.getMessage());
-        }
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mediaPlayer.setLooping(true);
+            }
+        });
 
     }
 
