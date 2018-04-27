@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardBackgroundColor="@color/white"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
@@ -21,15 +22,11 @@
             android:id="@+id/ivAvatar"
             android:layout_width="95dp"
             android:layout_height="94dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:contentDescription="logo"
             app:civ_border_color="@color/white"
             app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
@@ -39,44 +36,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Username"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/title_activity_user_profile"
             android:textColor="@color/profile_cv_text"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnFollowing"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toTopOf="@+id/tvFullname"
             app:layout_constraintStart_toEndOf="@+id/ivAvatar"
             app:layout_constraintTop_toBottomOf="@+id/llFollowers"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <LinearLayout
             android:id="@+id/llFollowing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/llFollowers"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvNumFollowing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/profile_cv_text"
                 android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textColor="@color/profile_cv_text"
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/tvFollowing"
@@ -91,27 +83,22 @@
             android:id="@+id/llFollowers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ivAvatar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.275">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvNumFollowers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textColor="@color/profile_cv_text"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/tvFollowers"
@@ -126,34 +113,33 @@
         <TextView
             android:id="@+id/tvFullname"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:text="Fullname"
-            android:textColor="@color/profile_cv_text"
+            android:layout_marginStart="136dp"
+            android:text="TextView"
             android:textSize="14sp"
+            android:textColor="@color/profile_cv_text"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnFollowing"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/ivAvatar"
-            app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnFollowing"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_width="108dp"
+            android:layout_height="37dp"
+            android:layout_marginBottom="2dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="280dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:background="@drawable/rounded_otherstartbutton"
             android:fontFamily="@font/futura_medium_bt"
             android:text="@string/follow_btn"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llFollowing" />
+            app:layout_constraintTop_toBottomOf="@+id/llFollowing"
+            app:layout_constraintVertical_bias="0.333" />
 
 
     </android.support.constraint.ConstraintLayout>

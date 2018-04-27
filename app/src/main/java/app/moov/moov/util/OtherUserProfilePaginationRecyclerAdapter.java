@@ -116,7 +116,7 @@ public class OtherUserProfilePaginationRecyclerAdapter extends PaginationAdapter
             userID = user.getUid();
 
             FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-            StorageReference avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(userID + ".png");
+            StorageReference avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(uid.toString() + ".png");
 
 //        setUIViews();
 
