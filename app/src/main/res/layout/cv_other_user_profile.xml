@@ -132,7 +132,6 @@
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_otherstartbutton"
             android:fontFamily="@font/futura_medium_bt"
-            android:text="@string/follow_btn"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
