@@ -12,6 +12,8 @@
 
         <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
 
+        <item name="android:actionMenuTextColor">@color/darker_text_color</item>
+
         <item name="logo">@drawable/logo_trimmed</item>
         <item name="displayOptions">useLogo|showHome</item>
     </style>
