@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#ef544f</color>
+    <color name="colorPrimary">#1797AA</color>
+    <color name="colorPrimaryDark">#127787</color>
+    <color name="colorAccent">#FF7F50</color>
 
-    <color name="toolbar_color">#2D3246</color>
+    <color name="colorStar">#FF7F50</color>
+    <color name="colorStarBackground">#5e6266</color>
 
+
+
+    <color name="toolbar_color">#1797AA</color>
     <color name="purple_color">#4b519d</color>
-
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#1d202d</color>
-    <color name="bg_main">#c2c4c9</color>
+    <color name="bg_main">#D5E8ED</color>
     <color name="white">#ffffff</color>
     <color name="input_login">#222222</color>
     <color name="input_login_hint">#999999</color>
@@ -21,13 +24,14 @@
     <color name="btn_login_bg">#eceef1</color>
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ff6861</color>
+    <color name="profile_cv_text">#224245</color>
+    <color name="profile_ff_text">#376a70</color>
 
     <color name="google_red">#db3236</color>
     <color name="google_blue">#4885ed</color>
     <color name="google_yellow">#f4c20d</color>
     <color name="google_green">#3cba54</color>
-
-
-    <color name="card_username">#262626</color>
-    <color name="card_movietitle">#5e6266</color>
+    <color name="cardview_light_background">#78dded</color>
+    <color name="card_username">#224245</color>
+    <color name="card_movietitle">#376a70</color>
 </resources>

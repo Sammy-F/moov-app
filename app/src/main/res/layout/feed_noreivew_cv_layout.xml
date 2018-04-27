@@ -39,7 +39,7 @@
 
         <TextView
             android:id="@+id/MovieTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/Username"
             android:layout_below="@+id/Username"
