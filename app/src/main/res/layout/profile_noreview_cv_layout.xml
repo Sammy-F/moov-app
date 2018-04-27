@@ -30,7 +30,6 @@
             android:textColor="@color/card_username"
             android:textSize="16sp" />
 
-
         <TextView
             android:id="@+id/MovieTitle"
             android:layout_width="wrap_content"
