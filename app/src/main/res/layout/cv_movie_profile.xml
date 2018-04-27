@@ -6,14 +6,16 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:layout_marginBottom="3dp"
-    android:layout_marginTop="3dp"
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
     card_view:cardCornerRadius="0dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:layout_margin="0dp"
+        >
 
         <ImageView
             android:id="@+id/ivMoviePoster"
