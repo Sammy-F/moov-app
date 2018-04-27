@@ -117,7 +117,7 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
                         Resources r = getResources();
                         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, r.getDisplayMetrics());
 
-                        searchRecycler.addItemDecoration(new GridSpacingItemDecoration(2, px, true));
+//                        searchRecycler.addItemDecoration(new GridSpacingItemDecoration(2, px, true));
 
                         PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
