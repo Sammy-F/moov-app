@@ -10,8 +10,6 @@
     tools:context="app.moov.moov.activity.MovieProfileActivity"
     tools:showIn="@layout/activity_movie_profile">
 
-    >
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/movieRecycler"
         android:layout_width="0dp"
