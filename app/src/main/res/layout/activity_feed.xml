@@ -22,7 +22,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_feed" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_feed" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navBar"
