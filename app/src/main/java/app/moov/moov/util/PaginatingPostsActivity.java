@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.AbsListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -252,23 +253,46 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
         Log.e("post list", mAdapter.getPostList().toString());
 
         feedRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int currentVisibleItemCount;
+            private int currentScrollState;
+            private int currentFirstVisibleItem;
+            private int totalItem;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView view, int scrollState) {
+                currentScrollState = scrollState;
+                isScrollCompleted();
+            }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 //                mTotalItemCount = (int) numPosts;
-                mTotalItemCount = orderedManager.getItemCount();
-                mVisibleItemCount = orderedManager.getChildCount();
-                mfirstVisibleItemPos = orderedManager.findFirstVisibleItemPosition();
+                totalItem = orderedManager.getItemCount();
+                currentVisibleItemCount = orderedManager.getChildCount();
+                currentFirstVisibleItem = orderedManager.findFirstVisibleItemPosition();
 
-                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (currentPage <= maxPages)
-//                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (mAdapter.getItemCount() <= maxPosts)
-                        && mfirstVisibleItemPos >= 0) {
+//                if ((!isLoading) && (totalItem <= (currentVisibleItemCount + currentFirstVisibleItem)) && (currentPage <= maxPages)
+////                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (mAdapter.getItemCount() <= maxPosts)
+//                        && mfirstVisibleItemPos >= 0) {
+//
+//                    loadPosts(mAdapter.getLastTimestamp());
+//                    isLoading = true;
+//
+//                }
 
-                    loadPosts(mAdapter.getLastTimestamp());
-                    isLoading = true;
+            }
+
+            private void isScrollCompleted() {
+                if (totalItem - currentFirstVisibleItem == currentVisibleItemCount
+                        && currentScrollState == RecyclerView.SCROLL_STATE_IDLE) {
+
+                    if (!isLoading && currentPage <= maxPages) {
+                        loadPosts(mAdapter.getLastTimestamp());
+                        isLoading = true;
+                    }
 
                 }
-
             }
         });
 
