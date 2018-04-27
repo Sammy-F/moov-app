@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import app.moov.moov.R;
@@ -77,16 +78,41 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
         movieProfilePaginationSetup(this, FirebaseAuth.getInstance(), database,
                 baseRef, postsRef, movieRecycler, movieID);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MovieProfileActivity.this, PostActivity.class);
-                intent.putExtra("movieID", movieID);
-                intent.putExtra("movieTitle", getMovieProfilePaginatingRecyclerAdapter().getMovieTitle());
-                intent.putExtra("posterURL", getMovieProfilePaginatingRecyclerAdapter().getPosterURL());
-                startActivity(intent);
+        String url = "https://api.themoviedb.org/3/movie/" + movieID + "?api_key=3744632a440f06514578b01d1b6e9d27&language=en-US";
 
+        RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
+
+        JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    JSONObject movieDetail = response;
+                    final String tMovieTitle = (String) movieDetail.get("title");
+                    final String posterURL = (String) movieDetail.get("poster_path");
+
+                    FloatingActionButton fab = findViewById(R.id.fab);
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MovieProfileActivity.this, PostActivity.class);
+                            intent.putExtra("movieID", movieID);
+                            intent.putExtra("movieTitle", tMovieTitle);
+                            intent.putExtra("posterURL", posterURL);
+                            startActivity(intent);
+
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    Toast.makeText(MovieProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MovieProfileActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
