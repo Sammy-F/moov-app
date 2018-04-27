@@ -141,6 +141,22 @@ public class OtherUserProfilePaginationRecyclerAdapter extends PaginationAdapter
 //            }
 //        });
 
+            userRef.child("Followers").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        btnFollowing.setText("Unfollow");
+                    } else {
+                        btnFollowing.setText("Follow");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
             llFollowers.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
