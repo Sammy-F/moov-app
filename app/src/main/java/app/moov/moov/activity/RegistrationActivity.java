@@ -129,7 +129,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                             database.getReference().child("Users").child(currentPerson.getUid()).child("lowername").setValue(userName.trim().toLowerCase());
                                             database.getReference().child("lusernames").child(userName.trim().toLowerCase()).setValue(thisUID);
                                             avatarSetup(thisUID);
-                                            startActivity(new Intent(RegistrationActivity.this, FeedTutorialActivity.class));
+                                            startActivity(new Intent(RegistrationActivity.this, FeedActivity.class));
                                             finish();
                                         } else {
 
