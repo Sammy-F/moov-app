@@ -22,7 +22,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/darker_text_color"
         android:backgroundTint="@color/colorPrimaryDark"
         android:hint="@string/search_movie_to_review"
         android:inputType="textPersonName"

@@ -37,7 +37,7 @@
         android:id="@+id/etChangeUsername"
         android:textColorHint="@color/hint_text_color"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/darker_text_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
