@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF7F50</color>
     <color name="colorAccentDarker">#b75c00</color>
     <color name="buttons">#0c6e7d</color>
-
+    <color name="hint_text_color">#6E9398</color>
     <color name="colorStar">#FF7F50</color>
     <color name="colorStarBackground">#5e6266</color>
     <color name="toolbar_color">#1797AA</color>

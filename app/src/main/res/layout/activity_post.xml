@@ -32,6 +32,7 @@
 
     <TextView
         android:id="@+id/textViewCreateNewPost"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -48,6 +49,7 @@
 
     <TextView
         android:id="@+id/tvMovieTitle"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -60,27 +62,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewCreateNewPost"
         app:layout_constraintVertical_bias="0.041" />
 
-    <!--<RatingBar-->
-    <!--android:id="@+id/editTextRating"-->
-    <!--style="@style/Widget.AppCompat.RatingBar"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:ems="10"-->
-    <!--android:hint="@string/rating"-->
-    <!--android:inputType="textPersonName|number"-->
-    <!--android:numStars="5"-->
-    <!--android:rating="3"-->
-    <!--android:stepSize=".5"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"-->
-    <!--app:layout_constraintVertical_bias="0.0" />-->
-
     <EditText
         android:id="@+id/editTextWriteReview"
         android:layout_width="0dp"
@@ -91,8 +72,10 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="top"
+        android:textColor="@color/colorAccent"
         android:hint="@string/posttext"
         android:inputType="textMultiLine"
+        android:textColorHint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -104,12 +87,16 @@
         android:id="@+id/buttonShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:onClick="shareButtonClicked"
         android:text="@string/share"
+        android:background="@drawable/rounded_otherstartbutton"
+        android:fontFamily="@font/futura_medium_bt"
+        android:gravity="start|center_vertical"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,6 +109,8 @@
         android:numStars="5"
         android:rating="3"
         android:stepSize="1"
+        android:foreground="@color/colorAccent"
+        android:indeterminateTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

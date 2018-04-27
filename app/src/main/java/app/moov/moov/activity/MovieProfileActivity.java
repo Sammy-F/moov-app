@@ -81,7 +81,6 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(MovieProfileActivity.this, PostActivity.class);
                 intent.putExtra("movieID", movieID);
                 intent.putExtra("movieTitle", getMovieProfilePaginatingRecyclerAdapter().getMovieTitle());
