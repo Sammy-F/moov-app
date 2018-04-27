@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Iterator;
 
 import app.moov.moov.activity.MovieProfileActivity;
+import app.moov.moov.activity.OtherUserProfile;
 import app.moov.moov.activity.ToolbarBaseActivity;
 import app.moov.moov.activity.UserProfileActivity;
 import app.moov.moov.model.Post;
@@ -38,6 +39,7 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
     private final int MISC_ACTIVITY_TYPE = 0;
     private final int USER_PROFILE_ACTIVITY_TYPE = 1;
     private final int MOVIE_PROFILE_ACTIVITY_TYPE = 2;
+    private final int OTHER_USER_PROFILE_ACTIVITY_TYPE = 3;
 
     private int activityType;
 
@@ -66,12 +68,34 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
     private int currentPage;
 
     private int movieID;
+    private String otherUserID;
 
     MovieProfilePaginatingRecyclerAdapter mAdapterForMovieProfile;
 //
 //    public PaginationRecyclerAdapter mAdapter;
 
     public PaginationAdapter mAdapter;
+
+    public void otherUserProfilePaginationSetup(Context thisContext, FirebaseAuth firebaseAuth, FirebaseDatabase database,
+                                                DatabaseReference baseRef, DatabaseReference postsKeysRef, RecyclerView feedRecycler, String otherUserID) {
+        this.thisContext = thisContext;
+        this.firebaseAuth = firebaseAuth;
+        this.database = database;
+        this.baseRef = baseRef;
+        this.postsRef = postsKeysRef;
+        this.feedRecycler = feedRecycler;
+        this.movieID = movieID;
+        this.otherUserID = otherUserID;
+        orderedManager = new LinearLayoutManager(thisContext);
+
+        setupDatabaseRefs();
+
+        feedRecycler.setHasFixedSize(true);
+        feedRecycler.setLayoutManager(orderedManager);
+        feedRecycler.setItemAnimator(new DefaultItemAnimator());
+
+        initPostLoad();
+    }
 
     public void movieProfilePaginationSetup(Context thisContext, FirebaseAuth firebaseAuth, FirebaseDatabase database,
                                 DatabaseReference baseRef, DatabaseReference postsKeysRef, RecyclerView feedRecycler, int movieID) {
@@ -157,6 +181,8 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
         }
         else if (thisContext instanceof MovieProfileActivity) {
             return MOVIE_PROFILE_ACTIVITY_TYPE;
+        } else if (thisContext instanceof  OtherUserProfile) {
+            return OTHER_USER_PROFILE_ACTIVITY_TYPE;
         } else {
             return MISC_ACTIVITY_TYPE;
         }
@@ -175,7 +201,11 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
         } else if (activityType == MOVIE_PROFILE_ACTIVITY_TYPE) {
             mAdapter = new MovieProfilePaginatingRecyclerAdapter(thisContext, movieID);
             mAdapterForMovieProfile = (MovieProfilePaginatingRecyclerAdapter) mAdapter;
-        } else {
+        } else if (activityType == OTHER_USER_PROFILE_ACTIVITY_TYPE) {
+            OtherUserProfile mActivity = (OtherUserProfile) thisContext;
+            mAdapter = new OtherUserProfilePaginationRecyclerAdapter(mActivity, otherUserID);
+        }
+        else {
             mAdapter = new PaginationRecyclerAdapter(thisContext);
         }
 

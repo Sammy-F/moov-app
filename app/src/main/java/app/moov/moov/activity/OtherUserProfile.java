@@ -81,8 +81,8 @@ public class OtherUserProfile extends PaginatingPostsActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference baseRef = database.getReference();
         usersRef = baseRef.child("Users");
-        currentUID = firebaseAuth.getCurrentUser().getUid();
-        currentUserRef = usersRef.child(currentUID);
+//        currentUID = firebaseAuth.getCurrentUser().getUid();
+//        currentUserRef = usersRef.child(currentUID);
         thisUserRef = usersRef.child(thisUserID);
         DatabaseReference postsRef = thisUserRef.child("Posts");
 
@@ -91,178 +91,178 @@ public class OtherUserProfile extends PaginatingPostsActivity {
 
         RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.userRecycler);
 
-        setUIViews();
+//        setUIViews();
 
-        paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
+        otherUserProfilePaginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler, thisUserID);
     }
 
-    private void setUIViews() {
-
-        tvUsername = (TextView) findViewById(R.id.tvUsername);
-        btnFollow = (Button) findViewById(R.id.btnFollow);
-        tvFullname = (TextView) findViewById(R.id.tvFullname);
-
-        ivAvatar = (CircleImageView) findViewById(R.id.ivAvatar);
-
-        avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(thisContext).asBitmap().load(uri.toString()).into(ivAvatar);
-            }
-        });
-
-        tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
-        tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
-
-        llFollowers = (LinearLayout) findViewById(R.id.llFollowers);
-        llFollowing = (LinearLayout) findViewById(R.id.llFollowing);
-
-        llFollowers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(OtherUserProfile.this, FollowersFollowingActivity.class);
-                intent.putExtra("type", "followers");
-                intent.putExtra("uid", thisUserID);
-                startActivity(intent);
-            }
-        });
-
-        llFollowing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(OtherUserProfile.this, FollowersFollowingActivity.class);
-                intent.putExtra("type", "following");
-                intent.putExtra("uid", thisUserID);
-                startActivity(intent);
-            }
-        });
-
-
-        // Set the text for the follow/unfollow button
-        thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.exists()) {
-                    btnFollow.setText("Follow");
-                }
-                else {
-                    btnFollow.setText("Unfollow");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        // Display number of user's followers
-        thisUserRef.child("Followers").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                tvNumFollowers.setText(String.valueOf(dataSnapshot.getChildrenCount()));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        // Display how many people the user is following
-        thisUserRef.child("Following").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                tvNumFollowing.setText(String.valueOf(dataSnapshot.getChildrenCount()));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        /**
-         * Inside method gets user's posts and displays them
-         */
-
-
-        /**
-         * Inside gets current user's username and sets the
-         * TextView to display it
-         */
-        thisUserRef.child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String username = dataSnapshot.getValue(String.class);
-
-                tvUsername.setText(username);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(OtherUserProfile.this,"Getting username failed.", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        /**
-         * Add full name text
-         */
-        thisUserRef.child("FirstName").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String firstName = dataSnapshot.getValue() + " ";
-                tvFullname.setText(firstName);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        thisUserRef.child("LastName").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String fullName = tvFullname.getText().toString() + dataSnapshot.getValue(String.class);
-                tvFullname.setText(fullName);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        // Handle following/unfollowing when button is clicked
-        btnFollow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (!dataSnapshot.exists()) {
-                            thisUserRef.child("Followers").child(currentUID).setValue(true);
-                            currentUserRef.child("Following").child(thisUserID).setValue(true);
-                            btnFollow.setText("Unfollow");
-                        }
-                        else {
-                            thisUserRef.child("Followers").child(currentUID).removeValue();
-                            currentUserRef.child("Following").child(thisUserID).removeValue();
-                            btnFollow.setText("Follow");
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        });
-    }
+//    private void setUIViews() {
+//
+//        tvUsername = (TextView) findViewById(R.id.tvUsername);
+//        btnFollow = (Button) findViewById(R.id.btnFollow);
+//        tvFullname = (TextView) findViewById(R.id.tvFullname);
+//
+//        ivAvatar = (CircleImageView) findViewById(R.id.ivAvatar);
+//
+//        avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Glide.with(thisContext).asBitmap().load(uri.toString()).into(ivAvatar);
+//            }
+//        });
+//
+//        tvNumFollowers = (TextView) findViewById(R.id.tvNumFollowers);
+//        tvNumFollowing = (TextView) findViewById(R.id.tvNumFollowing);
+//
+//        llFollowers = (LinearLayout) findViewById(R.id.llFollowers);
+//        llFollowing = (LinearLayout) findViewById(R.id.llFollowing);
+//
+//        llFollowers.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(OtherUserProfile.this, FollowersFollowingActivity.class);
+//                intent.putExtra("type", "followers");
+//                intent.putExtra("uid", thisUserID);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        llFollowing.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(OtherUserProfile.this, FollowersFollowingActivity.class);
+//                intent.putExtra("type", "following");
+//                intent.putExtra("uid", thisUserID);
+//                startActivity(intent);
+//            }
+//        });
+//
+//
+//        // Set the text for the follow/unfollow button
+//        thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (!dataSnapshot.exists()) {
+//                    btnFollow.setText("Follow");
+//                }
+//                else {
+//                    btnFollow.setText("Unfollow");
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//
+//        // Display number of user's followers
+//        thisUserRef.child("Followers").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                tvNumFollowers.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        // Display how many people the user is following
+//        thisUserRef.child("Following").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                tvNumFollowing.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        /**
+//         * Inside method gets user's posts and displays them
+//         */
+//
+//
+//        /**
+//         * Inside gets current user's username and sets the
+//         * TextView to display it
+//         */
+//        thisUserRef.child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String username = dataSnapshot.getValue(String.class);
+//
+//                tvUsername.setText(username);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Toast.makeText(OtherUserProfile.this,"Getting username failed.", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//        /**
+//         * Add full name text
+//         */
+//        thisUserRef.child("FirstName").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String firstName = dataSnapshot.getValue() + " ";
+//                tvFullname.setText(firstName);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        thisUserRef.child("LastName").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String fullName = tvFullname.getText().toString() + dataSnapshot.getValue(String.class);
+//                tvFullname.setText(fullName);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        // Handle following/unfollowing when button is clicked
+//        btnFollow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                thisUserRef.child("Followers").child(currentUID).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        if (!dataSnapshot.exists()) {
+//                            thisUserRef.child("Followers").child(currentUID).setValue(true);
+//                            currentUserRef.child("Following").child(thisUserID).setValue(true);
+//                            btnFollow.setText("Unfollow");
+//                        }
+//                        else {
+//                            thisUserRef.child("Followers").child(currentUID).removeValue();
+//                            currentUserRef.child("Following").child(thisUserID).removeValue();
+//                            btnFollow.setText("Follow");
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+//            }
+//        });
+//    }
 
 }
