@@ -9,6 +9,7 @@
     tools:context="app.moov.moov.activity.MovieSearchResultsActivity"
     tools:showIn="@layout/activity_movie_search_results">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/searchRecycler"
         android:layout_width="match_parent"

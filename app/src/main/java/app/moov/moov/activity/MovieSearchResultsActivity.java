@@ -41,13 +41,14 @@ import app.moov.moov.util.VolleySingleton;
  * Class handles movie results after
  * searching for one to post about.
  */
+
+
+
 public class MovieSearchResultsActivity extends ToolbarBaseActivity {
 
     private RecyclerView searchRecycler;
     private String searchQuery;
-
 //    private List<MovieDb> searchResults;
-
     private FirebaseAuth firebaseAuth;
 
     private Context thisContext;

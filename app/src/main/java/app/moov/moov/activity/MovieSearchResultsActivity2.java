@@ -37,7 +37,6 @@ import app.moov.moov.R;
 //import app.moov.moov.util.JSONMovieResultsAdapter;
 import app.moov.moov.util.MovieSearchResultAdapter;
 import app.moov.moov.util.VolleySingleton;
-
 /**
  * Created by Lisa on 30/03/18.
  * THIS IS NOT FOR SEARCHING IN THE POST ACTIVITY
