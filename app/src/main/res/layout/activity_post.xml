@@ -109,8 +109,6 @@
         android:numStars="5"
         android:rating="3"
         android:stepSize="1"
-        android:foreground="@color/colorAccent"
-        android:indeterminateTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
