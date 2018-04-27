@@ -32,4 +32,8 @@
     <color name="cardview_light_background">#78dded</color>
     <color name="card_username">#224245</color>
     <color name="card_movietitle">#376a70</color>
+
+    <color name="movie_info_color">#224245</color>
+    <color name="movie_summary_color">#376a70</color>
+
 </resources>
