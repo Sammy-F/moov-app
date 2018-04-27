@@ -75,7 +75,7 @@
         android:textColor="@color/darker_text_color"
         android:hint="@string/posttext"
         android:inputType="textMultiLine"
-        android:textColorHint="@color/colorPrimaryDark"
+        android:textColorHint="@color/hint_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
