@@ -12,6 +12,9 @@
     android:background="@color/white"
     android:focusableInTouchMode="true"
     android:id="@+id/constraintLayout"
+    app:tabBackground="@color/colorPrimaryDark"
+    android:backgroundTint="@color/bg_main"
+
     >
 
     <TextView
@@ -22,8 +25,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/futura_medium_bt"
         android:text="@string/input_movie_name"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/etMovieQuery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +58,8 @@
 
     <Button
         android:id="@+id/btnSearchMovies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -64,6 +69,8 @@
         android:gravity="start|center_vertical"
         android:text="@string/btn_go"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -14,6 +14,7 @@
         <item name="android:actionMenuTextColor">@color/darker_text_color</item>
         <item name="android:textColorPrimary">@color/darker_text_color</item>
 
+
         <item name="android:textViewStyle">@style/FuturaTextViewStyle</item>
         <item name="android:buttonStyle">@style/FuturaButtonStyle</item>
         <item name="android:editTextStyle">@style/FuturaTextStyle</item>
@@ -29,7 +30,7 @@
     </style>
 
     <style name="FuturaTextStyle" parent="android:Widget.EditText">
-        <item name="android:fontFamily">@font/futura_medium_bt</item>
+    <item name="android:fontFamily">@font/futura_medium_bt</item>
     </style>
 
     <style name="ActionButtonStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
