@@ -16,7 +16,6 @@
 
         <item name="android:textViewStyle">@style/FuturaTextViewStyle</item>
         <item name="android:buttonStyle">@style/FuturaButtonStyle</item>
-        <item name="android:editTextStyle">@style/FuturaTextStyle</item>
 
         <item name="logo">@drawable/logo_trimmed</item>
         <item name="displayOptions">useLogo|showHome</item>
@@ -24,15 +23,11 @@
     </style>
 
     <style name="FuturaTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/futura_medium_bt</item>
+        <item name="android:fontFamily">@font/sf_regular</item>
     </style>
 
     <style name="FuturaButtonStyle" parent="android:Widget.Holo.Button">
-        <item name="android:fontFamily">@font/futura_medium_bt</item>
-    </style>
-
-    <style name="FuturaTextStyle" parent="android:Widget.EditText">
-        <item name="android:fontFamily">@font/futura_medium_bt</item>
+        <item name="android:fontFamily">@font/sf_regular</item>
     </style>
 
 
