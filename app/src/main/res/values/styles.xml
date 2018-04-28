@@ -16,6 +16,12 @@
 
     </style>
 
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+    <item name="fontFamily">@font/futura_medium_bt</item>
+
+    </style>
+
+
 
     <style name="ActionButtonStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:minWidth">0dp</item>
