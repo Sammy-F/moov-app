@@ -349,6 +349,7 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
                 });
                 break;
             case WITH_REVIEW_TYPE:
+                final Post thisPost2 = postList.get(position);
                 final MovieProfilePaginatingRecyclerAdapter.FeedViewHolder viewHolderWith = (MovieProfilePaginatingRecyclerAdapter.FeedViewHolder) viewHolder;
 
                 final Post reviewedThisPost = postList.get(position);
@@ -368,9 +369,14 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
                 viewHolderWith.getUserName().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(thisContext, OtherUserProfile.class);
-                        intent.putExtra("thisUserID", reviewedThisPost.getUID());
-                        thisContext.startActivity(intent);
+                        if (thisPost2.getUID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            Intent intent = new Intent(thisContext, UserProfileActivity.class);
+                            thisContext.startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(thisContext, OtherUserProfile.class);
+                            intent.putExtra("thisUserID", thisPost2.getUID());
+                            thisContext.startActivity(intent);
+                        }
                     }
                 });
 

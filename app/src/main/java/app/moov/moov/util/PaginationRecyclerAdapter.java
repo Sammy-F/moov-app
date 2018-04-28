@@ -236,8 +236,8 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
                     String newStr = reviewedThisPost.getMovieReview().substring(0, 199);
                     newStr = thisContext.getResources().getString(R.string.show_more, newStr);
                     Spannable newStrSpannable = new SpannableString(newStr);
-                    newStrSpannable.setSpan(new ForegroundColorSpan(Color.BLUE), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    newStrSpannable.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    newStrSpannable.setSpan(new ForegroundColorSpan(thisContext.getResources().getColor(R.color.card_username)), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    newStrSpannable.setSpan(new StyleSpan(Typeface.BOLD), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     viewHolderWith.getReviewView().setText(newStrSpannable, TextView.BufferType.SPANNABLE);
                     viewHolderWith.getReviewView().setOnClickListener(new View.OnClickListener() {
                         @Override

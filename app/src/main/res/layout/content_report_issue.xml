@@ -16,7 +16,6 @@
 
     <TextView
         android:id="@+id/textView"
-        android:textColor="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -24,12 +23,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/have_issue"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.107" />
 
     <EditText
         android:id="@+id/etSubject"
@@ -39,23 +39,23 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:textColorHint="@color/hint_text_color"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:textColor="@color/darker_text_color"
+        android:ems="10"
         android:hint="@string/subject"
         android:inputType="textPersonName"
+        android:textColor="@color/darker_text_color"
+        android:textColorHint="@color/hint_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <EditText
         android:id="@+id/etMessageBody"
         android:layout_width="0dp"
-        android:layout_height="329dp"
+        android:layout_height="229dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -79,14 +79,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="@string/btn_send"
         android:background="@drawable/rounded_otherstartbutton"
         android:fontFamily="@font/futura_medium_bt"
         android:gravity="start|center_vertical"
+        android:text="@string/btn_send"
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMessageBody" />
 

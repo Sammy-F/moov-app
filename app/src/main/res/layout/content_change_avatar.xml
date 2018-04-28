@@ -8,8 +8,7 @@
     tools:context="app.moov.moov.activity.ChangeAvatarActivity"
     tools:showIn="@layout/activity_change_avatar">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ivCurrentAvatar"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -20,9 +19,10 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAvInfo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.061" />
 
     <TextView
         android:id="@+id/tvAvInfo"
@@ -43,44 +43,44 @@
 
     <Button
         android:id="@+id/btnAvChange"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="@string/select_new_avatar"
         android:background="@drawable/rounded_otherstartbutton"
         android:fontFamily="@font/futura_medium_bt"
         android:gravity="start|center_vertical"
+        android:text="@string/select_new_avatar"
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivCurrentAvatar"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <Button
         android:id="@+id/btnConfirmNew"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="@string/confirm_new"
-        android:textColor="@color/white"
         android:background="@drawable/rounded_otherstartbutton"
+        android:enabled="false"
         android:fontFamily="@font/futura_medium_bt"
         android:gravity="start|center_vertical"
+        android:text="@string/confirm_new"
         android:textAlignment="center"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAvChange"
-        app:layout_constraintVertical_bias="0.02"
-        android:enabled="false"/>
+        app:layout_constraintVertical_bias="0.02" />
 
 </android.support.constraint.ConstraintLayout>

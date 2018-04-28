@@ -5,13 +5,11 @@
     <item
         android:id="@+id/deletePost"
         android:title="Delete"
-        android:textColor="@color/darker_text_color"
         >
 
     </item>
     <item
         android:id="@+id/editPost"
-        android:textColor="@color/darker_text_color"
         android:title="Edit"
         />
 
