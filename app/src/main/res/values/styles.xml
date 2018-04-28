@@ -14,10 +14,6 @@
         <item name="android:actionMenuTextColor">@color/darker_text_color</item>
     </style>
 
-    <style name="FuturaTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">futura_medium_bt</item>
-    </style>
-
 
     <style name="ActionButtonStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:minWidth">0dp</item>
