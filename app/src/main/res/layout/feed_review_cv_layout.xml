@@ -20,6 +20,7 @@
 
         <TextView
             android:id="@+id/Username"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -47,6 +48,7 @@
             android:layout_below="@+id/ivPoster"
             android:layout_marginTop="9dp"
             android:text="moveireview"
+            android:layout_marginEnd="18dp"
             android:textColor="@color/card_movietitle" />
 
 

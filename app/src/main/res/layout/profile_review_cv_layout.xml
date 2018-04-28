@@ -82,6 +82,7 @@
             android:layout_alignStart="@+id/ratingBar"
             android:layout_below="@+id/ivPoster"
             android:layout_marginTop="9dp"
+            android:layout_marginEnd="18dp"
             android:text="moveireview"
             android:textColor="@color/card_movietitle" />
 
