@@ -89,16 +89,21 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
                 try {
                     JSONObject movieDetail = response;
                     final String tMovieTitle = (String) movieDetail.get("title");
-                    final String posterURL = (String) movieDetail.get("poster_path");
+                    final String posterURL = "https://image.tmdb.org/t/p/w185" + (String) movieDetail.get("poster_path");
 
-                    FloatingActionButton fab = findViewById(R.id.fab);
+                    FloatingActionButton fab = findViewById(R.id.tFab);
+                    fab.bringToFront();
                     fab.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            Log.e("clicked", "cliecked");
                             Intent intent = new Intent(MovieProfileActivity.this, PostActivity.class);
                             intent.putExtra("movieID", movieID);
                             intent.putExtra("movieTitle", tMovieTitle);
                             intent.putExtra("posterURL", posterURL);
+                            Log.e("movie id", Integer.toString(movieID));
+                            Log.e("movie title", tMovieTitle);
+                            Log.e("poster url", posterURL);
                             startActivity(intent);
 
                         }
@@ -106,6 +111,7 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
 
                 } catch (JSONException e) {
                     Toast.makeText(MovieProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("error", e.getMessage());
                 }
 
             }
@@ -113,8 +119,11 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MovieProfileActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e("error", error.getMessage());
             }
         });
+
+        queue.add(mRequest);
 
     }
 
@@ -122,4 +131,6 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
     protected void onStart() {
         super.onStart();
     }
+
+
 }
