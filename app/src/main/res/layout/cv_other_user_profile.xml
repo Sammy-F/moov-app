@@ -133,6 +133,7 @@
             android:background="@drawable/rounded_otherstartbutton"
             android:fontFamily="@font/futura_medium_bt"
             android:textAlignment="center"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

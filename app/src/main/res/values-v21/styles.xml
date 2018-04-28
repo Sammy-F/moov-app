@@ -16,12 +16,14 @@
 
         <item name="logo">@drawable/logo_trimmed</item>
         <item name="displayOptions">useLogo|showHome</item>
+        <item name="android:textColorPrimary">@color/darker_text_color</item>
     </style>
 
     <style name="ActionButtonStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:minWidth">0dp</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>
+        <item name="android:actionMenuTextColor">@color/darker_text_color</item>
     </style>
 
 </resources>

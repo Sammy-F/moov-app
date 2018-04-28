@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/rounded_otherstartbutton"
+                android:textColor="@color/white"
                 android:fontFamily="@font/futura_medium_bt"
                 android:gravity="start|center_vertical"
                 android:text="@string/change_avatar"
@@ -73,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_otherstartbutton"
+                android:textColor="@color/white"
                 android:fontFamily="@font/futura_medium_bt"
                 android:gravity="start|center_vertical"
                 android:text="@string/change_email"
@@ -85,6 +87,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/rounded_otherstartbutton"
                 android:fontFamily="@font/futura_medium_bt"
+                android:textColor="@color/white"
                 android:gravity="start|center_vertical"
                 android:text="@string/change_password"
                 android:textAlignment="center" />
@@ -96,6 +99,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/futura_medium_bt"
                 android:gravity="start|center_vertical"
+
                 android:text="@string/support"
 
                 android:textColor="@color/darker_text_color"
@@ -109,7 +113,9 @@
                 android:background="@drawable/rounded_otherstartbutton"
                 android:fontFamily="@font/futura_medium_bt"
                 android:gravity="start|center_vertical"
+                android:textColor="@color/white"
                 android:text="@string/report_problem"
+
                 android:textAlignment="center" />
 
             <Button
@@ -119,6 +125,7 @@
                 android:background="@drawable/rounded_login"
                 android:fontFamily="@font/futura_medium_bt"
                 android:text="@string/logout"
+                android:textColor="@color/white"
                 android:textAlignment="center" />
         </LinearLayout>
 
