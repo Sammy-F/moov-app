@@ -223,6 +223,13 @@ public class SelfPaginationRecyclerAdapter extends PaginationAdapter {
                 }
             });
 
+            ivAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    thisContext.startActivity(new Intent(thisContext, app.moov.moov.activity.ChangeAvatarActivity.class));
+                }
+            });
+
         }
 
     }

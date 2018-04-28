@@ -25,6 +25,7 @@
     <color name="btn_logut_bg">#ff6861</color>
     <color name="profile_cv_text">#224245</color>
     <color name="profile_ff_text">#376a70</color>
+    <color name="avatar_border">#eeeeee</color>
 
     <color name="google_red">#db3236</color>
     <color name="google_blue">#4885ed</color>

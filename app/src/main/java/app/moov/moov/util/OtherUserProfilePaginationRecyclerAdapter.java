@@ -257,13 +257,17 @@ public class OtherUserProfilePaginationRecyclerAdapter extends PaginationAdapter
                                 userRef.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() { //add all of the other user's posts to the user's feed
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        Map<String, Map<String, Long>> mPosts = (Map) dataSnapshot.getValue();
-                                        ArrayList<String> pids = new ArrayList<>();
-                                        ArrayList<Long> times = new ArrayList<>();
+                                        if (dataSnapshot.exists()) {
+                                            Map<String, Map<String, Long>> mPosts = (Map) dataSnapshot.getValue();
+                                            ArrayList<String> pids = new ArrayList<>();
+                                            ArrayList<Long> times = new ArrayList<>();
 
-                                        for (Map.Entry<String, Map<String, Long>> entry : mPosts.entrySet()) {
-                                            String pid = entry.getKey();
-                                            allUsers.child(userID).child("Feed").child(pid).setValue(entry.getValue());
+                                            if (mPosts.size() > 0) {
+                                                for (Map.Entry<String, Map<String, Long>> entry : mPosts.entrySet()) {
+                                                    String pid = entry.getKey();
+                                                    allUsers.child(userID).child("Feed").child(pid).setValue(entry.getValue());
+                                                }
+                                            }
                                         }
                                     }
 
@@ -281,14 +285,18 @@ public class OtherUserProfilePaginationRecyclerAdapter extends PaginationAdapter
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                        Map<String, Map<String, Long>> mPosts = (Map) dataSnapshot.getValue();
-                                        Log.e("num posts found", Integer.toString(mPosts.size()));
-                                        ArrayList<String> pids = new ArrayList<>();
-                                        ArrayList<Long> times = new ArrayList<>();
+                                        if (dataSnapshot.exists()) {
+                                            Map<String, Map<String, Long>> mPosts = (Map) dataSnapshot.getValue();
 
-                                        for (Map.Entry<String, Map<String, Long>> entry : mPosts.entrySet()) {
-                                            String pid = entry.getKey();
-                                            allUsers.child(userID).child("Feed").child(pid).removeValue();
+                                            if (mPosts.size() > 0) {
+                                                ArrayList<String> pids = new ArrayList<>();
+                                                ArrayList<Long> times = new ArrayList<>();
+
+                                                for (Map.Entry<String, Map<String, Long>> entry : mPosts.entrySet()) {
+                                                    String pid = entry.getKey();
+                                                    allUsers.child(userID).child("Feed").child(pid).removeValue();
+                                                }
+                                            }
                                         }
                                     }
 
