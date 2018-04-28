@@ -8,14 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/bg_main</item>
         <item name="android:windowContentOverlay">@null</item>
-
         <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
-
         <item name="logo">@drawable/logo_trimmed</item>
         <item name="displayOptions">useLogo|showHome</item>
-
         <item name="android:actionMenuTextColor">@color/darker_text_color</item>
     </style>
+
+    <style name="FuturaTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">futura_medium_bt</item>
+    </style>
+
 
     <style name="ActionButtonStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:minWidth">0dp</item>
@@ -24,7 +26,6 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
