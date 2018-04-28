@@ -14,16 +14,22 @@
 
         <item name="android:actionMenuTextColor">@color/darker_text_color</item>
 
+        <item name="android:textViewStyle">@style/FuturaTextViewStyle</item>
+        <item name="android:buttonStyle">@style/FuturaButtonStyle</item>
+
         <item name="logo">@drawable/logo_trimmed</item>
         <item name="displayOptions">useLogo|showHome</item>
         <item name="android:textColorPrimary">@color/darker_text_color</item>
     </style>
 
-
-    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
-    <item name="fontFamily">@font/futura_medium_bt</item>
-
+    <style name="FuturaTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/sf_regular</item>
     </style>
+
+    <style name="FuturaButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/sf_regular</item>
+    </style>
+
 
     <style name="ActionButtonStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:minWidth">0dp</item>
