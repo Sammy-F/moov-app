@@ -28,12 +28,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import app.moov.moov.R;
 import app.moov.moov.activity.EditPostActivity;
@@ -121,7 +124,7 @@ public class OtherUserProfilePaginationRecyclerAdapter extends PaginationAdapter
 //        setUIViews();
 
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference baseRef = database.getReference();
+            final DatabaseReference baseRef = database.getReference();
             final DatabaseReference userRef = database.getReference().child("Users").child(uid);
             DatabaseReference postsRef = database.getReference().child("Users").child(uid).child("Posts");
             final DatabaseReference allUsers = baseRef.child("Users");
@@ -132,14 +135,6 @@ public class OtherUserProfilePaginationRecyclerAdapter extends PaginationAdapter
                     Glide.with(thisContext).asBitmap().load(uri.toString()).into(ivAvatar);
                 }
             });
-
-//        avatarRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-//            @Override
-//            public void onSuccess(byte[] bytes) {
-//                Bitmap currentAvatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//                ivAvatar.setImageBitmap(currentAvatar);
-//            }
-//        });
 
             userRef.child("Followers").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -254,15 +249,55 @@ public class OtherUserProfilePaginationRecyclerAdapter extends PaginationAdapter
                     userRef.child("Followers").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (!dataSnapshot.exists()) {
+                            if (!dataSnapshot.exists()) { //follow them if you don't yet
                                 userRef.child("Followers").child(userID).setValue(true);
                                 allUsers.child(userID).child("Following").child(uid).setValue(true);
                                 btnFollowing.setText("Unfollow");
+
+                                userRef.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() { //add all of the other user's posts to the user's feed
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        Map<String, Map<String, Long>> mPosts = (Map) dataSnapshot.getValue();
+                                        ArrayList<String> pids = new ArrayList<>();
+                                        ArrayList<Long> times = new ArrayList<>();
+
+                                        for (Map.Entry<String, Map<String, Long>> entry : mPosts.entrySet()) {
+                                            String pid = entry.getKey();
+                                            allUsers.child(userID).child("Feed").child(pid).setValue(entry.getValue());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
                             }
                             else {
                                 userRef.child("Followers").child(userID).removeValue();
                                 allUsers.child(userID).child("Following").child(uid).removeValue();
                                 btnFollowing.setText("Follow");
+                                userRef.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() { //add all of the other user's posts to the user's feed
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                        Map<String, Map<String, Long>> mPosts = (Map) dataSnapshot.getValue();
+                                        Log.e("num posts found", Integer.toString(mPosts.size()));
+                                        ArrayList<String> pids = new ArrayList<>();
+                                        ArrayList<Long> times = new ArrayList<>();
+
+                                        for (Map.Entry<String, Map<String, Long>> entry : mPosts.entrySet()) {
+                                            String pid = entry.getKey();
+                                            allUsers.child(userID).child("Feed").child(pid).removeValue();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
                             }
                         }
 
