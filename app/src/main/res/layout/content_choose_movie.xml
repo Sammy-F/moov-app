@@ -9,9 +9,27 @@
     tools:showIn="@layout/activity_choose_movie"
     android:clickable="true"
     android:focusable="true"
+    android:background="@color/white"
     android:focusableInTouchMode="true"
     android:id="@+id/constraintLayout"
     >
+
+    <TextView
+        android:id="@+id/tvFindMovie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/input_movie_name"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/etMovieQuery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.755" />
+
 
     <EditText
         android:id="@+id/etMovieQuery"
@@ -21,18 +39,16 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:textColor="@color/darker_text_color"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:hint="@string/search_movie_to_review"
+        android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/darker_text_color"
         android:textColorHint="@color/hint_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209" />
+        app:layout_constraintVertical_bias="0.304" />
 
 
     <Button
@@ -50,8 +66,9 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMovieQuery"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.054" />
 
 </android.support.constraint.ConstraintLayout>
