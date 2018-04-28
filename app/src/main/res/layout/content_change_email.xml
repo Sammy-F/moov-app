@@ -23,7 +23,6 @@
         android:layout_marginTop="8dp"
         android:text="@string/change_email"
         android:background="@drawable/rounded_otherstartbutton"
-        android:fontFamily="@font/futura_medium_bt"
         android:gravity="start|center_vertical"
         android:textAlignment="center"
         android:textColor="@color/white"
