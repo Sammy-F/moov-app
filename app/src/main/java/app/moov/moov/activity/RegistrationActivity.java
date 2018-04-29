@@ -129,9 +129,10 @@ public class RegistrationActivity extends AppCompatActivity {
                                             database.getReference().child("Users").child(currentPerson.getUid()).child("lowername").setValue(userName.trim().toLowerCase());
                                             database.getReference().child("lusernames").child(userName.trim().toLowerCase()).setValue(thisUID);
                                             avatarSetup(thisUID);
-                                            startActivity(new Intent(RegistrationActivity.this, FeedActivity.class));
+                                            startActivity(new Intent(RegistrationActivity.this, FeedTutorialActivity.class));
                                             finish();
                                         } else {
+
 
                                             regProgress.setVisibility(View.INVISIBLE);
                                             Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
