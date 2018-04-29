@@ -227,6 +227,9 @@ public class RegistrationActivity extends AppCompatActivity {
         } else if (name.length() > 12) {
             Toast.makeText(RegistrationActivity.this, "Username must be 12 characters or shorter", Toast.LENGTH_LONG).show();
             return false;
+        } else if (!name.matches("[A-Za-z0-9]+") || !firstName.matches("[A-Za-z0-9]+") || !lastName.matches("[A-Za-z0-9]+")) {
+            Toast.makeText(RegistrationActivity.this, "First name, last name, and username can only contain alphanumeric characters", Toast.LENGTH_LONG).show();
+            return false;
         } else {
             return true;
         }
