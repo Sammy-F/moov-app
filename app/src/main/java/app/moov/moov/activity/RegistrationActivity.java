@@ -133,6 +133,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                             finish();
                                         } else {
 
+
                                             regProgress.setVisibility(View.INVISIBLE);
                                             Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                         }

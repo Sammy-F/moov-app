@@ -46,6 +46,7 @@ public class FeedTutorialActivity extends ToolbarBaseActivity {
             }
         });
 
+
         findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
