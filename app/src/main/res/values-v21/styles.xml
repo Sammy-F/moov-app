@@ -36,6 +36,7 @@
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>
         <item name="android:actionMenuTextColor">@color/darker_text_color</item>
+        <item name="android:fontFamily">@font/sf_regular</item>
     </style>
 
 </resources>
