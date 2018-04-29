@@ -186,6 +186,8 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
         paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
 
+
+
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -194,6 +196,7 @@ public class UserProfileActivity extends PaginatingPostsActivity {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
+                activitySetup();
                 swipeContainer.setRefreshing(false);
 
             }
@@ -280,5 +283,29 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 //        public Button getEditButton() { return editButton; }
 //
 //    }
+
+    private void activitySetup() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
+
+        Context thisContext = this;
+
+//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
+//        setUpNavBar(navBar);
+
+        // initialize the variables in the super class
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference baseRef = database.getReference();
+        DatabaseReference postsRef = baseRef.child("Users").child(uid).child("Feed");
+
+        RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
+
+        paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
+
+    }
 
 }
