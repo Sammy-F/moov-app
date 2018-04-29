@@ -2,6 +2,7 @@ package app.moov.moov.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 
 import app.moov.moov.R;
 
-public class FeedTutorialActivity extends AppCompatActivity {
+public class FeedTutorialActivity extends ToolbarBaseActivity {
 
     private Button btnEndTutorial;
 
@@ -25,16 +26,14 @@ public class FeedTutorialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feed_tutorial);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolBarSetup(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.tFab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
+        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
+        BottomNavigationViewHelper.disableShiftMode(navBar);
+        setUpNavBar(navBar);
+        setUIViews();
+        };
+
     private void setUIViews() {
         btnEndTutorial = (Button) findViewById(R.id.btnEndTutorial);
 
