@@ -194,7 +194,7 @@ public class RegistrationActivity extends AppCompatActivity {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference baseRef = firebaseStorage.getReference();
         final StorageReference avatarRef = baseRef.child("images").child("avatars").child(newUID + ".png");
-        StorageReference defaultRef = firebaseStorage.getReferenceFromUrl("gs://moov-app.appspot.com/images/avatars/logo.png");
+        StorageReference defaultRef = firebaseStorage.getReferenceFromUrl("gs://moov-app.appspot.com/images/avatars/blue_1.png");
 
         defaultRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
