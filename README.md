@@ -8,12 +8,12 @@ Its primary goal is to provide people with a means of finding many casual review
  well as a way to find movies they might like in a more person-to-person manner.
 
 ## Features
-* Create an account in which to store your reviews\
-* Change your password when your forget\
-* Search for movies and users by String input\
-* Make posts about movies via the movie search page, or by navigating to the movie's profile\
-* Edit or delete existing posts\
-* Follow and unfollow users, whose past posts will be added or removed to your Feed, respectively.\
+* Create an account in which to store your reviews
+* Change your password when your forget
+* Search for movies and users by String input
+* Make posts about movies via the movie search page, or by navigating to the movie's profile
+* Edit or delete existing posts
+* Follow and unfollow users, whose past posts will be added or removed to your Feed, respectively.
 * Set an avatar to personalize your profile
 
 ## Issues
