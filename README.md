@@ -18,4 +18,4 @@ There's an awkward time lag between an Activity being created and the content of
 Unable to swipe to refresh on profile pages
 
 ## Building
-The project can be checked out from GitHub in Android Studio by going to VCS > Checkout From Version Control > GitHub. 
+The project can be checked out from GitHub in Android Studio by going to VCS > Checkout From Version Control > GitHub.
