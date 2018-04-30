@@ -18,4 +18,4 @@ Its primary goal is to provide people with a means of finding many casual review
 * Unable to swipe to refresh on profile pages
 
 ## Building
-The project can be checked out from GitHub in Android Studio by going to VCS > Checkout From Version Control > GitHub.
+The project can be checked out from GitHub in Android Studio by going to VCS > Checkout From Version Control > GitHub. At this point you can go to Build > Make Project which will produce an APK. Once the build is finished, you should go to the project's root directory > app > build > Outputs > Apk. In this location, there should be an app_debug.apk file.
