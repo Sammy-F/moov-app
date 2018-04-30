@@ -1,8 +1,11 @@
 # Moov
-Moov is a social media app designed to enable users to follow - and be followed by - other users with similar taste in movies. Users can make posts about their favorite films in order to let others know their thoughts.
+Moov is a social media app designed to enable users to follow - and be followed by - other users with
+ similar taste in movies. Users can make posts about their favorite films in order to let others know
+ their thoughts.
 
 ## Purpose
-Its primary goal is to provide people with a means of finding many casual reviews in one place, as well as a way to find movies they might like in a more person-to-person manner.
+Its primary goal is to provide people with a means of finding many casual reviews in one place, as
+ well as a way to find movies they might like in a more person-to-person manner.
 
 ## Features
 * Create an account in which to store your reviews\
@@ -18,4 +21,8 @@ Its primary goal is to provide people with a means of finding many casual review
 * Unable to swipe to refresh on profile pages
 
 ## Building
-The project can be checked out from GitHub in Android Studio by going to VCS > Checkout From Version Control > GitHub. At this point, you can go to Build > Rebuild Project which will produce an APK. Once the build is finished, you should go to the project's root directory > app > build > Outputs > Apk. In this location, there should be an app_debug.apk file.
+The project can be checked out from GitHub in Android Studio by going to VCS > Checkout From Version
+ Control > GitHub. At this point, you can go to Build > Rebuild Project which will produce an APK.
+ Once the build is finished, you should go to the project's root directory > app > build > Outputs >
+  Apk. In this location, there should be an app_debug.apk file. This file can be installed on an
+  Android phone and run as long as non-Play Store app installations are authorized.
