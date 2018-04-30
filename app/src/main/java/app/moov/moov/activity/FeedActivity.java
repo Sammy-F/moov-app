@@ -16,6 +16,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -101,9 +103,20 @@ public class FeedActivity extends PaginatingPostsActivity {
         DatabaseReference baseRef = database.getReference();
         DatabaseReference postsRef = baseRef.child("Users").child(uid).child("Feed");
 
-        RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
+        final RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
+
+        feedRecycler.setVisibility(View.INVISIBLE);
 
         paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
+
+        feedRecycler.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                feedRecycler.setVisibility(View.VISIBLE);
+                feedRecycler.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
 
     }
 
