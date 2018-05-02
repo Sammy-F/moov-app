@@ -402,12 +402,12 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
 
         loadQuery.addListenerForSingleValueEvent(mListener);
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                // Actions to do after 10 seconds
-            }
-        }, 100);
+//        Handler handler = new Handler(); //delay load
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                // Actions to do after 10 seconds
+//            }
+//        }, 100);
 
         loadQuery.removeEventListener(mListener);
 
