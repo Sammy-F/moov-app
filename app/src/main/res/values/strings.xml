@@ -4,14 +4,14 @@
     <string name="register">REGISTER</string>
 
     <string name="placeholder">Just some sad placeholder text. Sorry!</string>
-    <string name="reauthenticate_password_change">To change your password, input the fields below </string>
+    <string name="reauthenticate_password_change">To change your password, \n input the fields below </string>
 
     <string name="show_more" formatted="false">%1$s\u2026 <font color ="#0000FF"><u><b>Show more.</b></u></font></string>
     <string name="not_show_more">%1$s</string>
 
     <!-- Strings related to login -->
     <string name="reauthenticate">Please input your login details.</string>
-    <string name="reauthenticate_email_change">Please input your login details and new email.</string>
+    <string name="reauthenticate_email_change">Please input your login details \nand your new email.</string>
     <string name="prompt_email">Email</string>
     <string name="year">Year</string>
     <string name="runtime">Runtime</string>
@@ -103,7 +103,7 @@
     <string name="hint_new_email">New Email</string>
     <string name="hint_new_email_again">New Email (again)</string>
     <string name="btn_change">Change</string>
-    <string name="btn_send">Send</string>
+    <string name="btn_send">SEND</string>
     <string name="btn_remove">Remove</string>
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
@@ -141,7 +141,7 @@
 
     <string name="have_issue">Have an issue? Let us know!</string>
     <string name="subject">Subject</string>
-    <string name="issue_description">Describe your problem.</string>
+    <string name="issue_description">Describe your problem</string>
     <string name="title_activity_tool_bar">ToolBarActivity</string>
     <string name="title_activity_toolbar_base">ToolbarBaseActivity</string>
     <string name="title_activity_followers_following">FollowersFollowingActivity</string>
