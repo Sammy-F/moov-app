@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +39,7 @@ import app.moov.moov.util.PaginationRecyclerAdapter;
 public class FeedActivity extends PaginatingPostsActivity {
 
     private SwipeRefreshLayout swipeContainer;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -51,6 +53,13 @@ public class FeedActivity extends PaginatingPostsActivity {
         setUpNavBar(navBar);
 
         ConnectionTester connectionTester = new ConnectionTester();
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         activitySetup();
 
@@ -74,16 +83,8 @@ public class FeedActivity extends PaginatingPostsActivity {
                 R.color.google_yellow,
                 R.color.google_red,
                 R.color.google_blue);
+
     }
-
-
-//        if (connectionTester.connectionExists()) {
-//            activitySetup();
-//        } else {
-//            Toast.makeText(this, "No internet connection detected. Please check your internet connection and restart the app.", Toast.LENGTH_LONG).show();
-//        }
-
-
 
     private void activitySetup() {
 
@@ -119,22 +120,4 @@ public class FeedActivity extends PaginatingPostsActivity {
 
 
     }
-
-    /**
-     * Initialize layout objects, called in onCreate
-     */
-//    private void setUIViews() {
-
-        //initialize the remaining variables in the super class
-//        feedRecycler = (RecyclerView) findViewById(R.id.feedRecycler);
-//        feedRecycler.setHasFixedSize(true);
-//
-//        orderedManager = new LinearLayoutManager(this);
-//
-//        feedRecycler.setLayoutManager(orderedManager);
-//        feedRecycler.setItemAnimator(new DefaultItemAnimator());
-//
-//        initPostLoad();
-//
-//    }
 }

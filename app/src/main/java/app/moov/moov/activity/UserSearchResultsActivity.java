@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -145,6 +146,9 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         firebaseRecyclerAdapter.startListening();
         searchResultList.setAdapter(firebaseRecyclerAdapter);
         progressBar.setVisibility(View.INVISIBLE);
+        if (firebaseRecyclerAdapter.getItemCount() == 0) {
+            Toast.makeText(this, "No users found.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setUIViews() {
