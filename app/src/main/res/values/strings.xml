@@ -112,11 +112,11 @@
     <string name="mLogo">Moov Logo</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_feed_page">FeedPage</string>
-    <string name="new_post">Create a New Post</string>
+    <string name="new_post">Create a new post</string>
     <string name="movie">Movie Title</string>
     <string name="rating">Rating out of Ten</string>
     <string name="posttext">Write your thoughts! (optional)</string>
-    <string name="share">Share</string>
+    <string name="share">SHARE</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_other_user_profile">OtherUserProfile</string>
     <string name="title_activity_find_user">FindUserActivity</string>
