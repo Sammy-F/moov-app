@@ -37,7 +37,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/new_post"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.04000002" />
 
     <TextView
         android:id="@+id/tvMovieTitle"
@@ -60,22 +60,22 @@
         android:fontFamily="@font/sf_bold"
         android:textAlignment="center"
         android:textColor="@color/card_movietitle"
-        android:textSize="25sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCreateNewPost"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.016" />
 
     <EditText
         android:id="@+id/editTextWriteReview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="360dp"
+        android:layout_height="270dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:ems="10"
         android:fontFamily="@font/sf_regular"
@@ -87,18 +87,18 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonShare"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRating"
+        app:layout_constraintVertical_bias="0.26" />
 
     <Button
         android:id="@+id/buttonShare"
         android:layout_width="151dp"
         android:layout_height="47dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_login"
         android:fontFamily="@font/sf_bold"
         android:gravity="start|center_vertical"
@@ -109,10 +109,8 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRating"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextWriteReview" />
 
     <RatingBar
         android:id="@+id/editTextRating"
