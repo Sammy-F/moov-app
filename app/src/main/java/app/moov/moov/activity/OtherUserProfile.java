@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -36,6 +37,8 @@ import app.moov.moov.util.PaginatingPostsActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OtherUserProfile extends PaginatingPostsActivity {
+
+    private SwipeRefreshLayout swipeContainer;
 
     private Context thisContext;
 
@@ -94,6 +97,27 @@ public class OtherUserProfile extends PaginatingPostsActivity {
 //        setUIViews();
 
         otherUserProfilePaginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler, thisUserID);
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+//                activitySetup();
+                swipeContainer.setRefreshing(false);
+
+            }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(
+                R.color.google_green,
+                R.color.google_yellow,
+                R.color.google_red,
+                R.color.google_blue);
     }
 
 //    private void setUIViews() {

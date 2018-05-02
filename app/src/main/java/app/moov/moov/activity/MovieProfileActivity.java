@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -47,6 +48,9 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
     private LinearLayoutManager orderedManager;
     private int movieID;
 
+    private SwipeRefreshLayout swipeContainer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +71,27 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
         ref = database.getReference();
 
         setUIViews();
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+//                activitySetup();
+                swipeContainer.setRefreshing(false);
+
+            }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(
+                R.color.google_green,
+                R.color.google_yellow,
+                R.color.google_red,
+                R.color.google_blue);
     }
 
     private void setUIViews() {
