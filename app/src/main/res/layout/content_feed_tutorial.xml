@@ -120,12 +120,12 @@
 
     <TextView
         android:id="@+id/tvSetting"
-        android:layout_width="116dp"
+        android:layout_width="50dp"
         android:layout_height="55dp"
         android:layout_marginBottom="400dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:gravity="center"
         android:text="Edit your info"
         android:textColor="@color/colorPrimaryDark"
