@@ -116,27 +116,27 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
                         JSONObject movieDetail = response;
                         String title = (String) response.get("title");
                         if (title != null) {
-                            tvMovieTitle.setText("Movie Title: " + title);
+                            tvMovieTitle.setText(title);
                             movieTitle = title;
                         }
 
                         String releaseDate = (String) response.get("release_date");
                         if (releaseDate!=null) {
                             String subString = releaseDate.substring(0, 4);
-                            tvMovieYear.setText("Release Year: " + subString);
+                            tvMovieYear.setText(subString);
                         }
 
                         String summary = (String) response.get("overview");
                         if (summary!=null) {
-                            tvMovieSummary.setText("Summary: " + summary);
+                            tvMovieSummary.setText(summary);
                         }
 
                         try {
                             Integer runtime = (Integer) response.get("runtime");
-                            tvMovieRuntime.setText("Runtime: " + Integer.toString(runtime) + " minutes");
+                            tvMovieRuntime.setText(Integer.toString(runtime) + " minutes");
                         } catch (ClassCastException e) { //catch null runtimes
                             String unknown = "Run time unknown";
-                            tvMovieRuntime.setText("Runtime: " +unknown);
+                            tvMovieRuntime.setText(unknown);
                         }
 
                         if (movieDetail.get("poster_path") != null && !movieDetail.get("poster_path").equals("")) {
