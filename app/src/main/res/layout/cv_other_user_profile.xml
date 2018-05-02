@@ -154,7 +154,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="9dp"
             android:background="@drawable/rounded_otherstartbutton"
             android:fontFamily="@font/sf_bold"
             android:textAlignment="center"
