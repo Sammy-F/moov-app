@@ -13,7 +13,7 @@
     android:focusableInTouchMode="true"
     android:id="@+id/constraintLayout"
     app:tabBackground="@color/colorPrimaryDark"
-    android:backgroundTint="@color/bg_main"
+    android:backgroundTint="@color/white"
 
     >
 
@@ -25,14 +25,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/sf_bold"
         android:text="@string/input_movie_name"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/etMovieQuery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874" />
+        app:layout_constraintVertical_bias="0.75" />
 
 
     <EditText
@@ -64,17 +65,19 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:background="@drawable/rounded_otherstartbutton"
+        android:background="@drawable/rounded_login"
+        android:fontFamily="@font/sf_bold"
         android:gravity="start|center_vertical"
         android:text="@string/btn_go"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMovieQuery"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintVertical_bias="0.527" />
 
 </android.support.constraint.ConstraintLayout>
