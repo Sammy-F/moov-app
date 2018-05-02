@@ -24,7 +24,7 @@
             android:layout_toEndOf="@+id/ivUserIcon"
             android:fontFamily="@font/sf_bold"
             android:text="@string/hint_username"
-            android:textColor="@color/card_username"
+            android:textColor="@color/card_movietitle"
             android:textSize="18sp" />
 
         <TextView
@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ivUserIcon"
             android:layout_alignStart="@+id/tvUsername"
+            android:layout_marginBottom="5dp"
             android:text="@string/hint_name"
             android:textColor="@color/card_username" />
 
