@@ -18,6 +18,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/sf_bold"
         android:text="@string/hint_username"
         android:textColor="@color/card_username"
         android:textSize="18sp"

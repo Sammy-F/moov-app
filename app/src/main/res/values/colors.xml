@@ -33,8 +33,8 @@
     <color name="google_yellow">#f4c20d</color>
     <color name="google_green">#3cba54</color>
     <color name="cardview_light_background">#78dded</color>
-    <color name="card_username">#224245</color>
-    <color name="card_movietitle">#376a70</color>
+    <color name="card_username">#376a70</color>
+    <color name="card_movietitle">#142628</color>
 
     <color name="movie_info_color">#224245</color>
     <color name="movie_summary_color">#376a70</color>
