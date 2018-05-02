@@ -78,6 +78,7 @@
         android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:ems="10"
+        android:fontFamily="@font/sf_regular"
         android:gravity="top|start"
         android:hint="@string/posttext"
         android:inputType="textMultiLine"
