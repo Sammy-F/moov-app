@@ -115,7 +115,7 @@
                 android:id="@+id/btnReportProblem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="80dp"
                 android:background="@drawable/rounded_otherstartbutton"
                 android:fontFamily="@font/sf_bold"
                 android:gravity="start|center_vertical"
