@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +38,8 @@ import app.moov.moov.util.UserResultViewHolder;
 public class FollowersFollowingActivity extends ToolbarBaseActivity {
 
     private RecyclerView rvFollow;
+
+    private SwipeRefreshLayout swipeContainer;
 
     private FirebaseAuth firebaseAuth;
 
@@ -80,6 +83,28 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
         followingRef = userRef.child("Following");
 
         setUIViews();
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+//                activitySetup();
+                swipeContainer.setRefreshing(false);
+
+            }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(
+                R.color.google_green,
+                R.color.google_yellow,
+                R.color.google_red,
+                R.color.google_blue);
+
     }
 
     @Override
