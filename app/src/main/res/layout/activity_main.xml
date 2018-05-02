@@ -93,7 +93,7 @@
     <Button
         android:id="@+id/btnLogin"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="170dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -145,6 +145,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
+        android:fontFamily="@font/sf_bold"
         android:text="@string/btn_forgot_password"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
