@@ -3,15 +3,18 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv"
-    android:layout_width="140dp"
-    android:layout_height="240dp"
+    android:layout_width="158dp"
+    android:layout_height="271dp"
 
-    android:layout_margin="8dp"
+    android:layout_gravity="center_horizontal"
+
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+
 
     android:background="@color/colorPrimaryDark"
-
     android:backgroundTint="@color/colorPrimaryDark"
-    android:layout_gravity="center_horizontal"
     app:cardElevation="2dp">
 
     <LinearLayout
@@ -29,17 +32,20 @@
         <TextView
             android:id="@+id/tvMovieTitle"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="57dp"
+            android:fontFamily="@font/sf_bold"
             android:gravity="center"
             android:text="Movie Title"
-            android:textSize="13sp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/tvReleaseYear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="Year"
+            android:textAlignment="center"
             android:textSize="13sp" />
 
     </LinearLayout>
