@@ -63,7 +63,7 @@
 
     <string name="numAttempts"> attempts remaining</string>
 
-    <string name="btn_link_to_register">Not a member?</string>
+    <string name="btn_link_to_register">NOT A MEMBER?</string>
     <string name="btn_register">SIGN UP</string>
     <string name="btn_already_registered">Already registered?</string>
     <string name="btn_reset">Reset Password</string>
