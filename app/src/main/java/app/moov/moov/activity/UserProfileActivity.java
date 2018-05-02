@@ -86,8 +86,6 @@ public class UserProfileActivity extends PaginatingPostsActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
@@ -97,109 +95,18 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
         thisContext = this;
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        final String uid = user.getUid();
-        userID = user.getUid();
-
-        firebaseStorage = FirebaseStorage.getInstance();
-        avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(userID + ".png");
-
-//        setUIViews();
-
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference baseRef = database.getReference();
-//        userRef = database.getReference().child("Users").child(uid);
-        DatabaseReference postsRef = database.getReference().child("Users").child(uid).child("Posts");
-//        allUsers = baseRef.child("Users");
-        RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
-
-        // Set text for number of Followers user has
-//        userRef.child("Followers").addValueEventListener(new ValueEventListener() {
+//        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer); //currently bugged
+//        // Setup refresh listener which triggers new data loading
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 //            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                tvNumFollowers.setText(String.valueOf(dataSnapshot.getChildrenCount()));
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
+//            public void onRefresh() {
+//                // Your code to refresh the list here.
+//                // Make sure you call swipeContainer.setRefreshing(false)
+//                // once the network request has completed successfully.
+//                swipeContainer.setRefreshing(false);
+//                activitySetup();
 //            }
 //        });
-//
-//        // Set next for number of users the user Follows
-//        userRef.child("Following").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                tvNumFollowing.setText(String.valueOf(dataSnapshot.getChildrenCount()));
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//        /**
-//         * Inside gets current user's username
-//         */
-//        userRef.child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                username = dataSnapshot.getValue(String.class);
-//
-//                tvUsername.setText(username);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Toast.makeText(UserProfileActivity.this,"Getting username failed.", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//
-//        userRef.child("FirstName").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                String firstName = dataSnapshot.getValue() + " ";
-//                tvFullName.setText(firstName);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//        userRef.child("LastName").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                String fullName = tvFullName.getText().toString() + dataSnapshot.getValue(String.class);
-//                tvFullName.setText(fullName);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
-        paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
-
-
-
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
-                swipeContainer.setRefreshing(false);
-
-            }
-        });
 
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(
@@ -211,83 +118,32 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
     }
 
-//    @Override
-//    protected void onStart() {
-//
-//        super.onStart();
-//
-//        Query query = postsRef.orderByChild("timestamp");
-//
-//        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-//                .setIndexedQuery(query, baseRef.child("Posts"), Post.class)
-//                .build();
-//
-//        SelfProfileSwitchingAdapter FBRA = new SelfProfileSwitchingAdapter(options, thisContext);
-//
-//        FBRA.startListening();
-//        profileFeedRecycler.setAdapter(FBRA);
-//
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-    /**
-     * Internal ViewHolder class used with
-     * the custom Adapter for our profile
-     * RecyclerView
-     */
-//    public static class ProfileFeedHolder extends RecyclerView.ViewHolder {
-//
-//        private TextView btnMovieTitle;
-//        private TextView movieReview;
-//        private ImageView ivPoster;
-//        private Button editButton;
-//        private Button delButton;
-//
-//        public ProfileFeedHolder(View itemView) {
-//            super(itemView);
-//            View mView = itemView;
-//            btnMovieTitle = itemView.findViewById(R.id.MovieTitle);
-//            ivPoster = itemView.findViewById(R.id.ivPoster);
-//        }
-//
-//        public void setTitle(String title) {
-//            btnMovieTitle.setText(title);
-//        }
-//
-//        public void setRating(float rating) {
-//            RatingBar movieRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
-//            movieRating.setIsIndicator(true);
-//            movieRating.setRating(rating);
-//        }
-//
-//        public void setReview(String review) {
-//            movieReview = (TextView) itemView.findViewById(R.id.MovieReview);
-//            movieReview.setText(review);
-//        }
-//
-//        public TextView getReviewView() { return movieReview; }
-//
-//        public void setUsername(String username) {
-//            TextView userName = (TextView) itemView.findViewById(R.id.Username);
-//            userName.setText(username);
-//        }
-//
-//        public TextView getBtnMovieTitle() { return btnMovieTitle; }
-//
-//        public ImageView getIvPoster() {
-//            return ivPoster;
-//        }
-//
-//        public Button getDelButton() { return delButton; }
-//
-//        public Button getEditButton() { return editButton; }
-//
-//    }
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        final String uid = user.getUid();
+        userID = user.getUid();
+
+        firebaseStorage = FirebaseStorage.getInstance();
+        avatarRef = firebaseStorage.getReference().child("images").child("avatars").child(userID + ".png");
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference baseRef = database.getReference();
+        DatabaseReference postsRef = database.getReference().child("Users").child(uid).child("Posts");
+        RecyclerView feedRecycler = (RecyclerView) findViewById(R.id.profileRecycler);
+
+        paginationSetup(thisContext, firebaseAuth, database, baseRef, postsRef, feedRecycler);
+
+    }
 
     private void activitySetup() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolBarSetup(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        toolBarSetup(toolbar);
 
         Context thisContext = this;
 

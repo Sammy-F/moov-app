@@ -18,13 +18,6 @@ public class ToolbarBaseActivity extends AppCompatActivity {
 
     FirebaseAuth signOutAuth;
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_toolbar_base);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//    }
-
     public void toolBarSetup(Toolbar toolbar) {
         if (Build.VERSION.SDK_INT > 21) {
             toolbar.setElevation(5);
@@ -36,21 +29,6 @@ public class ToolbarBaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-//
-//        if (id==R.id.navBarAddIcon) {
-//            Intent intent = new Intent(this,ChooseMovieActivity.class);
-//            startActivity(intent);
-//        }
-
-//        if (id==R.id.profileIcon) {
-//            Intent intent = new Intent(this, UserProfileActivity.class);
-//            startActivity(intent);
-//        }
-
-//        if (id==R.id.searchIcon) {
-//            Intent intent = new Intent(this,SearchActivity.class);
-//            startActivity(intent);
-//        }
 
         if (id==R.id.settingsIcon) {
             Intent intent = new Intent(this,UserSettingsActivity.class);
@@ -77,23 +55,31 @@ public class ToolbarBaseActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 if (item.getItemId() == R.id.navBarHomeIcon) {
-                    Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
-                    startActivity(intent);
+                    if (!(ToolbarBaseActivity.this instanceof FeedActivity)) { //check if clicked is same as existing
+                        Intent intent = new Intent(ToolbarBaseActivity.this, FeedActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
                 if (item.getItemId() == R.id.navBarSearchIcon) {
-                    Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-                    startActivity(intent);
+                    if (!(ToolbarBaseActivity.this instanceof SearchActivity)) {
+                        Intent intent = new Intent(ToolbarBaseActivity.this, SearchActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
                 if (item.getItemId() == R.id.navBarPersonIcon) {
-                    Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-                    startActivity(intent);
+                    if (!(ToolbarBaseActivity.this instanceof  UserProfileActivity)) {
+                        Intent intent = new Intent(ToolbarBaseActivity.this, UserProfileActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
                 if (item.getItemId() == R.id.navBarAddIcon) {
-                    Intent intent = new Intent(getApplicationContext(), ChooseMovieActivity.class);
-                    startActivity(intent);
+                    if (!(ToolbarBaseActivity.this instanceof ChooseMovieActivity)) {
+                        Intent intent = new Intent(ToolbarBaseActivity.this, ChooseMovieActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
                 return true;
