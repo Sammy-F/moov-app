@@ -56,22 +56,24 @@
 
     <TextView
         android:id="@+id/tvRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="28dp"
+        android:layout_width="175dp"
+        android:layout_height="42dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:textColor="@color/darker_text_color"
+        android:fontFamily="@font/sf_bold"
         android:text="@string/register"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textStyle="bold"
+        android:textColor="@color/darker_text_color"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029999971" />
+        app:layout_constraintVertical_bias="0.035" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -82,34 +84,33 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="9dp"
         android:background="@drawable/rounded_login"
+        android:fontFamily="@font/sf_bold"
         android:text="@string/btn_register"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.815" />
+        app:layout_constraintVertical_bias="0.825" />
 
     <Button
         android:id="@+id/btnAlready"
-        android:layout_width="212dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="1000dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_otherstartbutton"
+        android:fontFamily="@font/sf_bold"
         android:text="@string/btn_already_registered"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.906" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ProgressBar
         android:id="@+id/regProcess"
@@ -172,6 +173,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/sf_bold"
         android:text="@string/password_requirement"
         android:textColor="@color/darker_text_color"
         android:textSize="12sp"
@@ -179,7 +181,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintVertical_bias="0.522" />
 
     <EditText
         android:id="@+id/etFirstName"
