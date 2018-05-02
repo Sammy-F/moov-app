@@ -146,9 +146,6 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         firebaseRecyclerAdapter.startListening();
         searchResultList.setAdapter(firebaseRecyclerAdapter);
         progressBar.setVisibility(View.INVISIBLE);
-        if (firebaseRecyclerAdapter.getItemCount() == 0) {
-            Toast.makeText(this, "No users found.", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void setUIViews() {
