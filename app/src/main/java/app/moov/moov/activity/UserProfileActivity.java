@@ -196,7 +196,6 @@ public class UserProfileActivity extends PaginatingPostsActivity {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
-//                activitySetup();
                 swipeContainer.setRefreshing(false);
 
             }
