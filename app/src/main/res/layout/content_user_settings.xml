@@ -39,31 +39,37 @@
                 android:id="@+id/tvProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="9dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/sf_bold"
                 android:text="@string/profile"
+                android:textAlignment="center"
                 android:textColor="@color/darker_text_color"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
 
             <Button
                 android:id="@+id/btnChangeAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="25dp"
                 android:background="@drawable/rounded_otherstartbutton"
-                android:textColor="@color/white"
+                android:fontFamily="@font/sf_bold"
                 android:gravity="start|center_vertical"
                 android:text="@string/change_avatar"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tvAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="9dp"
+                android:fontFamily="@font/sf_bold"
                 android:text="@string/account"
+                android:textAlignment="center"
                 android:textColor="@color/darker_text_color"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
 
             <Button
                 android:id="@+id/btnGoChangEmail"
@@ -71,33 +77,39 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_otherstartbutton"
-                android:textColor="@color/white"
+                android:fontFamily="@font/sf_bold"
                 android:gravity="start|center_vertical"
                 android:text="@string/change_email"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btnChangePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="25dp"
                 android:background="@drawable/rounded_otherstartbutton"
-                android:textColor="@color/white"
+                android:fontFamily="@font/sf_bold"
                 android:gravity="start|center_vertical"
                 android:text="@string/change_password"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tvSupport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="9dp"
+                android:fontFamily="@font/sf_bold"
+
                 android:gravity="start|center_vertical"
 
                 android:text="@string/support"
-
+                android:textAlignment="center"
                 android:textColor="@color/darker_text_color"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
 
             <Button
                 android:id="@+id/btnReportProblem"
@@ -105,20 +117,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="100dp"
                 android:background="@drawable/rounded_otherstartbutton"
+                android:fontFamily="@font/sf_bold"
                 android:gravity="start|center_vertical"
-                android:textColor="@color/white"
                 android:text="@string/report_problem"
 
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btnLogOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_login"
+                android:fontFamily="@font/sf_bold"
                 android:text="@string/logout"
-                android:textColor="@color/white"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </ScrollView>

@@ -74,12 +74,12 @@
     <string name="search_movie_to_review">Find a movie to review</string>
 
     <string name="change_avatar">Change Avatar</string>
-    <string name="account">Account</string>
+    <string name="account">ACCOUNT</string>
     <string name="delete_account">Delete account</string>
-    <string name="support">Support</string>
+    <string name="support">SUPPORT</string>
     <string name="report_problem">Report a Problem</string>
 
-    <string name="profile">Profile</string>
+    <string name="profile">PROFILE</string>
 
     <string name="email">Email</string>
     <string name="password_requirement">Minimum 6 characters</string>
