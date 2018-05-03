@@ -15,12 +15,18 @@ import app.moov.moov.util.SectionsPageAdapter;
 
 /**
  * Created by Lisa on 31/03/18.
+ * This class is to search for both users and movies
  */
 
 public class SearchActivity extends ToolbarBaseActivity{
     private SectionsPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +35,6 @@ public class SearchActivity extends ToolbarBaseActivity{
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
-
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
@@ -43,7 +46,11 @@ public class SearchActivity extends ToolbarBaseActivity{
         tabLayout.setupWithViewPager(mViewPager);
 
     }
+
+    //We are using fragments, so sets up the adapter for that
     SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+
+    //Sets up the fragments
     private void setupViewPager(ViewPager viewPager) {
         adapter.addFragment(new TabSearchUserFragment(), "Search User");
         adapter.addFragment(new TabSearchMovieFragment(), "Search Movie");

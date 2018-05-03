@@ -59,13 +59,6 @@ public class UserProfileActivity extends PaginatingPostsActivity {
     private String username;
     private String userID;
 
-//    private FirebaseAuth firebaseAuth;
-//    private FirebaseDatabase database;
-//    private DatabaseReference baseRef;
-//    private DatabaseReference postsRef;
-    //    private RecyclerView profileFeedRecycler;
-    //    private Context thisContext;
-
     private DatabaseReference allUsers;
 
     private DatabaseReference userRef;
@@ -79,8 +72,11 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
     final long ONE_MEGABYTE = 1024 * 1024;
 
-
-
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,14 +138,7 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
     private void activitySetup() {
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        toolBarSetup(toolbar);
-
         Context thisContext = this;
-
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
 
         // initialize the variables in the super class
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
