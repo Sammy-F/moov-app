@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import app.moov.moov.R;
 
+/**
+ * This class is the page that lets user report issues
+ */
 public class ReportIssueActivity extends ToolbarBaseActivity {
 
     EditText etSubject;
@@ -23,6 +26,11 @@ public class ReportIssueActivity extends ToolbarBaseActivity {
 
     final String[] recipient = {"sfritsch@macalester.edu"};
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +43,14 @@ public class ReportIssueActivity extends ToolbarBaseActivity {
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
 
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
-
         setUIViews();
 
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews() {
         etSubject = (EditText) findViewById(R.id.etSubject);
         etMessageBody = (EditText) findViewById(R.id.etMessageBody);
@@ -65,6 +74,10 @@ public class ReportIssueActivity extends ToolbarBaseActivity {
 
     }
 
+    /**
+     * When the btnSendMessage is clicked, then it will get the subject that the user typed in, and then
+     * after making sure it is not blank, then it will send the email to us
+     */
     private void sendEmail() {
         String subject = etSubject.getText().toString().trim();
         String body = etSubject.getText().toString().trim();

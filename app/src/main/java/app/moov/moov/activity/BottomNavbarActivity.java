@@ -17,7 +17,7 @@ public class BottomNavbarActivity extends AppCompatActivity{
     FirebaseAuth signOutAuth;
 
     /**
-     * Sets the layout, and initializes the NavBar
+     * Sets the layout, and initializes the Nav Bar
      * @param savedInstanceState
      */
     @Override

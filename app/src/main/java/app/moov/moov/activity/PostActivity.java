@@ -54,6 +54,11 @@ public class PostActivity extends ToolbarBaseActivity {
     private String movieTitle;
     private String posterURL;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,10 +80,8 @@ public class PostActivity extends ToolbarBaseActivity {
         moviePostsRef = baseRef.child("PostsByMovie").child(Integer.toString(movieID));
 
         storageReference = FirebaseStorage.getInstance().getReference();
-//        editTextMovieTitle = (EditText) findViewById(R.id.editTextMovieTitle);
         tvMovieTitle = (TextView) findViewById(R.id.tvMovieTitle);
         tvMovieTitle.setText(movieTitle);
-//        editTextRating = (EditText) findViewById(R.id.editTextRating);
         ratingBar = (RatingBar) findViewById(R.id.editTextRating);
         editTextWriteReview = (EditText) findViewById(R.id.editTextWriteReview);
 
@@ -92,24 +95,12 @@ public class PostActivity extends ToolbarBaseActivity {
         });
     }
 
-//    public void shareButtonClicked(View view) {
-//        String movieTitle = editTextMovieTitle.getText().toString().trim();
-//        String rating = editTextRating.getText().toString().trim();
-//        String review = editTextWriteReview.getText().toString().trim();
-//        if (!TextUtils.isEmpty(movieTitle) && !TextUtils.isEmpty(rating) && !TextUtils.isEmpty(review)) {
-//            StorageReference filePath = storageReference.child("Post_Review").child(uri.getLastPathSegment());
-//            filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    Uri downloadurl = taskSnapshot.getDownloadUrl();
-//                    Toast.makeText(PostActivity.this,"Upload Complete", Toast.LENGTH_LONG).show();
-//                }
-//            });
-//        }
-//    }
+    /**
+     * When the share button is clicked, this method is called. It basically gets all the data that
+     * the user has input in the edit texts/ratings, and then uploads that data onto firebase
+     * @param view
+     */
     public void shareButtonClicked(View view){
-//        final String movieTitle = editTextMovieTitle.getText().toString().trim();
-//        final String rating = editTextRating.getText().toString().trim();
         final int rating = (int) ratingBar.getRating();
         final String review = editTextWriteReview.getText().toString().trim();
         final long timePosted = Calendar.getInstance().getTimeInMillis();
@@ -132,8 +123,6 @@ public class PostActivity extends ToolbarBaseActivity {
                         newPostRef.setValue(newPost);
 
                         // Switching to pointers ONLY
-//                        usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPost);
-//                        usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPost);
                         usersRef.child(user).child("Posts").child(newPostRef.getKey()).setValue(newPostRef.getKey());
                         usersRef.child(user).child("Posts").child(newPostRef.getKey()).child("timestamp").setValue(timePosted * -1);
                         usersRef.child(user).child("Feed").child(newPostRef.getKey()).setValue(newPostRef.getKey());
@@ -153,7 +142,6 @@ public class PostActivity extends ToolbarBaseActivity {
                                     String UID = postSnapshot.getKey();
                                     usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPostRef.getKey());
                                     usersRef.child(UID).child("Feed").child(newPostRef.getKey()).child("timestamp").setValue(timePosted * -1);
-//                                    usersRef.child(UID).child("Feed").child(newPostRef.getKey()).setValue(newPost);
                                 }
                             }
 

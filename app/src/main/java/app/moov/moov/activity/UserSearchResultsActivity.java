@@ -35,6 +35,9 @@ import app.moov.moov.util.UserResultViewHolder;
  * Modified by Sammy 3/30/2019
  */
 
+/**
+ * This class is the page that displays the results of the user search
+ */
 public class UserSearchResultsActivity extends ToolbarBaseActivity {
 
     private FirebaseAuth firebaseAuth;
@@ -46,6 +49,11 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
     private ProgressBar progressBar;
     private String searchString;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -84,6 +92,13 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
             private FirebaseStorage firebaseStorage;
             private StorageReference allAvRef;
 
+            /**
+             * Creates the cardview (specifies the layout), and then gets the data reference to what is going
+             * to be populated in the cards
+             * @param parent
+             * @param viewType
+             * @return
+             */
             @Override
             public UserResultViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
@@ -95,6 +110,12 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
                 return new UserResultViewHolder(view);
             }
 
+            /**
+             * Sets the actual data from firebase to each card (username, avatar, full name)
+             * @param viewHolder
+             * @param position
+             * @param model
+             */
             @Override
             protected void onBindViewHolder(final UserResultViewHolder viewHolder, int position, User model) {
                 viewHolder.setUsername(model.getUsername()); //changed back
@@ -144,6 +165,9 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         progressBar.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * Set up the Views in the Activity.
+     */
     private void setUIViews() {
         searchResultList = (RecyclerView) findViewById(R.id.userSearchRecycler);
         searchResultList.setHasFixedSize(true);

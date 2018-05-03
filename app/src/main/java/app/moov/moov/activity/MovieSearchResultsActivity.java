@@ -42,18 +42,21 @@ import app.moov.moov.util.VolleySingleton;
  * searching for one to post about.
  */
 
-
-
 public class MovieSearchResultsActivity extends ToolbarBaseActivity {
 
     private RecyclerView searchRecycler;
     private String searchQuery;
-//    private List<MovieDb> searchResults;
     private FirebaseAuth firebaseAuth;
 
     private Context thisContext;
     private ProgressBar progressBar;
 
+
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,14 +88,14 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
         final ProgressBar progressBar = findViewById(R.id.resultsProgress);
         progressBar.setVisibility(View.VISIBLE);
 
+        //Gets the searchQuery string that is input by the user, replaces the spaces with +
         searchQuery = searchQuery.replaceAll(" ", "+");
 
         String url = "https://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&language=en-US&query=" + searchQuery + "&page=1";
 
+        //Get the VolleySingleton queue that we are using to queue requests
         RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
-//        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
-//        Network network = new BasicNetwork(new HurlStack());
-
+        //Create a new request
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -117,27 +120,9 @@ public class MovieSearchResultsActivity extends ToolbarBaseActivity {
                         Resources r = getResources();
                         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, r.getDisplayMetrics());
 
-//                        searchRecycler.addItemDecoration(new GridSpacingItemDecoration(2, px, true));
-
                         PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
-//                    else if (convertedArray.size() > 30) { // Cap the result size to 30
-//                        convertedArray = convertedArray.subList(0, 29);
-//                        searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
-//                        searchRecycler.setHasFixedSize(true);
-//
-//                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
-//                        searchRecycler.setLayoutManager(mLayoutManager);
-//
-//                        Resources r = getResources();
-//                        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, r.getDisplayMetrics());
-//
-//                        searchRecycler.addItemDecoration(new GridSpacingItemDecoration(2, px, true));
-//
-//                        PostableMovieResultAdapter searchAdapter = new PostableMovieResultAdapter(thisContext, convertedArray);
-//                        searchRecycler.setAdapter(searchAdapter);
-//                    }
                     else {
                         Toast.makeText(MovieSearchResultsActivity.this,"An error occurred.", Toast.LENGTH_SHORT).show();
                     }

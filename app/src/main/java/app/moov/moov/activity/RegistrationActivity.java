@@ -40,6 +40,9 @@ import java.io.InputStream;
 import app.moov.moov.R;
 import app.moov.moov.util.ConnectionTester;
 
+/**
+ * This class is the page where new users register onto the app
+ */
 public class RegistrationActivity extends AppCompatActivity {
 
     private Button btnRegister;
@@ -61,8 +64,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private String firstName;
     private String lastName;
 
-
-
     private FirebaseStorage firebaseStorage;
     private StorageReference storageRef;
     private StorageReference imageRef;
@@ -71,6 +72,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private FirebaseUser currentPerson;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +94,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 goLogin();
             }
         });
+        //If the register button is clicked, then get all the user input to upload to firebase and authenticate
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +105,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 firstName = etFirstName.getText().toString().trim();
                 lastName = etLastName.getText().toString().trim();
 
+                //If we are able to validate it, then upload all the data on firebase and authorize the user
                 if (validate()) {
                     regProgress.setVisibility(View.VISIBLE);
 
@@ -160,8 +168,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-
-
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews(){
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnAlready = (Button) findViewById(R.id.btnAlready);
@@ -183,11 +193,18 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Go to the log in page, called when the user decides not to register and to go back to the log in page
+     */
     private void goLogin(){
         Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * sets up the avatar to the default blue logo
+     * @param newUID
+     */
     private void avatarSetup(String newUID) {
         final long ONE_MEGABYTE = 1024 * 1024;
 
@@ -210,6 +227,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Validates the authentication - makes sure the passwords, email, username etc meet the conditions
+     * @return
+     */
     private Boolean validate(){
         String name = etUsername.getText().toString();
         String password1 = etPassword.getText().toString();

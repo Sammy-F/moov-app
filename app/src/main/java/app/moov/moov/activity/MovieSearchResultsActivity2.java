@@ -52,6 +52,12 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
     private Context thisContext;
     private ProgressBar progressBar;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +80,10 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
         setUIViews();
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     public void setUIViews() {
         searchRecycler = (RecyclerView) findViewById(R.id.movieSearchRecycler);
         progressBar = (ProgressBar) findViewById(R.id.resultsProgress);
@@ -82,10 +92,12 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
         searchQuery = searchQuery.replaceAll(" ", "+");
         String url = "https://api.themoviedb.org/3/search/movie?api_key=3744632a440f06514578b01d1b6e9d27&query=" + searchQuery + "&page=1";
 
+        //Get the VolleySingleton queue that we use to queue requests
         RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
         Network network = new BasicNetwork(new HurlStack());
 
+        //Create a new request that we will load to the queue
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -112,19 +124,6 @@ public class MovieSearchResultsActivity2 extends ToolbarBaseActivity {
                         MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
                         searchRecycler.setAdapter(searchAdapter);
                     }
-//                    else if (convertedArray.size() > 30) { // Cap the result size to 30
-//                        convertedArray = convertedArray.subList(0, 29);
-//                        searchRecycler = (RecyclerView) findViewById(R.id.searchRecycler);
-//                        searchRecycler.setHasFixedSize(true);
-//                        searchRecycler.setDrawingCacheEnabled(true);
-//                        searchRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-//
-//                        GridLayoutManager mLayoutManager = new GridLayoutManager(thisContext, 2);
-//                        searchRecycler.setLayoutManager(mLayoutManager);
-//
-//                        MovieSearchResultAdapter searchAdapter = new MovieSearchResultAdapter(thisContext, convertedArray);
-//                        searchRecycler.setAdapter(searchAdapter);
-//                    }
                     else {
                         Toast.makeText(MovieSearchResultsActivity2.this,"An error occurred", Toast.LENGTH_SHORT).show();
                     }

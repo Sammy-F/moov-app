@@ -14,10 +14,18 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import app.moov.moov.R;
 
+/**
+ * This is the class that all classes in our app which represents a page extends
+ * It sets up the toolbar
+ */
 public class ToolbarBaseActivity extends AppCompatActivity {
 
     FirebaseAuth signOutAuth;
 
+    /**
+     * Sets up the toolbar
+     * @param toolbar
+     */
     public void toolBarSetup(Toolbar toolbar) {
         if (Build.VERSION.SDK_INT > 21) {
             toolbar.setElevation(5);
@@ -26,6 +34,11 @@ public class ToolbarBaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
+    /**
+     * Creates intents for when the different icons are selected (directs the user to a new page)
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -43,12 +56,21 @@ public class ToolbarBaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * References the menu_feed_page layout that it will use to inflate the toolbar
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_feed_page, menu);
         return true;
     }
 
+    /**
+     * Creates intents for when different icons in the bottom nav bar are selected (Directs the user to different pages)
+     * @param navBar
+     */
     public void setUpNavBar(BottomNavigationView navBar) {
         navBar.setOnNavigationItemSelectedListener(                new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

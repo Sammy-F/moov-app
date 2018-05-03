@@ -25,6 +25,12 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
     private FirebaseAuth firebaseAuth;
     Button btnChangeAv;
 
+
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
