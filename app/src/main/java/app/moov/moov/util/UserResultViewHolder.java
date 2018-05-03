@@ -4,8 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import app.moov.moov.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -30,13 +27,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import app.moov.moov.R;
-import app.moov.moov.model.Post;
 import app.moov.moov.model.User;
 import app.moov.moov.util.UserResultViewHolder;
 
 /**
  * Created by Lisa on 30/03/18.
- *
  * Modified by Sammy 3/30/2019
  */
 
@@ -78,6 +73,7 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
         final Query firebaseSearchQuery = usernamesRef.orderByChild("lowername")
                 .startAt(searchString).endAt(searchString + "\uf8ff").limitToFirst(20); //capping at 20 users
 
+        //Generate a FirebaseRecyclerOptions object that lets us set the query and model class
         FirebaseRecyclerOptions<User> options =
                 new FirebaseRecyclerOptions.Builder<User>()
                         .setQuery(firebaseSearchQuery, User.class)
@@ -130,11 +126,11 @@ public class UserSearchResultsActivity extends ToolbarBaseActivity {
                     @Override
                     public void onClick(View view) {
                         //Clicked
-                        if (viewHolder.getUid().equals(firebaseAuth.getCurrentUser().getUid())) {
+                        if (viewHolder.getUid().equals(firebaseAuth.getCurrentUser().getUid())) {  //If the user's own profile is selected, go to a self user profile
                             Intent intent = new Intent(UserSearchResultsActivity.this, UserProfileActivity.class);
                             startActivity(intent);
                         }
-                        else {
+                        else { //If another user's profile is selected, go to an other user profile for them
                             Intent intent = new Intent(UserSearchResultsActivity.this, OtherUserProfile.class);
                             intent.putExtra("thisUserID", viewHolder.getUid());
                             startActivity(intent);

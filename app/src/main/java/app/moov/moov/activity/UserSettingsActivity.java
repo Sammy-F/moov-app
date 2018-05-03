@@ -1,26 +1,20 @@
 package app.moov.moov.activity;
 
-import
-        android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.TabHost;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import app.moov.moov.R;
 
 /**
- *
+ * Manages a list of user settings options
  */
 public class UserSettingsActivity extends ToolbarBaseActivity {
 
@@ -40,8 +34,6 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
-//        BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
@@ -52,6 +44,9 @@ public class UserSettingsActivity extends ToolbarBaseActivity {
 
     }
 
+    /**
+     * Initialize all buttons and set their onClickListeners
+     */
     private void setUIViews() {
 
         btnChangeAv = (Button) findViewById(R.id.btnChangeAvatar);

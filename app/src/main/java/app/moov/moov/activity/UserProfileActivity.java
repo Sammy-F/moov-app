@@ -95,18 +95,19 @@ public class UserProfileActivity extends PaginatingPostsActivity {
 
         thisContext = this;
 
-//        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer); //currently bugged
-//        // Setup refresh listener which triggers new data loading
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                // Your code to refresh the list here.
-//                // Make sure you call swipeContainer.setRefreshing(false)
-//                // once the network request has completed successfully.
-//                swipeContainer.setRefreshing(false);
-//                activitySetup();
-//            }
-//        });
+        //Swipe container is currently bugged
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                swipeContainer.setRefreshing(false);
+
+            }
+        });
 
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(
