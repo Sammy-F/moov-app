@@ -22,6 +22,8 @@ import app.moov.moov.activity.UserSearchResultsActivity;
 
 /**
  * Created by Lisa on 31/03/18.
+ *  * This is the tab for the user search on the bottom nav view
+
  */
 
 public class TabSearchUserFragment extends Fragment {

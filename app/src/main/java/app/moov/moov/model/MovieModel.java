@@ -2,6 +2,7 @@ package app.moov.moov.model;
 
 /**
  * Created by Sammy on 3/29/2018.
+ * A class that defines a movie as an object
  */
 
 public class MovieModel {

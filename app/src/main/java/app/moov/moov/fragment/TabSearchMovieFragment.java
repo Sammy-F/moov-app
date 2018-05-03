@@ -22,6 +22,7 @@ import app.moov.moov.activity.UserSearchResultsActivity;
 
 /**
  * Created by Lisa on 31/03/18.
+ * This is the tab for the movie search on the bottom nav view
  */
 
 public class TabSearchMovieFragment extends Fragment {

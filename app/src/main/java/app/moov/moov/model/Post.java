@@ -3,6 +3,7 @@ package app.moov.moov.model;
 /**
  * Created by Lisa on 27/02/18.
  * Last Modified by Sammy on 3/3/2018.
+ * Defines what goes into a post on the feed
  */
 
 public class Post {

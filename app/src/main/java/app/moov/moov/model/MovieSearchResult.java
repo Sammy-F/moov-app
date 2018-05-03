@@ -2,6 +2,7 @@ package app.moov.moov.model;
 
 /**
  * Created by Lisa on 29/03/18.
+ * Defines what is to be shown on a movie result
  */
 
 public class MovieSearchResult {

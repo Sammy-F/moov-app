@@ -2,6 +2,7 @@ package app.moov.moov.model;
 
 /**
  * Created by Lisa on 24/03/18.
+ * Define the credentials of the user
  */
 
 public class User {

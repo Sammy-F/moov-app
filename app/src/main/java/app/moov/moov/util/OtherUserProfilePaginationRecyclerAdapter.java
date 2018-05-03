@@ -50,6 +50,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Sammy on 4/7/2018.
+ * A paginatoin for users other than myself
  */
 
 public class OtherUserProfilePaginationRecyclerAdapter extends PaginationAdapter {
