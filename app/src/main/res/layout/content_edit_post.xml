@@ -68,14 +68,14 @@
 
     <EditText
         android:id="@+id/etReview"
-        android:layout_width="360dp"
-        android:layout_height="270dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="80dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/colorPrimaryDark"
         android:background="@android:color/transparent"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:ems="10"
         android:fontFamily="@font/sf_regular"
         android:gravity="top"

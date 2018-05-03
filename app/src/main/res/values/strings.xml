@@ -34,7 +34,7 @@
         completions."
     </string>
     <string name="change_username">Change Username</string>
-    <string name="logout">Log Out</string>
+    <string name="logout">LOG OUT</string>
 
     <string name="hint_new_username">Type new username</string>
     <string name="following">Follow</string>
