@@ -65,6 +65,10 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
         postList.add(placeholderPost); //We'll add the placeholder to the List
     }
 
+    /**
+     * Internal ViewHolder for displaying information about the given movie
+     * in the first card.
+     */
     public static class MovieProfileViewHolder extends RecyclerView.ViewHolder{
 
         private View mView;
@@ -283,6 +287,13 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
         }
     }
 
+    /**
+     * Upon the ViewHolder's creation, we determine its viewType and inflate
+     * the appropriate CardView layout.
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == NO_REVIEW_TYPE) {
@@ -301,6 +312,12 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
         }
     }
 
+    /**
+     * Once the ViewHolder has been created, we take data and bind it
+     * to the ViewHolder, depending on its viewType.
+     * @param viewHolder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
@@ -308,7 +325,9 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
         // and sets up the item depending on this ViewType.
         switch(viewHolder.getItemViewType()) {
             case NO_REVIEW_TYPE:
-                final MovieProfilePaginatingRecyclerAdapter.FeedViewHolderWithoutReview viewHolder1 = (MovieProfilePaginatingRecyclerAdapter.FeedViewHolderWithoutReview) viewHolder;
+                // For each viewType, we cast the ViewHolder to the appropriate one in order to access its unique methods
+                final MovieProfilePaginatingRecyclerAdapter.FeedViewHolderWithoutReview viewHolder1
+                        = (MovieProfilePaginatingRecyclerAdapter.FeedViewHolderWithoutReview) viewHolder;
 
                 final Post thisPost = postList.get(position);
 
@@ -400,30 +419,37 @@ public class MovieProfilePaginatingRecyclerAdapter extends PaginationAdapter {
     @Override
     public int getItemCount() {
         return postList == null ? 0 : postList.size();
-//        return postList.size();
     }
 
     @Override
-    public void setLastTimeStamp(long newTime) {
-
-        this.lastTimestamp = newTime;
-
-    }
+    public void setLastTimeStamp(long newTime) { this.lastTimestamp = newTime; }
 
     @Override
     public Long getLastTimestamp() { return this.lastTimestamp; }
 
+    /**
+     * Return the timestamp of the item last loaded by the adapter
+     * @return
+     */
     public Long getLastItemTimestamp() {
         Log.e("timestamp post", Long.toString(postList.get(postList.size() -1).getTime()));
         return postList.get(postList.size() - 1).getTime();
     }
 
+    /**
+     * Add a list of Posts to the adapter and notify it of the changes
+     * @param newPosts
+     */
     public void addAll(List<Post> newPosts) {
         int initSize = postList.size();
         postList.addAll(newPosts);
         notifyItemRangeInserted(initSize, postList.size());
     }
 
+    /**
+     * Add a single Post to the adapter and notify it of the change
+     * @param newPost
+     */
     @Override
     public void addItem(Post newPost) {
         int initSize = postList.size();

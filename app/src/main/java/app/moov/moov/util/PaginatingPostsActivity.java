@@ -1,12 +1,11 @@
 package app.moov.moov.util;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.AbsListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,19 +30,26 @@ import app.moov.moov.model.Post;
 /**
  * Abstract custom Activity to be used on pages with basic posts
  *
- * All classes that extend this should paginationSetup()
+ * All classes that extend this should call paginationSetup()
+ * Custom paginationSetup() methods can be written if required for the activity
  */
 
 public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
+
+    //CONSTANTS
 
     private final int MISC_ACTIVITY_TYPE = 0;
     private final int USER_PROFILE_ACTIVITY_TYPE = 1;
     private final int MOVIE_PROFILE_ACTIVITY_TYPE = 2;
     private final int OTHER_USER_PROFILE_ACTIVITY_TYPE = 3;
 
+    private final int POSTS_PER_LOAD = 15;
+
     private int activityType;
 
-    // Must initialzie to work
+    // INSTANCE VARIABLES
+
+        //Parameters
     private RecyclerView feedRecycler;
     private FirebaseDatabase database;
     private DatabaseReference baseRef;
@@ -52,11 +58,11 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
     private LinearLayoutManager orderedManager;
     private Context thisContext;
 
-    // All of this is handled by the abstract class
+        //Generated internally
+
     private String lastTime;
     private boolean isLoading;
 
-    private final int POSTS_PER_LOAD = 15;
     private int mTotalItemCount;
     private int mVisibleItemCount;
     private int mfirstVisibleItemPos;
@@ -71,8 +77,6 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
     private String otherUserID;
 
     MovieProfilePaginatingRecyclerAdapter mAdapterForMovieProfile;
-//
-//    public PaginationRecyclerAdapter mAdapter;
 
     public PaginationAdapter mAdapter;
 
@@ -283,36 +287,42 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
         Log.e("post list", mAdapter.getPostList().toString());
 
         feedRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
             private int currentVisibleItemCount;
             private int currentScrollState;
             private int currentFirstVisibleItem;
             private int totalItem;
 
+            /**
+             * When we change scroll states, store the current state
+             * and check if the scroll is completed.
+             * @param view
+             * @param scrollState
+             */
             @Override
             public void onScrollStateChanged(RecyclerView view, int scrollState) {
                 currentScrollState = scrollState;
                 isScrollCompleted();
             }
 
+            /**
+             * When scrolling, update information about the state of
+             * the items stored in the recycler view
+             * @param recyclerView
+             * @param dx
+             * @param dy
+             */
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-//                mTotalItemCount = (int) numPosts;
                 totalItem = orderedManager.getItemCount();
                 currentVisibleItemCount = orderedManager.getChildCount();
                 currentFirstVisibleItem = orderedManager.findFirstVisibleItemPosition();
-
-//                if ((!isLoading) && (totalItem <= (currentVisibleItemCount + currentFirstVisibleItem)) && (currentPage <= maxPages)
-////                if ((!isLoading) && (mTotalItemCount <= (mVisibleItemCount + mfirstVisibleItemPos)) && (mAdapter.getItemCount() <= maxPosts)
-//                        && mfirstVisibleItemPos >= 0) {
-//
-//                    loadPosts(mAdapter.getLastTimestamp());
-//                    isLoading = true;
-//
-//                }
-
             }
 
+            /**
+             * Check if scrolling is complete and, if so, load posts
+             */
             private void isScrollCompleted() {
                 if (totalItem - currentFirstVisibleItem == currentVisibleItemCount
                         && currentScrollState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -328,15 +338,16 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
 
     }
 
+    /**
+     * When called, loads <= 15 posts, adds them to the adapter, and notifies
+     * the adapter of the change.
+     * @param lastTimestamp
+     */
     public void loadPosts(long lastTimestamp) {
-        Log.e("firing loader post", "loadPosts() fired");
 
         Query loadQuery = postsRef.orderByChild("timestamp").startAt(mAdapter.getLastTimestamp()).limitToFirst(POSTS_PER_LOAD);
 
-        Log.e("query created", "created query");
-        Log.e("query info", loadQuery.toString());
-
-        ValueEventListener mListener = new ValueEventListener() {
+        ValueEventListener mListener = new ValueEventListener() { //query info from firebase and add it
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterator<DataSnapshot> dataIter = dataSnapshot.getChildren().iterator();
@@ -351,10 +362,9 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                                     mAdapter.addItem(dataSnapshot.getValue(Post.class));
                                 }
                             }
-
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-
+                                Toast.makeText(thisContext, "Unable to load posts", Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -366,13 +376,13 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                                 mAdapter.setLastTimeStamp(dataSnapshot.getValue(Post.class).getTime());
                             }
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
+                            Toast.makeText(thisContext, "Error getting last timestamp.", Toast.LENGTH_LONG).show();
 
                         }
                     });
-                } else {
+                } else { // there are less than 15 points, so we're done loading afterwards
                     for (int i = 0; i < length; i++) {
                         baseRef.child("Posts").child(dataIter.next().getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -381,10 +391,9 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
                                     mAdapter.addItem(dataSnapshot.getValue(Post.class));
                                 }
                             }
-
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-
+                                Toast.makeText(thisContext, "Unable to load posts", Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -393,37 +402,19 @@ public abstract class PaginatingPostsActivity extends ToolbarBaseActivity {
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
-                Log.e("was cancelled", "cancelled new post key load");
+                Toast.makeText(thisContext, "Error getting last timestamp.", Toast.LENGTH_LONG).show();
                 isLoading = false;
 
             }
         };
 
         loadQuery.addListenerForSingleValueEvent(mListener);
-
-//        Handler handler = new Handler(); //delay load
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
-//                // Actions to do after 10 seconds
-//            }
-//        }, 100);
-
         loadQuery.removeEventListener(mListener);
 
         isLoading = false;
         mAdapter.notifyDataSetChanged();
 
-        currentPage++;
+        currentPage++; //increment current "page" number in order to check if we've reached the last page
 
     }
-
-    public MovieProfilePaginatingRecyclerAdapter getMovieProfilePaginatingRecyclerAdapter() {
-        if (mAdapterForMovieProfile != null) {
-            return mAdapterForMovieProfile;
-        } else {
-            return null;
-        }
-    }
-
 }

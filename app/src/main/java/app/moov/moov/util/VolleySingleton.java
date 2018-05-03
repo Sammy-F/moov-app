@@ -8,6 +8,10 @@ import com.android.volley.toolbox.Volley;
 
 /**
  * Created by Sammy on 3/30/2018.
+ *
+ * Singleton class that lets us use the
+ * same RequestQueue over the lifecycle of the
+ * app.
  */
 
 public class VolleySingleton {
