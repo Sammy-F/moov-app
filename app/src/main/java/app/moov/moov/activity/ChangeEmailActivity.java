@@ -23,7 +23,7 @@ import app.moov.moov.R;
 
 /**
  * Class that handles the page for changing
- * the email of the account
+ * the email of the account included in the settings panel
  */
 public class ChangeEmailActivity extends ToolbarBaseActivity {
 

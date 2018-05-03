@@ -33,7 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Modified by Sammy 4/5/2018
  *
  * Class that handles the page for changing
- * the user's avatar.
+ * the user's avatar in the settings panel.
  */
 public class ChangeAvatarActivity extends ToolbarBaseActivity {
 

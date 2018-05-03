@@ -9,7 +9,7 @@ import app.moov.moov.R;
 
 /**
  * Created by Lisa on 31/03/18.
- * This class sets up the Bottom Navigation View
+ * This class sets up the Bottom Navigation View provided by Android Studio.
  */
 
 public class BottomNavbarActivity extends AppCompatActivity{
