@@ -2,10 +2,8 @@ package app.moov.moov.util;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -33,6 +31,9 @@ import app.moov.moov.model.Post;
 
 /**
  * Created by Sammy on 4/7/2018.
+ *
+ * Basic Adapter for handling Post pagination from a List
+ * of Posts.
  */
 
 public class PaginationRecyclerAdapter extends PaginationAdapter {
@@ -160,6 +161,13 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
         }
     }
 
+    /**
+     * Create and return a new ViewHolder with the correct layout based
+     * on its viewType
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
@@ -174,11 +182,16 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
         }
     }
 
+    /**
+     * Decide which ViewType the Post has (i.e. with review or without review)
+     * and sets up the item depending on this ViewType.
+     * @param viewHolder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
-        //Decide which ViewType the Post has (i.e. with review or without review)
-        // and sets up the item depending on this ViewType.
+        // run cases to check viewType
         switch(viewHolder.getItemViewType()) {
             case 0:
                 final PaginationRecyclerAdapter.FeedViewHolderWithoutReview viewHolder1 = (PaginationRecyclerAdapter.FeedViewHolderWithoutReview) viewHolder;
@@ -232,13 +245,9 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
                 final String posterUrlWith = reviewedThisPost.getPosterURL();
 
                 if (reviewedThisPost.getMovieReview().length() > 200) {
-                    Log.e("got line count", "got line count");
-                    String newStr = reviewedThisPost.getMovieReview().substring(0, 199);
-                    newStr = thisContext.getResources().getString(R.string.show_more, newStr);
-                    Spannable newStrSpannable = new SpannableString(newStr);
-                    newStrSpannable.setSpan(new ForegroundColorSpan(thisContext.getResources().getColor(R.color.card_username)), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    newStrSpannable.setSpan(new StyleSpan(Typeface.BOLD), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    viewHolderWith.getReviewView().setText(newStrSpannable, TextView.BufferType.SPANNABLE);
+
+                    viewHolderWith.getReviewView().setText(formatString(reviewedThisPost.getMovieReview()),
+                            TextView.BufferType.SPANNABLE);
                     viewHolderWith.getReviewView().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -280,10 +289,24 @@ public class PaginationRecyclerAdapter extends PaginationAdapter {
         }
     }
 
+    /**
+     * Format reviews with more than 200 characters and return the spannable
+     * @param reviewString
+     * @return
+     */
+    private Spannable formatString(String reviewString) {
+        String newStr = reviewString.substring(0, 199);
+        newStr = thisContext.getResources().getString(R.string.show_more, newStr);
+        Spannable newStrSpannable = new SpannableString(newStr);
+        newStrSpannable.setSpan(new ForegroundColorSpan(thisContext.getResources().getColor(R.color.card_username)), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        newStrSpannable.setSpan(new StyleSpan(Typeface.BOLD), 201, newStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return newStrSpannable;
+    }
+
     @Override
     public int getItemCount() {
         return postList == null ? 0 : postList.size();
-//        return postList.size();
     }
 
     @Override

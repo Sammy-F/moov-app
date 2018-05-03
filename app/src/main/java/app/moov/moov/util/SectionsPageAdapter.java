@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Lisa on 31/03/18.
+ * Created by Lisa on 31/03/
+ *
+ * Allows us to create and manage the fragments
+ * on the Search page
  */
-
-public class SectionsPageAdapter extends FragmentPagerAdapter {
+ class SectionsPageAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();

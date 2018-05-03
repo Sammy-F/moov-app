@@ -23,6 +23,7 @@ import app.moov.moov.activity.MovieProfileActivity;
 
 /**
  * Created by Lisa on 29/03/18.
+ * Modified by Sammy  5/3/18.
  * NOTE: THIS IS THE ADAPTER FOR SEARCHING FOR MOVIES REGULARLY, NOT ON POST ACTIVITY
  */
 
@@ -36,6 +37,13 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         this.movieResults = movieResults;
     }
 
+    /**
+     * Inflate the layout for the items and return a new ViewHolder
+     * using this layout.
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
@@ -44,6 +52,12 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         return new MyViewHolder(view);
     }
 
+    /**
+     * Once a ViewHolder has been created, bind the data to the appropriate
+     * Views it stores.
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(final MovieSearchResultAdapter.MyViewHolder holder, int position) {
 
@@ -79,6 +93,10 @@ public class MovieSearchResultAdapter extends RecyclerView.Adapter<MovieSearchRe
         return movieResults.size();
     }
 
+    /**
+     * Internal ViewHolder static class that represents a single
+     * item in the adapter.
+     */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvMovieTitle;
         ImageView ivMoviePoster;

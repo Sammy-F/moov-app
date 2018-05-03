@@ -165,6 +165,13 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
         }
     }
 
+    /**
+     * Provide instructions for how to bind data representing a given post
+     * to a View
+     * @param viewHolder
+     * @param position
+     * @param model
+     */
     @Override
     protected void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, final Post model) {
 
@@ -183,6 +190,7 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
 
                 final int movieID = model.getMovieID();
 
+                // make username clickable
                 viewHolder1.getUsername().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -192,6 +200,7 @@ public class FirebaseSwitchingAdapter extends FirebaseRecyclerAdapter<Post, Recy
                     }
                 });
 
+                // make poster clickable
                 viewHolder1.getIvPoster().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) { //temporary button response

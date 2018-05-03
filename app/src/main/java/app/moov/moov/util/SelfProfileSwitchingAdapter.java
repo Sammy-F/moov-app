@@ -2,7 +2,6 @@ package app.moov.moov.util;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Dimension;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -36,7 +36,8 @@ import app.moov.moov.model.Post;
  * Created by Sammy on 4/2/2018.
  *
  * Adapter that changes ViewHolders depending on
- * whether a Post has a comment or not.
+ * whether a Post has a comment or not for the user's
+ * own profile.
  */
 
 public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, RecyclerView.ViewHolder> {
@@ -59,8 +60,6 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         private ImageView ivPoster;
         private View mView;
         private TextView userName;
-//        private Button editBtn;
-//        private Button delBtn;
         private ImageButton ibDetail;
 
         public FeedViewHolder(View itemView) {
@@ -68,8 +67,6 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
             mView = itemView;
             btnMovieTitle = mView.findViewById(R.id.MovieTitle);
             ivPoster = mView.findViewById(R.id.ivPoster);
-//            editBtn = mView.findViewById(R.id.btnEdit);
-//            delBtn = mView.findViewById(R.id.btnDelete);
             ibDetail = mView.findViewById(R.id.ibDetail);
         }
 
@@ -114,8 +111,6 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         private ImageView ivPoster;
         private View mView;
         private TextView userName;
-//        Button editBtn;
-//        Button delBtn;
         private ImageButton ibDetail;
 
         public FeedViewHolderWithoutReview(View itemView) {
@@ -123,8 +118,6 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
             mView = itemView;
             btnMovieTitle = mView.findViewById(R.id.MovieTitle);
             ivPoster = mView.findViewById(R.id.ivPoster);
-//            editBtn = mView.findViewById(R.id.btnEdit);
-//            delBtn = mView.findViewById(R.id.btnDelete);
             ibDetail = mView.findViewById(R.id.ibDetail);
         }
 
@@ -180,6 +173,15 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         }
     }
 
+    /**
+     * When called, creates an Intent that sends the user
+     * to the EditPost activity and passes along information about
+     * the given Post.
+     * @param pid
+     * @param review
+     * @param movieTitle
+     * @param rating
+     */
     private void editPost(String pid, String review, String movieTitle, String rating) {
         Intent intent = new Intent(thisContext, EditPostActivity.class);
         intent.putExtra("rating", rating);
@@ -195,7 +197,7 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
      * @param uid
      */
     private void deletePost(String pid, String uid, int movieId) {
-        final String thisPid = pid;
+        final String thisPid = pid;                 // generate references for use in deleting the post
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
         final DatabaseReference allUsers = database.getReference().child("Users");
@@ -213,7 +215,7 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot follower : dataSnapshot.getChildren()) {
+                for (DataSnapshot follower : dataSnapshot.getChildren()) { //get all of the user's followers and delete the post from their feed
                     String UID = follower.getKey();
 
                     allUsers.child(UID).child("Feed").child(thisPid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -223,10 +225,9 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
                                 database.getReference().removeValue();
                             }
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
+                            Toast.makeText(thisContext, "Unable to delete post.", Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -242,6 +243,12 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
 
     }
 
+    /**
+     * Allows us to show a drop down method when clicked
+     * @param view
+     * @param position
+     * @param model
+     */
     private void showPopupMenu(View view, int position, Post model) {
         PopupMenu popup = new PopupMenu(view.getContext(), view);
         MenuInflater inflater = popup.getMenuInflater();
@@ -250,6 +257,9 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         popup.show();
     }
 
+    /**
+     * Listener that listens for when the popup menu is clicked
+     */
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
         private int position;
         private Post thisPost;
@@ -272,10 +282,16 @@ public class SelfProfileSwitchingAdapter extends FirebaseRecyclerAdapter<Post, R
         }
     }
 
+    /**
+     * Bind a Post to a given ViewHolder
+     * @param viewHolder
+     * @param position
+     * @param model
+     */
     @Override
     protected void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position, final Post model) {
 
-        switch(viewHolder.getItemViewType()) {
+        switch(viewHolder.getItemViewType()) { //cast a different type of ViewHolder if the Post has a review or not
             case 0:
                 final FeedViewHolderWithoutReview viewHolder1 = (FeedViewHolderWithoutReview) viewHolder;
 

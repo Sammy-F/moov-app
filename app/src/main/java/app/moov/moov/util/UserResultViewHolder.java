@@ -9,6 +9,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Sammy on 3/31/2018.
+ *
+ * ViewHolder that displays information about a given
+ * user in the results page.
  */
 
 //VIEWHOLDER CLASS FOR USERS

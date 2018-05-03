@@ -38,6 +38,12 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
         this.movieResults = movieResults;
     }
 
+    /**
+     * Return a ViewHolder with the correct inflated layout based on viewType
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
@@ -46,6 +52,11 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
         return new MyViewHolder(view);
     }
 
+    /**
+     * Bind data to given ViewHolder
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(final PostableMovieResultAdapter.MyViewHolder holder, int position) {
 
@@ -86,6 +97,9 @@ public class PostableMovieResultAdapter extends RecyclerView.Adapter<PostableMov
         return movieResults.size();
     }
 
+    /**
+     * Internal class representing a ViewHolder
+     */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvMovieTitle;
         ImageView ivMoviePoster;
