@@ -30,6 +30,10 @@ import app.moov.moov.R;
  * Created by Lisa on 04/04/18.
  */
 
+/**
+ * Class that handles the page for changing the Username - THIS IS NOT ACTUALLY USED IN OUR APP, SINCE
+ * WE DECIDED NOT TO ACTUALLY IMPLEMENT IT BUT IT IS HERE FOR FUTURE REFERENCE IF WE DECIDE TO WORK ON IT
+ */
 public class ChangeUsernameActivity extends ToolbarBaseActivity{
 
     private EditText etNewUserName;
@@ -39,6 +43,10 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
     private DatabaseReference usernameReference;
     private FirebaseDatabase database;
 
+    /**
+     * For all of our UI components/objects: specify which exact component in the layout we are referring to
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +54,6 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
-//
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
 
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
@@ -62,6 +67,10 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
         setUIViews();
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews() {
         etNewUserName = (EditText) findViewById(R.id.etChangeUsername);
         btnChangeUsername = (Button) findViewById(R.id.btnChangeUsername);
@@ -83,18 +92,15 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
         });
     }
 
+    /**
+     * Method that changes the username on firebase, is called when the btnChangeUsername is clicked
+     */
     private void changeUsername() {
         final String newUsername = etNewUserName.getText().toString().trim();
         //Check to see whether the username exists
         usernameReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (newUsername.exists()) {
-//                    Toast.makeText(ChangeUsernameActivity.this, dataSnapshot + " already exists! Please choose another username", Toast.LENGTH_LONG).show();
-//                } else {
-//
-//                }
-
             }
 
             @Override
@@ -102,8 +108,6 @@ public class ChangeUsernameActivity extends ToolbarBaseActivity{
 
             }
         });
-
-
 
     }
 

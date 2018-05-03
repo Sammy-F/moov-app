@@ -37,8 +37,8 @@ import app.moov.moov.util.VolleySingleton;
 
 /**
  * Created by Lisa on 07/04/18.
- *
  * Modified by Sammy 4/7/2018
+ * This class is the movie profile
  */
 
 public class MovieProfileActivity extends PaginatingPostsActivity{
@@ -50,7 +50,11 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
 
     private SwipeRefreshLayout swipeContainer;
 
-
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +66,6 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
 
         movieID = getIntent().getIntExtra("movieID", 0);
 
@@ -94,6 +96,10 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
                 R.color.google_blue);
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews() {
 
         movieRecycler = (RecyclerView) findViewById(R.id.movieRecycler);
@@ -107,6 +113,7 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
 
         RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
 
+        //Create a new JsonObjectRequest
         JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -177,6 +184,4 @@ public class MovieProfileActivity extends PaginatingPostsActivity{
     protected void onStart() {
         super.onStart();
     }
-
-
 }

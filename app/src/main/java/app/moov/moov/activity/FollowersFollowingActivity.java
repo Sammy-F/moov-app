@@ -35,14 +35,15 @@ import app.moov.moov.R;
 import app.moov.moov.model.User;
 import app.moov.moov.util.UserResultViewHolder;
 
+/**
+ * This class is the page that shows all of the user's followers/following, and is called when
+ * the followers/following is clicked on any user's profile
+ */
 public class FollowersFollowingActivity extends ToolbarBaseActivity {
 
     private RecyclerView rvFollow;
-
     private SwipeRefreshLayout swipeContainer;
-
     private FirebaseAuth firebaseAuth;
-
     private FirebaseDatabase database;
     private DatabaseReference baseRef;
     private DatabaseReference usersRef;
@@ -56,6 +57,11 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
     private FirebaseStorage firebaseStorage;
     private StorageReference allAvRef;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +70,6 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
@@ -107,6 +111,10 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
 
     }
 
+    /**
+     * First, checks to see whether we want to populate the user's followers or following, then
+     * populate the viewholder
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -130,6 +138,12 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
 
         FirebaseRecyclerAdapter<User, UserResultViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserResultViewHolder>(options) {
 
+            /**
+             * Creates the view, specify which cardview layout we want to use for the view
+             * @param parent
+             * @param viewType
+             * @return
+             */
             @Override
             public UserResultViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
@@ -138,6 +152,12 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
                 return new UserResultViewHolder(view);
             }
 
+            /**
+             * For each of the view, specify what data we want it to populate (The Full name, Username of user)
+             * @param viewHolder
+             * @param position
+             * @param model
+             */
             @Override
             protected void onBindViewHolder(final UserResultViewHolder viewHolder, int position, User model) {
                 viewHolder.setUsername(model.getUsername()); //changed back
@@ -187,6 +207,10 @@ public class FollowersFollowingActivity extends ToolbarBaseActivity {
 
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews() {
 
         rvFollow = (RecyclerView) findViewById(R.id.rvFollow);

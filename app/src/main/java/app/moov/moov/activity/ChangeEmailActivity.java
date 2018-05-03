@@ -21,6 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 import app.moov.moov.R;
 
+/**
+ * Class that handles the page for changing
+ * the email of the account
+ */
 public class ChangeEmailActivity extends ToolbarBaseActivity {
 
     private EditText etCurrentEmail;
@@ -32,6 +36,11 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +49,9 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
-
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
-
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
@@ -54,6 +59,10 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
         setUIViews();
     }
 
+    /**
+     * For all of our UI components/objects: specify which exact component in the layout we are referring to
+     * Set onClickListener for buttons
+     */
     private void setUIViews() {
         etCurrentEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPass);
@@ -77,6 +86,10 @@ public class ChangeEmailActivity extends ToolbarBaseActivity {
         });
     }
 
+    /**
+     * Method that handles changing the email, called once the btnChangeEmail is clicked
+     * First makes sure it is a valid email, then authenticates using firebase
+     */
     private void changeEmail() {
         String currentEmail = etCurrentEmail.getText().toString().trim().toLowerCase();
         String password = etPassword.getText().toString().trim();
