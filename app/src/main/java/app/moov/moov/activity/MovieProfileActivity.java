@@ -38,7 +38,7 @@ import app.moov.moov.util.VolleySingleton;
 /**
  * Created by Lisa on 07/04/18.
  * Modified by Sammy 4/7/2018
- * This class is the movie profile
+ * This class is the movie profile that contains info about the movie
  */
 
 public class MovieProfileActivity extends PaginatingPostsActivity{

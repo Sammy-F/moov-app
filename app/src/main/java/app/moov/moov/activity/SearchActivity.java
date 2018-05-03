@@ -15,7 +15,7 @@ import app.moov.moov.util.SectionsPageAdapter;
 
 /**
  * Created by Lisa on 31/03/18.
- * This class is to search for both users and movies
+ * This class is to search for both users and movies, included in the bottom nav view.
  */
 
 public class SearchActivity extends ToolbarBaseActivity{

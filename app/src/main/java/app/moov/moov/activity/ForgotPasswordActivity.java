@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import app.moov.moov.R;
 
 /**
- * This class handles the forgot password page
+ * This class handles the forgot password page included in the settings panel
  */
 public class ForgotPasswordActivity extends AppCompatActivity {
 

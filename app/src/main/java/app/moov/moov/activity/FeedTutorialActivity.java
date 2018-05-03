@@ -10,6 +10,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import app.moov.moov.R;
 
+/**
+ * Initializes the transparent tutorial page that comes up on the first registration.
+ */
+
 public class FeedTutorialActivity extends ToolbarBaseActivity {
 
     private Button btnEndTutorial;

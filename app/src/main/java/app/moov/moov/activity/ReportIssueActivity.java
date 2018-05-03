@@ -16,7 +16,7 @@ import android.widget.Toast;
 import app.moov.moov.R;
 
 /**
- * This class is the page that lets user report issues
+ * This class is the page that lets user report issues in the settings panel
  */
 public class ReportIssueActivity extends ToolbarBaseActivity {
 

@@ -40,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * UserProfileActivity displays the user's profile
  * and handles certain interactions with items within
- * the profile.
+ * the profile of only the user itself.
  *
  * Modified by Sammy 3/25/18
  */

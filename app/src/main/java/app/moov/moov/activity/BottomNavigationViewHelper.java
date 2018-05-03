@@ -15,6 +15,10 @@ import java.lang.reflect.Field;
 
 public class BottomNavigationViewHelper {
 
+    /**
+     * Disables the shift mode in order to have more than three icons in the bottom
+     * @param view an instance of the bottom toolbar
+     */
     @SuppressLint("RestrictedApi")
     public static void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);

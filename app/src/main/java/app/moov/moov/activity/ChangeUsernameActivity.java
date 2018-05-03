@@ -31,7 +31,7 @@ import app.moov.moov.R;
  */
 
 /**
- * Class that handles the page for changing the Username - THIS IS NOT ACTUALLY USED IN OUR APP, SINCE
+ * Class that handles the page for changing the Username included in the settings panel - THIS IS NOT ACTUALLY USED IN OUR APP, SINCE
  * WE DECIDED NOT TO ACTUALLY IMPLEMENT IT BUT IT IS HERE FOR FUTURE REFERENCE IF WE DECIDE TO WORK ON IT
  */
 public class ChangeUsernameActivity extends ToolbarBaseActivity{

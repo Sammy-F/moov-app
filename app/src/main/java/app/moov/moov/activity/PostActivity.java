@@ -28,6 +28,11 @@ import java.util.Calendar;
 import app.moov.moov.model.Post;
 import app.moov.moov.R;
 
+
+/**
+ * This class handles the posting feature of the app, where a user looks for a movie and posts a review for it
+ */
+
 public class PostActivity extends ToolbarBaseActivity {
 
     private Uri uri = null;

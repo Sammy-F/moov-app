@@ -37,7 +37,7 @@ import app.moov.moov.util.PaginatingPostsActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * This class is the page for user profiles (other than the user who is using the app)
+ * This class is the page for user profiles of everyone except the user itself
  */
 public class OtherUserProfile extends PaginatingPostsActivity {
 

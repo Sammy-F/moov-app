@@ -24,7 +24,8 @@ import app.moov.moov.R;
 /**
  * Handles post editing by taking the existing
  * review and rating in a post from the intent and
- * then updates database info to reflect the changes.
+ * then updates database information to reflect the changes
+ * made by the user.
  *
  * Created by Sammy 3/25/18
  */

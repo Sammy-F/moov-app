@@ -20,8 +20,8 @@ import org.w3c.dom.Text;
 import app.moov.moov.R;
 
 /**
- * This class is the page that shows the full post (for posts which have longer reviews and the
- * review is not contained in the cardview
+ * This class is the page that shows the full post on the feed (for posts which have longer reviews and the
+ * review is not contained in the cardview)
  */
 public class FullPostActivity extends ToolbarBaseActivity {
 

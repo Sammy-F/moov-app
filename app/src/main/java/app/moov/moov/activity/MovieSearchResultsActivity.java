@@ -39,7 +39,7 @@ import app.moov.moov.util.PostableMovieResultAdapter;
 import app.moov.moov.util.VolleySingleton;
 /**
  * Class handles movie results after
- * searching for one to post about.
+ * searching for one the user wants to post about.
  */
 
 public class MovieSearchResultsActivity extends ToolbarBaseActivity {

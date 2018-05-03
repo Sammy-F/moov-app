@@ -2,7 +2,7 @@ package app.moov.moov.activity;
 
 /**
  * MainActivity initializes the objects
- * in the login pages and handles any
+ * in the login pages and handles the
  * listeners such as the video loop in the background.
  *
  * Modified 3/14 by Sammy Fritsche

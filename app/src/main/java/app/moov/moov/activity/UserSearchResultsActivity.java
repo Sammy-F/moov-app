@@ -36,7 +36,7 @@ import app.moov.moov.util.UserResultViewHolder;
  */
 
 /**
- * This class is the page that displays the results of the user search
+ * This class is the page that displays the results of the user search from the bottom nav view
  */
 public class UserSearchResultsActivity extends ToolbarBaseActivity {
 

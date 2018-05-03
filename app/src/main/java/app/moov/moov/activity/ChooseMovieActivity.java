@@ -18,7 +18,7 @@ import app.moov.moov.R;
 
 /**
  * Created by Sammy on 3/22/18
- * Class for testing movie searching.
+ * Class for one of the main functions of testing movie searching.
  */
 
 public class ChooseMovieActivity extends ToolbarBaseActivity {

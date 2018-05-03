@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import app.moov.moov.R;
 
 /**
- * Manages a list of user settings options
+ * Manages a list of user settings options such as change avatar.
  */
 public class UserSettingsActivity extends ToolbarBaseActivity {
 

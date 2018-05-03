@@ -15,8 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import app.moov.moov.R;
 
 /**
- * This is the class that all classes in our app which represents a page extends
- * It sets up the toolbar
+ * This is the class that all classes in our app.
+ * It sets up the toolbar on every page.
  */
 public class ToolbarBaseActivity extends AppCompatActivity {
 

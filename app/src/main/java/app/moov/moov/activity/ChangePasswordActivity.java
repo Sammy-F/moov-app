@@ -27,7 +27,7 @@ import app.moov.moov.R;
  * Modified by Sammy 4/5/2018
  *
  * Class that handles the Activity for changing
- * the user's password.
+ * the user's password included in the settings panel.
  */
 
 public class ChangePasswordActivity extends ToolbarBaseActivity {

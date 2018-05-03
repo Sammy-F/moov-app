@@ -20,7 +20,7 @@ import app.moov.moov.util.PaginatingPostsActivity;
  * Created by Sammy on 3/3/18.
  * Loads and displays the feed
  * and manages user interactions
- * with the toolbar.
+ * with the toolbar. Also included a pull to refresh feature
  */
 public class FeedActivity extends PaginatingPostsActivity {
 

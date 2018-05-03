@@ -36,8 +36,8 @@ import app.moov.moov.model.User;
 import app.moov.moov.util.UserResultViewHolder;
 
 /**
- * This class is the page that shows all of the user's followers/following, and is called when
- * the followers/following is clicked on any user's profile
+ * This class is the page that shows all of the user's followers/following users, and is called when
+ * the followers/following button is clicked on any user's profile.
  */
 public class FollowersFollowingActivity extends ToolbarBaseActivity {
 
