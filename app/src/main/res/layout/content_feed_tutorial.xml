@@ -19,18 +19,19 @@
 
     <Button
         android:id="@+id/btnEndTutorial"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="47dp"
-        android:text="Action!"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_login"
+        android:fontFamily="@font/sf_bold"
+        android:text="Action!"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_otherstartbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -41,14 +42,17 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/sf_bold"
         android:text="Welcome to Moov! Here's how the app works! "
+        android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.391"
-        tools:text="Welcome to mooV! Here's how the app works! " />
+        app:layout_constraintVertical_bias="0.38"
+        tools:text="Welcome to mooV! \n Here's how the app works! " />
 
     <TextView
         android:id="@+id/tvHome"
@@ -120,8 +124,8 @@
 
     <TextView
         android:id="@+id/tvSetting"
-        android:layout_width="50dp"
-        android:layout_height="55dp"
+        android:layout_width="103dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="400dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
