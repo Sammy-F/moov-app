@@ -2,6 +2,8 @@ package app.moov.moov.activity;
 
 /**
  * Created by danielimmy on 2018. 4. 18..
+ * This class creates a function that enables the
+ * Boottom Navigation View to hold more than 3 icons.
  */
 
 import android.annotation.SuppressLint;
