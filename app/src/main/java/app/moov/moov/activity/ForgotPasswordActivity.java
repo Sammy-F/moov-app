@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import app.moov.moov.R;
 
+/**
+ * This class handles the forgot password page
+ */
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
@@ -27,6 +30,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     EditText etEmailInput;
     Button btnSendEmail;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews() {
         etEmailInput = (EditText) findViewById(R.id.etNewPasswordEmail);
         btnSendEmail = (Button) findViewById(R.id.btnSendNewPassword);
@@ -60,6 +72,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sends the email to the user to change the password, is called when the btnSendEmail is clicked
+     */
     private void sendEmail() {
 
         email = etEmailInput.getText().toString().trim();

@@ -42,6 +42,12 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
 
     private Button btnChangePass;
 
+
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +56,6 @@ public class ChangePasswordActivity extends ToolbarBaseActivity {
         setSupportActionBar(toolbar);
         toolBarSetup(toolbar);
 
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);

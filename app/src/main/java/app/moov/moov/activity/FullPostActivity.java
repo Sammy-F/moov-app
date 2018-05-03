@@ -19,6 +19,10 @@ import org.w3c.dom.Text;
 
 import app.moov.moov.R;
 
+/**
+ * This class is the page that shows the full post (for posts which have longer reviews and the
+ * review is not contained in the cardview
+ */
 public class FullPostActivity extends ToolbarBaseActivity {
 
     private TextView tvUsername;
@@ -33,6 +37,11 @@ public class FullPostActivity extends ToolbarBaseActivity {
     private String posterURL;
     private int numStars;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +64,10 @@ public class FullPostActivity extends ToolbarBaseActivity {
 
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews() {
         tvUsername = (TextView) findViewById(R.id.Username);
         tvMovieReview = (TextView) findViewById(R.id.MovieReview);
@@ -87,6 +100,11 @@ public class FullPostActivity extends ToolbarBaseActivity {
         }
     }
 
+    /**
+     * A method to make sure that the string is not null or empty
+     * @param checkStr
+     * @return
+     */
     private boolean stringIsValid(String checkStr) {
         if (checkStr != null && !checkStr.trim().equals("")) {
             return true;

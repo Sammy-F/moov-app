@@ -1,47 +1,37 @@
 package app.moov.moov.activity;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.ProgressBar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import app.moov.moov.R;
+import app.moov.moov.util.ConnectionTester;
+import app.moov.moov.util.PaginatingPostsActivity;
+
 /**
  * Created by Sammy on 3/3/18.
  * Loads and displays the feed
  * and manages user interactions
  * with the toolbar.
  */
-
-import android.content.Context;
-import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import java.util.Iterator;
-
-import app.moov.moov.model.Post;
-import app.moov.moov.R;
-import app.moov.moov.util.ConnectionTester;
-import app.moov.moov.util.PaginatingPostsActivity;
-import app.moov.moov.util.PaginationRecyclerAdapter;
-
 public class FeedActivity extends PaginatingPostsActivity {
 
     private SwipeRefreshLayout swipeContainer;
     private ProgressBar progressBar;
 
-
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -64,7 +54,6 @@ public class FeedActivity extends PaginatingPostsActivity {
         activitySetup();
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -93,9 +82,6 @@ public class FeedActivity extends PaginatingPostsActivity {
         toolBarSetup(toolbar);
 
         Context thisContext = this;
-
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
 
         // initialize the variables in the super class
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();

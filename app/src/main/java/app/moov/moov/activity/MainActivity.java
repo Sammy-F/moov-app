@@ -40,6 +40,9 @@ import com.google.firebase.auth.FirebaseUser;
 import app.moov.moov.R;
 import app.moov.moov.util.ConnectionTester;
 
+/**
+ * This class is the log in page
+ */
 public class MainActivity extends AppCompatActivity {
 
     private EditText etEmail;
@@ -52,16 +55,19 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private VideoView mVideoView;
 
+
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
-
-
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
-
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.bg_video);
 
         mVideoView.setVideoURI(uri);
@@ -87,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * When we return to the log in page, start playing the video again
+     */
     @Override
     protected void onPostResume() {
         super.onPostResume();
@@ -225,8 +234,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-//        numAttempts = (TextView) findViewById(R.id.numAttempts);
-//        numAttempts.setText("Number of attempts remaining: 5");
     }
 
 

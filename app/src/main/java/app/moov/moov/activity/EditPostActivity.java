@@ -54,6 +54,11 @@ public class EditPostActivity extends ToolbarBaseActivity {
 
     private String postID;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +89,10 @@ public class EditPostActivity extends ToolbarBaseActivity {
         setUIViews();
     }
 
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
     private void setUIViews() {
 
         rbRating = (RatingBar) findViewById(R.id.rbRating);

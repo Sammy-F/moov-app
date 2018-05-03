@@ -31,9 +31,7 @@ import app.moov.moov.R;
 public class PostActivity extends ToolbarBaseActivity {
 
     private Uri uri = null;
-//    private EditText editTextMovieTitle;
     private TextView tvMovieTitle;
-//    private EditText editTextRating;
     private RatingBar ratingBar;
     private EditText editTextWriteReview;
     private StorageReference storageReference;

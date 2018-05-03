@@ -27,6 +27,11 @@ public class ChooseMovieActivity extends ToolbarBaseActivity {
     private Button btnSearchMovies;
     String searchQuery;
 
+    /**
+     * Initializes all of the object (like toolbar, bottom nav bar), sets up data references
+     * and specifies which layout XML to use
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +43,14 @@ public class ChooseMovieActivity extends ToolbarBaseActivity {
         BottomNavigationView navBar = (BottomNavigationView) findViewById(R.id.navBar);
         BottomNavigationViewHelper.disableShiftMode(navBar);
         setUpNavBar(navBar);
-//
-//        BottomNavigationViewEx navBar = (BottomNavigationViewEx) findViewById(R.id.navBar);
-//        setUpNavBar(navBar);
-
-
 
         setUIViews();
     }
+
+    /**
+     * Initialize the View variables used in
+     * the Activity.
+     */
 
     private void setUIViews() {
         etMovieQuery = (EditText) findViewById(R.id.etMovieQuery);
