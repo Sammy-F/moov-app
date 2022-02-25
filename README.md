@@ -3,6 +3,8 @@ Moov is a social media app designed to enable users to follow - and be followed 
  similar taste in movies. Users can make posts about their favorite films in order to let others know
  their thoughts.
 
+Go to [Moov Keynote](https://drive.google.com/file/d/1PFlDakg-aQtGsjLeimEGKtRKi5oZHudv/view?usp=sharing).
+
 ## Purpose
 Its primary goal is to provide people with a means of finding many casual reviews in one place, as
  well as a way to find movies they might like in a more person-to-person manner.
